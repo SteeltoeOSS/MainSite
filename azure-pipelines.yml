@@ -12,7 +12,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: dotnet publish './src/blazor-site.sln' --output './publish' --configuration Release --framework netcoreapp3.0
+- script: dotnet publish './src/Steeltoe-MainSite.sln' --output './publish' --configuration Release --framework netcoreapp3.0
 
 - task: CopyFiles@2
   inputs:
