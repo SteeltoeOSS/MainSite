@@ -1,0 +1,53 @@
+﻿@using System
+@implements IDisposable
+
+<Tab Title="Local">
+	<ol>
+		@if (!string.IsNullOrEmpty(ProjectName) && !string.IsNullOrEmpty(LocalEndpointAddress))
+		{
+			<li>
+				Using the .NET cli
+				<code class="inline">dotnet run &lt;PATH_TO&gt;\@(ProjectName).csproj</code>
+				
+				@if (IncludeNavigateToApp) {
+					<div>Navigate to the endpoint (you may need to change the port number) <a href="@LocalEndpointAddress" target="_blank">@LocalEndpointAddress</a></div>
+				}
+			</li>
+		}
+		@if (!string.IsNullOrEmpty(ProjectName) && !string.IsNullOrWhiteSpace(VSEndpointAddress))
+		{
+			<li>
+				Using Visual Studio
+				<div class="bg-light p-2">Choose the top <span class="font-italic">Debug</span> menu, then choose <span class="font-italic">Start Debugging (F5)</span>. This should bring up a browser with the app running.</div>
+				
+					@if (IncludeNavigateToApp){
+						<div>Navigate to the endpoint (you may need to change the port number) <a href="@VSEndpointAddress" target="_blank">@VSEndpointAddress</a></div>
+					}
+			</li>
+		}
+
+		@AdditionalSteps
+	</ol>
+</Tab>
+
+@code {
+	[Parameter]
+	public string ProjectName { get; set; } = null;
+	[Parameter]
+	public string LocalEndpointAddress { get; set; } = "http://localhost:5000/api/values";
+	[Parameter]
+	public string VSEndpointAddress { get; set; } = "http://localhost:8080/api/values";
+	[Parameter]
+	public bool IncludeNavigateToApp { get; set; } = true;
+
+	[Parameter]
+	public RenderFragment AdditionalSteps { get; set; }
+
+	protected override void OnInitialized()
+	{
+	}
+
+	public void Dispose()
+	{
+	}
+}

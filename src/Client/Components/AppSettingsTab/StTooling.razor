@@ -1,0 +1,121 @@
+﻿@using System
+@implements IDisposable
+
+<Tab Title="Steeltoe Tooling">
+	@if (string.IsNullOrEmpty(ServiceName))
+	{
+		<span>It's already set, continue to next step.</span>
+	}
+	else
+	{
+		<span>Update with the @ServiceName info</span>
+		<pre><code>{
+...
+</code>
+	@if (!string.IsNullOrEmpty(SpringApplicationName)) {
+<code>	"spring": {
+		"application": {
+			"name": "@SpringApplicationName"
+		}</code>
+}
+@if (!string.IsNullOrEmpty(SpringServerUri)){
+<code>		,"cloud": {
+			"config": {
+				"uri": "@SpringServerUri"
+			}
+		}
+</code>
+}
+@if (!string.IsNullOrEmpty(SpringApplicationName)) {
+<code>	},</code>
+}
+@if(!string.IsNullOrEmpty(ZipkinEndpoint)){
+		<code>"management": {
+		"tracing": {
+			"alwaysSample": true,
+			"useShortTraceIds ": true,
+			"exporter": {
+				"zipkin": {
+					"endpoint": "@(ZipkinEndpoint)",
+					"validateCertificates": false,
+					"useShortTraceIds ": true
+				}
+			}
+		}
+	},</code>
+}
+@if(!string.IsNullOrEmpty(ManagementEndpointPath)){
+<code>
+"management": {
+	"endpoints": {
+		"path": "@ManagementEndpointPath",
+		"cloudfoundry": {
+			"validateCertificates": false
+		}
+	},
+	"metrics": {
+		"exporter": {
+			"cloudfoundry": {
+				"validateCertificates": false
+			}
+		}
+	}
+}</code>
+}
+@if(!string.IsNullOrEmpty(ShouldRegisterWithEureka)){
+<code>	"eureka": {
+		"client": {
+			"shouldRegisterWithEureka": @ShouldRegisterWithEureka
+		}
+	}</code>
+}
+@if(!string.IsNullOrEmpty(ConsulHostAddress)){
+<code>	"consul": {
+		"host": "@ConsulHostAddress",
+		"port": @ConsulHostPort,
+		"discovery": {
+		"register": @ConsulShouldRegister,
+		"serviceName": "@ProjectName"
+		}
+	}</code>
+}
+<code>
+...
+}</code></pre>
+	}
+	@ChildContent
+</Tab>
+
+@code {
+	[Parameter]
+	public string ServiceName { get; set; } = "";
+	[Parameter]
+	public string SpringApplicationName { get; set; } = null;
+	[Parameter]
+	public string SpringServerUri { get; set; } = null;
+	[Parameter]
+	public string ZipkinEndpoint { get; set; } = null;
+	[Parameter]
+	public string ManagementEndpointPath { get; set; } = null;
+	[Parameter]
+	public string ShouldRegisterWithEureka { get; set; } = null;
+	[Parameter]
+	public string ConsulHostAddress { get; set; } = null;
+	[Parameter]
+	public string ConsulHostPort { get; set; } = null;
+	[Parameter]
+	public string ConsulShouldRegister { get; set; } = "false";
+	[Parameter]
+	public string ProjectName { get; set; } = "";
+
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
+
+	protected override void OnInitialized()
+	{
+	}
+
+	public void Dispose()
+	{
+	}
+}

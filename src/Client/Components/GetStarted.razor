@@ -1,0 +1,17 @@
+﻿<div class="width-all">
+ <div class="width-65 container">
+  <div class="row no-gutters">
+   <div class="col get-started-title">Get Started with @ComponentName</div>
+  </div>
+  <div class="row no-gutters get-started-tutorials">
+   @Tutorials
+  </div>
+ </div>
+</div>
+
+@code {
+	[Parameter]
+	public RenderFragment ComponentName { get; set; }
+	[Parameter]
+	public RenderFragment Tutorials { get; set; }
+}

@@ -1,0 +1,45 @@
+﻿
+<div class="width-all">
+	<div class="width-90 container">
+		<div class="row no-gutters breadcrumbs">
+			<div class="col">
+				<ul>
+					<li><NavLink class="nav-link" href="/index"><span class="oi oi-home"></span></NavLink></li>
+					<li class="delimiter">&gt;</li>
+					<li class=""><a href="@ParentLinkUrl">@ParentLinkName</a></li>
+					<li class="delimiter">&gt;</li>
+					@if (ShowGetStarted)
+					{
+						<li class=""><a href="@ParentLinkUrl/get-started">Get Started</a></li>
+						<li class="delimiter">&gt;</li>
+					}
+					<li class="">@NavName</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+
+@code {
+	[Parameter]
+	public string NavName { get; set; }
+	[Parameter]
+	public bool ShowGetStarted { get; set; } = false;
+	[Parameter]
+	public bool ShowDocs { get; set; } = false;
+	[Parameter]
+	public string ParentLinkUrl { get; set; }
+	[Parameter]
+	public string ParentLinkName { get; set; }
+
+	protected override void OnInitialized()
+	{
+
+	}
+
+	public void Dispose()
+	{
+
+	}
+
+}

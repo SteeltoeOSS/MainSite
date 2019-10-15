@@ -1,0 +1,110 @@
+﻿@page "/service-connectors/get-started/rabbit"
+
+	<Breadcrumbs NavName="RabbitMQ Messaging"
+							 ParentLinkName="Service connectors"
+							 ParentLinkUrl="/service-connectors"
+							 ShowGetStarted=true />
+<Tutorial>
+	<Title>Using Service Connectors with RabbitMQ</Title>
+	<Description>This tutorial takes you through setting up a .NET Core application with the RabbitMQ service connector.</Description>
+	<TutorialSteps>
+
+		<div class="row">
+			<div class="col-12 getting-started-header">First, <b>start a RabbitMQ instance</b>. Depending on your hosting platform this is done in several ways.</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<TabSet>
+					<Steeltoe.Client.Components.StartInstanceTab.Local ServiceName="@ServiceName">
+						<DockerCmd>docker run --publish 5672:5672 steeltoeoss/rabbitmq</DockerCmd>
+					</Steeltoe.Client.Components.StartInstanceTab.Local>
+					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="@ServiceName">
+						<CFCreateServiceCmd>cf create-service p.rabbitmq single-node-3.7 @InstanceName</CFCreateServiceCmd>
+						<AdditionalSteps>
+							<Note><Message>In the above example we are choosing the p.rabbitmq service with a single-node-3.7 plan. Naming can vary in each foundation. Find your plan naming with the <code>cf marketplace</code> command</Message></Note>
+						</AdditionalSteps>
+					</Steeltoe.Client.Components.StartInstanceTab.CloudFoundry>
+					<Steeltoe.Client.Components.StartInstanceTab.Kubernetes InstanceName="@InstanceName" ServiceName="@ServiceName">
+						<HelmGettingStartedUrl>https://hub.helm.sh/charts/stable/rabbitmq</HelmGettingStartedUrl>
+						<HelmCmd>helm install --name @InstanceName --set rabbitmq.username=steeltoe,rabbitmq.password-steeltoe,service.type=NodePort,persistence.enabled=false stable/rabbitmq</HelmCmd>
+					</Steeltoe.Client.Components.StartInstanceTab.Kubernetes>
+					@*<Steeltoe.Client.Components.StartInstanceTab.StTooling InstanceName="@InstanceName" ServiceName="@ServiceName" ToolingServiceName="RabbitMQ" />*@
+				</TabSet>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-header">Next, <b>create a .NET Core WebAPI</b> that interacts with RabbitMQ</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+				<ol>
+					<li>
+						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="rabbit-connector.png" DependencyName="RabbitMQ" ProjectName="@ProjectName" />
+					</li>
+					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
+					<li>
+						Validate the correct logging level is set in <b>appsettings.json</b>
+<pre><code>
+"Logging": {
+	"LogLevel": {
+		"Default": "Information",
+		"System": "Information",
+		"Microsoft": "Information"
+	}
+},
+}</code></pre>
+					</li>
+					<li>
+						Set the instance address in <b>appsettings.json</b>
+						<TabSet>
+							<Steeltoe.Client.Components.AppSettingsTab.Local ServiceName="@ServiceName"
+																												ParentSettingsParamName="rabbitmq"
+																												ChildSettingsParamName="client"
+																												ServicePort="5672"
+																												ServiceHost="127.0.0.1"
+																												ServiceUsername="guest"
+																												ServicePassword="guest" />
+							<Steeltoe.Client.Components.AppSettingsTab.CloudFoundry />
+							<Steeltoe.Client.Components.AppSettingsTab.Kubernetes InstanceName="@InstanceName"
+																														 ServiceName="@ServiceName"
+																														 ServicePort="HELM_PROVIDED_PORT_NUMBER"
+																														 ParentSettingsParamName="rabbitmq"
+																														 ChildSettingsParamName="client"
+																														 ServiceServer="HELM_PROVIDED_HOST_ADDRESS"
+																														 ServiceUsername="steeltoe"
+																														 ServicePassword="steeltoe" />
+							@*<Steeltoe.Client.Components.AppSettingsTab.StTooling />*@
+						</TabSet>
+					</li>
+					<Note><Message>Make sure the correct logging is set or you'll miss the output. The default logging level should be set to <code>Information</code>.</Message></Note>
+					<li>
+						<div>Run the application</div>
+						<div>
+							<TabSet>
+								<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" />
+								@*<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" InstanceName="@ServiceName" />*@
+								<Steeltoe.Client.Components.RunAppTab.Kubernetes ProjectName="@ProjectName" />
+								@*<Steeltoe.Client.Components.RunAppTab.StTooling ProjectName="@ProjectName" />*@
+							</TabSet>
+						</div>
+					</li>
+					<li>
+						As the app loads in the browser it will create a message queue, listen for new messages on the queue, and write 5 messages. Once finished the output will let you know everything has completed - <samp>Wrote 5 message to the info log. Have a look!</samp>. Looking at the app logs (console) you will see...
+<pre><code>Received message: Message 1
+Received message: Message 2
+Received message: Message 3
+Received message: Message 4
+Received message: Message 5</code></pre>
+						<br />
+					</li>
+				</ol>
+			</div>
+		</div>
+	</TutorialSteps>
+</Tutorial>
+@code
+{
+	private string ServiceName = "RabbitMQ";
+	private string InstanceName = "myrabbitservice";
+	private string ProjectName = "RabbitMQ_Connector";
+}

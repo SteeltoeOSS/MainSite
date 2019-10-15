@@ -1,0 +1,132 @@
+////
+/// @group layout
+////
+
+/// An approximation of π.
+/// @access private
+/// @return {Float}
+/// @link https://github.com/at-import/Sassy-math/blob/master/sass/math.scss#L8 SassyMath
+@function pi() {
+  @return 3.1415926535897932384626433832795028841971693993751;
+}
+
+/// Factorial function.
+/// @access private
+/// @param {Number} $number
+/// @return {Number}
+/// @link https://unindented.org/articles/trigonometry-in-sass/ Trigonometry in Sass
+@function fact($number) {
+  $value: 1;
+
+  @if $number > 0 {
+    @for $i from 1 through $number {
+      $value: $value * $i;
+    }
+  }
+
+  @return $value;
+}
+
+/// Power function.
+/// @access private
+/// @param {Number} $number
+/// @param {Number} $exp
+/// @link https://unindented.org/articles/trigonometry-in-sass/ Trigonometry in Sass
+@function pow($number, $exp) {
+  $value: 1;
+
+  @if $exp > 0 {
+    @for $i from 1 through $exp {
+      $value: $value * $number;
+    }
+  } @else if $exp < 0 {
+    @for $i from 1 through -$exp {
+      $value: $value / $number;
+    }
+  }
+
+  @return $value;
+}
+
+/// Sine function.
+/// @access private
+/// @param {Angle} $angle - Angle expressed in degrees
+/// @return {Number}
+/// @link https://unindented.org/articles/trigonometry-in-sass/ Trigonometry in Sass
+@function sin($angle) {
+  $sin: 0;
+  $rad: $angle * pi() * 1rad / 180deg;
+  $angle: $rad / ($rad * 0 + 1);
+
+  @for $i from 0 through 10 {
+    $sin: $sin + pow(-1, $i) * pow($angle, (2 * $i + 1)) / fact(2 * $i + 1);
+  }
+
+  @return $sin;
+}
+
+/// Square root function.
+/// @access private
+/// @param {Number} $number
+/// @return {Number}
+/// @link https://github.com/at-import/Sassy-math/blob/master/sass/math.scss#L259-L266 SassyMath
+@function sqrt($number) {
+  $guess: 4; // Guaranteed to be random: https://xkcd.com/221/
+  $root: $guess;
+
+  @for $i from 1 through 50 {
+    $root: $root - (pow($root, 2) - $number) / (2 * $root);
+  }
+
+  @return $root;
+}
+
+/// Computes the height of the tilted pseudo-element based on the given angle
+/// using Pythagoras Theorem.
+// sin(..), pow(..) and sqrt(..)  functions come from this pen:
+// https://codepen.io/HugoGiraudel/pen/rLpPGo
+/// @access public
+/// @author Hugo Giraudel
+/// @param {Angle} $angle - the tilt angle
+@function get-tilted-height($angle) {
+  $a: (100% / 1%);
+  $A: (90deg - $angle);
+  $c: ($a / sin($A));
+  $b: sqrt(pow($c, 2) - pow($a, 2));
+
+  @return (abs($b) * 1%);
+}
+
+/// Apply a tilted effect by generating a pseudo-element with a diagonal
+/// splitted background.
+/// @access public
+/// @author Hugo Giraudel
+/// @param {Angle} $angle - the tilt angle
+/// @param {Color} $color - the color to be used as background + gradient
+/// @param {String} $position ['top'] - either `top` or `bottom`
+/// @param {String} $pseudo ['before'] - either `before` or `after`
+@mixin tilted($angle, $color, $position: 'top', $pseudo: 'before') {
+  $height: get-tilted-height($angle);
+
+  position: relative;
+  background-color: $color;
+  
+  &::#{$pseudo} {
+    background-color: inherit;
+    content: '';
+    left: 0;
+    padding-top: $height;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    z-index: -1;
+
+    @if ($position == 'top') {
+      transform: translateY(-50%) skewY($angle);
+      top: 0;
+    } @else {
+      transform: translateY(50%) skewY($angle);
+      bottom: 0;
+    }
+  }
+}

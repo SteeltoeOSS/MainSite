@@ -1,0 +1,107 @@
+﻿@page "/service-connectors/get-started/postgresql"
+
+	<Breadcrumbs NavName="PostgreSQL Database"
+							 ParentLinkName="Service connectors"
+							 ParentLinkUrl="/service-connectors"
+							 ShowGetStarted=true />
+<Tutorial>
+	<Title>Using Service Connectors with @ServiceName Database</Title>
+	<Description>This tutorial takes you through setting up a .NET Core application with the @ServiceName service connector.</Description>
+	<TutorialSteps>
+
+		<div class="row">
+			<div class="col-12 getting-started-header">First, <b>start a @ServiceName instance</b>. Depending on your hosting platform this is done in several ways.</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<TabSet>
+					<Steeltoe.Client.Components.StartInstanceTab.Local ServiceName="@ServiceName">
+						<DockerCmd>docker run --env POSTGRES_PASSWORD=Steeltoe789 --publish 5432:5432 steeltoeoss/postgresql</DockerCmd>
+					</Steeltoe.Client.Components.StartInstanceTab.Local>
+					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="@ServiceName">
+						<CFCreateServiceCmd>cf create-service p-postgre shared @InstanceName</CFCreateServiceCmd>
+						<AdditionalSteps>
+							<Note><Message>In the above example we are choosing the p-postgre service with a shared plan. Naming can vary in each foundation. Find your plan naming with the <code>cf marketplace</code> command</Message></Note>
+						</AdditionalSteps>
+					</Steeltoe.Client.Components.StartInstanceTab.CloudFoundry>
+					<Steeltoe.Client.Components.StartInstanceTab.Azure InstanceName="@InstanceName" ServiceName="@ServiceName">
+						<AzureGettingStartedUrl>https://docs.microsoft.com/en-us/azure/postgresql/scripts/sample-create-server-and-firewall-rule?toc=%2fcli%2fazure%2ftoc.json</AzureGettingStartedUrl>
+					</Steeltoe.Client.Components.StartInstanceTab.Azure>
+					<Steeltoe.Client.Components.StartInstanceTab.Kubernetes InstanceName="@InstanceName" ServiceName="@ServiceName">
+						<HelmGettingStartedUrl>https://hub.helm.sh/charts/stable/mysql</HelmGettingStartedUrl>
+						<HelmCmd>helm install --name mySqlService --set postgresqlPassword=steeltoe,service.type=NodePort,persistence.enabled=false stable/postgresql</HelmCmd>
+					</Steeltoe.Client.Components.StartInstanceTab.Kubernetes>
+					@*<Steeltoe.Client.Components.StartInstanceTab.StTooling InstanceName="@InstanceName" ServiceName="@ServiceName" ToolingServiceName="postgresql" />*@
+				</TabSet>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-header">Next, <b>create a .NET Core WebAPI</b> that interacts with PostgreSQL</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+				<ol>
+					<li>
+						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="postgre-connector.png" DependencyName="PostgreSQL" ProjectName="@ProjectName" />
+					</li>
+					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
+					<li>
+						Set the instance address in <b>appsettings.json</b>
+						<TabSet>
+							<Steeltoe.Client.Components.AppSettingsTab.Local ServiceName="@ServiceName"
+																												ServicePort="5432"
+																												ParentSettingsParamName="postgres"
+																												ChildSettingsParamName="client"
+																												ServiceServer="127.0.0.1"
+																												ServiceUsername="postgres"
+																												ServicePassword="Steeltoe789" />
+							<Steeltoe.Client.Components.AppSettingsTab.CloudFoundry />
+							<Steeltoe.Client.Components.AppSettingsTab.Azure InstanceName="@InstanceName"
+																												ServiceName="@ServiceName"
+																												ParentSettingsParamName="postgres"
+																												ChildSettingsParamName="client"
+																												ServicePort="AZURE_PROVIDED"
+																												ServiceServer="AZURE_PROVIDED"
+																												ServiceUsername="AZURE_PROVIDED"
+																												ServicePassword="AZURE_PROVIDED" />
+							<Steeltoe.Client.Components.AppSettingsTab.Kubernetes InstanceName="@InstanceName"
+																														 ServiceName="@ServiceName"
+																														 ServicePort="HELM_PROVIDED_PORT_NUMBER"
+																														 ParentSettingsParamName="postgres"
+																														 ChildSettingsParamName="client"
+																														 ServiceServer="HELM_PROVIDED_HOST_ADDRESS"
+																														 ServiceUsername="postgres"
+																														 ServicePassword="Steeltoe789" />
+							@*<Steeltoe.Client.Components.AppSettingsTab.StTooling />*@
+						</TabSet>
+					</li>
+					<Tip><Message>Looking for additional params to use when connecting? Have a look at the <NavLink href="/service-connectors/docs" class="nav-link" target="_blank">docs</NavLink></Message></Tip>
+					<li>
+						<div>Run the application</div>
+						<div>
+							<TabSet>
+								<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" />
+								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" InstanceName="@InstanceName" />
+								<Steeltoe.Client.Components.RunAppTab.AzureAppService>
+									<AzureDeployHowToUrl>https://docs.microsoft.com/en-us/visualstudio/deployment/quickstart-deploy-to-azure?view=vs-2019</AzureDeployHowToUrl>
+								</Steeltoe.Client.Components.RunAppTab.AzureAppService>
+								<Steeltoe.Client.Components.RunAppTab.Kubernetes ProjectName="@ProjectName" />
+								@*<Steeltoe.Client.Components.RunAppTab.StTooling ProjectName="@ProjectName" />*@
+							</TabSet>
+						</div>
+					</li>
+					<li>
+						Once the app loads in the browser you will see a list of the default database schemas installed with @ServiceName.
+						<br /><samp>["UTF8","UTF8","UTF8"]</samp>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</TutorialSteps>
+</Tutorial>
+@code
+{
+	private string ServiceName = "PostgreSQL";
+	private string InstanceName = "mypgservice";
+	private string ProjectName = "Postgre_Connector";
+}

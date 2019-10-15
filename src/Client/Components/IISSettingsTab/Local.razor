@@ -1,0 +1,30 @@
+﻿@using System
+@implements IDisposable
+
+<Tab Title="Local">
+<pre><code>"iisSettings": {
+		"windowsAuthentication": false, 
+		"anonymousAuthentication": true, 
+		"iisExpress": {
+			"applicationUrl": "@(ApplicationUrl)",
+			"sslPort": 0
+		}
+	}</code></pre>
+@ChildContent
+</Tab>
+
+@code {
+
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
+	[Parameter]
+	public string ApplicationUrl { get; set; } = "http://localhost:8080";
+
+	protected override void OnInitialized()
+	{
+	}
+
+	public void Dispose()
+	{
+	}
+}

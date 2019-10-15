@@ -1,0 +1,216 @@
+﻿@page "/"
+@page "/index"
+@page "/docs"
+
+<div class="bg-midnight-blue text-white width-all">
+	<div class="width-60 container">
+		<div class="row no-gutters py-5">
+			<div class="col">
+				<Banner Href="https://pivotal.io/platform-acceleration-lab/pal-for-developers-net">
+					<span class="font-weight-bold">Become a Steeltoe ninja.</span> Attend Pivotal's 4-day cloud-native .NET training course &gt;
+				</Banner>
+			</div>
+		</div>
+		<div class="row mb-4 no-gutters">
+			<div class="col"><h1>Steeltoe is a .NET framework that provides libraries for quickly creating cloud-native microservices.</h1></div>
+		</div>
+		<div class="row no-gutters">
+			<div class="col"><span class="line-height-35 font-weight-normal">Need to containerize .NET Framework apps for the cloud? Steeltoe can help reach a few of those 12 factors in a snap. Creating new .NET Core applications? With little effort, Steeltoe will have your app getting the most out of its platform. Steeltoe also provides tools for the cloud-native .NET developer to work locally and on a cloud platform with little change.<br /><br />Learn more about the tools & components within Steeltoe below, or <NavLink class="nav-link text-white font-weight-bold" href="/get-started" style="text-decoration:underline;">get started now</NavLink>!</span></div>
+		</div>
+	</div>
+</div>
+<div class="width-all blue-slant">
+	<div class="width-70 container">
+		<div class="width-all text-center"><h2>What Steeltoe can do</h2></div>
+		<div class="">
+			<div class="row no-gutters">
+				<div class="col component">
+					<div class="title"><h3>Cloud Management</h3></div>
+					<div class="desc">Monitor and manage your app while it runs in production with Steeltoe Cloud Management.</div>
+					<div class="links">
+						<NavLink class="nav-link" href="/cloud-management/get-started">get started</NavLink>
+						<NavLink class="nav-link" href="/cloud-management/docs">docs</NavLink>
+						<NavLink class="nav-link" href="/cloud-management">about</NavLink>
+					</div>
+				</div>
+				<div class="col component">
+					<div class="title"><h3>App Configuration</h3></div>
+					<div class="desc">Store external config values in Git, the filesystem, or Hashicorp Vault with Spring Cloud Config.</div>
+					<div class="links">
+						<NavLink class="nav-link" href="/app-configuration/get-started">get started</NavLink>
+						<NavLink class="nav-link" href="/app-configuration/docs">docs</NavLink>
+						<NavLink class="nav-link" href="/app-configuration">about</NavLink>
+					</div>
+				</div>
+			</div>
+			<div class="row no-gutters">
+				<div class="col component">
+					<div class="title"><h3>Service Discovery</h3></div>
+					<div class="desc">Steeltoe includes a .NET client to both register and discover microservices in your registry of choice.</div>
+					<div class="links">
+						<NavLink class="nav-link" href="/service-discovery/get-started">get started</NavLink>
+						<NavLink class="nav-link" href="/service-discovery/docs">docs</NavLink>
+						<NavLink class="nav-link" href="/service-discovery">about</NavLink>
+					</div>
+				</div>
+				<div class="col component">
+					<div class="title"><h3>Service Connectors</h3></div>
+					<div class="desc">
+						Automatically configure and manage connections to common cloud services like databases, caches, and more.
+					</div>
+					<div class="links">
+						<NavLink class="nav-link" href="/service-connectors/get-started">get started</NavLink>
+						<NavLink class="nav-link" href="/service-connectors/docs">docs</NavLink>
+						<NavLink class="nav-link" href="/service-connectors">about</NavLink>
+					</div>
+				</div>
+			</div>
+			<div class="row no-gutters">
+				<div class="col component">
+					<div class="title"><h3>Cloud Security Providers</h3></div>
+					<div class="desc">Integrate ASP.NET authentication and authorization features in your app, no matter what platform you use.</div>
+					<div class="links">
+						<NavLink class="nav-link" href="/security-providers/get-started">get started</NavLink>
+						<NavLink class="nav-link" href="/security-providers/docs">docs</NavLink>
+						<NavLink class="nav-link" href="/security-providers">about</NavLink>
+					</div>
+				</div>
+				<div class="col component">
+					<div class="title"><h3>Circuit Breakers</h3></div>
+					<div class="desc">Implement the Netflix Hystrix, a proven circuit breaker pattern with rich metrics and monitoring features.</div>
+					<div class="links">
+						<NavLink class="nav-link" href="/circuit-breakers/get-started">get started</NavLink>
+						<NavLink class="nav-link" href="/circuit-breakers/docs">docs</NavLink>
+						<NavLink class="nav-link" href="/circuit-breakers">about</NavLink>
+					</div>
+				</div>
+			</div>
+			@*<div class="row no-gutters">
+					<div class="col component">
+						<NavLink class="nav-link" href="/logging">
+							<div class="title"><h3>Logging</h3></div>
+						</NavLink>
+						<div class="desc">Do something else.</div>
+						<div class="links">
+							<NavLink class="nav-link" href="/logging/get-started">get started</NavLink>
+							<NavLink class="nav-link" href="/logging/docs">docs</NavLink>
+							<NavLink class="nav-link" href="/logging">about</NavLink>
+						</div>
+					</div>
+					<div class="col component">
+						<NavLink class="nav-link" href="/network-file-sharing">
+							<div class="title"><h3>Network File Sharing</h3></div>
+						</NavLink>
+						<div class="desc">Do something else.</div>
+						<div class="links">
+							<NavLink class="nav-link" href="/network-file-sharing/get-started">get started</NavLink>
+							<NavLink class="nav-link" href="/network-file-sharing/docs">docs</NavLink>
+							<NavLink class="nav-link" href="/network-file-sharing">about</NavLink>
+						</div>
+					</div>
+				</div>*@
+			<div class="row no-gutters">
+				<div class="col-12 component">
+					<NavLink class="nav-link" href="/cloud-native-developer">
+						<div class="title"><h3>Cloud-Native .NET Tools</h3></div>
+					</NavLink>
+					<div class="desc mb-3">Along with the framework, the Steeltoe team has also developed tooling to help you code microservices and interact with cloud platforms easier.</div>
+					<div class="links">
+						<NavLink class="nav-link" href="/cloud-native-developer">learn more</NavLink>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div style="margin: 0 0 0 51%;">
+	<svg xmlns="http://www.w3.org/2000/svg"
+			 width="100%" height="100%" preserveAspectRatio="xMidYMid meet"
+			 viewBox="0 0 3517 363">
+		<path fill="#7f9bb6" d="M 0.00,362.00
+           C 0.00,362.00 28.00,363.00 28.00,363.00
+             28.00,363.00 89.00,363.00 89.00,363.00
+             89.00,363.00 301.00,363.00 301.00,363.00
+             301.00,363.00 1026.00,363.00 1026.00,363.00
+             1026.00,363.00 3517.00,363.00 3517.00,363.00
+             3517.00,363.00 3517.00,0.00 3517.00,0.00
+             3517.00,0.00 3495.00,0.00 3495.00,0.00
+             3495.00,0.00 3465.00,2.83 3465.00,2.83
+             3465.00,2.83 3388.00,10.83 3388.00,10.83
+             3388.00,10.83 3205.00,29.83 3205.00,29.83
+             3205.00,29.83 2718.00,80.17 2718.00,80.17
+             2718.00,80.17 2608.00,91.83 2608.00,91.83
+             2608.00,91.83 2319.00,121.83 2319.00,121.83
+             2319.00,121.83 1562.00,200.17 1562.00,200.17
+             1562.00,200.17 1196.00,238.17 1196.00,238.17
+             1196.00,238.17 753.00,284.17 753.00,284.17
+             753.00,284.17 252.00,336.17 252.00,336.17
+             252.00,336.17 79.00,354.17 79.00,354.17
+             79.00,354.17 0.00,362.00 0.00,362.00 Z" />
+	</svg>
+</div>
+<div class="left-yellow-slant bg-midnight-blue text-white width-all pb-4">
+	<div class="width-60 container">
+		<div class="text-center width-all pb-3"><h2>News</h2></div>
+		<div class="row no-gutters">
+			<div class="col news">
+				<div class="date"><span>october</span> 6-7 2019</div>
+				<div class="title">.NET developer pre-conference training at Spring One Platform</div>
+				<div class="desc">A two-day course that demonstrates how to build cloud-native .NET applications using Steeltoe. Get signed up today!</div>
+				<div class=""><a class="special-link" href="https://springoneplatform.io/2019/training/steeltoe" target="_blank">read more &gt;</a></div>
+			</div>
+		</div>
+		<div class="row no-gutters">
+			<div class="col"><hr class="border-steeltoe-blue" /></div>
+		</div>
+		<div class="row no-gutters">
+			<div class="col news">
+				<div class="date"><span>september</span> 30 2019</div>
+				<div class="title">Steeltoe 2.3 is available</div>
+				<div class="desc">With new features in logging, cloud management, and cloud connectors as well as quite a few notable issues resolved the 2.3 release is another milestone in Steeltoe's roadmap.</div>
+				<div class=""><a class="special-link" href="https://github.com/SteeltoeOSS/steeltoe/blob/master/roadmaps/2.3.0.md" target="_blank">read more &gt;</a></div>
+			</div>
+		</div>
+		<div class="row no-gutters">
+			<div class="col"><hr class="border-steeltoe-blue" /></div>
+		</div>
+		<div class="row no-gutters">
+			<div class="col news">
+				<div class="date"><span>august</span> 9 2019</div>
+				<div class="title">Update to Steeltoe 3.0 roadmap</div>
+				<div class="desc">This new major version of Steeltoe will continue the Spring Cloud theme with the addition of streaming support as well as well as introduce big enhancements to the existing features.</div>
+				<div class=""><a class="special-link" href="https://github.com/SteeltoeOSS/steeltoe/blob/master/roadmaps/3.0.0.md" target="_blank">read more &gt;</a></div>
+			</div>
+		</div>
+	</div>
+	@*<div class="text-center width-all"><h5>MORE NEWS &gt;</h5></div>*@
+</div>
+<div class="width-all">
+	<div class="width-60 container py-5">
+		@*<div class="text-center width-all"><h2>Stats</h2></div>*@
+		<div class="row no-gutters text-center mt-3">
+			<div class="col stat">
+				Steeltoe has been downloaded over <span class="number">4.9 million</span> times on NuGet!
+			</div>
+		</div>
+	</div>
+</div>
+@*<div class="bg-grey width-all grey">
+	 <div class="width-60 container py-5">
+		<div class="text-center width-all black"><h3>Testimonials</h3></div>
+		<div class="row no-gutters mt-3">
+		 <div class="col testimonial">
+			<div class="desc">"I can't believe how much time Steeltoe is saving me! We went from concept to production in 2 weeks!"</div>
+			<div class="name">-Some one</div>
+		 </div>
+		 <div class="col testimonial">
+			<div class="desc">"I can't believe how much time Steeltoe is saving me! We went from concept to production in 2 weeks!"</div>
+			<div class="name">-Some one</div>
+		 </div>
+		 <div class="col testimonial">
+			<div class="desc">"I can't believe how much time Steeltoe is saving me! We went from concept to production in 2 weeks!"</div>
+			<div class="name">-Some one</div>
+		 </div>
+		</div>
+	 </div>
+	</div>*@

@@ -1,0 +1,110 @@
+.animated {
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;  
+}
+
+.tada {
+  -webkit-animation-name: tada;
+  animation-name: tada;
+}
+
+@keyframes tada {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  10%, 20% {
+    -webkit-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+    transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+  }
+
+  30%, 50%, 70%, 90% {
+    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+  }
+
+  40%, 60%, 80% {
+    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+#service-discovery g circle:nth-of-type(2),
+#service-discovery g circle:nth-of-type(3) {
+  animation: pulsate 2s infinite linear;
+}
+
+#service-discovery g circle:nth-of-type(3) {
+  animation-delay: 1s;
+}
+
+
+@keyframes pulsate {
+  0%   { opacity: 1; }
+  50%  { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+#external-configuration #serverPath,
+#external-configuration #databasePath,
+#external-configuration #debugPath {
+  stroke-dasharray: 221px;
+  animation-direction: alternate-reverse;
+  animation-duration: 2s;
+  animation-fill-mode: backwards;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-out;
+}
+
+#external-configuration #serverPath,
+#external-configuration #debugPath {
+  animation-name: drawPath;
+}
+
+#external-configuration #databasePath {
+  animation-name: drawDatabasePath; 
+}
+
+@keyframes drawDatabasePath {
+  0% {
+    opacity: 0;
+    stroke-dashoffset: 200px;
+  
+  }
+  100% {
+    opacity: 1;
+    stroke-dashoffset: 0px;
+  }
+}
+
+
+@keyframes drawPath {
+  0% {
+    opacity: 0;
+    stroke-dashoffset: -200px;
+ 
+  }
+  100% {
+    opacity: 1;
+    stroke-dashoffset: 0px;
+  }
+}
+
+#cloud-connector #connectorPath {
+  stroke-dasharray: 10;
+  animation: dottedPath 2s infinite linear;
+}
+
+
+@keyframes dottedPath {
+  to {
+    stroke-dashoffset: 100;
+  }
+}

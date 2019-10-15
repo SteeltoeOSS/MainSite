@@ -1,0 +1,45 @@
+﻿@page "/security-providers"
+@page "/steeltoe-security"
+
+<SteeltoeComponent>
+	<DocsURL><a class="component-button nav-link" href="security-providers/docs">VIEW THE DOCS</a></DocsURL>
+	<GettingStartedURL>
+		<a class="component-button nav-link" href="security-providers/get-started">GET STARTED TUTORIAL</a>
+	</GettingStartedURL>
+	<ComponentName>security providers</ComponentName>
+	<ComponentDescription>Securing your applications and microservices using the security services provided by cloud platforms can seem like an impossible and complex development effort. Steeltoe reduces that effort by including security providers which enable you to easily integrate ASP.NET Core authentication and authorization features with Cloud Foundry security services.</ComponentDescription>
+	<WhatIsComponent>Applications must have some notion of security, but you don’t want to lock the app in to a certain provider. Instead use the native functions of .NET and let the platform decide the provider. Cloud Security helps your app achieve that abstraction.</WhatIsComponent>
+	<WhyUseComponent>Steeltoe provides a number of Security related services that simplify using a cloud platform’s security services in ASP.NET applications.</WhyUseComponent>
+	<Features>
+		<div class="row component-feature">
+			<div class="col-6">
+				<div class="component-feature-title">Single Sign-on with OAuth2 or OpenID Connect</div>
+				<div class="component-feature-desc">Leverage existing credentials managed by an OAuth2 service for authentication and authorization in ASP.NET Core applications or with OpenID Connect in ASP.NET Framework (4.x).</div>
+			</div>
+			<div class="col-6 text-center"><div class="component-feature-img"><img class="" src="images/Icon_computer.svg" /></div></div>
+		</div>
+		<div class="row component-feature">
+			<div class="col-6 text-center"><div class="component-feature-img"><img class="" src="images/Icon_security.svg" /></div></div>
+			<div class="col-6">
+				<div class="component-feature-title">Resource Protection using JWT</div>
+				<div class="component-feature-desc">Control access to REST resources by using JWT tokens.</div>
+			</div>
+		</div>
+		<div class="row component-feature">
+			<div class="col-6">
+				<div class="component-feature-title">Redis Key Storage Provider</div>
+				<div class="component-feature-desc">Reconfigure the Data Protection service in ASP.NET to use an external Redis instance for key ring storage.</div>
+			</div>
+			<div class="col-6 text-center"><div class="component-feature-img"><img class="" src="images/Icon_down-arrow.svg" /></div></div>
+		</div>
+		<div class="row component-feature">
+			<div class="col-6 text-center"><div class="component-feature-img"><img class="" src="images/Icon_security.svg" /></div></div>
+			<div class="col-6">
+				<div class="component-feature-title">CredHub Client</div>
+				<div class="component-feature-desc">Interact directly with a CredHub secrets store in an ASP.NET application.</div>
+			</div>
+		</div>
+	</Features>
+	<Resources></Resources>
+</SteeltoeComponent>
+

@@ -1,0 +1,43 @@
+﻿@page "/cloud-management/get-started/logging"
+
+<Breadcrumbs NavName="Dynamic Logging"
+						 ParentLinkName="Cloud Management"
+						 ParentLinkUrl="/cloud-management"
+						 ShowGetStarted=true />
+<Tutorial>
+	<Title>Using @ServiceName for debugging with Zipkin</Title>
+	<Description>This tutorial takes you through setting up a .NET Core application with the Redis service connector.</Description>
+	<TutorialSteps>
+		<div class="row">
+			<div class="col-12 getting-started-header">First, <b>create a .NET Core WebAPI</b> with @ServiceName enabled</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+				<ol>
+					<li>
+						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="dynamic-logger.png" ProjectName="@ProjectName" DependencyName="Actuators, DynamicLogger" />
+					</li>
+					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
+					<li>
+						<div>Run the application</div>
+						<div>
+							<TabSet>
+								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFServices=true >
+									<AdditionalSteps>
+									<li>With the application successfully pushed, navigate to App Manager&gt;Logs tab to see the new option to configure logging levels.
+									<img src="images/initializr/dynamic-logger-appmanager.png" class="img-fluid" /></li>
+								</AdditionalSteps>
+								</Steeltoe.Client.Components.RunAppTab.CloudFoundry>
+							</TabSet>
+						</div>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</TutorialSteps>
+</Tutorial>
+@code
+{
+	private string ServiceName = "Dynamic Logging";
+	private string ProjectName = "Dynamic_Logging_Example";
+}

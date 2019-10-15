@@ -1,0 +1,116 @@
+﻿@using System
+@implements IDisposable
+
+<Tab Title="Kubernetes">
+	<ol>
+		<li>
+			Create a <b>DockerFile</b> in the same folder as @(ProjectName).csproj.
+<pre><code>FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build-env
+WORKDIR /app
+
+# Copy csproj and restore as distinct layers
+COPY *.csproj ./
+RUN dotnet restore
+
+# Copy everything else and build
+COPY . ./
+RUN dotnet publish -c Release -o out
+
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
+WORKDIR /app
+COPY --from=build-env /app/out .
+ENTRYPOINT ["dotnet", "@(ProjectName).dll"]
+</code></pre>
+		</li>
+		<li>
+			Buld the Docker image
+			<code class="inline">docker build -t &lt;YOUR_DOCKER_NAME&gt;/@(ProjectName.ToLower()) &lt;PATH_TO_PROJECT_FOLDER&gt;</code>
+		</li>
+		<Tip><Message>With the container image built, you can test locally by running <code>docker run -p 80:80 &lt;YOUR_DOCKER_NAME&gt;/@(ProjectName.ToLower())</code>. Then navigate to <a href="http://localhost:8080/api/values" target="_blank">http://localhost/api/values</a>.</Message></Tip>
+		<li>
+			Push the new docker image to the Docker <a href="http://hub.docker.com" target="_blank">container registry hub</a>
+																							<code class="inline">docker push &lt;YOUR_DOCKER_NAME&gt;/@(ProjectName.ToLower())</code>
+		</li>
+		<li>
+			Create a Kubernetes <b>manifest.yml</b> in the same folder as @(ProjectName).csproj.
+<pre><code>---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    app: @(ProjectName.Replace("_","-").ToLower())
+  name: @(ProjectName.Replace("_","-").ToLower())
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: @(ProjectName.Replace("_","-").ToLower())
+      name: @(ProjectName.Replace("_","-").ToLower())
+    spec:
+      containers:
+      - name: @(ProjectName.Replace("_","-").ToLower())
+        imagePullPolicy: IfNotPresent
+        image: &lt;YOUR_DOCKER_NAME&gt;/@(ProjectName.ToLower())
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: @(ProjectName.Replace("_","-").ToLower())
+  labels:
+    app: @(ProjectName.Replace("_","-").ToLower())
+spec:
+  ports:
+  - port: 80
+    targetPort: 80
+  selector:
+    app: @(ProjectName.Replace("_","-").ToLower())
+  type: NodePort
+</code></pre>
+			<Tip><Message>This manifest is using a specific <code>apiVersion</code>. Your K8 cluster version might differ. Learn more about api versions <NavLink class="nav-link" href="https://kubernetes.io/docs/reference/using-api/api-overview/" target="_blank">here</NavLink>.</Message></Tip>
+		</li>
+		<li>
+			Using the manifest, create the pod deployment.
+			<code class="inline">kubectl apply -f &lt;PATH_TO&gt;\manifest.yml</code>
+		</li>
+		@*<li>
+			Expose the new app for access.
+			<code class="inline">kubectl expose deployment @(ProjectName.Replace("_","-").ToLower()) --type=NodePort --name=@(ProjectName.Replace("_","-").ToLower()) --port 80</code>
+		</li>*@
+		@if (IncludeNavigateToApp) {
+			<li>
+				Along with deploying the app, the manifest also exposed a port for accessing the app external of the customer. To retrieve the assigned port look up the service info.
+				<code class="inline">kubectl get svc @(ProjectName.Replace("_", "-").ToLower()) -o jsonpath='{.spec.ports[0].nodePort}'</code>
+			</li>
+			<li>
+				You'll also need any one of the node IP addresses. To look them up retrieve node details and note the EXTERNAL-IP of the first node.
+				<code class="inline">kubectl get nodes -o wide</code>
+			</li>
+			<li>
+				Using the IP address from  <code>https://&lt;EXTERNAL_IP_ADDRESS&gt;:&lt;PORT&gt;/api/values</code> to run the app.
+			</li>
+		}
+		@AdditionalSteps
+	</ol>
+	<Tip><Message>Once finished, to remove the deployment simply run <code>kubectl delete pod,service,deployment @(ProjectName.Replace("_", "-").ToLower())</code></Message></Tip>
+</Tab>
+
+
+@code {
+	[Parameter]
+	public string ProjectName { get; set; } = "";
+	[Parameter]
+	public bool IncludeNavigateToApp { get; set; } = true;
+
+	[Parameter]
+	public RenderFragment AdditionalSteps { get; set; }
+
+	protected override void OnInitialized()
+	{
+	}
+
+	public void Dispose()
+	{
+	}
+}

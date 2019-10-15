@@ -1,0 +1,242 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0048) -->
+<html class="gr__steeltoe_io">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+	<meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+
+	<!-- Use title if it's in the page YAML frontmatter -->
+	<link href="images/favicon.png" rel="icon" type="image/png">
+	<link rel="stylesheet" href="/stylesheets/css.css">
+	<link href="/stylesheets/site.css" rel="stylesheet">
+	<link href="/stylesheets/tocbot.css" rel="stylesheet">
+</head>
+
+<body class="docs docs_steeltoe-logging docs_steeltoe-logging_index" data-gr-c-s-loaded="true">
+
+	<div class="max-width-4 mx-auto">
+		<div class="">
+			<div class="sm-flex">
+				<div class="col-12 sm-col-3 sm-pr3">
+
+					<div id="toc" class="">
+						<div class="toc-link border-bottom border-silver js-toc"><ul class="toc-list "><li class="toc-list-item"><a href="#1-0-dynamic-logging-provider" class="toc-link node-name--H1  is-active-link">1.0 Dynamic Logging Provider</a><ul class="toc-list  is-collapsible"><li class="toc-list-item"><a href="#1-1-usage" class="toc-link node-name--H2 ">1.1 Usage</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#1-1-1-add-nuget-references" class="toc-link node-name--H3 ">1.1.1 Add NuGet References</a></li><li class="toc-list-item"><a href="#1-1-2-configure-settings" class="toc-link node-name--H3 ">1.1.2 Configure Settings</a></li><li class="toc-list-item"><a href="#1-1-3-add-logging-provider" class="toc-link node-name--H3 ">1.1.3 Add Logging Provider</a></li></ul></li></ul></li><li class="toc-list-item"><a href="#2-0-serilog-dynamic-logger" class="toc-link node-name--H1 ">2.0 Serilog Dynamic Logger</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#2-1-usage" class="toc-link node-name--H2 ">2.1 Usage</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#2-1-1-add-nuget-references" class="toc-link node-name--H3 ">2.1.1 Add NuGet References</a></li><li class="toc-list-item"><a href="#2-1-2-configure-settings" class="toc-link node-name--H3 ">2.1.2 Configure Settings</a></li><li class="toc-list-item"><a href="#2-1-3-add-serilog-dynamic-logger" class="toc-link node-name--H3 ">2.1.3 Add Serilog Dynamic Logger</a></li></ul></li></ul></li></ul></div>
+					</div>
+				</div>
+				<div class="col-12 sm-col-9 js-toc-content">
+					<h1 class="js-toc-ignore regular">Logging</h1>
+					<p>Steeltoe adds a Logging provider to the set of available logging packages in order to support the Steeltoe Management Logger endpoint.</p>
+
+					<p>When used with the Steeltoe Logger Management endpoint, this package enables dynamically changing the logging levels for running applications with the <a target="_blank" href="https://docs.pivotal.io/pivotalcf/2-0/console/index.html">Pivotal Apps Manager</a> on Cloud Foundry.</p>
+
+					<h1 id="1-0-dynamic-logging-provider">1.0 Dynamic Logging Provider</h1>
+
+					<p>This logging provider is a wrapper around the <a target="_blank" href="https://github.com/aspnet/Logging">Microsoft Console Logging</a> provider. This wrapper allows for querying the currently defined loggers and their levels as well as then modifying the levels dynamically at runtime.</p>
+
+					<p>For more information on how to use <a target="_blank" href="https://docs.pivotal.io/pivotalcf/2-0/console/index.html">Pivotal Apps Manager</a> on Cloud Foundry for viewing and modifying logging levels, see the <a target="_blank" href="https://docs.pivotal.io/pivotalcf/2-0/console/using-actuators.html">Using Actuators with Apps Manager section</a> of the Pivotal Cloud Foundry documentation.</p>
+
+					<blockquote>
+						<p>NOTE: The Pivotal Apps Manager integration involves sending the fully-qualified logger name over HTTP. Avoid using colons in the name of a logger to prevent invalid HTTP Requests.</p>
+					</blockquote>
+
+					<p>The source code for the Logging provider can be found <a target="_blank" href="https://github.com/SteeltoeOSS/steeltoe/tree/master/src/Logging/src/DynamicLogger">here</a>.</p>
+
+					<h2 id="1-1-usage">1.1 Usage</h2>
+
+					<p>Before starting to use Steeltoe provider, you should have a good understanding of how the .NET <a target="_blank" href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?tabs=aspnetcore2x">Logging service</a> works, as it is nothing more than a wrapper around the existing Microsoft Console logger.</p>
+
+					<p>In order to use the Steeltoe logging provider, you need to do the following:</p>
+
+					<ol>
+						<li>Add the Logging NuGet package references to your project.</li>
+						<li>Configure Logging settings.</li>
+						<li>Add the Dynamic logging provider to the logging builder.</li>
+					</ol>
+
+					<h3 id="1-1-1-add-nuget-references">1.1.1 Add NuGet References</h3>
+
+					<p>To use the logging provider, you need to add a reference to the Steeltoe Dynamic Logging NuGet.</p>
+
+					<p>The provider is found in the <code>Steeltoe.Extensions.Logging.DynamicLogger</code> package.</p>
+
+					<p>You can add the provider to your project by using the following <code>PackageReference</code>:</p>
+
+<pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
+...
+					<span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Extensions.Logging.DynamicLogger"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
+...
+<span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
+</code></pre>
+
+					<h3 id="1-1-2-configure-settings">1.1.2 Configure Settings</h3>
+
+					<p>As mentioned earlier, the Steeltoe Logging provider is a wrapper around the Microsoft Console logging provider. Consequently, you can configure it the same way you would the Microsoft provider. For more details on how this is done, see the section on <a target="_blank" href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/logging/?tabs=aspnetcore2x#log-filtering">Log Filtering</a>.</p>
+
+					<h3 id="1-1-3-add-logging-provider">1.1.3 Add Logging Provider</h3>
+
+					<p>In order to use the provider, you need to add it to the logging builder by using the <code>AddDynamicConsole()</code> extension method, as shown in the following example:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">using</span> Steeltoe.Extensions.Logging;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>)
+    </span>{
+					<span class="hljs-keyword">var</span> host = <span class="hljs-keyword">new</span> WebHostBuilder()
+            .UseKestrel()
+            .UseCloudFoundryHosting()
+            .UseContentRoot(Directory.GetCurrentDirectory())
+            .UseIISIntegration()
+            .UseStartup&lt;Startup&gt;()
+            .UseApplicationInsights()
+            .ConfigureAppConfiguration((builderContext, config) =&gt;
+            {
+                config.SetBasePath(builderContext.HostingEnvironment.ContentRootPath)
+                    .AddJsonFile(<span class="hljs-string">"appsettings.json"</span>, optional: <span class="hljs-literal">false</span>, reloadOnChange: <span class="hljs-literal">true</span>)
+                    .AddJsonFile(<span class="hljs-string">$"appsettings.<span class="hljs-subst">{builderContext.HostingEnvironment.EnvironmentName}</span>.json"</span>, optional: <span class="hljs-literal">true</span>)
+                    .AddCloudFoundry()
+                    .AddEnvironmentVariables();
+            })
+            .ConfigureLogging((builderContext, loggingBuilder) =&gt;
+            {
+                loggingBuilder.AddConfiguration(builderContext.Configuration.GetSection(<span class="hljs-string">"Logging"</span>));
+
+					<span class="hljs-comment">// Add Steeltoe Dynamic Logging provider</span>
+                loggingBuilder.AddDynamicConsole();
+            })
+            .Build();
+
+        host.Run();
+    }
+}
+</code></pre>
+
+					<h1 id="2-0-serilog-dynamic-logger">2.0 Serilog Dynamic Logger</h1>
+
+					<p>This logging provider extends the <a href="#1-0-dynamic-logging-provider">Dynamic Logging Provider</a> with <a target="_blank" href="https://serilog.net/">Serilog</a>. This allows logger levels configured via Serilog to be queried and modified at runtime via the <a href="https://steeltoe.io/docs/steeltoe-management/#1-2-7-loggers">Loggers Endpoint</a></p>
+
+					<p>The source code for the Serilog Dynamic Logger can be found <a target="_blank" href="https://github.com/SteeltoeOSS/steeltoe/tree/master/src/Logging/src/SerilogDynamicLogger">here</a>.</p>
+
+					<p>A sample working project can be found <a target="_blank" href="https://github.com/SteeltoeOSS/Samples/tree/master/Management/src/AspDotNetCore/CloudFoundry">here</a>.</p>
+
+					<h2 id="2-1-usage">2.1 Usage</h2>
+
+					<p>In order to use the Serilog Dynamic Logger, you need to do the following:</p>
+
+					<ol>
+						<li>Add the Logging NuGet package references to your project.</li>
+						<li>Configure Logging settings.</li>
+						<li>Add the Serilog Dynamic Logger to the logging builder.</li>
+					</ol>
+
+					<h3 id="2-1-1-add-nuget-references">2.1.1 Add NuGet References</h3>
+
+					<p>To use the logging provider, you need to add a reference to the Steeltoe Dynamic Logging NuGet.</p>
+
+					<p>The provider is found in the <code>Steeltoe.Extensions.Logging.SerilogDynamicLogger</code> package.</p>
+
+					<p>You can add the provider to your project by using the following <code>PackageReference</code>:</p>
+
+<pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
+...
+					<span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Extensions.Logging.SerilogDynamicLogger"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
+...
+<span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
+</code></pre>
+
+					<h3 id="2-1-2-configure-settings">2.1.2 Configure Settings</h3>
+
+					<p>As mentioned earlier, the Serilog Dynamic Logger provider extends Serilog. Consequently, you can configure it the same way you would Serilog. For more details on how this is done, see the section on <a target="_blank" href="https://github.com/serilog/serilog-settings-configuration">Serilog-Settings-Configuration</a>.</p>
+
+<pre><code class="json hljs">...
+
+					<span class="hljs-string">"Serilog"</span>: {
+					<span class="hljs-attr">"IncludeScopes"</span>: <span class="hljs-literal">false</span>,
+					<span class="hljs-attr">"MinimumLevel"</span>: {
+					<span class="hljs-attr">"LogLevel"</span>: {
+					<span class="hljs-attr">"Default"</span>: <span class="hljs-string">"Warning"</span>,
+					<span class="hljs-attr">"Override"</span>: {
+					<span class="hljs-attr">"Pivotal"</span>: <span class="hljs-string">"Information"</span>,
+					<span class="hljs-attr">"Microsoft"</span>: <span class="hljs-string">"Warning"</span>,
+					<span class="hljs-attr">"Steeltoe"</span>: <span class="hljs-string">"Information"</span>,
+					<span class="hljs-attr">"CloudFoundry.Controllers"</span>: <span class="hljs-string">"Verbose"</span>
+                }
+        },
+					<span class="hljs-attr">"WriteTo"</span>: [
+            {
+					<span class="hljs-attr">"Name"</span>: <span class="hljs-string">"Console"</span>,
+					<span class="hljs-attr">"Args"</span>: {
+					<span class="hljs-attr">"outputTemplate"</span>: <span class="hljs-string">"[{Timestamp:HH:mm:ss} {Level:u3}] {SourceContext}: {Properties} {NewLine} {EventId} {Message:lj}{NewLine}{Exception}"</span>
+                }
+            }
+        ],
+					<span class="hljs-attr">"Enrich"</span>: [ <span class="hljs-string">"FromLogContext"</span>, <span class="hljs-string">"WithMachineName"</span>, <span class="hljs-string">"WithThreadId"</span> ]
+    },
+},
+...
+</code></pre>
+
+					<h3 id="2-1-3-add-serilog-dynamic-logger">2.1.3 Add Serilog Dynamic Logger</h3>
+
+					<p>In order to use the provider, you need to add it to the logging builder by using the <code>AddSerilogDynamicConsole()</code> extension method, as shown in the following example: </p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">using</span> Steeltoe.Extensions.Logging;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>)
+    </span>{
+					<span class="hljs-keyword">var</span> host = <span class="hljs-keyword">new</span> WebHostBuilder()
+            .UseKestrel()
+            .UseCloudFoundryHosting()
+            .UseContentRoot(Directory.GetCurrentDirectory())
+            .UseIISIntegration()
+            .UseStartup&lt;Startup&gt;()
+            .UseApplicationInsights()
+            .ConfigureAppConfiguration((builderContext, config) =&gt;
+            {
+                config.SetBasePath(builderContext.HostingEnvironment.ContentRootPath)
+                    .AddJsonFile(<span class="hljs-string">"appsettings.json"</span>, optional: <span class="hljs-literal">false</span>, reloadOnChange: <span class="hljs-literal">true</span>)
+                    .AddJsonFile(<span class="hljs-string">$"appsettings.<span class="hljs-subst">{builderContext.HostingEnvironment.EnvironmentName}</span>.json"</span>, optional: <span class="hljs-literal">true</span>)
+                    .AddCloudFoundry()
+                    .AddEnvironmentVariables();
+            })
+            .ConfigureLogging((builderContext, loggingBuilder) =&gt;
+            {
+                loggingBuilder.AddConfiguration(builderContext.Configuration.GetSection(<span class="hljs-string">"Logging"</span>));
+
+					<span class="hljs-comment">// Add Serilog Dynamic Logger </span>
+                loggingBuilder.AddSerilogDynamicConsole();
+            })
+            .Build();
+
+        host.Run();
+    }
+}
+</code></pre>
+
+					<a class="repo-link" target="_blank" href="https://github.com/steeltoeoss/steeltoe-site/tree/dev/source/docs/steeltoe-logging.html.markdown">Create a pull request or raise an issue on the source for this page in GitHub</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/javascripts/vendor/gumshoe.js"></script>
+	<script src="/javascripts/vendor/highlight.min.js"></script>
+	<script src="/javascripts/vendor/jquery-3.1.1.slim.min.js"></script>
+	<script src="/javascripts/vendor/particles.min.js"></script>
+	<script src="/javascripts/vendor/smooth-scroll.js"></script>
+	<script src="/javascripts/vendor/sticky-kit.min.js"></script>
+	<script src="/javascripts/vendor/svg-injector.min.js"></script>
+	<script src="/javascripts/vendor/tocbot.min.js"></script>
+	<script src="/javascripts/all.js"></script>
+	<script src="/javascripts/docs.js"></script>
+	<script>
+		function viewV1() {
+			window.location.href = '/1x/steeltoe-configuration/';
+		}
+					//document.getElementById('docselector').style.display = "inline";
+	</script>
+
+
+</body>
+</html>

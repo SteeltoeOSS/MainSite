@@ -1,0 +1,86 @@
+﻿@page "/circuit-breakers/get-started/breaker"
+@page "/circuit-breakers/get-started"
+
+<Breadcrumbs NavName="Circuit Breakers"
+						 ParentLinkName="Circuit Breakers"
+						 ParentLinkUrl="/circuit-breakers"
+						 ShowGetStarted=true />
+<Tutorial>
+	<Title>Implementing Circuit Breakers</Title>
+	<Description>This tutorial takes you through setting up a .NET Core application that implements a circuit breaker pattern.</Description>
+	<TutorialSteps>
+		<div class="row">
+			<div class="col-12 getting-started-header">First, <b>start a instance of the Hystrix dashboard</b>. Depending on your hosting platform this is done in several ways.</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<TabSet>
+					<Steeltoe.Client.Components.StartInstanceTab.Local ServiceName="@ServiceName">
+						<DockerCmd>docker run --publish 7979:7979 steeltoeoss/hystrix-dashboard</DockerCmd>
+						<AdditionalSteps>
+							<li>
+								Confirm the service is running by viewing the dashboard - <a href="https://localhost:7979" target="_blank">https://localhost:7979</a>
+							</li>
+						</AdditionalSteps>
+					</Steeltoe.Client.Components.StartInstanceTab.Local>
+					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="@ServiceName">
+						<CFCreateServiceCmd>cf create-service p-circuit-breaker-dashboard standard @InstanceName</CFCreateServiceCmd>
+						<AdditionalSteps>
+							<li>
+								Confirm the service is running by viewing the dashboard. Learn how <a href="https://docs.pivotal.io/spring-cloud-services/2-0/common/circuit-breaker/using-the-dashboard.html" target="_blank">here</a>.
+							</li>
+						</AdditionalSteps>
+					</Steeltoe.Client.Components.StartInstanceTab.CloudFoundry>
+					@*<Steeltoe.Client.Components.StartInstanceTab.StTooling InstanceName="@InstanceName" ServiceName="@ServiceName" />*@
+				</TabSet>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-header"><b>Create a .NET Core WebAPI</b> that implements the circuit breaker pattern</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+				<ol>
+					<li>
+						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="circuit-breaker.png" DependencyName="Circuit Breakers" ProjectName="@ProjectName" />
+					</li>
+					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
+					<li>
+						Set the instance address and name in <b>appsettings.json</b>
+						<TabSet>
+							<Steeltoe.Client.Components.AppSettingsTab.Local ServiceName="@ServiceName" SpringApplicationName="@ProjectName" />
+							<Steeltoe.Client.Components.AppSettingsTab.CloudFoundry ServiceName="@ServiceName" SpringApplicationName="@ProjectName" />
+							@*<Steeltoe.Client.Components.AppSettingsTab.StTooling ServiceName="@ServiceName" SpringApplicationName="@ProjectName" />*@
+						</TabSet>
+					</li>
+					<li>
+						<div>Run the application</div>
+						<div>
+							<TabSet>
+								<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" />
+								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" InstanceName="@InstanceName">
+									<AdditionalSteps>
+										<li>
+											With the application runnning and bound to your circuit breaker instance, Steeltoe has automatically registered it with the dashboard. Navigate to the circuit breaker dashboard to confirm, learn how <a href="https://docs.pivotal.io/spring-cloud-services/2-0/common/circuit-breaker/using-the-dashboard.html" target="_blank">here</a>.
+										</li>
+									</AdditionalSteps>
+								</Steeltoe.Client.Components.RunAppTab.CloudFoundry>
+								@*<Steeltoe.Client.Components.RunAppTab.StTooling ProjectName="@ProjectName" />*@
+							</TabSet>
+						</div>
+					</li>
+					<li>
+						Refresh the application in your browser a few times and go back to the dashboard to see it logging live activity.
+						<img src="images/initializr/circuit-breaker-closed.png" class="img-fluid" />
+					</li>
+				</ol>
+			</div>
+		</div>
+	</TutorialSteps>
+</Tutorial>
+@code
+{
+	private string ServiceName = "Circuit Breaker";
+	private string InstanceName = "myCircuitBreaker";
+	private string ProjectName = "Circuit_Breaker_Example";
+}

@@ -1,0 +1,56 @@
+﻿@using System
+@implements IDisposable
+
+<Tab Title="Azure">
+	Replace <code>localhost</code> with the @ServiceName instance info
+<pre><code>{
+...
+ "@ParentSettingsParamName": {
+	"@ChildSettingsParamName": {
+		@(string.IsNullOrEmpty(ServiceServer) ? "" : "\"server\": \""+ServiceServer+"\",")
+		@(string.IsNullOrEmpty(ServiceHost) ? "" : "\"host\": \""+ServiceHost+"\",")
+		@(string.IsNullOrEmpty(ServicePort) ? "" : "\"port\": \""+ServicePort+"\",")
+		@(string.IsNullOrEmpty(ServiceUsername) ? "" : "\"username\": \""+ServiceUsername+"\",")
+		@(string.IsNullOrEmpty(ServicePassword) ? "" : "\"password\": \""+ServicePassword+"\",")
+		@(string.IsNullOrEmpty(ServiceDatabase) ? "" : "\"database\": \""+ServiceDatabase+"\",")
+	}
+ }
+...
+}
+</code></pre>
+</Tab>
+@ChildContent
+
+@code {
+	[Parameter]
+	public string InstanceName { get; set; } = "";
+	[Parameter]
+	public string ServiceName { get; set; } = "";
+	[Parameter]
+	public string ServiceServer { get; set; } = null;
+	[Parameter]
+	public string ServiceHost { get; set; } = null;
+	[Parameter]
+	public string ServicePort { get; set; } = null;
+	[Parameter]
+	public string ServiceUsername { get; set; } = null;
+	[Parameter]
+	public string ServicePassword { get; set; } = null;
+	[Parameter]
+	public string ServiceDatabase { get; set; } = null;
+	[Parameter]
+	public string ParentSettingsParamName { get; set; } = "";
+	[Parameter]
+	public string ChildSettingsParamName { get; set; } = "";
+
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
+
+	protected override void OnInitialized()
+	{
+	}
+
+	public void Dispose()
+	{
+	}
+}

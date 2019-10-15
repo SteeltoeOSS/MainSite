@@ -1,0 +1,61 @@
+﻿@page "/service-discovery"
+@page "/steeltoe-discovery"
+
+<SteeltoeComponent>
+	<DocsURL><a class="component-button nav-link" href="service-discovery/docs">VIEW THE DOCS</a></DocsURL>
+	<GettingStartedURL>
+		<a class="component-button nav-link" href="service-discovery/get-started">GET STARTED TUTORIAL</a>
+	</GettingStartedURL>
+	<ComponentName>Service Discovery</ComponentName>
+	<ComponentDescription>A service registry provides a database that applications can use to implement the Service Discovery pattern, one of the key tenets of a microservices-based architecture. Trying to hand-configure each client of a service or adopt some form of access convention can be difficult and prove to be brittle in production. Instead, applications can use a service registry to dynamically discover and call registered services.</ComponentDescription>
+	<WhatIsComponent>Think of it as a phone book of services. Instead of needing to configure a service's exact URI, your app “asks” the service registry to look up the URI of a named service. The name is what your app remembers, the URI is what's discovered. Your app could also register itself for discovery. Then you could distribute the name used during registration for others to discover.</WhatIsComponent>
+	<WhyUseComponent>
+		With the ability to discover and register URIs, services within an organization are far less coupled. In turn services are more mobile, can be updated easily, and each can follow different availability patterns.<br /><br />
+		Duplicated registries in multiple locations, registering URIs to route requests between multiple data centers, and registering different versions of the same service are just a few of the benefits.
+	</WhyUseComponent>
+	<Features>
+		<div class="row component-feature">
+			<div class="col-6">
+				<div class="component-feature-title">Support for Multiple Registries</div>
+				<div class="component-feature-desc">The Steeltoe discovery client removes any dependencies to a specific registry. With support for both <a class="nav-link" href="" target="_blank">Spring Cloud Netflix</a> as well as <a class="nav-link" href="" target="_blank">HashiCorp Consul</a>, you have flexibility with little to no code change when choosing the right registry.</div>
+			</div>
+			<div class="col-6 text-center"><div class="component-feature-img"><img class="" src="images/Icon_computers.svg" /></div></div>
+		</div>
+		<div class="row component-feature">
+			<div class="col-6 text-center"><div class="component-feature-img"><img class="" src="images/Icon_cloud.svg" /></div></div>
+			<div class="col-6">
+				<div class="component-feature-title">Logging & Health Checks Built In</div>
+				<div class="component-feature-desc">Service registry logs are automatically fed to your app’s logging interface, and health contributors are automatically configured and made available to your application.</div>
+			</div>
+		</div>
+		<div class="row component-feature">
+			<div class="col-6">
+				<div class="component-feature-title">Register and Discover Services</div>
+				<div class="component-feature-desc">With just a few lines of code, your app can use a registry to discover services as well as registering itself for discovery.</div>
+			</div>
+			<div class="col-6 text-center"><div class="component-feature-img"><img class="" src="images/Icon_device-network.svg" /></div></div>
+		</div>
+		<div class="row component-feature">
+			<div class="col-6 text-center"><div class="component-feature-img"><img class="" src="images/Icon_data-transfer.svg" /></div></div>
+			<div class="col-6">
+				<div class="component-feature-title">Request Load Balancing</div>
+				<div class="component-feature-desc">When a service as registered multiple instances, configure the client to balance requests across instances. Options for random, round robin, as well as building your own are available in Steeltoe Service Discovery.</div>
+			</div>
+		</div>
+	</Features>
+	<Resources>
+		@*<div class="col-3 component-resource p-0">
+			 <div class="title">Spring Eureka Server</div>
+			 <div class="desc">Something</div>
+			</div>
+			<div class="col-3 component-resource p-0">
+			 <div class="title">More about service registries</div>
+			 <div class="desc">Something</div>
+			</div>
+			<div class="col-3 component-resource p-0">
+			 <div class="title">Something else</div>
+			 <div class="desc">Something</div>
+			</div>*@
+	</Resources>
+</SteeltoeComponent>
+

@@ -1,0 +1,38 @@
+﻿@using System
+@implements IDisposable
+
+<Tab Title="Cloud Foundry">
+	<ol>
+		<li>
+			Start an instance of @ServiceName, named @InstanceName
+			<code class="inline">@CFCreateServiceCmd</code>
+		</li>
+		<li class="@(ShowServiceLookup == false ? "hide" : "")">
+			Wait for service to be ready
+			<code class="inline">cf services</code>
+		</li>
+		@AdditionalSteps
+	</ol>
+</Tab>
+
+@code {
+	[Parameter]
+	public string InstanceName { get; set; } = "";
+	[Parameter]
+	public string ServiceName { get; set; } = "";
+	[Parameter]
+	public RenderFragment CFCreateServiceCmd { get; set; }
+	[Parameter]
+	public bool ShowServiceLookup { get; set; } = true;
+
+	[Parameter]
+	public RenderFragment AdditionalSteps { get; set; }
+
+	protected override void OnInitialized()
+	{
+	}
+
+	public void Dispose()
+	{
+	}
+}

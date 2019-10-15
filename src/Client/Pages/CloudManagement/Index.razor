@@ -1,0 +1,38 @@
+﻿@page "/cloud-management"
+@page "/steeltoe-management"
+
+<SteeltoeComponent>
+	<DocsURL><a class="component-button nav-link" href="cloud-management/docs">VIEW THE DOCS</a></DocsURL>
+	<GettingStartedURL>
+		<a class="component-button nav-link" href="cloud-management/get-started">GET STARTED TUTORIAL</a>
+	</GettingStartedURL>
+	<ComponentName>Cloud Management</ComponentName>
+	<ComponentDescription>Steeltoe includes a number of optional features you can add to your applications to aid in monitoring and managing it while it runs in production. These features are implemented as a number of management endpoints that you can easily add to your application.</ComponentDescription>
+	<WhatIsComponent>Once your application is in production, management tools become a must. Unlike traditional infrastructure, cloud platforms offer limited access to VMs and disk storage. Cloud Management automatically creates secure endpoints exposing critical data about your application. </WhatIsComponent>
+	<WhyUseComponent>The way the endpoints are exposed and used depends on the type of technology you choose in exposing the functionality of the endpoint. Out of the box, Steeltoe provides several easy ways to expose these endpoints over HTTP in .NET applications. Of course, you can build and use whatever you would like to meet your needs.</WhyUseComponent>
+	<Features>
+		<div class="row component-feature no-gutters align-items-center">
+			<div class="col">
+				<div class="component-feature-title">Management Endpoints</div>
+				<div class="component-feature-desc">Automatically expose endpoints over HTTP in your ASP.NET application for things like health, info, metrics, refresh, tracing, loggers, and route mappings.</div>
+			</div>
+			<div class="col-6 text-center"><div class="component-feature-img"><img class="" src="images/Icon_connector.svg" /></div></div>
+		</div>
+		<div class="row component-feature no-gutters align-items-center">
+			<div class="col-6 text-center"><div class="component-feature-img"><img class="" src="images/Icon_device-exchange.svg" /></div></div>
+			<div class="col">
+				<div class="component-feature-title">Distributed Tracing</div>
+				<div class="component-feature-desc">Use the OpenCensus project capture request tracing data and display it visually in the dashboard or send it to a remote collector.</div>
+			</div>
+		</div>
+		<div class="row component-feature no-gutters align-items-center">
+			<div class="col">
+				<div class="component-feature-title">Management Tasks</div>
+				<div class="component-feature-desc">Run one-time administrative tasks for ASP.NET Core applications, for things like data migrations or custom processes.</div>
+			</div>
+			<div class="col-6 text-center"><div class="component-feature-img"><img class="" src="images/Icon_box.svg" /></div></div>
+		</div>
+	</Features>
+	<Resources></Resources>
+</SteeltoeComponent>
+

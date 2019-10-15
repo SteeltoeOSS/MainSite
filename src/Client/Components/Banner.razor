@@ -1,0 +1,29 @@
+﻿<div class="rounded-pill banner">
+	<a href="@Href" target="_blank">
+		<div class="row no-gutters align-items-center">
+			<div class="col" style="margin: .7% 3% .7% 5%;max-width: 11%;">
+				<div class="sign rounded-pill special-link">
+				<div style="padding: 2px 0px 2px 0px;">event</div>
+				</div>
+			</div>
+			<div class="col desc">
+				@ChildContent
+			</div>
+		</div>
+	</a>
+</div>
+
+
+@*<div class="width-all banner rounded-pill my-4">
+		<div class="sign rounded-pill special-link">event</div>
+		<div class="desc"</div>
+	</div>*@
+
+
+@code {
+ [Parameter]
+ public RenderFragment ChildContent { get; set; }
+
+ [Parameter]
+ public string Href {get;set;}
+}

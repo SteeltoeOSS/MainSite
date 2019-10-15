@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0048) -->
+<html class="gr__steeltoe_io">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+	<meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+
+	<!-- Use title if it's in the page YAML frontmatter -->
+	<link href="images/favicon.png" rel="icon" type="image/png">
+	<link rel="stylesheet" href="/stylesheets/css.css">
+	<link href="/stylesheets/site.css" rel="stylesheet">
+	<link href="/stylesheets/tocbot.css" rel="stylesheet">
+</head>
+
+<body class="docs docs_steeltoe-smb docs_steeltoe-smb_index" data-gr-c-s-loaded="true">
+	
+	<div class="max-width-4 mx-auto">
+		<div class="">
+			<div class="sm-flex">
+				<div class="col-12 sm-col-3 sm-pr3">
+					<div id="toc" class="">
+						<div class="toc-link border-bottom border-silver js-toc"><ul class="toc-list "><li class="toc-list-item"><a href="#windows-network-file-shares" class="toc-link node-name--H1  is-active-link">Windows Network File Shares</a><ul class="toc-list  is-collapsible"><li class="toc-list-item"><a href="#0-0-initialize-dev-environment" class="toc-link node-name--H2 ">0.0 Initialize Dev Environment</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#0-0-1-setup-file-share" class="toc-link node-name--H3 ">0.0.1 Setup File Share</a></li></ul></li><li class="toc-list-item"><a href="#1-1-quick-start" class="toc-link node-name--H2 ">1.1 Quick Start</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#1-1-1-locate-sample" class="toc-link node-name--H3 ">1.1.1 Locate Sample</a></li><li class="toc-list-item"><a href="#1-1-2-set-credentials" class="toc-link node-name--H3 ">1.1.2 Set Credentials</a></li><li class="toc-list-item"><a href="#1-1-3-run-sample" class="toc-link node-name--H3 ">1.1.3 Run Sample</a></li><li class="toc-list-item"><a href="#1-1-4-publish-and-push-sample" class="toc-link node-name--H3 ">1.1.4 Publish and Push Sample</a></li><li class="toc-list-item"><a href="#1-1-5-understand-sample" class="toc-link node-name--H3 ">1.1.5 Understand Sample</a></li></ul></li><li class="toc-list-item"><a href="#1-2-usage" class="toc-link node-name--H2 ">1.2 Usage</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#1-2-1-add-nuget-references" class="toc-link node-name--H3 ">1.2.1 Add NuGet References</a></li><li class="toc-list-item"><a href="#1-2-2-managing-the-connection" class="toc-link node-name--H3 ">1.2.2 Managing the Connection</a></li><li class="toc-list-item"><a href="#1-2-3-managing-credentials" class="toc-link node-name--H3 ">1.2.3 Managing Credentials</a></li></ul></li></ul></li><li class="toc-list-item"><a href="#common-steps" class="toc-link node-name--H1 ">Common Steps</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#publish-sample" class="toc-link node-name--H2 ">Publish Sample</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#asp-net-core" class="toc-link node-name--H3 ">ASP.NET Core</a></li><li class="toc-list-item"><a href="#asp-net-4-x" class="toc-link node-name--H3 ">ASP.NET 4.x</a></li></ul></li><li class="toc-list-item"><a href="#push-sample" class="toc-link node-name--H2 ">Push Sample</a></li></ul></li></ul></div>
+
+
+					</div>
+				</div>
+				<div class="col-12 sm-col-9 js-toc-content">
+					<h1 class="js-toc-ignore regular">Network File Share</h1>
+					<p>Network shares are not the most cloud-native way to deal with files. For new development consider exploring message queues, caches, blob stores, and/or NoSQL stores. The alternatives offer greater resiliency and decoupling from backing services. With that said, sometimes the alternatives aren’t viable. We’re not here to judge you. For .NET applications deployed to Microsoft Windows Servers, Steeltoe provides a stepping stone towards cloud-native in the form of the <code>WindowsNetworkFileShare</code>. For applications deployed to Linux hosts on Pivotal Cloud Foundry, <a target="_blank" href="https://docs.pivotal.io/pivotalcf/opsguide/enable-vol-services.html">volume services</a> is available.</p>
+
+					<h1 id="windows-network-file-shares">Windows Network File Shares</h1>
+
+					<p>Steeltoe’s <code>WindowsNetworkFileShare</code> provides a simplified experience for interacting with SMB file shares by making <a target="_blank" href="https://docs.microsoft.com/en-us/cpp/dotnet/how-to-call-native-dlls-from-managed-code-using-pinvoke">P/Invoke calls</a> to underlying Windows APIs, specifically to <code>mpr.dll</code>. For more background on SMB, see <a target="_blank" href="https://docs.microsoft.com/en-us/windows/desktop/fileio/microsoft-smb-protocol-and-cifs-protocol-overview">Microsoft’s SMB documentation</a></p>
+
+					<h2 id="0-0-initialize-dev-environment">0.0 Initialize Dev Environment</h2>
+
+					<p>All of the Steeltoe sample applications are in the same repository. If you have not already done so, use git to clone the <a target="_blank" href="https://github.com/SteeltoeOSS/Samples">Steeltoe Samples</a> repository or download it with your browser from GitHub. The following git command shows how to clone the repository from the command line:</p>
+
+<pre><code class="bash hljs">git <span class="hljs-built_in">clone</span> https://github.com/SteeltoeOSS/Samples.git
+</code></pre>
+
+					<blockquote>
+						<p>NOTE: All File Share samples in the Samples repository have a base path of <code>Samples/FileShares/src/</code>.</p>
+					</blockquote>
+
+					<p>Make sure your Cloud Foundry CLI tools are logged in and targeting the correct org and space, as follows:</p>
+
+<pre><code class="bash hljs">cf login [<span class="hljs-_">-a</span> API_URL] [-u USERNAME] [-p PASSWORD] [-o ORG] [<span class="hljs-_">-s</span> SPACE] [--skip-ssl-validation]
+</code></pre>
+
+					<p>or</p>
+
+<pre><code class="bash hljs">cf target -o &lt;YourOrg&gt; <span class="hljs-_">-s</span> &lt;YourSpace&gt;
+</code></pre>
+
+					<h3 id="0-0-1-setup-file-share">0.0.1 Setup File Share</h3>
+
+					<p>If you do not already have a network file share available, you may use <code>create-user-and-share.ps1</code>, provided in the scripts folder, but please read this entire section before executing it. To run the script, execute it from a prompt with adminstrator-level permissions:</p>
+
+<pre><code class="powershell hljs sql">.\Samples\FileShares\scripts\<span class="hljs-keyword">create</span>-<span class="hljs-keyword">user</span>-<span class="hljs-keyword">and</span>-share.ps1
+</code></pre>
+
+					<p>By default, this script will create a user named <code>shareWriteUser</code> with password <code>thisIs1Pass!</code> and a folder at <code>c:\steeltoe_network_share</code> that is shared as <code>steeltoe_network_share</code> with the user created in the script. All four of those values are configured as parameters for the script and can be set manually when executing the script. This is how they are defined:</p>
+
+<pre><code class="powershell hljs bash">Param(
+    [string]<span class="hljs-variable">$shareName</span> = <span class="hljs-string">"steeltoe_network_share"</span>,
+    [string]<span class="hljs-variable">$folderPath</span> = <span class="hljs-string">"c:\steeltoe_network_share"</span>,
+    [string]<span class="hljs-variable">$username</span> = <span class="hljs-string">"shareWriteUser"</span>,
+    [string]<span class="hljs-variable">$password</span> = <span class="hljs-string">"thisIs1Pass!"</span>
+)
+</code></pre>
+
+
+					<p>Before starting with Steeltoe’s Windows Network File Share library, you should already have a plan for interacting with the file system. Steeltoe will only be managing the connection to the file share.</p>
+
+					<h3 id="1-2-1-add-nuget-references">1.2.1 Add NuGet References</h3>
+
+					<p>Use the NuGet Package Manager or a <code>PackageReference</code> to add a reference to <code>Steeltoe.Common.Net</code></p>
+
+					<h3 id="1-2-2-managing-the-connection">1.2.2 Managing the Connection</h3>
+
+					<p>The state of the connection to the file share is managed through the lifecycle of <code>WindowsNetworkFileShare</code>. In order to open the connection, instantiate a <code>WindowsFileShare</code>:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">var</span> fileShare = <span class="hljs-keyword">new</span> WindowsNetworkFileShare(<span class="hljs-string">@"\\server\path"</span>, <span class="hljs-keyword">new</span> System.Net.NetworkCredential(<span class="hljs-string">"username"</span>, <span class="hljs-string">"password"</span>));
+</code></pre>
+
+					<p>The constructor opens the connection with the equivalent of the <code>net use</code> command by calling <a target="_blank" href="https://docs.microsoft.com/en-us/windows/desktop/api/winnetwk/nf-winnetwk-wnetaddconnection2a">WNetAddConnection2</a> with the information provided in the constructor.</p>
+
+					<p>In order to close the connection, call dispose on the <code>WindowsNetworkFileShare</code>.</p>
+
+<pre><code class="csharp hljs">fileShare.Dispose();
+</code></pre>
+
+					<p>Because <code>WindowsNetworkFileShare</code> implements <code>IDisposable</code>, you also have the ability to manage the <code>WindowsNetworkFileShare</code> with a using statement:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">using</span> (<span class="hljs-keyword">new</span> WindowsNetworkFileShare(<span class="hljs-string">@"\\server\path"</span>, <span class="hljs-keyword">new</span> System.Net.NetworkCredential(<span class="hljs-string">"username"</span>, <span class="hljs-string">"password"</span>)))
+{
+					<span class="hljs-comment">// Interact with an attached network share here</span>
+}
+</code></pre>
+
+					<blockquote>
+						<p>WARNING: Levels of support for accessing SMB shares on Pivotal Application Service for Windows (PASW) may vary by installed version. Support for IP-based SMB shares was included with the initial 2.4 release and in patch releases for lower versions. Support for FQDN-based SMB shares will be included in PASW 2.5 and in patch releases for lower versions. See the <a target="_blank" href="https://docs.pivotal.io/pivotalcf/2-4/pcf-release-notes/windows-rn.html">PASW Release notes</a> to confirm the relevant patch version required.</p>
+					</blockquote>
+
+					<h3 id="1-2-3-managing-credentials">1.2.3 Managing Credentials</h3>
+
+					<p>Credentials are generally required for interacting with SMB shares. <code>WindowsNetworkFileShare</code> does not have an opinion on where those credentials are stored, but as a general guideline, storing credentials with your application’s code or standard configuration is not recommended. Consider using the <a target="_blank" href="https://docs.pivotal.io/credhub-service-broker/">CredHub Service Broker</a> for storing and retrieving your credentials.</p>
+
+					<p>When used in conjuction with the <a href="https://steeltoe.io/docs/steeltoe-configuration/#1-0-cloud-foundry-provider">Cloud Foundry Configuration Provider</a>, you can access the values in a relatively straightforward way:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">SomeClassConstructor</span>(<span class="hljs-params">IOptions&lt;CloudFoundryServicesOptions&gt; serviceOptions</span>)
+</span>{
+					<span class="hljs-keyword">var</span> userName = serviceOptions.Services[<span class="hljs-string">"credhub"</span>]
+       .First(q =&gt; q.Name.Equals(<span class="hljs-string">"my-network-share"</span>))
+       .Credentials[<span class="hljs-string">"share-username"</span>].Value;
+					<span class="hljs-keyword">var</span> password = serviceOptions.Services[<span class="hljs-string">"credhub"</span>]
+       .First(q =&gt; q.Name.Equals(<span class="hljs-string">"my-network-share"</span>))
+       .Credentials[<span class="hljs-string">"share-password"</span>].Value;
+
+					<span class="hljs-comment">// create credential object to pass to WindowsNetworkFileShare</span>
+					<span class="hljs-keyword">var</span> _shareCredential = <span class="hljs-keyword">new</span> NetworkCredential(userName, password);
+}
+</code></pre>
+
+					<h1 id="common-steps">Common Steps</h1>
+
+					<h2 id="publish-sample">Publish Sample</h2>
+
+					<h3 id="asp-net-core">ASP.NET Core</h3>
+
+					<p>Use the <code>dotnet</code> CLI to <a target="_blank" href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-publish">build and locally publish</a> the application for the framework and runtime you will deploy the application to:</p>
+
+					<ul>
+						<li>Windows with .NET Core: <code>dotnet publish -f netcoreapp2.1 -r win10-x64</code></li>
+						<li>Windows with .NET Platform: <code>dotnet publish -f net461 -r win10-x64</code></li>
+					</ul>
+
+					<blockquote>
+						<p>NOTE: Starting with .NET Core 2.0, the <code>dotnet publish</code> command will automatically restore dependencies for you. Running <code>dotnet restore</code> explicitly is not generally required.</p>
+					</blockquote>
+
+					<h3 id="asp-net-4-x">ASP.NET 4.x</h3>
+
+					<ol>
+						<li>Open the solution for the sample in Visual Studio</li>
+						<li>Right click on the project, select “Publish”</li>
+						<li>Use the included <code>FolderProfile</code> to publish to <code>bin/Debug/net461/win10-x64/publish</code></li>
+					</ol>
+
+					<h2 id="push-sample">Push Sample</h2>
+
+					<p>Use the Cloud Foundry CLI to push the published application to Cloud Foundry using the parameters that match what you selected for framework and runtime, as follows:</p>
+
+<pre><code class="bash hljs"> <span class="hljs-comment"># Push to Windows cell, .NET Core</span>
+cf push <span class="hljs-_">-f</span> manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish
+
+					<span class="hljs-comment"># Push to Windows cell, .NET Framework</span>
+cf push <span class="hljs-_">-f</span> manifest-windows.yml -p bin/Debug/net461/win10-x64/publish
+</code></pre>
+
+					<blockquote>
+						<p>NOTE: All sample manifests have been defined to bind their application to service(s) as created above.</p>
+					</blockquote>
+
+					<a class="repo-link" target="_blank" href="https://github.com/steeltoeoss/steeltoe-site/tree/dev/source/docs/steeltoe-smb.html.markdown">Create a pull request or raise an issue on the source for this page in GitHub</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/javascripts/vendor/gumshoe.js"></script>
+	<script src="/javascripts/vendor/highlight.min.js"></script>
+	<script src="/javascripts/vendor/jquery-3.1.1.slim.min.js"></script>
+	<script src="/javascripts/vendor/particles.min.js"></script>
+	<script src="/javascripts/vendor/smooth-scroll.js"></script>
+	<script src="/javascripts/vendor/sticky-kit.min.js"></script>
+	<script src="/javascripts/vendor/svg-injector.min.js"></script>
+	<script src="/javascripts/vendor/tocbot.min.js"></script>
+	<script src="/javascripts/all.js"></script>
+	<script src="/javascripts/docs.js"></script>
+	<script>
+		function viewV1() {
+			window.location.href = '/1x/steeltoe-configuration/';
+		}
+					//document.getElementById('docselector').style.display = "inline";
+	</script>
+
+
+</body>
+</html>

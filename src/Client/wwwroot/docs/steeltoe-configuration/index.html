@@ -1,0 +1,1179 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0048) -->
+<html class="gr__steeltoe_io"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta content="IE=edge" http-equiv="X-UA-Compatible">
+  
+  <meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+
+  <!-- Use title if it's in the page YAML frontmatter -->
+  <link href="images/favicon.png" rel="icon" type="image/png">
+  <link rel="stylesheet" href="/stylesheets/css.css">
+  <link href="/stylesheets/site.css" rel="stylesheet">
+  <link href="/stylesheets/tocbot.css" rel="stylesheet">
+</head>
+
+  <body class="docs docs_steeltoe-configuration docs_steeltoe-configuration_index" data-gr-c-s-loaded="true">
+    <div class="max-width-4 mx-auto">
+      <div class="">
+        <div class="sm-flex">
+          <div class="col-12 sm-col-3 sm-pr3">
+            <div id="toc" class="">
+		<div class="toc-link border-bottom border-silver js-toc"><ul class="toc-list "><li class="toc-list-item"><a href="#1-0-cloud-foundry-provider" class="toc-link node-name--H1 ">1.0 Cloud Foundry Provider</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#1-1-quick-start" class="toc-link node-name--H2 ">1.1 Quick Start</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#1-1-1-locate-sample" class="toc-link node-name--H3 ">1.1.1 Locate Sample</a></li><li class="toc-list-item"><a href="#1-1-2-publish-sample" class="toc-link node-name--H3 ">1.1.2 Publish Sample</a></li><li class="toc-list-item"><a href="#1-1-3-push-sample" class="toc-link node-name--H3 ">1.1.3 Push Sample</a></li><li class="toc-list-item"><a href="#1-1-4-observe-logs" class="toc-link node-name--H3 ">1.1.4 Observe Logs</a></li><li class="toc-list-item"><a href="#1-1-5-what-to-expect" class="toc-link node-name--H3 ">1.1.5 What to Expect</a></li><li class="toc-list-item"><a href="#1-1-6-understand-sample" class="toc-link node-name--H3 ">1.1.6 Understand Sample</a></li></ul></li><li class="toc-list-item"><a href="#1-2-usage" class="toc-link node-name--H2 ">1.2 Usage</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#1-2-1-add-nuget-reference" class="toc-link node-name--H3 ">1.2.1 Add NuGet Reference</a></li><li class="toc-list-item"><a href="#1-2-2-add-configuration-provider" class="toc-link node-name--H3 ">1.2.2 Add Configuration Provider</a></li><li class="toc-list-item"><a href="#1-2-3-access-configuration-data" class="toc-link node-name--H3 ">1.2.3 Access Configuration Data</a></li><li class="toc-list-item"><a href="#1-2-4-access-configuration-data-as-options" class="toc-link node-name--H3 ">1.2.4 Access Configuration Data as Options</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#1-2-4-1-configurecloudfoundryoptions" class="toc-link node-name--H4 ">1.2.4.1 ConfigureCloudFoundryOptions()</a></li><li class="toc-list-item"><a href="#1-2-4-2-configurecloudfoundryservice" class="toc-link node-name--H4 ">1.2.4.2 ConfigureCloudFoundryService</a></li></ul></li></ul></li></ul></li><li class="toc-list-item"><a href="#2-0-config-server-provider" class="toc-link node-name--H1 ">2.0 Config Server Provider</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#2-1-quick-start" class="toc-link node-name--H2 ">2.1 Quick Start</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#2-1-1-running-locally" class="toc-link node-name--H3 ">2.1.1  Running Locally</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#2-1-1-1-start-config-server" class="toc-link node-name--H4 ">2.1.1.1 Start Config Server</a></li><li class="toc-list-item"><a href="#2-1-1-2-locate-sample" class="toc-link node-name--H4 ">2.1.1.2 Locate Sample</a></li><li class="toc-list-item"><a href="#2-1-1-3-run-sample" class="toc-link node-name--H4 ">2.1.1.3 Run Sample</a></li><li class="toc-list-item"><a href="#2-1-1-4-observe-logs" class="toc-link node-name--H4 ">2.1.1.4 Observe Logs</a></li><li class="toc-list-item"><a href="#2-1-1-5-view-results" class="toc-link node-name--H4 ">2.1.1.5 View Results</a></li></ul></li><li class="toc-list-item"><a href="#2-1-2-running-on-cloud-foundry" class="toc-link node-name--H3 ">2.1.2 Running on Cloud Foundry</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#2-1-2-1-start-config-server" class="toc-link node-name--H4 ">2.1.2.1 Start Config Server</a></li><li class="toc-list-item"><a href="#2-1-2-2-publish-sample" class="toc-link node-name--H4 ">2.1.2.2 Publish Sample</a></li><li class="toc-list-item"><a href="#2-1-2-3-push-sample" class="toc-link node-name--H4 ">2.1.2.3 Push Sample</a></li><li class="toc-list-item"><a href="#2-1-2-4-observe-logs" class="toc-link node-name--H4 ">2.1.2.4 Observe Logs</a></li><li class="toc-list-item"><a href="#2-1-2-5-view-results" class="toc-link node-name--H4 ">2.1.2.5 View Results</a></li></ul></li><li class="toc-list-item"><a href="#2-1-3-understand-sample" class="toc-link node-name--H3 ">2.1.3 Understand Sample</a></li></ul></li><li class="toc-list-item"><a href="#2-2-usage" class="toc-link node-name--H2 ">2.2 Usage</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#2-2-1-add-nuget-reference" class="toc-link node-name--H3 ">2.2.1 Add NuGet Reference</a></li><li class="toc-list-item"><a href="#2-2-2-configure-settings" class="toc-link node-name--H3 ">2.2.2 Configure Settings</a></li><li class="toc-list-item"><a href="#2-2-3-add-configuration-provider" class="toc-link node-name--H3 ">2.2.3 Add Configuration Provider</a></li><li class="toc-list-item"><a href="#2-2-4-bind-to-cloud-foundry" class="toc-link node-name--H3 ">2.2.4 Bind to Cloud Foundry</a></li><li class="toc-list-item"><a href="#2-2-5-access-configuration-data" class="toc-link node-name--H3 ">2.2.5 Access Configuration Data</a></li><li class="toc-list-item"><a href="#2-2-6-enable-logging" class="toc-link node-name--H3 ">2.2.6 Enable Logging</a></li><li class="toc-list-item"><a href="#2-2-7-configuring-discovery-first" class="toc-link node-name--H3 ">2.2.7 Configuring Discovery First</a></li><li class="toc-list-item"><a href="#2-2-8-configuring-health-contributor" class="toc-link node-name--H3 ">2.2.8 Configuring Health Contributor</a></li><li class="toc-list-item"><a href="#2-2-9-configuring-fail-fast" class="toc-link node-name--H3 ">2.2.9 Configuring Fail Fast</a></li><li class="toc-list-item"><a href="#2-2-10-configuring-retry" class="toc-link node-name--H3 ">2.2.10 Configuring Retry</a></li><li class="toc-list-item"><a href="#2-2-11-configuring-multiple-urls" class="toc-link node-name--H3 ">2.2.11 Configuring Multiple Urls</a></li></ul></li></ul></li><li class="toc-list-item"><a href="#3-0-placeholder-provider" class="toc-link node-name--H1 ">3.0 Placeholder Provider</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#3-1-quick-start" class="toc-link node-name--H2 ">3.1 Quick Start</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#3-1-1-locate-sample" class="toc-link node-name--H3 ">3.1.1 Locate Sample</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#3-1-2-run-sample" class="toc-link node-name--H4 ">3.1.2 Run Sample</a></li><li class="toc-list-item"><a href="#3-1-3-observe-logs" class="toc-link node-name--H4 ">3.1.3 Observe Logs</a></li></ul></li><li class="toc-list-item"><a href="#3-1-4-what-to-expect" class="toc-link node-name--H3 ">3.1.4 What to Expect</a></li><li class="toc-list-item"><a href="#3-1-5-understand-sample" class="toc-link node-name--H3 ">3.1.5 Understand Sample</a></li></ul></li><li class="toc-list-item"><a href="#3-2-usage" class="toc-link node-name--H2 ">3.2 Usage</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#3-2-1-add-nuget-reference" class="toc-link node-name--H3 ">3.2.1 Add NuGet Reference</a></li><li class="toc-list-item"><a href="#3-2-2-add-configuration-provider" class="toc-link node-name--H3 ">3.2.2 Add Configuration Provider</a></li><li class="toc-list-item"><a href="#3-2-3-access-configuration-data" class="toc-link node-name--H3 ">3.2.3 Access Configuration Data</a></li><li class="toc-list-item"><a href="#3-2-4-access-configuration-data-as-options" class="toc-link node-name--H3 ">3.2.4 Access Configuration Data as Options</a></li></ul></li></ul></li><li class="toc-list-item"><a href="#4-0-randomvalue-provider" class="toc-link node-name--H1 ">4.0 RandomValue Provider</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#4-1-quick-start" class="toc-link node-name--H2 ">4.1 Quick Start</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#4-1-1-locate-sample" class="toc-link node-name--H3 ">4.1.1 Locate Sample</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#4-1-2-run-sample" class="toc-link node-name--H4 ">4.1.2 Run Sample</a></li><li class="toc-list-item"><a href="#4-1-3-observe-logs" class="toc-link node-name--H4 ">4.1.3 Observe Logs</a></li></ul></li><li class="toc-list-item"><a href="#4-1-4-what-to-expect" class="toc-link node-name--H3 ">4.1.4 What to Expect</a></li><li class="toc-list-item"><a href="#4-1-5-understand-sample" class="toc-link node-name--H3 ">4.1.5 Understand Sample</a></li></ul></li><li class="toc-list-item"><a href="#4-2-usage" class="toc-link node-name--H2 ">4.2 Usage</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#4-2-1-add-nuget-reference" class="toc-link node-name--H3 ">4.2.1 Add NuGet Reference</a></li><li class="toc-list-item"><a href="#4-2-2-add-configuration-provider" class="toc-link node-name--H3 ">4.2.2 Add Configuration Provider</a></li><li class="toc-list-item"><a href="#4-2-3-access-random-value-data" class="toc-link node-name--H3 ">4.2.3 Access Random Value Data</a></li></ul></li></ul></li><li class="toc-list-item"><a href="#5-0-hosting-extensions" class="toc-link node-name--H1 ">5.0 Hosting Extensions</a></li><li class="toc-list-item"><a href="#common-steps" class="toc-link node-name--H1 ">Common Steps</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#publish-sample" class="toc-link node-name--H2 ">Publish Sample</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#asp-net-core" class="toc-link node-name--H3 ">ASP.NET Core</a></li><li class="toc-list-item"><a href="#asp-net-4-x" class="toc-link node-name--H3 ">ASP.NET 4.x</a></li></ul></li><li class="toc-list-item"><a href="#push-sample" class="toc-link node-name--H2 ">Push Sample</a></li></ul></li></ul></div>
+
+            </div>
+          </div>
+          <div class="col-12 sm-col-9 js-toc-content">
+						<h1 id="1-0-cloud-foundry-provider">1.0 Cloud Foundry Provider</h1>
+<p>The following sections describe how to use the Cloud Foundry configuration provider:</p>
+
+<ul>
+<li><a href="#1-2-1-add-nuget-reference">Add NuGet Reference</a></li>
+<li><a href="#1-2-2-add-configuration-provider">Add Configuration Provider</a></li>
+<li><a href="#1-2-3-access-configuration-data">Access Configuration Data</a></li>
+<li><a href="#1-2-4-access-configuration-data-as-options">Access Configuration Data as Options</a></li>
+</ul>
+
+<p>You should have a good understanding of how the .NET <a target="_blank" href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration">Configuration services</a> work before starting to use this provider.</p>
+
+<p>In order to use the Steeltoe Cloud Foundry provider you need to do the following:</p>
+
+<ol>
+<li>Add a NuGet package reference to your project.</li>
+<li>Add the provider to the Configuration Builder.</li>
+<li>Configure Cloud Foundry options classes by binding configuration data to the classes.</li>
+<li>Inject and use the Cloud Foundry Options to access Cloud Foundry configuration data.</li>
+</ol>
+
+<blockquote>
+<p>NOTE: Most of the example code in the following sections is based on using Steeltoe in an ASP.NET Core application. If you are developing an ASP.NET 4.x application or a Console based app, see the <a target="_blank" href="https://github.com/SteeltoeOSS/Samples/tree/master/Configuration">other samples</a> for example code you can use.</p>
+</blockquote>
+
+<h3 id="1-2-1-add-nuget-reference">1.2.1 Add NuGet Reference</h3>
+
+<p>To use the provider, you need to add a reference to the appropriate Steeltoe Cloud Foundry NuGet based on the type of the application you are building and what Dependency Injector you have chosen, if any. The following table describes the available packages:</p>
+
+<table><thead>
+<tr>
+<th>App Type</th>
+<th>Package</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Console/ASP.NET 4.x</td>
+<td><code>Steeltoe.Extensions.Configuration.CloudFoundryBase</code></td>
+<td>Base functionality. No dependency injection.</td>
+</tr>
+<tr>
+<td>ASP.NET Core</td>
+<td><code>Steeltoe.Extensions.Configuration.CloudFoundryCore</code></td>
+<td>Includes base. Adds ASP.NET Core dependency injection.</td>
+</tr>
+<tr>
+<td>ASP.NET 4.x with Autofac</td>
+<td><code>Steeltoe.Extensions.Configuration.CloudFoundryAutofac</code></td>
+<td>Includes base. Adds Autofac dependency injection.</td>
+</tr>
+</tbody></table>
+
+<p>To add this type of NuGet to your project, add a <code>PackageReference</code> resembling the following:</p>
+
+<pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
+...
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Extensions.Configuration.CloudFoundryCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
+...
+<span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
+</code></pre>
+
+<h3 id="1-2-2-add-configuration-provider">1.2.2 Add Configuration Provider</h3>
+
+<p>In order to parse the Cloud Foundry environment variables and make them available in the application’s configuration, you need to add the Cloud Foundry configuration provider to the <code>ConfigurationBuilder</code>.</p>
+
+<p>The following example shows how to do so:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">using</span> Steeltoe.Extensions.Configuration;
+...
+
+<span class="hljs-keyword">var</span> builder = <span class="hljs-keyword">new</span> ConfigurationBuilder()
+    .SetBasePath(env.ContentRootPath)
+    .AddJsonFile(<span class="hljs-string">"appsettings.json"</span>, optional: <span class="hljs-literal">true</span>, reloadOnChange: <span class="hljs-literal">true</span>)
+    .AddJsonFile(<span class="hljs-string">$"appsettings.<span class="hljs-subst">{env.EnvironmentName}</span>.json"</span>, optional: <span class="hljs-literal">true</span>)
+
+    <span class="hljs-comment">// Add VCAP_* configuration data</span>
+    .AddCloudFoundry();
+Configuration = builder.Build();
+...
+
+</code></pre>
+
+<p>When developing an ASP.NET Core application, you can do the same thing by using the <code>AddCloudFoundry()</code> extension method on the <code>IWebHostBuilder</code>. The following example shows how to do so:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>)
+    </span>{
+        BuildWebHost(args).Run();
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IWebHost <span class="hljs-title">BuildWebHost</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>) </span>=&gt;
+        WebHost.CreateDefaultBuilder(args)
+            .UseCloudFoundryHosting()
+
+            <span class="hljs-comment">// Add VCAP_* configuration data</span>
+            .AddCloudFoundry()
+            .UseStartup&lt;Startup&gt;()
+            .Build();
+}
+</code></pre>
+
+<h3 id="1-2-3-access-configuration-data">1.2.3 Access Configuration Data</h3>
+
+<p>Once the configuration has been built, the values from the <code>VCAP_APPLICATION</code> and <code>VCAP_SERVICES</code> environment variables have been added to the application’s configuration data and become available under keys prefixed with <code>vcap:application</code> and <code>vcap:services</code> respectively.</p>
+
+<p>You can access the values from the <code>VCAP_APPLICATION</code> environment variable settings directly from the configuration as follows:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">var</span> config = builder.Build();
+<span class="hljs-keyword">var</span> appName = config[<span class="hljs-string">"vcap:application:application_name"</span>]
+<span class="hljs-keyword">var</span> instanceId = config[<span class="hljs-string">"vcap:application:instance_id"</span>]
+...
+</code></pre>
+
+<p>A list of all <code>VCAP_APPLICATION</code> keys is available in the <a target="_blank" href="https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html#VCAP-APPLICATION">VCAP_APPLICATION</a> topic of the Cloud Foundry documentation.</p>
+
+<p>You can also directly access the values from the <code>VCAP_SERVICES</code> environment variable. For example, to access the information about the first instance of a bound Cloud Foundry service with a name of <code>service-name</code>, you could code the following:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">var</span> config = builder.Build();
+<span class="hljs-keyword">var</span> name = config[<span class="hljs-string">"vcap:services:service-name:0:name"</span>]
+<span class="hljs-keyword">var</span> uri = config[<span class="hljs-string">"vcap:services:service-name:0:credentials:uri"</span>]
+...
+</code></pre>
+
+<p>A list of all <code>VCAP_SERVICES</code> keys is available in the <a target="_blank" href="https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html#VCAP-SERVICES">VCAP_SERVICES</a> topic of the Cloud Foundry documentation.</p>
+
+<blockquote>
+<p>NOTE: This provider uses the built-in .NET <a target="_blank" href="https://github.com/aspnet/Configuration/tree/dev/src/Microsoft.Extensions.Configuration.Json">JSON Configuration Parser</a> when parsing the JSON provided in the <code>VCAP_*</code> environment variables. As a result, you can expect the exact same key names and behavior as you see when parsing JSON configuration files (such as <code>appsettings.json</code>) in your application.</p>
+</blockquote>
+
+<h3 id="1-2-4-access-configuration-data-as-options">1.2.4 Access Configuration Data as Options</h3>
+
+<h4 id="1-2-4-1-configurecloudfoundryoptions">1.2.4.1 ConfigureCloudFoundryOptions()</h4>
+
+<p>Alternatively, instead of accessing the Cloud Foundry configuration data directly from the configuration, you can use the .NET <a target="_blank" href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration">Options</a> framework together with <a target="_blank" href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection">Dependency Injection</a>.</p>
+
+<p>The Cloud Foundry provider includes two additional classes, <code>CloudFoundryApplicationOptions</code> and <code>CloudFoundryServicesOptions</code>. Both can be configured through the Options framework to hold the parsed <code>VCAP_*</code> data by using the Options <code>Configure()</code> feature.</p>
+
+<p>To use it in an ASP.NET Core application, add the the following to the <code>ConfigureServices()</code> method in the <code>Startup</code> class:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">using</span> Steeltoe.Extensions.Configuration.CloudFoundry;
+
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
+</span>{
+    <span class="hljs-comment">// Setup Options framework with DI</span>
+    services.AddOptions();
+
+    <span class="hljs-comment">// Add Steeltoe Cloud Foundry Options to service container</span>
+    services.ConfigureCloudFoundryOptions(Configuration);
+}
+</code></pre>
+
+<p>The <code>ConfigureCloudFoundryOptions(Configuration)</code> method call uses the Options framework to bind the <code>vcap:application</code> configuration values to an instance of <code>CloudFoundryApplicationOptions</code> and binds the <code>vcap:services</code> values to an instance of <code>CloudFoundryServicesOptions</code>.</p>
+
+<p>Both of these method calls also add these objects to the service container as <code>IOptions</code>.</p>
+
+<p>Once this is done, you can access these configuration objects in the Controllers or Views of an application by using normal Dependency Injection.</p>
+
+<p>The following example controller shows how to do so:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">using</span> Steeltoe.Extensions.Configuration.CloudFoundry;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">HomeController</span> : <span class="hljs-title">Controller</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HomeController</span>(<span class="hljs-params">IOptions&lt;CloudFoundryApplicationOptions&gt; appOptions,
+                            IOptions&lt;CloudFoundryServicesOptions&gt; serviceOptions</span>)
+    </span>{
+        AppOptions = appOptions.Value;
+        ServiceOptions = serviceOptions.Value;
+    }
+
+    CloudFoundryApplicationOptions AppOptions { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
+    CloudFoundryServicesOptions ServiceOptions { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
+
+    <span class="hljs-comment">// GET: /&lt;controller&gt;/</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IActionResult <span class="hljs-title">Index</span>(<span class="hljs-params"></span>)
+    </span>{
+        ViewData[<span class="hljs-string">"AppName"</span>] = AppOptions.ApplicationName;
+        ViewData[<span class="hljs-string">"AppId"</span>] = AppOptions.ApplicationId;
+        ViewData[<span class="hljs-string">"URI-0"</span>] = AppOptions.ApplicationUris[<span class="hljs-number">0</span>];
+
+        ViewData[ServiceOptions.ServicesList[<span class="hljs-number">0</span>].Label] = ServiceOptions.ServicesList[<span class="hljs-number">0</span>].Name;
+        ViewData[<span class="hljs-string">"client_id"</span>]= ServiceOptions.ServicesList[<span class="hljs-number">0</span>].Credentials[<span class="hljs-string">"client_id"</span>].Value;
+        ViewData[<span class="hljs-string">"client_secret"</span>]= ServiceOptions.ServicesList[<span class="hljs-number">0</span>].Credentials[<span class="hljs-string">"client_secret"</span>].Value;
+        ViewData[<span class="hljs-string">"uri"</span>]= ServiceOptions.ServicesList[<span class="hljs-number">0</span>].Credentials[<span class="hljs-string">"uri"</span>].Value;
+        <span class="hljs-keyword">return</span> View();
+    }
+}
+</code></pre>
+
+<h4 id="1-2-4-2-configurecloudfoundryservice">1.2.4.2 ConfigureCloudFoundryService</h4>
+
+<p>As an alternative to using <code>CloudFoundryServicesOptions</code> to access Cloud Foundry service data you can also use <code>ConfigureCloudFoundryService&lt;TOption&gt;()</code> or <code>ConfigureCloudFoundryServices&lt;TOption&gt;()</code> to easily gain access to service data.  </p>
+
+<p>These methods allow you to define an Option class which represents a particular type of Cloud Foundry service binding and then use either method to select that data from <code>VCAP_SERVICES</code> and bind the data to it.</p>
+
+<p>To do this, you first need to create a Options class that derives from <code>AbstractServiceOptions</code>. That class must match the data provided in <code>VCAP_SERVICES</code>.  </p>
+
+<p>Here is an example that illustrates how to do this for a MySql service binding on PCF:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">using</span> Steeltoe.Extensions.Configuration.CloudFoundry;
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MySqlServiceOption</span> : <span class="hljs-title">AbstractServiceOptions</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MySqlServiceOption</span>(<span class="hljs-params"></span>) </span>{ }
+    <span class="hljs-keyword">public</span> MySqlCredentials Credentials { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+}
+
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MySqlCredentials</span>
+{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Hostname { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> Port { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Name { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Username { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Password { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Uri { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> JdbcUrl { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+}
+</code></pre>
+
+<p>Next in your <code>Startup</code> class you can use either <code>ConfigureCloudFoundryService&lt;TOption&gt;()</code> or <code>ConfigureCloudFoundryServices&lt;TOption&gt;()</code> to bind the service data from <code>VCAP_SERVICES</code> to your <code>TOption</code>.  There are multiple ways to do this depending on your needs.</p>
+
+<p>You can use <code>ConfigureCloudFoundryService&lt;TOption&gt;()</code> method to select a specific Cloud Foundry service binding from <code>VCAP_SERVICES</code> by specifying a service name. Or you can use <code>ConfigureCloudFoundryServices&lt;TOption&gt;()</code> to bind to all services of a particular type by specifying a Cloud Foundry service label.  </p>
+
+<p>Here are some examples:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">using</span> Steeltoe.Extensions.Configuration.CloudFoundry;
+
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
+</span>{
+    <span class="hljs-comment">// Setup Options framework with DI</span>
+    services.AddOptions();
+
+    <span class="hljs-comment">// Bind VCAP_SERVICES data for mySql2 service instance to MySqlServiceOption</span>
+    services.ConfigureCloudFoundryService&lt;MySqlServiceOption&gt;(Configuration, <span class="hljs-string">"mySql2"</span>);
+
+    <span class="hljs-comment">// Bind VCAP_SERVICES data for all p-mysql service instances to MySqlServiceOption</span>
+    services.ConfigureCloudFoundryServices&lt;MySqlServiceOption&gt;(Configuration, <span class="hljs-string">"p-mysql"</span>);
+}
+</code></pre>
+
+<p>As you can see all of this is built using the Microsoft provided Options framework.  As a result we are able to leverage the <code>named</code> Options feature Microsoft has implemented in options binding, and configure each <code>TOption</code> with a name equal to the Cloud Foundry service name found in <code>VCAP_SERVICES</code>.</p>
+
+<p>What this means is within a controller you can inject the <code>IOptionsSnapshot&lt;MySqlServiceOption&gt;</code> or <code>IOptionsMonitor&lt;MySqlServiceOption&gt;</code> as you normally would and then access the Option by name. (for example: specific Cloud Foundry service binding instance).</p>
+
+<p>Here is an example:</p>
+
+<pre><code class="csharp hljs">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">HomeController</span> : <span class="hljs-title">Controller</span>
+    {
+        <span class="hljs-keyword">private</span> IOptionsSnapshot&lt;MySqlServiceOption&gt; _mySqlOptions;
+        <span class="hljs-keyword">private</span>  MySqlServiceOption MySqlOptions
+        {
+            <span class="hljs-keyword">get</span>
+            {
+                <span class="hljs-keyword">return</span> _mySqlOptions.Get(<span class="hljs-string">"mySql2"</span>);
+            }
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HomeController</span>(<span class="hljs-params">IOptionsSnapshot&lt;MySqlServiceOption&gt; mySqlOptions</span>)
+        </span>{
+            _mySqlOptions = mySqlOptions;
+        }
+</code></pre>
+
+<h1 id="2-0-config-server-provider">2.0 Config Server Provider</h1>
+
+
+<p>The following sections describe how to use the config server configuration provider.</p>
+
+<ul>
+<li><a href="#2-2-1-add-nuget-reference">Add NuGet Reference</a></li>
+<li><a href="#2-2-2-configure-settings">Configure Settings</a></li>
+<li><a href="#2-2-3-add-configuration-provider">Add Configuration Provider</a></li>
+<li><a href="#2-2-4-bind-to-cloud-foundry">Bind to Cloud Foundry</a></li>
+<li><a href="#2-2-5-access-configuration-data">Access Configuration Data</a></li>
+<li><a href="#2-2-6-enable-logging">Enable Logging</a></li>
+<li><a href="#2-2-7-configuring-discovery-first">Configuring Discovery First</a></li>
+<li><a href="#2-2-8-configuring-health-contributor">Configuring Health Contributor</a></li>
+<li><a href="#2-2-9-configuring-fail-fast">Configuring Fail Fast</a></li>
+<li><a href="#2-2-10-configuring-retry">Configuring Retry</a></li>
+<li><a href="#2-2-11-configuring-multiple-urls">Configuring Multiple Urls</a></li>
+</ul>
+
+<p>You should know how the new .NET <a target="_blank" href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration">Configuration services</a> work before starting to use this provider. A basic understanding of the <code>ConfigurationBuilder</code> and how to add providers to the builder is necessary.</p>
+
+<p>You should also have a good understanding of the <a target="_blank" href="https://cloud.spring.io/spring-cloud-config/">Spring Cloud Config Server</a>.</p>
+
+<p>To use the Steeltoe provider, you need to do the following:</p>
+
+<ol>
+<li>Add the appropriate NuGet package reference to your project.</li>
+<li>Configure the settings that the Steeltoe provider uses to access the Spring Cloud Config Server.</li>
+<li>Add the provider to the configuration builder.</li>
+<li>Optionally, configure the returned config server config data as Options.</li>
+<li>Inject and use Options or ConfigurationRoot to access configuration data.</li>
+</ol>
+
+<h3 id="2-2-1-add-nuget-reference">2.2.1 Add NuGet Reference</h3>
+
+<p>You can choose from two Config Server client NuGets, depending on your needs.</p>
+
+<p>If you plan on only connecting to the open source version of <a target="_blank" href="https://projects.spring.io/spring-cloud/">Spring Cloud Config Server</a>, then you should use one of the packages described by the following table, depending on your application type and needs:</p>
+
+<table><thead>
+<tr>
+<th>App Type</th>
+<th>Package</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Console/ASP.NET 4.x</td>
+<td><code>Steeltoe.Extensions.Configuration.ConfigServerBase</code></td>
+<td>Base functionality. No dependency injection.</td>
+</tr>
+<tr>
+<td>ASP.NET Core</td>
+<td><code>Steeltoe.Extensions.Configuration.ConfigServerCore</code></td>
+<td>Includes base. Adds ASP.NET Core dependency injection.</td>
+</tr>
+<tr>
+<td>ASP.NET 4.x with Autofac</td>
+<td><code>Steeltoe.Extensions.Configuration.ConfigServerAutofac</code></td>
+<td>Includes base. Adds Autofac dependency injection.</td>
+</tr>
+</tbody></table>
+
+<p>To add this type of NuGet to your project, add a <code>PackageReference</code> that resembles the following:</p>
+
+<pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
+...
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Extensions.Configuration.ConfigServerCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
+...
+<span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
+</code></pre>
+
+<blockquote>
+<p>IMPORTANT: The <code>Pivotal.Extensions.Configuration.ConfigServer*</code> packages were deprecated in Steeltoe 2.2 and are not included newer releases.  All functionality provided in those packages has been pushed into the corresponding <code>Steeltoe.Extensions.Configuration.ConfigServer*</code> packages.</p>
+</blockquote>
+
+<p>If you are using still using versions of Steeltoe less than 2.2.0 and push your application to Cloud Foundry to use <a target="_blank" href="https://docs.pivotal.io/spring-cloud-services/1-5/common/index.html">Spring Cloud Services</a>, you should use one of the packages described in the following table, depending on your application type and needs:</p>
+
+<table><thead>
+<tr>
+<th>App Type</th>
+<th>Package</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Console/ASP.NET 4.x</td>
+<td><code>Pivotal.Extensions.Configuration.ConfigServerBase</code></td>
+<td>Base functionality. No dependency injection.</td>
+</tr>
+<tr>
+<td>ASP.NET Core</td>
+<td><code>Pivotal.Extensions.Configuration.ConfigServerCore</code></td>
+<td>Includes base. Adds ASP.NET Core dependency injection.</td>
+</tr>
+<tr>
+<td>ASP.NET 4.x with Autofac</td>
+<td><code>Pivotal.Extensions.Configuration.ConfigServerAutofac</code></td>
+<td>Includes base. Adds Autofac dependency injection.</td>
+</tr>
+</tbody></table>
+
+<h3 id="2-2-2-configure-settings">2.2.2 Configure Settings</h3>
+
+<p>The most convenient way to configure settings for the provider is to put them in a file and then use one of the other file-based configuration providers to read them.</p>
+
+<p>The following example shows some provider settings put in a JSON file. Only two settings are really necessary. <code>spring:application:name</code> configures the “application name” to be <code>sample</code>, and <code>spring:cloud:config:uri</code> the address of the config server.</p>
+
+<blockquote>
+<p>NOTE: The <code>spring:application:name</code> is also used by other Steeltoe libraries in addition to the config server.</p>
+</blockquote>
+
+<pre><code class="json hljs">{
+  <span class="hljs-attr">"spring"</span>: {
+    <span class="hljs-attr">"application"</span>: {
+      <span class="hljs-attr">"name"</span>: <span class="hljs-string">"sample"</span>
+    },
+    <span class="hljs-attr">"cloud"</span>: {
+      <span class="hljs-attr">"config"</span>: {
+        <span class="hljs-attr">"uri"</span>: <span class="hljs-string">"http://localhost:8888"</span>
+      }
+    }
+  }
+  ...
+}
+</code></pre>
+
+<p>The following table describes all the settings that can be used to configure the behavior of the provider:</p>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>App name for which to request config</td>
+<td><code>IHostingEnvironment.ApplicationName</code></td>
+</tr>
+<tr>
+<td>enabled</td>
+<td>Enable or disable config server client</td>
+<td>true</td>
+</tr>
+<tr>
+<td>uri</td>
+<td>Comma-separated list of config server endpoints</td>
+<td><code>http://localhost:8888</code></td>
+</tr>
+<tr>
+<td>env</td>
+<td>Environment or profile used in the server request</td>
+<td><code>IHostingEnvironment.EnvironmentName</code></td>
+</tr>
+<tr>
+<td>validateCertificates</td>
+<td>Enable or disable certificate validation</td>
+<td>true</td>
+</tr>
+<tr>
+<td>label</td>
+<td>Comma-separated list of labels to request</td>
+<td>master</td>
+</tr>
+<tr>
+<td>timeout</td>
+<td>Time to wait for response from server, in milliseconds</td>
+<td>6000</td>
+</tr>
+<tr>
+<td>username</td>
+<td>Username for basic authentication</td>
+<td>none</td>
+</tr>
+<tr>
+<td>password</td>
+<td>Password for basic authentication</td>
+<td>none</td>
+</tr>
+<tr>
+<td>failFast</td>
+<td>Enable or disable failure at startup</td>
+<td>false</td>
+</tr>
+<tr>
+<td>token</td>
+<td>Hashicorp Vault authentication token</td>
+<td>none</td>
+</tr>
+<tr>
+<td>tokenTtl</td>
+<td>Hashicorp Vault token renewal TTL. Valid on Cloud Foundry only</td>
+<td>300000ms</td>
+</tr>
+<tr>
+<td>tokenRenewRate</td>
+<td>Hashicorp Vault token renewal rate. Valid on Cloud Foundry only</td>
+<td>60000ms</td>
+</tr>
+<tr>
+<td>retry:enabled</td>
+<td>Enable or disable retry logic</td>
+<td>false</td>
+</tr>
+<tr>
+<td>retry:maxAttempts</td>
+<td>Max retries if retry enabled</td>
+<td>6</td>
+</tr>
+<tr>
+<td>retry:initialInterval</td>
+<td>Starting interval</td>
+<td>1000ms</td>
+</tr>
+<tr>
+<td>retry:maxInterval</td>
+<td>Maximum retry interval</td>
+<td>2000ms</td>
+</tr>
+<tr>
+<td>retry:multiplier</td>
+<td>Retry interval multiplier</td>
+<td>1.1</td>
+</tr>
+<tr>
+<td>clientId</td>
+<td>OAuth2 client id when using OAuth security</td>
+<td>none</td>
+</tr>
+<tr>
+<td>clientSecret</td>
+<td>OAuth2 client secret when using OAuth security</td>
+<td>none</td>
+</tr>
+<tr>
+<td>accessTokenUri</td>
+<td>Uri to use to obtain OAuth access token</td>
+<td>none</td>
+</tr>
+<tr>
+<td>discovery:enabled</td>
+<td>Enable or disable discovery first feature</td>
+<td>false</td>
+</tr>
+<tr>
+<td>discovery:serviceId</td>
+<td>Config Server service id to use in discovery first feature</td>
+<td>configserver</td>
+</tr>
+<tr>
+<td>health:enabled</td>
+<td>Enable or disable config server health check contributor</td>
+<td>true</td>
+</tr>
+<tr>
+<td>health:timeToLive</td>
+<td>Health check contributor cache time to live in ms</td>
+<td>60*5ms</td>
+</tr>
+</tbody></table>
+
+<p>As mentioned earlier, all settings should start with <code>spring:cloud:config:</code></p>
+
+<blockquote>
+<p>NOTE: If you use self-signed certificates on Cloud Foundry, you might run into certificate validation issues when pushing an application. A quick way to work around this is to disable certificate validation until a proper solution can be put in place.</p>
+</blockquote>
+
+<h3 id="2-2-3-add-configuration-provider">2.2.3 Add Configuration Provider</h3>
+
+<p>Once the provider’s settings have been defined and put in a file (such as a JSON file), the next step is to read them and make them available to the provider.</p>
+
+<p>In the next C# example, the provider’s configuration settings from the preceding example are put in the <code>appsettings.json</code> file included with the application. Then, by using the .NET JSON configuration provider, we can read the settings by adding the JSON provider to the configuration builder (<code>AddJsonFile("appsettings.json")</code>.</p>
+
+<p>Then, after the JSON provider has been added, you can add the config server provider to the builder. We include an extension method, <code>AddConfigServer()</code>, that you can use to do so.</p>
+
+<p>Because the JSON provider that reads <code>appsettings.json</code> has been added <code>before</code> the config server provider, the JSON-based settings become available to the Steeltoe provider. Note that you do not have to use JSON for the Steeltoe settings. You can use any of the other off-the-shelf configuration providers for the settings (such as INI files, environment variables, and so on).</p>
+
+<p>You need to <code>Add*()</code> the source of the config server clients settings (<code>AddJsonFile(..)</code>) <em>before</em> you <code>AddConfigServer(..)</code>. Otherwise, the settings are not picked up and used.</p>
+
+<p>The following sample shows how to add a configuration provider:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">using</span> Steeltoe.Extensions.Configuration;
+...
+
+<span class="hljs-keyword">var</span> builder = <span class="hljs-keyword">new</span> ConfigurationBuilder()
+    .SetBasePath(env.ContentRootPath)
+    .AddJsonFile(<span class="hljs-string">"appsettings.json"</span>, optional: <span class="hljs-literal">true</span>, reloadOnChange: <span class="hljs-literal">true</span>)
+    .AddJsonFile(<span class="hljs-string">$"appsettings.<span class="hljs-subst">{env.EnvironmentName}</span>.json"</span>, optional: <span class="hljs-literal">true</span>, reloadOnChange: <span class="hljs-literal">true</span>)
+    .AddConfigServer(env)
+    .AddEnvironmentVariables();
+
+<span class="hljs-keyword">var</span> config = builder.Build();
+...
+</code></pre>
+
+<p>When developing an ASP.NET Core application, you can accomplish the same thing by using the <code>AddConfigServer()</code> extension method on the <code>IWebHostBuilder</code>. The following example shows how to do so:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>)
+    </span>{
+        BuildWebHost(args).Run();
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IWebHost <span class="hljs-title">BuildWebHost</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>) </span>=&gt;
+        WebHost.CreateDefaultBuilder(args)
+            .UseCloudFoundryHosting()
+
+            <span class="hljs-comment">// Use Config Server for configuration data</span>
+            .AddConfigServer()
+            .UseStartup&lt;Startup&gt;()
+            .Build();
+}
+</code></pre>
+
+<h3 id="2-2-4-bind-to-cloud-foundry">2.2.4 Bind to Cloud Foundry</h3>
+
+<p>When you want to use a Config Server on Cloud Foundry and you have installed <a target="_blank" href="https://docs.pivotal.io/spring-cloud-services/1-5/common/index.html">Spring Cloud Services</a>, you can create and bind an instance of it to your application by using the Cloud Foundry CLI, as follows:</p>
+
+<pre><code class="bash hljs"><span class="hljs-comment"># Create config server instance named `myConfigServer`</span>
+cf create-service p-config-server standard myConfigServer
+
+<span class="hljs-comment"># Wait for service to become ready</span>
+cf services
+
+<span class="hljs-comment"># Bind the service to `myApp`</span>
+cf <span class="hljs-built_in">bind</span>-service myApp myConfigServer
+
+<span class="hljs-comment"># Restage the app to pick up change</span>
+cf restage myApp
+</code></pre>
+
+<p>Once the service is bound to the application, the config server settings are available and can be setup in <code>VCAP_SERVICES</code>.</p>
+
+<p>Then, when you push the application, the Steeltoe provider takes the settings from the service binding and merges those settings with the settings that you have provided through other configuration mechanisms (such as <code>appsettings.json</code>).</p>
+
+<p>If there are any merge conflicts, the last provider added to the Configuration takes precedence and overrides all others.</p>
+
+<h3 id="2-2-5-access-configuration-data">2.2.5 Access Configuration Data</h3>
+
+<p>When the <code>ConfigurationBuilder</code> builds the configuration, the Config Server client makes the appropriate REST calls to the Config Server and retrieves the configuration values based on the settings that have been provided.</p>
+
+<p>If there are any errors or problems accessing the server, the application continues to initialize, but the values from the server are not retrieved. If this is not the behavior you want, you should set the <code>spring:cloud:config:failFast</code> to <code>true</code>. Once that’s done, the application fails to start if problems occur during the build.</p>
+
+<p>After the configuration has been built, you can access the retrieved data directly by using <code>IConfiguration</code>. The following example shows how to do so:</p>
+
+<pre><code class="csharp hljs">...
+<span class="hljs-keyword">var</span> config = builder.Build();
+<span class="hljs-keyword">var</span> property1 = config[<span class="hljs-string">"myconfiguration:property1"</span>]
+<span class="hljs-keyword">var</span> property2 = config[<span class="hljs-string">"myconfiguration:property2"</span>]
+...
+</code></pre>
+
+<p>Alternatively, you can create a class to hold your configuration data and then use the <a target="_blank" href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration">Options</a> framework together with <a target="_blank" href="https://docs.asp.net/en/latest/fundamentals/dependency-injection.html">Dependency Injection</a> to inject an instance of the class into your controllers and view.</p>
+
+<p>To do so, first create a class representing the configuration data you expect to retrieve from the server, as shown in the following example:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">MyConfiguration</span> {
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Property1 { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Property2 { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+}
+</code></pre>
+
+<p>Next, use the <code>Configure&lt;&gt;()</code> method to tell the Options framework to create an instance of that class with the returned data. For the preceding <code>MyConfiguration</code> class, you could add the following code to the <code>ConfigureServices()</code> method in the <code>Startup</code> class in an ASP.NET Core application, as shown in the following example:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
+    </span>{
+        Configuration = configuration;
+    }
+
+    <span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
+    </span>{
+        <span class="hljs-comment">// Setup Options framework with DI</span>
+        services.AddOptions();
+
+        <span class="hljs-comment">// Configure IOptions&lt;MyConfiguration&gt;</span>
+        services.Configure&lt;MyConfiguration&gt;(Configuration.GetSection(<span class="hljs-string">"myconfiguration"</span>));
+        ...
+    }
+}
+</code></pre>
+
+<p>The preceding <code>Configure&lt;MyConfiguration&gt;(Configuration.GetSection("myconfiguration"))</code> method call instructs the Options framework to bind the <code>myconfiguration:...</code> values to an instance of the <code>MyConfiguration</code> class.</p>
+
+<p>After this has been done, you can gain access to the data in your <code>Controller</code> or <code>View</code> through dependency injection. The following example shows how to do so:</p>
+
+<pre><code class="csharp hljs">
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">HomeController</span> : <span class="hljs-title">Controller</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HomeController</span>(<span class="hljs-params">IOptions&lt;MyConfiguration&gt; myOptions</span>)
+    </span>{
+        MyOptions = myOptions.Value;
+    }
+
+    MyConfiguration MyOptions { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
+
+    <span class="hljs-comment">// GET: /&lt;controller&gt;/</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IActionResult <span class="hljs-title">Index</span>(<span class="hljs-params"></span>)
+    </span>{
+        ViewData[<span class="hljs-string">"property1"</span>] = MyOptions.Property1;
+        ViewData[<span class="hljs-string">"property2"</span>] = MyOptions.Property2;
+        <span class="hljs-keyword">return</span> View();
+    }
+}
+</code></pre>
+
+<h3 id="2-2-6-enable-logging">2.2.6 Enable Logging</h3>
+
+<p>Sometimes, it is desirable to turn on debug logging in the provider.</p>
+
+<p>To do so, you need to inject the <code>ILoggerFactory</code> into the <code>Startup</code> class constructor by adding it as an argument to the constructor. Once you have access to it, you can add a console logger to the factory and also set its minimum logging level set to Debug.</p>
+
+<p>Once that is done, pass the <code>ILoggerFactory</code> to the Steeltoe configuration provider. The provider then uses it to establish a logger with the debug level logging turned on.</p>
+
+<p>The following example shows how to enable Debug-level logging:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">using</span> Steeltoe.Extensions.Configuration;
+
+    LoggerFactory logFactory = <span class="hljs-keyword">new</span> LoggerFactory();
+    logFactory.AddConsole(minLevel: LogLevel.Debug);
+
+    <span class="hljs-comment">// Set up configuration sources.</span>
+    <span class="hljs-keyword">var</span> builder = <span class="hljs-keyword">new</span> ConfigurationBuilder()
+        .SetBasePath(env.ContentRootPath)
+        .AddJsonFile(<span class="hljs-string">"appsettings.json"</span>, optional: <span class="hljs-literal">false</span>, reloadOnChange: <span class="hljs-literal">true</span>)
+        .AddJsonFile(<span class="hljs-string">$"appsettings.<span class="hljs-subst">{env.EnvironmentName}</span>.json"</span>, optional: <span class="hljs-literal">true</span>)
+        .AddEnvironmentVariables()
+        .AddConfigServer(env, logFactory);
+...
+</code></pre>
+
+<h3 id="2-2-7-configuring-discovery-first">2.2.7 Configuring Discovery First</h3>
+
+<p>The default behavior for the Steeltoe Config Client is to access the Config Server through the <code>spring:cloud:config:uri</code> configuration setting. This of course requires that the application needs a <code>appsettings.json</code> or an environment variable with the Config Servers address set in <code>spring:cloud:config:uri</code>.  This mode of operation, the default, is called <code>Config First</code>.</p>
+
+<p>Alternatively, you can setup your Config Server to register with a Discovery service such as Netflix Eureka. This enables you application to lookup the address of the Config Server using a Discovery Service instead of configuring it in <code>appsettings.json</code>.  Note that you have to specifically configure your Config Server deployment to register with an Discovery service as this doesn’t happen automatically.  See the Spring Cloud Config Server documentation on how to do this.</p>
+
+<p>However, with the default <code>Config First</code> mode of the Steeltoe client you are not able to take advantage of the Config Server registration unless you change the clients mode of operation to <code>Discovery First</code>. To do this follow these steps:</p>
+
+<ol>
+<li>If your application is not using a Service Discovery service you need to configure your application to do so.  See the Steeltoe Discovery documentation for details on how to do this. Note that currently we only support Netflix Eureka. You will at a minimum need to configure the Eureka Server address.</li>
+<li>Change the Steeltoe Config Server client setting <code>spring:cloud:config:discovery:enabled</code>; set it to be <code>true</code>; the default is <code>false</code>.</li>
+<li>Optionally, if you change the service name registered by the Config Server with Eureka, you can use <code>spring:cloud:config:discovery:serviceId=YourNewName</code> to change the name used by the client for lookup.</li>
+</ol>
+
+<p>Note that the price for using this mode of operation is an extra network round trip on startup to locate the Config Server service registration. The benefit is, as long as the Discovery Service is at fixed point, the Config Server can change its address and no changes are need to applications.</p>
+
+<h3 id="2-2-8-configuring-health-contributor">2.2.8 Configuring Health Contributor</h3>
+
+<p>The Config Server package provides a Steeltoe Management Health contributor that attempts to load configuration from the Config Server and contributes health information to the results of the Health endpoint.</p>
+
+<p>If you use the <code>AddConfigServer()</code> extension method of the <code>IWebHostBuilder</code> the contributor is automatically added to the container and will automatically picked up an used. Otherwise you can manually add the contributor to the container using the <code>AddConfigServerHealthContributor()</code> extension method.</p>
+
+<p>The contributor is enabled by default, but can be disabled by setting <code>spring:cloud:config:health:enabled=false</code>.</p>
+
+<p>The response from the Config Server is cached for performance reasons. The default cache time to live is 5 minutes. To change that value, set the <code>spring:cloud:config:health:timeToLive=xxxx</code> setting (in milliseconds).</p>
+
+<h3 id="2-2-9-configuring-fail-fast">2.2.9 Configuring Fail Fast</h3>
+
+<p>In some cases, you may want to fail the startup of your application if it cannot connect to the Config Server. If this is the desired behavior, set the configuration setting <code>spring:cloud:config:failFast=true</code> to make the client halt with an Exception.</p>
+
+<h3 id="2-2-10-configuring-retry">2.2.10 Configuring Retry</h3>
+
+<p>If you expect that the Config Server may occasionally be unavailable when your application starts, you can make it keep trying after a failure.</p>
+
+<p>First, you need to set <code>spring:cloud:config:failFast=true</code>. Then you need to enable retry by adding the setting <code>spring:cloud:config:retry:enabled=true</code>.</p>
+
+<p>The default behavior is to retry six times with an initial backoff interval of 1000ms and an exponential multiplier of 1.1 for subsequent backoffs. You can configure these settings (and others) by setting the <code>spring:cloud:config:retry:*</code> configuration settings described earlier.</p>
+
+<h3 id="2-2-11-configuring-multiple-urls">2.2.11 Configuring Multiple Urls</h3>
+
+<p>To ensure high availability when you have multiple instances of Config Server deployed and expect one or more instances to be unavailable from time to time, you can either specify multiple URLs as a comma-separated list for <code>spring:cloud:config:uri</code> or have all your instances register in a Service Registry like Eureka if using <code>Discovery First</code> mode.</p>
+
+<p>Note that doing so ensures high availability only when the Config Server is not running or responding (for example, when the server has exited or when a connection timeout has occurred). For example, if the Config Server returns a 500 (Internal Server Error) response or the Steeltoe client receives a 401 from the Config Server (due to bad credentials or other causes), the client does not try to fetch properties from other URLs. An error of that kind indicates a user issue rather than an availability problem.</p>
+
+<p>If you use HTTP basic auth security on your Config Server, it is currently only possible to support per-Config Server auth credentials if you embed the credentials in each URL you specify for the <code>spring:cloud:config:uri</code> setting. If you use any other kind of security mechanism, you cannot currently support per-Config Server authentication and authorization.</p>
+
+<h1 id="3-0-placeholder-provider">3.0 Placeholder Provider</h1>
+
+<p>The following sections describe how to use the Placeholder resolver configuration provider:</p>
+
+<ul>
+<li><a href="#3-2-1-add-nuget-reference">Add NuGet Reference</a></li>
+<li><a href="#3-2-2-add-configuration-provider">Add Configuration Provider</a></li>
+<li><a href="#3-2-3-access-configuration-data">Access Configuration Data</a></li>
+<li><a href="#3-2-4-access-configuration-data-as-options">Access Configuration Data as Options</a></li>
+</ul>
+
+<p>You should have a good understanding of how the .NET <a target="_blank" href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration">Configuration services</a> work before starting to use this provider.</p>
+
+<p>In order to use the Steeltoe Placeholder resolver provider you need to do the following:</p>
+
+<ol>
+<li>Add a NuGet package reference to your project.</li>
+<li>Add the provider to the Configuration Builder.</li>
+<li>Optionally, configure Options classes by binding configuration data to the classes.</li>
+<li>Inject and use the Options classes or access configuration data directly.</li>
+</ol>
+
+<blockquote>
+<p>NOTE: Most of the example code in the following sections is based on using Steeltoe in an ASP.NET Core application. If you are developing an ASP.NET 4.x application or a Console based app, see the <a target="_blank" href="https://github.com/SteeltoeOSS/Samples/tree/master/Configuration">other samples</a> for example code you can use.</p>
+</blockquote>
+
+<h3 id="3-2-1-add-nuget-reference">3.2.1 Add NuGet Reference</h3>
+
+<p>To use the provider, you need to add a reference to the appropriate Steeltoe NuGet based on the type of the application you are building and what Dependency Injector you have chosen, if any. The following table describes the available packages:</p>
+
+<table><thead>
+<tr>
+<th>App Type</th>
+<th>Package</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Console/ASP.NET 4.x</td>
+<td><code>Steeltoe.Extensions.Configuration.PlaceholderBase</code></td>
+<td>Base functionality. No dependency injection.</td>
+</tr>
+<tr>
+<td>ASP.NET Core</td>
+<td><code>Steeltoe.Extensions.Configuration.PlaceholderCore</code></td>
+<td>Includes base. Adds ASP.NET Core dependency injection.</td>
+</tr>
+</tbody></table>
+
+<p>To add this type of NuGet to your project, add a <code>PackageReference</code> resembling the following:</p>
+
+<pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
+...
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Extensions.Configuration.PlaceholderCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.2.0"</span>/&gt;</span>
+...
+<span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
+</code></pre>
+
+<h3 id="3-2-2-add-configuration-provider">3.2.2 Add Configuration Provider</h3>
+
+<p>In order to have placeholders resolved when accessing your configuration data, you need to add the Placeholder resolver provider to the <code>ConfigurationBuilder</code>.  </p>
+
+<p>There are four different ways in which you can do this.</p>
+
+<ol>
+<li>Add the resolver using <code>ConfigurationBuilder</code> extension method <code>AddPlaceholderResolver()</code>.</li>
+<li>Add the resolver to an already built configuration using <code>IConfiguration</code> extension method <code>AddPlaceholderResolver()</code>.</li>
+<li>Add the resolver using <code>IWebHostBuilder</code> extension method <code>AddPlaceholderResolver()</code>.</li>
+<li>Use the <code>ConfigurePlaceholderResolver()</code> in <code>ConfigureServices()</code> to add the resolver to the already built <code>IConfiguration</code> and to replace it in the container.</li>
+</ol>
+
+<p>The following example shows how to add to the <code>ConfigurationBuilder</code>:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">using</span> Steeltoe.Extensions.Configuration.Placeholder;
+...
+
+<span class="hljs-keyword">var</span> builder = <span class="hljs-keyword">new</span> ConfigurationBuilder()
+    .SetBasePath(env.ContentRootPath)
+    .AddJsonFile(<span class="hljs-string">"appsettings.json"</span>, optional: <span class="hljs-literal">true</span>, reloadOnChange: <span class="hljs-literal">true</span>)
+    .AddJsonFile(<span class="hljs-string">$"appsettings.<span class="hljs-subst">{env.EnvironmentName}</span>.json"</span>, optional: <span class="hljs-literal">true</span>)
+
+    <span class="hljs-comment">// Add Placeholder resolver</span>
+    .AddPlaceholderResolver();
+Configuration = builder.Build();
+...
+
+</code></pre>
+
+<p>The following example shows how to add to the <code>IWebHostBuilder</code>:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>)
+    </span>{
+        BuildWebHost(args).Run();
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IWebHost <span class="hljs-title">BuildWebHost</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>) </span>=&gt;
+        WebHost.CreateDefaultBuilder(args)
+            .UseCloudFoundryHosting()
+
+            .AddPlaceholderResolver()
+            .UseStartup&lt;Startup&gt;()
+            .Build();
+}
+</code></pre>
+
+<blockquote>
+<p>NOTE: It is important to understand that the Placeholder resolver works by wrapping and replacing the existing configuration providers already added to the <code>ConfigurationBuilder</code>. As a result you typically will want to add it as the last provider.</p>
+</blockquote>
+
+<h3 id="3-2-3-access-configuration-data">3.2.3 Access Configuration Data</h3>
+
+<p>Once the configuration has been built, the Placeholder resolver will be used to resolve any placeholders as you access your configuration data.  Simply access the configuration data as your normally would and the resolver will attempt to resolve and placeholder before returning the value for the key requested.</p>
+
+<p>Consider the following <code>appsettings.json</code> file:</p>
+
+<pre><code class="json hljs">{
+    <span class="hljs-attr">"spring"</span>: {
+        <span class="hljs-attr">"bar"</span>: {
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"myName"</span>
+    },
+      <span class="hljs-attr">"cloud"</span>: {
+        <span class="hljs-attr">"config"</span>: {
+            <span class="hljs-attr">"name"</span> : <span class="hljs-string">"${spring:bar:name?no_name}"</span>,
+        }
+      }
+    }
+  ...
+}
+</code></pre>
+
+<p>When using the normal <code>IConfiguration</code> indexer to access the configuration you will see the Placeholder resolver do its thing:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">var</span> config = builder.Build();
+
+Assert.Equal(<span class="hljs-string">"myName"</span>, config[<span class="hljs-string">"spring:cloud:config:name"</span>]);
+...
+</code></pre>
+
+<h3 id="3-2-4-access-configuration-data-as-options">3.2.4 Access Configuration Data as Options</h3>
+
+<p>Alternatively, instead of accessing the configuration data directly from the configuration, you can also use the .NET <a target="_blank" href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration">Options</a> framework together with placeholders.</p>
+
+<p>First, consider the following <code>appsettings.json</code> and <code>appsettings.Development.json</code> files:</p>
+
+<pre><code class="json hljs">// appsettings.json
+{
+  <span class="hljs-attr">"Logging"</span>: {
+    <span class="hljs-attr">"LogLevel"</span>: {
+      <span class="hljs-attr">"Default"</span>: <span class="hljs-string">"Warning"</span>
+    }
+  },
+  <span class="hljs-attr">"AllowedHosts"</span>: <span class="hljs-string">"*"</span>,
+  <span class="hljs-attr">"ResolvedPlaceholderFromEnvVariables"</span>: <span class="hljs-string">"${PATH?NotFound}"</span>,
+  <span class="hljs-attr">"UnresolvedPlaceholder"</span>: <span class="hljs-string">"${SomKeyNotFound?NotFound}"</span>,
+  <span class="hljs-attr">"ResolvedPlaceholderFromJson"</span>: <span class="hljs-string">"${Logging:LogLevel:System?${Logging:LogLevel:Default?NotFound}}"</span>
+}
+// appsettings.Development.json
+{
+  <span class="hljs-attr">"Logging"</span>: {
+    <span class="hljs-attr">"LogLevel"</span>: {
+      <span class="hljs-attr">"Default"</span>: <span class="hljs-string">"Debug"</span>,
+      <span class="hljs-attr">"System"</span>: <span class="hljs-string">"Information"</span>,
+      <span class="hljs-attr">"Microsoft"</span>: <span class="hljs-string">"Information"</span>
+    }
+  }
+}
+</code></pre>
+
+<p>Notice <code>ResolvedPlaceholderFromEnvVariables</code> uses a placeholder that references the <code>PATH</code> environment variable which is added to the configuration by the default Web host builder.
+Also notice <code>ResolvedPlaceholderFromJson</code> uses a placeholder that references keys that come from the <code>.json</code> configuration files.</p>
+
+<p>Next, add the Placeholder resolver to the <code>IWebHostBuilder</code> in <code>Program.cs</code> or in any of the other ways described above:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">using</span> Microsoft.AspNetCore;
+<span class="hljs-keyword">using</span> Microsoft.AspNetCore.Hosting;
+<span class="hljs-keyword">using</span> Steeltoe.Extensions.Configuration.PlaceholderCore;
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>)
+    </span>{
+        CreateWebHostBuilder(args).Build().Run();
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IWebHostBuilder <span class="hljs-title">CreateWebHostBuilder</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>) </span>=&gt;
+        WebHost.CreateDefaultBuilder(args)
+
+            <span class="hljs-comment">// Add Steeltoe Placeholder resolver to apps configuration providers</span>
+            .AddPlaceholderResolver()
+            .UseStartup&lt;Startup&gt;();
+}
+</code></pre>
+
+<p>Then to use the configuration and the added Placeholder resolver together with your Options classes simply configure the Options as you normally would.</p>
+
+<pre><code class="csharp hljs">
+<span class="hljs-comment">// Options class</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">SampleOptions</span>
+{
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> ResolvedPlaceholderFromEnvVariables { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> UnresolvedPlaceholder { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+        <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> ResolvedPlaceholderFromJson { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+}
+
+<span class="hljs-comment">// Startup.cs</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span>
+{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
+    </span>{
+        Configuration = configuration;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
+    </span>{
+        <span class="hljs-comment">// Setup Options framework with DI</span>
+        services.AddOptions();
+
+        <span class="hljs-comment">// Configure the SampleOptions class with configuration data</span>
+        services.Configure&lt;SampleOptions&gt;(Configuration);
+    }
+    ....
+}
+</code></pre>
+
+<h1 id="4-0-randomvalue-provider">4.0 RandomValue Provider</h1>
+
+
+<p>The following sections describe how to use the Placeholder resolver configuration provider:</p>
+
+<ul>
+<li><a href="#4-2-1-add-nuget-reference">Add NuGet Reference</a></li>
+<li><a href="#4-2-2-add-configuration-provider">Add Configuration Provider</a></li>
+<li><a href="#4-2-3-access-random-value-data">Access Random Value Data</a></li>
+</ul>
+
+<p>You should have a good understanding of how the .NET <a target="_blank" href="https://docs.microsoft.com/en-us/aspnet/core/fundamentals/configuration">Configuration services</a> work before starting to use this provider.</p>
+
+<p>In order to use the Steeltoe RandomValue provider you need to do the following:</p>
+
+<ol>
+<li>Add a NuGet package reference to your project.</li>
+<li>Add the provider to the Configuration Builder.</li>
+<li>Access random values from the <code>IConfiguration</code>.</li>
+</ol>
+
+<blockquote>
+<p>NOTE: Most of the example code in the following sections is based on using Steeltoe in an ASP.NET Core application. If you are developing an ASP.NET 4.x application or a Console based app, see the <a target="_blank" href="https://github.com/SteeltoeOSS/Samples/tree/master/Configuration">other samples</a> for example code you can use.</p>
+</blockquote>
+
+<h3 id="4-2-1-add-nuget-reference">4.2.1 Add NuGet Reference</h3>
+
+<p>To use the provider, you need to add a reference to the appropriate Steeltoe NuGet.</p>
+
+<p>To do this add a <code>PackageReference</code> resembling the following:</p>
+
+<pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
+...
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Extensions.Configuration.RandomValueBase"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.2.0"</span>/&gt;</span>
+...
+<span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
+</code></pre>
+
+<h3 id="4-2-2-add-configuration-provider">4.2.2 Add Configuration Provider</h3>
+
+<p>In order to have the ability to generate random values from the configuration, you need to add the RandomValue generatore provider to the <code>ConfigurationBuilder</code>.  </p>
+
+<p>The following example shows how to add to this:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">using</span> Steeltoe.Extensions.Configuration.RandomValue;
+...
+
+<span class="hljs-keyword">var</span> builder = <span class="hljs-keyword">new</span> ConfigurationBuilder()
+    .SetBasePath(env.ContentRootPath)
+    .AddJsonFile(<span class="hljs-string">"appsettings.json"</span>, optional: <span class="hljs-literal">true</span>, reloadOnChange: <span class="hljs-literal">true</span>)
+    .AddJsonFile(<span class="hljs-string">$"appsettings.<span class="hljs-subst">{env.EnvironmentName}</span>.json"</span>, optional: <span class="hljs-literal">true</span>)
+
+    <span class="hljs-comment">// Add RandomValue generator</span>
+    .AddRandomValueSource();
+Configuration = builder.Build();
+...
+
+</code></pre>
+
+<blockquote>
+<p>NOTE: It if you wish to generate random values as part of using placeholders, then it’s important to add the RandomValue provider to the builder before you add the Placeholder resolver.</p>
+</blockquote>
+
+<h3 id="4-2-3-access-random-value-data">4.2.3 Access Random Value Data</h3>
+
+<p>Once the configuration has been built, the RandomValue generator can be used to generate values.  Simply access the configuration data using the appropriate <code>random</code> keys.</p>
+
+<p>Consider the following <code>HomeController</code>:</p>
+
+<pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">HomeController</span> : <span class="hljs-title">Controller</span>
+{
+    <span class="hljs-keyword">private</span> IConfiguration _config;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HomeController</span>(<span class="hljs-params">IConfiguration config</span>)
+    </span>{
+        _config = config;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IActionResult <span class="hljs-title">Index</span>(<span class="hljs-params"></span>)
+    </span>{
+        ViewData[<span class="hljs-string">"random:int"</span>] = _config[<span class="hljs-string">"random:int"</span>];
+        ViewData[<span class="hljs-string">"random:long"</span>] = _config[<span class="hljs-string">"random:long"</span>];
+        ViewData[<span class="hljs-string">"random:int(10)"</span>] = _config[<span class="hljs-string">"random:int(10)"</span>];
+        ViewData[<span class="hljs-string">"random:long(100)"</span>] = _config[<span class="hljs-string">"random:long(100)"</span>];
+        ViewData[<span class="hljs-string">"random:int(10,20)"</span>] = _config[<span class="hljs-string">"random:int(10,20)"</span>];
+        ViewData[<span class="hljs-string">"random:long(100,200)"</span>] = _config[<span class="hljs-string">"random:long(100,200)"</span>];
+        ViewData[<span class="hljs-string">"random:uuid"</span>] = _config[<span class="hljs-string">"random:uuid"</span>];
+        ViewData[<span class="hljs-string">"random:string"</span>] = _config[<span class="hljs-string">"random:string"</span>];
+        <span class="hljs-keyword">return</span> View();
+    }
+    ...
+}
+</code></pre>
+
+<h1 id="5-0-hosting-extensions">5.0 Hosting Extensions</h1>
+
+<p>Many cloud hosting providers, including Pivotal Cloud Foundry, dynamically provide port numbers at runtime. For ASP.NET Core applications, Steeltoe provides an extension method for <code>IWebHostBuilder</code> named <code>UseCloudFoundryHosting</code> that will automatically use the environment variable <code>PORT</code> (when present) to set the address the application is listening on. This sample illustrates basic usage:</p>
+
+<pre><code class="csharp hljs">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IWebHostBuilder <span class="hljs-title">CreateWebHostBuilder</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>) </span>=&gt;
+            WebHost.CreateDefaultBuilder(args)
+                ...
+                .UseCloudFoundryHosting()
+                ...
+</code></pre>
+
+<p>The extension includes an optional parameter to explicitly set the port, which is particularly useful when you are running multiple services at once on your workstation that will later be deployed to a cloud platform.</p>
+
+<pre><code class="csharp hljs">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IWebHostBuilder <span class="hljs-title">CreateWebHostBuilder</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>) </span>=&gt;
+            WebHost.CreateDefaultBuilder(args)
+                ...
+                .UseCloudFoundryHosting(<span class="hljs-number">5001</span>)
+                ...
+</code></pre>
+
+<blockquote>
+<p>NOTE: As this extension is intended for use on Cloud Foundry, if the ‘PORT’ environment variable is present, it will always override the parameter.</p>
+</blockquote>
+
+<h1 id="common-steps">Common Steps</h1>
+
+<p>This section describes tasks that are common to many of the processes described in this guide.</p>
+
+<h2 id="publish-sample">Publish Sample</h2>
+
+<h3 id="asp-net-core">ASP.NET Core</h3>
+
+<p>Use the <code>dotnet</code> CLI to <a target="_blank" href="https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-publish">build and locally publish</a> the application for the framework and runtime you will deploy the application to:</p>
+
+<ul>
+<li>Linux with .NET Core: <code>dotnet publish -f netcoreapp2.1 -r ubuntu.14.04-x64</code></li>
+<li>Windows with .NET Core: <code>dotnet publish -f netcoreapp2.1 -r win10-x64</code></li>
+<li>Windows with .NET Platform: <code>dotnet publish -f net461 -r win10-x64</code></li>
+</ul>
+
+<blockquote>
+<p>NOTE: Starting with .NET Core 2.0, the <code>dotnet publish</code> command will automatically restore dependencies for you. Running <code>dotnet restore</code> explicitly is not generally required.</p>
+</blockquote>
+
+<h3 id="asp-net-4-x">ASP.NET 4.x</h3>
+
+<ol>
+<li>Open the solution for the sample in Visual Studio</li>
+<li>Right click on the project, select “Publish”</li>
+<li>Use the included <code>FolderProfile</code> to publish to <code>bin/Debug/net461/win10-x64/publish</code></li>
+</ol>
+
+<h2 id="push-sample">Push Sample</h2>
+
+<p>Use the Cloud Foundry CLI to push the published application to Cloud Foundry using the parameters that match what you selected for framework and runtime:</p>
+
+<pre><code class="bash hljs"><span class="hljs-comment"># Push to Linux cell</span>
+cf push <span class="hljs-_">-f</span> manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.14.04-x64/publish
+
+<span class="hljs-comment"># Push to Windows cell, .NET Core</span>
+cf push <span class="hljs-_">-f</span> manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish
+
+<span class="hljs-comment"># Push to Windows cell, .NET Framework</span>
+cf push <span class="hljs-_">-f</span> manifest-windows.yml -p bin/Debug/net461/win10-x64/publish
+</code></pre>
+
+<blockquote>
+<p>NOTE: Manifest file names may vary. Some samples use a different manifest for .NET 4 vs .NET Core.</p>
+</blockquote>
+
+<!-- -->
+
+<blockquote>
+<p>NOTE: All sample manifests have been defined to bind their application to their service(s).</p>
+</blockquote>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+		<script src="/javascripts/vendor/gumshoe.js"></script><script src="/javascripts/vendor/highlight.min.js"></script><script src="/javascripts/vendor/jquery-3.1.1.slim.min.js"></script><script src="/javascripts/vendor/particles.min.js"></script><script src="/javascripts/vendor/smooth-scroll.js"></script><script src="/javascripts/vendor/sticky-kit.min.js"></script><script src="/javascripts/vendor/svg-injector.min.js"></script>
+		<script src="/javascripts/vendor/tocbot.min.js"></script>
+		<script src="/javascripts/all.js"></script>
+    <script src="/javascripts/docs.js"></script>
+    <script>
+      function viewV1(){
+        window.location.href='/1x/steeltoe-configuration/';
+      }
+      //document.getElementById('docselector').style.display = "inline";
+    </script>
+  
+
+</body></html>

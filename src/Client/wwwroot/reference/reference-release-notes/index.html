@@ -1,0 +1,486 @@
+﻿<!DOCTYPE html>
+<!-- saved from url=(0048) -->
+<html class="gr__steeltoe_io">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta content="IE=edge" http-equiv="X-UA-Compatible">
+
+	<meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+
+	<!-- Use title if it's in the page YAML frontmatter -->
+	<link href="images/favicon.png" rel="icon" type="image/png">
+	<link rel="stylesheet" href="/stylesheets/css.css">
+	<link href="/stylesheets/site.css" rel="stylesheet">
+	<link href="/stylesheets/tocbot.css" rel="stylesheet">
+</head>
+
+
+<body class="reference reference_reference-release-notes reference_reference-release-notes_index" data-gr-c-s-loaded="true">
+
+	<div class="max-width-4 mx-auto">
+		<div class="p2">
+			<div class="sm-flex">
+				<div class="col-12 sm-col-3 sm-pr3">
+					
+					<div id="toc" class="">
+						<div class="toc-link border-bottom border-silver js-toc"><ul class="toc-list "><li class="toc-list-item"><a href="#ga-releases" class="toc-link node-name--H1  is-active-link">GA Releases</a><ul class="toc-list  is-collapsible"><li class="toc-list-item"><a href="#2-3-0" class="toc-link node-name--H2 ">2.3.0</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#infrastructure" class="toc-link node-name--H3 ">Infrastructure</a></li><li class="toc-list-item"><a href="#connectors" class="toc-link node-name--H3 ">Connectors</a></li><li class="toc-list-item"><a href="#logging" class="toc-link node-name--H3 ">Logging</a></li><li class="toc-list-item"><a href="#management" class="toc-link node-name--H3 ">Management</a></li><li class="toc-list-item"><a href="#configuration" class="toc-link node-name--H3 ">Configuration</a></li><li class="toc-list-item"><a href="#contributions" class="toc-link node-name--H3 ">Contributions</a></li></ul></li><li class="toc-list-item"><a href="#2-2-0" class="toc-link node-name--H2 ">2.2.0</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#connectors" class="toc-link node-name--H3 ">Connectors</a></li><li class="toc-list-item"><a href="#security" class="toc-link node-name--H3 ">Security</a></li><li class="toc-list-item"><a href="#management" class="toc-link node-name--H3 ">Management</a></li><li class="toc-list-item"><a href="#discovery" class="toc-link node-name--H3 ">Discovery</a></li><li class="toc-list-item"><a href="#configuration" class="toc-link node-name--H3 ">Configuration</a></li><li class="toc-list-item"><a href="#health-contributors" class="toc-link node-name--H3 ">Health Contributors</a></li><li class="toc-list-item"><a href="#load-balancer" class="toc-link node-name--H3 ">Load Balancer</a></li><li class="toc-list-item"><a href="#other-features" class="toc-link node-name--H3 ">Other Features</a></li></ul></li><li class="toc-list-item"><a href="#2-1-0" class="toc-link node-name--H2 ">2.1.0</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#management" class="toc-link node-name--H3 ">Management</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#additional-spring-boot-compatible-actuator-endpoints" class="toc-link node-name--H4 ">Additional Spring Boot-compatible Actuator Endpoints</a></li><li class="toc-list-item"><a href="#out-of-box-health-contributors" class="toc-link node-name--H4 ">Out-of-box Health Contributors</a></li></ul></li><li class="toc-list-item"><a href="#application-metrics" class="toc-link node-name--H3 ">Application Metrics</a></li><li class="toc-list-item"><a href="#distributed-tracing" class="toc-link node-name--H3 ">Distributed Tracing</a></li><li class="toc-list-item"><a href="#asp-net-4-x" class="toc-link node-name--H3 ">ASP.NET 4.x</a></li><li class="toc-list-item"><a href="#net-core-2-1" class="toc-link node-name--H3 ">.NET Core 2.1</a></li></ul></li><li class="toc-list-item"><a href="#2-0-0" class="toc-link node-name--H2 ">2.0.0</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#circuitbreaker" class="toc-link node-name--H3 ">CircuitBreaker</a></li><li class="toc-list-item"><a href="#common" class="toc-link node-name--H3 ">Common</a></li><li class="toc-list-item"><a href="#configuration" class="toc-link node-name--H3 ">Configuration</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#config-server-settings" class="toc-link node-name--H4 ">Config Server Settings</a></li><li class="toc-list-item"><a href="#config-server-vault-support" class="toc-link node-name--H4 ">Config Server Vault support</a></li><li class="toc-list-item"><a href="#known-issues" class="toc-link node-name--H4 ">Known Issues</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#unstructured-data-files" class="toc-link node-name--H5 ">Unstructured data files</a></li><li class="toc-list-item"><a href="#client-decryption-option" class="toc-link node-name--H5 ">Client decryption option</a></li><li class="toc-list-item"><a href="#server-initiated-reload" class="toc-link node-name--H5 ">Server initiated reload</a></li></ul></li></ul></li><li class="toc-list-item"><a href="#connectors" class="toc-link node-name--H3 ">Connectors</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#mysql-connector" class="toc-link node-name--H4 ">MySql Connector</a></li><li class="toc-list-item"><a href="#postgres-connector" class="toc-link node-name--H4 ">Postgres Connector</a></li><li class="toc-list-item"><a href="#rabbitmq-connector" class="toc-link node-name--H4 ">RabbitMQ Connector</a></li><li class="toc-list-item"><a href="#redis-connector" class="toc-link node-name--H4 ">Redis Connector</a></li></ul></li><li class="toc-list-item"><a href="#discovery" class="toc-link node-name--H3 ">Discovery</a><ul class="toc-list  is-collapsible is-collapsed"><li class="toc-list-item"><a href="#eureka-version" class="toc-link node-name--H4 ">Eureka Version</a></li><li class="toc-list-item"><a href="#eureka-aws-support" class="toc-link node-name--H4 ">Eureka AWS Support</a></li><li class="toc-list-item"><a href="#eureka-client-configuration" class="toc-link node-name--H4 ">Eureka Client Configuration</a></li><li class="toc-list-item"><a href="#cloud-foundry-c2c-support" class="toc-link node-name--H4 ">Cloud Foundry C2C Support</a></li></ul></li><li class="toc-list-item"><a href="#logging" class="toc-link node-name--H3 ">Logging</a></li><li class="toc-list-item"><a href="#management" class="toc-link node-name--H3 ">Management</a></li><li class="toc-list-item"><a href="#security" class="toc-link node-name--H3 ">Security</a></li></ul></li></ul></li></ul></div>
+
+					</div>
+				</div>
+				<div class="col-12 sm-col-9 js-toc-content">
+					<h1 class="js-toc-ignore regular">Release Notes</h1>
+					<h1 id="ga-releases">GA Releases</h1>
+
+					<hr>
+
+					<h2 id="2-3-0">2.3.0</h2>
+
+					<ul>
+						<li>RC1 - <a href="https://github.com/SteeltoeOSS/steeltoe/milestone/1?closed=1">Closed issues in RC1</a></li>
+						<li>RC2 - <a href="https://github.com/SteeltoeOSS/steeltoe/milestone/3?closed=1">Closed issues in RC2</a></li>
+						<li>GA - <a href="https://github.com/SteeltoeOSS/steeltoe/milestone/4?closed=1">Closed issues in GA release</a> </li>
+					</ul>
+
+					<p><strong>Notable additions in 2.3.0:</strong></p>
+
+					<h3 id="infrastructure">Infrastructure</h3>
+
+					<ul>
+						<li>Restructure of Github repositories into a single repository: <a href="https://github.com/SteeltoeOSS/steeltoe">Steeltoe Mono Repository</a> </li>
+						<li>
+							Moved all CI/CD to Azure DevOps: <a href="https://dev.azure.com/SteeltoeOSS/Steeltoe">Steeltoe on Azure DevOps</a>
+
+							<ul>
+								<li>Added test coverage monitoring</li>
+								<li>Added code coverage monitoring</li>
+							</ul>
+						</li>
+						<li>
+							Created the <a href="http://github.com/SteeltoeOSS-incubator">Steeltoe Incubator</a>
+
+							<ul>
+								<li>Allows community members to introduce new features, enhancements, and projects to be considered for inclusion in the SteeltoeOSS framework. </li>
+							</ul>
+						</li>
+					</ul>
+
+					<h3 id="connectors">Connectors</h3>
+
+					<ul>
+						<li>New <a href="https://steeltoe.io/docs/steeltoe-connectors/#8-0-apache-geode-gemfire-pivotal-cloud-cache">Apache Geode/GemFire/Pivotal Cloud Cache</a> connector</li>
+						<li>New Oracle Database connector </li>
+						<li>Support for launching CloudFoundry tasks bundles with applications</li>
+						<li>Additional property support for Microsoft SQL Server connection strings</li>
+					</ul>
+
+					<h3 id="logging">Logging</h3>
+
+					<ul>
+						<li>Serilog is now supported</li>
+					</ul>
+
+					<h3 id="management">Management</h3>
+
+					<ul>
+						<li>Added support for <a href="https://steeltoe.io/docs/steeltoe-connectors/#using-asp-net-core-health-checks">ASP.NET Core Community Health Checks</a></li>
+						<li>Added ability to apply EF migrations using <code>cf task</code></li>
+					</ul>
+
+					<h3 id="configuration">Configuration</h3>
+
+					<ul>
+						<li>Added ability to disable vault renewal for config server</li>
+					</ul>
+
+					<h3 id="contributions">Contributions</h3>
+
+					<ul>
+						<li><a href="https://dotnetfoundation.org/projects?searchquery=Steeltoe&amp;type=project">Pivotal Steeltoe team</a></li>
+						<li><a href="https://github.com/macsux">Andrew Stakov</a></li>
+						<li><a href="https://github.com/kishoreallwynraj">@kishoreallwynraj</a></li>
+						<li><a href="https://github.com/kadkins-pivotal">Kendall Adkins</a></li>
+						<li><a href="https://github.com/pengweiqhca">@pengweiqhca</a></li>
+						<li>Everyone that found the time to test and report any issues.<br></li>
+					</ul>
+
+					<h2 id="2-2-0">2.2.0</h2>
+
+					<p><strong>The new features in Steeltoe 2.2.0</strong></p>
+
+					<h3 id="connectors">Connectors</h3>
+
+					<ul>
+						<li>New MongoDB Connector</li>
+					</ul>
+
+					<h3 id="security">Security</h3>
+
+					<ul>
+						<li>OpenIDConnect support added</li>
+						<li>
+							Refactor of .NET Framework Security
+
+							<ul>
+								<li>Separated common components into Base library</li>
+								<li>Enabled HttpClient injection</li>
+							</ul>
+						</li>
+					</ul>
+
+					<h3 id="management">Management</h3>
+
+					<ul>
+						<li>
+							Enhanced support for Spring Boot 2.0 Actuator Endpoints
+
+							<ul>
+								<li>Actuators in Cloud Foundry can be accessed outside cloudfoundry, while also maintaining AppsManager integration</li>
+								<li>Actuators now have default path /actuator when no path is specified</li>
+								<li>Control the exposure level of actuator endpoints</li>
+								<li>Show Details configuration options for the health endpoint (<em>always</em>, <em>never</em>, and <em>when-authorized</em>)</li>
+								<li>Sanitizing of sensitive information from <code>/env</code> actuator endpoint</li>
+							</ul>
+						</li>
+					</ul>
+
+					<h3 id="discovery">Discovery</h3>
+
+					<blockquote>
+						<p>IMPORTANT: The <code>Pivotal.Discovery.*</code> packages have been deprecated in Steeltoe 2.2 and will be removed in a future release.  All functionality provided in those packages has been pushed into the corresponding <code>Steeltoe.Discovery.*</code> packages.</p>
+					</blockquote>
+
+					<ul>
+						<li>
+							Eureka client supports additional HA features
+
+							<ul>
+								<li>Allow multiple Eureka server URLs to be configured</li>
+								<li>Added configurable retry logic when communicating with Eureka servers</li>
+								<li>Added retry/recovery logic during registration or renew failures</li>
+							</ul>
+						</li>
+						<li>Eureka client supports configuring Proxy settings (host, port, username, password)</li>
+						<li>Eureka client supports configuring GZip settings</li>
+						<li>
+							New Eureka based management health check contributors
+
+							<ul>
+								<li>EurekaServerHealthContributor - contributes health of Eureka server connection</li>
+								<li>EurekaApplicationsHealthContributor - contributes health of a configurable list of applications</li>
+							</ul>
+						</li>
+						<li>
+							New Eureka health check handler which computes health of the app based on management health contributor health check
+
+							<ul>
+								<li>Added dynamic updating of the apps health (e.g. UP, DOWN, etc.) in the registry as it changes</li>
+							</ul>
+						</li>
+						<li>
+							Hashicorp Consul supported added
+
+							<ul>
+								<li>Supports common Steeltoe <code>IDiscoveryClient</code> abstraction</li>
+							</ul>
+						</li>
+					</ul>
+
+					<h3 id="configuration">Configuration</h3>
+
+					<blockquote>
+						<p>IMPORTANT: The <code>Pivotal.Extensions.Configuration.ConfigServer*</code> packages have been deprecated in Steeltoe 2.2 and will be removed in a future release.  All functionality provided in those packages has been pushed into the corresponding <code>Steeltoe.Extensions.Configuration.ConfigServer*</code> packages.</p>
+					</blockquote>
+
+					<ul>
+						<li>
+							New <code>Placeholder</code> configuration provider supporting placeholder resolution
+
+							<ul>
+								<li>Use placeholders like <code>${key:key1:key2?default_value}</code> as configuration values</li>
+								<li>Configuration placeholders can be used when configuring Steeltoe components</li>
+							</ul>
+						</li>
+						<li>
+							New <code>RandomValue</code> configuration provider supporting random value generation
+
+							<ul>
+								<li>Use keys like <code>random:int</code>, <code>random:long</code>, <code>random:uuid</code>, <code>random:string</code>, etc. to access random values</li>
+							</ul>
+						</li>
+						<li>New <code>ConfigureCloudFoundryServices&lt;TOption&gt;()</code> Cloud Foundry extension method for binding <code>VCAP_SERVICES</code> configuration data to user defined <code>C#</code> objects</li>
+						<li>
+							Config Server client supports <code>Discovery First</code> configuration
+
+							<ul>
+								<li>Supports basic auth user/pass metadata values used by Spring Cloud Config Server (java)</li>
+							</ul>
+						</li>
+						<li>Config Server client supports HA by allowing multiple config servers URLs to be configured</li>
+						<li>New Config Server management health check contributor</li>
+					</ul>
+
+					<h3 id="health-contributors">Health Contributors</h3>
+
+					<ul>
+						<li>Config Server health contributor</li>
+						<li>Discovery Client health contributor</li>
+					</ul>
+
+					<h3 id="load-balancer">Load Balancer</h3>
+
+					<ul>
+						<li>Client-side load balancer</li>
+						<li>Support for random and round-robin load balancer implementations out-of-the-box</li>
+						<li>API for custom load balancer implementations</li>
+						<li>Integration with Eureka</li>
+					</ul>
+
+					<h3 id="other-features">Other Features</h3>
+
+					<ul>
+						<li>Reference Application <a href="https://github.com/SteeltoeOSS/eShopOnContainers">eShopOnContainers</a> using Steeltoe components</li>
+						<li>Released NuGet packages are now signed</li>
+						<li>All packages include <a href="https://github.com/dotnet/sourcelink">Source Link</a>, with symbols published to the <a href="https://docs.microsoft.com/en-us/nuget/create-packages/symbol-packages-snupkg#nugetorg-symbol-server">NuGet.org symbol server</a></li>
+					</ul>
+
+					<h2 id="2-1-0">2.1.0</h2>
+
+					<p><strong>The new features in Steeltoe 2.1.0</strong></p>
+
+					<ul>
+						<li>Management and Monitoring (M&amp;M’s)</li>
+						<li>ASP.NET 4.x</li>
+						<li>.NET Core &amp; ASP.NET Core 2.1</li>
+					</ul>
+
+					<h3 id="management">Management</h3>
+
+					<p>So what’s new in 2.1 Management?</p>
+
+					<ul>
+						<li>Additional Spring Boot-compatible endpoints</li>
+						<li>Out-of-box health contributors</li>
+						<li>Application metrics</li>
+						<li>Distributed tracing</li>
+					</ul>
+
+					<h4 id="additional-spring-boot-compatible-actuator-endpoints">Additional Spring Boot-compatible Actuator Endpoints</h4>
+
+					<p>In addition to the existing endpoints in 2.0, we’ve added several new ones.  Each one is available as additional REST endpoints you can expose in your applications:</p>
+
+					<ul>
+						<li>/env - returns keys and values from the app configuration.</li>
+						<li>/mappings - returns ASP.NET routes and route templates exposed by the application.</li>
+						<li>/refresh - causes the apps configuration to be reloaded and returned.</li>
+						<li>/metrics - returns current metrics for the app (more on metrics below.)</li>
+					</ul>
+
+					<h4 id="out-of-box-health-contributors">Out-of-box Health Contributors</h4>
+
+					<p>One of the key Spring Boot-compatible Management endpoints provided in Steeltoe 2.0 was ‘/health’. But, in 2.0 we provided a limited number of out-of-the-box contributors to run health checks. While it was fairly easy to write your own, you still had to do the coding yourself.</p>
+
+					<p>So in 2.1 we now include several new contributors which you can easily reference. They include:</p>
+
+					<ul>
+						<li>Redis</li>
+						<li>RabbitMQ</li>
+						<li>MySQL</li>
+						<li>Microsoft SQL Server</li>
+						<li>Postgres</li>
+					</ul>
+
+					<p>Each of these new contributors has been added to the Steeltoe Connectors package. This allows you to easily make use of the corresponding health contributor when using a connector.</p>
+
+					<h3 id="application-metrics">Application Metrics</h3>
+
+					<p>Support for collecting application metrics is completely new this release.  Here’s the functionality implemented so far:</p>
+
+					<ul>
+						<li>We’ve implemented the OpenCensus Stats APIs for instrumentation. You can also use those APIs in your code to collect your own custom metrics.</li>
+						<li>We’ve implemented the OpenCensus Tags APIs for tagging metrics and adding multi-dimensionality to the metrics collected.</li>
+						<li>Collect .NET runtime metrics automatically, for example,, heap, thread, and GC usage. Stay tuned for more enhancements in this area, as we build upon the work Microsoft is doing in this area.</li>
+						<li>Automatically collect ASP.NET metrics, like request counts,  response times, and others. There’s more to come here as well.</li>
+						<li>Automatically collect HttpClient metrics, for example,, request counts, response times, etc.</li>
+						<li>Expose metrics via the Spring Boot compatible REST endpoint  ‘/metrics’ (mentioned earlier.)</li>
+						<li>For Cloud Foundry users, you can export collected metrics to the Loggregator Firehose using Metrics Forwarder. Just as with Java Spring apps, developers can send their .NET apps metrics to any one of several backend services for collection and reporting, for example, PCF Metrics.</li>
+					</ul>
+
+					<h3 id="distributed-tracing">Distributed Tracing</h3>
+
+					<p>Also completely new in 2.1 is distributed tracing support. Here’s what we’re delivering in 2.1:</p>
+
+					<ul>
+						<li>Implemented OpenCensus Trace APIs for instrumenting your code.</li>
+						<li>Instrumented ASP.NET Core so that spans are automatically started, stopped, or joined at common ingress and egress points.</li>
+						<li>Instrumented HttpClient such that traces and spans are joined with already existing spans.</li>
+						<li>Add trace and span IDs to the log messages produced by your app so you can use log correlation by trace ID when diagnosing problems.</li>
+						<li>Automatically propagate trace context (in Zipkin format) to downstream processes or microservices.</li>
+						<li>Provide a Zipkin exporter which you can optionally use to send your captured spans to a backend Zipkin server.</li>
+					</ul>
+
+					<h3 id="asp-net-4-x">ASP.NET 4.x</h3>
+
+					<p>In Steeltoe 2.0, we took first steps to add better 4.x support by enabling the Config Server, Eureka Server, and Connectors to be used within a 4.x application. In 2.1, we have continued that work by adding Steeltoe Security &amp; Management to the list.</p>
+
+					<p>With Steeltoe 2.1, you can easily drop the Management endpoints into a 4.x application. We have implemented the endpoints using both OWIN middleware, and by using an HttpModule. You can pick the method that works best for your app. You can configure or add each endpoint individually, or you can add them all.</p>
+
+					<p>Since Steeltoe 1.0, we have offered two security providers for use in ASP.NET Core applications. With these two providers, you are able to log in to your apps using OAuth 2.0 flows with credentials provided from Cloud Foundry. You’re also able to secure microservice endpoints using JWT tokens also provided by Cloud Foundry.</p>
+
+					<p>With Steeltoe 2.1, we extended that same security functionality to 4.x applications. We support OWIN-based middleware for both MVC and WebAPI-based applications. We also added a Cloud Foundry <code>ServiceAuthorizationManager</code> which can be used in WCF-based applications for securing WCF endpoints.</p>
+
+					<h3 id="net-core-2-1">.NET Core 2.1</h3>
+
+					<p>In addition to supporting .NET Core 2.0, ASP.NET Core 2.0, and .NET 4.6.1+, we are also adding support for .NET Core 2.1 and ASP.NET Core 2.1. Compatibility with .NET Core/ASP.NET core 2.0 in general has been preserved, though you will see a few  <code>Microsoft.Extensions</code> packages (for example: <code>Logging</code>, <code>Options</code>, <code>Configuration</code>) that will update to 2.1. Your ASP.NET Core dependencies should not be impacted.</p>
+
+					<p>One new feature added in Steeltoe 2.1 is dependent on Core 2.1: support for the new <code>HttpClientFactory</code>. We have added a new <code>DelegatingHandler</code> that will carry out service discovery lookups and random load balancing when used with an <code>HttpClient</code>. This functionality is similar to what we already offered in 2.0, but now provides a seamless experience when using the <code>HttpClientFactory</code>.</p>
+
+					<h2 id="2-0-0">2.0.0</h2>
+
+					<p>A large focus of Steeltoe version 2.0 is compatibility with .NET Standard 2.0. As part of this initiative, virtually all packages have been reorganized and renamed to minimize hard dependencies on other libraries and also help differentiate between packages with full-framework support and those for .NET Core. Most Steeltoe libraries now include a package ending with “Base” that provides the majority of the functionality. Packages ending with “Core” provide extra methods for working with Microsoft’s Dependency Injection Framework, with the naming intended to coincide with .NET Core development. Full-framework support to date has been focused on Autofac. The relevant Steeltoe packages have names ending in “Autofac”.</p>
+
+					<h3 id="circuitbreaker">CircuitBreaker</h3>
+
+					<p>As described earlier in the general <a href="#2-0-release-notes">release notes</a>, Steeltoe Circuit breaker packages now have the following names: <code>Steeltoe.CircuitBreaker.HystrixBase</code>, <code>Steeltoe.CircuitBreaker.HystrixCore</code>, <code>Steeltoe.CircuitBreaker.HystrixAutofac</code>, <code>Steeltoe.CircuitBreaker.Hystrix.MetricsEventsCore</code>, and <code>Steeltoe.CircuitBreaker.Hystrix.MetricsStreamCore</code>.</p>
+
+					<h3 id="common">Common</h3>
+
+					<p>New for Steeltoe 2.0 is a set of libraries with code shared between our libraries. You can use this code as well, but these libraries are not likely to receive much attention in this documentation.</p>
+
+					<h3 id="configuration">Configuration</h3>
+
+					<p>In Steeltoe version 1.x, there are 3 packages for Configuration. As of 2.0.0, each of those packages now has a *Base, a *Core, and an *Autofac (for example: <code>Steeltoe.Extensions.Configuration.ConfigServerBase</code>, <code>Steeltoe.Extensions.Configuration.ConfigServerCore</code>, and so on) for a total of 9 packages. If you deploy your application to Pivotal Cloud Foundry, be sure to use the <code>Pivotal.&amp;ast;</code> packages.</p>
+
+					<h4 id="config-server-settings">Config Server Settings</h4>
+
+					<p>Starting with version 1.1.0 of Steeltoe, you can now configure the timeout value the Steeltoe client uses when making Http requests to the Config Server.</p>
+
+					<h4 id="config-server-vault-support">Config Server Vault support</h4>
+
+					<p>Starting with version 1.1.0 of Steeltoe, the Config Server client is compatible with Spring Cloud and Spring Cloud Services Config Server deployments that support using Hashicorp Vault as back-ends.</p>
+
+					<h4 id="known-issues">Known Issues</h4>
+
+					<h5 id="unstructured-data-files">Unstructured data files</h5>
+
+					<p>Unlike the Java version of the Config Server client, the Steeltoe client currently supports only property and yaml files, not plain text.</p>
+
+					<h5 id="client-decryption-option">Client decryption option</h5>
+
+					<p>Unless SSL/TLS is being used between the client and server, the Steeltoe client supports only clear text communication with the configuration server. Client decryption is not currently supported.</p>
+
+					<h5 id="server-initiated-reload">Server initiated reload</h5>
+
+					<p>Currently, the client must initiate reloads. Steeltoe has not implemented handlers to listen for server change events.</p>
+
+					<h3 id="connectors">Connectors</h3>
+
+					<p>As of version 2.0.0, all of the individual connectors have been rolled up into a single package: <code>Steeltoe.CloudFoundry.ConnectorBase</code>. Helper methods for ASP.NET Core/Microsoft DI have been moved to <code>Steeltoe.CloudFoundry.ConnectorCore</code>, <code>Steeltoe.CloudFoundry.Connector.EF6Core</code> (Entity Framework 6), and <code>Steeltoe.CloudFoundry.Connector.EFCore</code> (Entity Framework Core). Version 2.0.0 now includes a Microsoft SQL Server Connector. Classes and namespaces related to RabbitMQ have been renamed from <code>*Rabbit</code> to <code>*RabbitMQ</code>.</p>
+
+					<h4 id="mysql-connector">MySql Connector</h4>
+
+					<p>Starting with version 1.0.1 of Steeltoe, the direct dependency on all of Oracle’s MySql packages has been removed. This change lets the connector become more flexible in terms of which MySql ADO.NET providers and versions it supports. With this release, the connector is able to work with <a href="https://dev.mysql.com/downloads/connector/net/">Oracle’s MySql Provider</a> and the open source <a href="https://mysql-net.github.io/MySqlConnector/">MySqlConnector</a> providers.</p>
+
+					<p>Additionally, as it relates to Entity Framework support, the connector has been updated to support <a href="https://dev.mysql.com/downloads/connector/net/">Oracle’s Entity Framework Provider</a> and the open source <a href="https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql">Pomelo Entity Framework Provider</a>.</p>
+
+					<p>For more detail on how to use these providers, see the MySql connector documentation.</p>
+
+					<blockquote>
+						<p>CAUTION: This is a BREAKING change, as it now requires that you MUST explicitly include the packages and versions of the MySql/Entity framework code you wish to use in your application.</p>
+					</blockquote>
+
+					<h4 id="postgres-connector">Postgres Connector</h4>
+
+					<p>Starting with version 1.0.1 of Steeltoe, the direct dependency on the open source Npgsql package has been removed. This change lets the connector become more flexible in what Postgres ADO.NET providers and versions it supports.</p>
+
+					<p>For more detail on how to use the connector, see the Postgres connectors documentation.</p>
+
+					<blockquote>
+						<p>CAUTION: This is a BREAKING change, as it now requires that you MUST explicitly include the packages and versions of the Postgres/Entity framework code wish to use in your application.</p>
+					</blockquote>
+
+					<h4 id="rabbitmq-connector">RabbitMQ Connector</h4>
+
+					<p>In version 2.0.0, all namespaces, classes and methods with <code>Rabbit</code> in the name were changed to <code>RabbitMQ</code> (for example, <code>AddRabbitConnection()</code> is now <code>AddRabbitMQConnection()</code>)</p>
+
+					<p>Starting with version 1.0.1 of Steeltoe, the direct dependency on the open source RabbitMQ Client package has been removed. This change lets the connector become more flexible in what version of the client it supports.</p>
+
+					<p>For more detail on how to use the connector, see the RabbitMQ connectors documentation.</p>
+
+					<blockquote>
+						<p>CAUTION: This is a BREAKING change, as it now requires that you MUST explicitly include the packages and versions of the RabbitMQ code you wish to use in your application.</p>
+					</blockquote>
+
+					<p>Also, with this release, the connector has been updated to properly work with SSL/TLS based connections. Prior to this release, the connector did not support using the ‘amqps’ URL scheme.</p>
+
+					<h4 id="redis-connector">Redis Connector</h4>
+
+					<p>Starting with version 2.0.0 of Steeltoe, the direct dependencies on Redis packages have been removed. The Steeltoe connector works with the StackExchange libraries or <code>Microsoft.Extensions.Caching.Redis</code>. You include the package and version you prefer and use the appropriate methods to connect it. See the Redis Connector documentation for more information.</p>
+
+					<h3 id="discovery">Discovery</h3>
+
+					<p>In version 1.x of Steeltoe, there were three packages. In version 2.0.0 there are six packages:</p>
+
+					<ul>
+						<li><code>Steeltoe.Discovery.ClientAutofac</code></li>
+						<li><code>Steeltoe.Discovery.ClientCore</code></li>
+						<li><code>Steeltoe.Discovery.Eureka.ClientBase</code></li>
+						<li><code>Pivotal.Discovery.ClientCore</code></li>
+						<li><code>Pivotal.Discovery.ClientAutofac</code></li>
+						<li><code>Pivotal.Discovery.Eureka.ClientBase</code>.</li>
+					</ul>
+
+					<p>Be sure to use the <code>Pivotal.*.*</code> packages if you deploy your application to Pivotal Cloud Foundry. Version 2.0.0 also includes support for dynamic update of configuration options.</p>
+
+					<h4 id="eureka-version">Eureka Version</h4>
+
+					<p>Steeltoe has implemented a <a href="https://github.com/Netflix/eureka/wiki">Eureka 1.0 client</a>, not a 2.0 client. Eureka 2.0 is still a work in progress and is expected to have significant updates to its architecture and public API. At some point in time, we may examine a 2.0 implementation.</p>
+
+					<h4 id="eureka-aws-support">Eureka AWS Support</h4>
+
+					<p>The Eureka client for Java contains features that enable operation on AWS. The Steeltoe version does not currently implement those features. Instead, this version has been optimized for Cloud Foundry environments. We may look at adding AWS cloud features at a future point in time.</p>
+
+					<h4 id="eureka-client-configuration">Eureka Client Configuration</h4>
+
+					<p>Not all configuration properties found in the Java client are available for configuration. Those that are supported and provided by the Steeltoe implementation have been documented in this guide.</p>
+
+					<h4 id="cloud-foundry-c2c-support">Cloud Foundry C2C Support</h4>
+
+					<p>Starting with version 1.1.0 of Steeltoe, the Steeltoe Eureka client lets you configure what hostname/address gets registered with the Eureka server for your service registrations. This feature is provided by using a new setting: <code>spring:cloud:discovery:registrationMethod</code>.  By using this setting, you can now make use of Cloud Foundry Container to Container (C2C) networking support.</p>
+
+					<h3 id="logging">Logging</h3>
+
+					<p>As of version 2.0.0, <code>Steeltoe.Extensions.Logging.CloudFoundry</code> is renamed to <code>Steeltoe.Extensions.Logging.DynamicLogger</code></p>
+
+					<h3 id="management">Management</h3>
+
+					<p>As of version 2.0.0, all of the individual management endpoints have been rolled up into a single package: <code>Steeltoe.Management.EndpointBase</code>. Helper methods for ASP.NET Core/Microsoft DI have been moved to <code>Steeltoe.Management.EndpointCore</code>. Convenience helpers to set up all endpoints at once are available in <code>Steeltoe.Management.CloudFoundryCore</code>. Additionally in 2.0.0, actuators identify themselves to PCF as Steeltoe, resulting in a Steeltoe icon in Pivotal Apps Manager. Also, certificate validation can be disabled on management endpoints.</p>
+
+					<h3 id="security">Security</h3>
+
+					<p>New features for Steeltoe Security 2.0.0 include a client for <a href="https://github.com/cloudfoundry-incubator/credhub">CredHub</a>, support for using Cloud Foundry as an authentication provider in .NET Framework 4.x applications, and a JWT Provider for WCF applications.</p>
+
+					<a class="repo-link" href="https://github.com/steeltoeoss/steeltoe-site/tree/dev/source/reference/reference-release-notes.html.markdown">Create a pull request or raise an issue on the source for this page in GitHub</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="/javascripts/vendor/gumshoe.js"></script>
+	<script src="/javascripts/vendor/highlight.min.js"></script>
+	<script src="/javascripts/vendor/jquery-3.1.1.slim.min.js"></script>
+	<script src="/javascripts/vendor/particles.min.js"></script>
+	<script src="/javascripts/vendor/smooth-scroll.js"></script>
+	<script src="/javascripts/vendor/sticky-kit.min.js"></script>
+	<script src="/javascripts/vendor/svg-injector.min.js"></script>
+	<script src="/javascripts/vendor/tocbot.min.js"></script>
+	<script src="/javascripts/all.js"></script>
+	<script src="/javascripts/docs.js"></script>
+	<script>
+		function viewV1() {
+			window.location.href = '/1x/steeltoe-configuration/';
+		}
+					//document.getElementById('docselector').style.display = "inline";
+	</script>
+
+
+</body>
+</html>

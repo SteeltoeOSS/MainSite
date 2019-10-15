@@ -1,0 +1,28 @@
+﻿
+
+<div>Create a new ASP.NET Core WebAPI app with the <a href="https://start.steeltoe.io" target="_blank">Steeltoe Initializr</a></div>
+<img src="images/initializr/@ImageName" class="img-fluid" />
+<ul>
+	<li><b>SteeltoeVersion:</b> 2.3 for the latest stable</li>
+	<li>
+		<div>Project Metadata:</div>
+		<div class="pl-2"><b>Name:</b> @ProjectName</div>
+		<div class="pl-2"><b>Target Framework:</b> netcoreapp3.0 is the latest stable</div>
+	</li>
+	<li><b>Dependencies:</b> @(string.IsNullOrEmpty(DependencyName) ? "none":DependencyName)</li>
+	<li>Click <b>Generate Project</b> to download a zip containing the new project</li>
+</ul>
+@ChildContent
+
+@code {
+	[Parameter]
+	public string ImageName { get; set; } = "";
+	[Parameter]
+	public string ProjectName { get; set; } = "";
+	[Parameter]
+	public string DependencyName { get; set; } = null;
+
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
+
+}
