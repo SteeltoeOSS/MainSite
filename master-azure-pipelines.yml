@@ -7,8 +7,8 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: git checkout master
-- script: git merge dev
+- script: git checkout origin/master
+- script: git merge origin/dev
 
 - script: dotnet publish './src/Server/Steeltoe.Server.csproj' --output './publish' --configuration Release --framework netcoreapp3.0
 
