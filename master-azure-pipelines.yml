@@ -3,15 +3,13 @@
 # Add steps that run tests, create a NuGet package, deploy, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
-trigger:
-  branches:
-    include:
-      - master
-
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- script: git checkout master
+- script: git merge dev
+
 - script: dotnet publish './src/Server/Steeltoe.Server.csproj' --output './publish' --configuration Release --framework netcoreapp3.0
 
 - task: CopyFiles@2
