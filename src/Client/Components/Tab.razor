@@ -1,5 +1,4 @@
 ﻿@using Steeltoe.Client.UIInterfaces
-@implements IDisposable
 @implements ITab
 
 <li class="nav-item @TitleCssClass">
@@ -23,11 +22,6 @@
     protected override void OnInitialized()
     {
         ContainerTabSet.AddTab(this);
-    }
-
-    public void Dispose()
-    {
-        ContainerTabSet.RemoveTab(this);
     }
 
     private void Activate()
