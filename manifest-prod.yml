@@ -8,5 +8,6 @@ applications:
   routes:
   - route: "steeltoe.io"
   - route: "www.steeltoe.io"
+  - route: "steeltoe-prod.cfapps.io"
   services:
     - "autoscale-steeltoe.io"
