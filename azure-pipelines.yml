@@ -15,6 +15,9 @@ steps:
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
     CleanTargetFolder: true
 
+- script: cp "manifest-staging.yml" "$(Build.ArtifactStagingDirectory)/manifest-staging.yml"
+- script: cp "manifest-prod.yml" "$(Build.ArtifactStagingDirectory)/manifest-prod.yml"
+
 - task: PublishBuildArtifacts@1
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
