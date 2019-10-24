@@ -6,7 +6,7 @@ applications:
   buildpacks:
     - https://github.com/cloudfoundry/dotnet-core-buildpack.git#v2.3.1
   routes:
-  - steeltoe.io
-  - www.steeltoe.io
+    - "steeltoe.io"
+    - "www.steeltoe.io"
   services:
-  - autoscale-steeltoe.io
+    - "autoscale-steeltoe.io"
