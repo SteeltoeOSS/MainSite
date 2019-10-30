@@ -65,7 +65,7 @@
 
 <pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
 ...
-					<span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Extensions.Logging.DynamicLogger"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Extensions.Logging.DynamicLogger"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
 ...
 <span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
 </code></pre>
@@ -81,9 +81,9 @@
 <pre><code class="csharp hljs"><span class="hljs-keyword">using</span> Steeltoe.Extensions.Logging;
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
 {
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>)
     </span>{
-					<span class="hljs-keyword">var</span> host = <span class="hljs-keyword">new</span> WebHostBuilder()
+        <span class="hljs-keyword">var</span> host = <span class="hljs-keyword">new</span> WebHostBuilder()
             .UseKestrel()
             .UseCloudFoundryHosting()
             .UseContentRoot(Directory.GetCurrentDirectory())
@@ -102,7 +102,7 @@
             {
                 loggingBuilder.AddConfiguration(builderContext.Configuration.GetSection(<span class="hljs-string">"Logging"</span>));
 
-					<span class="hljs-comment">// Add Steeltoe Dynamic Logging provider</span>
+                <span class="hljs-comment">// Add Steeltoe Dynamic Logging provider</span>
                 loggingBuilder.AddDynamicConsole();
             })
             .Build();
@@ -140,7 +140,7 @@
 
 <pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
 ...
-					<span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Extensions.Logging.SerilogDynamicLogger"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Extensions.Logging.SerilogDynamicLogger"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
 ...
 <span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
 </code></pre>
@@ -151,29 +151,29 @@
 
 <pre><code class="json hljs">...
 
-					<span class="hljs-string">"Serilog"</span>: {
-					<span class="hljs-attr">"IncludeScopes"</span>: <span class="hljs-literal">false</span>,
-					<span class="hljs-attr">"MinimumLevel"</span>: {
-					<span class="hljs-attr">"LogLevel"</span>: {
-					<span class="hljs-attr">"Default"</span>: <span class="hljs-string">"Warning"</span>,
-					<span class="hljs-attr">"Override"</span>: {
-					<span class="hljs-attr">"Pivotal"</span>: <span class="hljs-string">"Information"</span>,
-					<span class="hljs-attr">"Microsoft"</span>: <span class="hljs-string">"Warning"</span>,
-					<span class="hljs-attr">"Steeltoe"</span>: <span class="hljs-string">"Information"</span>,
-					<span class="hljs-attr">"CloudFoundry.Controllers"</span>: <span class="hljs-string">"Verbose"</span>
+    <span class="hljs-string">"Serilog"</span>: {
+        <span class="hljs-attr">"IncludeScopes"</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">"MinimumLevel"</span>: {
+            <span class="hljs-attr">"LogLevel"</span>: {
+                <span class="hljs-attr">"Default"</span>: <span class="hljs-string">"Warning"</span>,
+                <span class="hljs-attr">"Override"</span>: {
+                    <span class="hljs-attr">"Pivotal"</span>: <span class="hljs-string">"Information"</span>,
+                    <span class="hljs-attr">"Microsoft"</span>: <span class="hljs-string">"Warning"</span>,
+                    <span class="hljs-attr">"Steeltoe"</span>: <span class="hljs-string">"Information"</span>,
+                    <span class="hljs-attr">"CloudFoundry.Controllers"</span>: <span class="hljs-string">"Verbose"</span>
                 }
+            },
+            <span class="hljs-attr">"WriteTo"</span>: [
+                {
+                    <span class="hljs-attr">"Name"</span>: <span class="hljs-string">"Console"</span>,
+                    <span class="hljs-attr">"Args"</span>: {
+                        <span class="hljs-attr">"outputTemplate"</span>: <span class="hljs-string">"[{Timestamp:HH:mm:ss} {Level:u3}] {SourceContext}: {Properties} {NewLine} {EventId} {Message:lj}{NewLine}{Exception}"</span>
+                    }
+                }
+            ],
+            <span class="hljs-attr">"Enrich"</span>: [ <span class="hljs-string">"FromLogContext"</span>, <span class="hljs-string">"WithMachineName"</span>, <span class="hljs-string">"WithThreadId"</span> ]
         },
-					<span class="hljs-attr">"WriteTo"</span>: [
-            {
-					<span class="hljs-attr">"Name"</span>: <span class="hljs-string">"Console"</span>,
-					<span class="hljs-attr">"Args"</span>: {
-					<span class="hljs-attr">"outputTemplate"</span>: <span class="hljs-string">"[{Timestamp:HH:mm:ss} {Level:u3}] {SourceContext}: {Properties} {NewLine} {EventId} {Message:lj}{NewLine}{Exception}"</span>
-                }
-            }
-        ],
-					<span class="hljs-attr">"Enrich"</span>: [ <span class="hljs-string">"FromLogContext"</span>, <span class="hljs-string">"WithMachineName"</span>, <span class="hljs-string">"WithThreadId"</span> ]
     },
-},
 ...
 </code></pre>
 
@@ -184,9 +184,9 @@
 <pre><code class="csharp hljs"><span class="hljs-keyword">using</span> Steeltoe.Extensions.Logging;
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
 {
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>)
     </span>{
-					<span class="hljs-keyword">var</span> host = <span class="hljs-keyword">new</span> WebHostBuilder()
+        <span class="hljs-keyword">var</span> host = <span class="hljs-keyword">new</span> WebHostBuilder()
             .UseKestrel()
             .UseCloudFoundryHosting()
             .UseContentRoot(Directory.GetCurrentDirectory())
@@ -205,7 +205,7 @@
             {
                 loggingBuilder.AddConfiguration(builderContext.Configuration.GetSection(<span class="hljs-string">"Logging"</span>));
 
-					<span class="hljs-comment">// Add Serilog Dynamic Logger </span>
+                <span class="hljs-comment">// Add Serilog Dynamic Logger </span>
                 loggingBuilder.AddSerilogDynamicConsole();
             })
             .Build();

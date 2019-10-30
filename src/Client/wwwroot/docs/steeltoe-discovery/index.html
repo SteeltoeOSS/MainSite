@@ -90,7 +90,7 @@
 
 <pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
 ...
-	<span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Discovery.ClientCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Discovery.ClientCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
 ...
 <span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
 </code></pre>
@@ -105,36 +105,35 @@
 
 					<p>You do these two things in the <code>ConfigureServices()</code> and <code>Configure()</code> methods of the <code>Startup</code> class, as shown in the following example:</p>
 
-<pre><code class="csharp hljs"><span class="hljs-keyword">using</span> Pivotal.Discovery.Client;
-<span class="hljs-comment">// or</span>
+<pre><code class="csharp hljs">
 <span class="hljs-keyword">using</span> Steeltoe.Discovery.Client;
 
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span> {
-...
-	<span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
-	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">...</span>)
-</span>{
-  ...
-}
-		<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
-</span>{
-		<span class="hljs-comment">// Add Steeltoe Discovery Client service</span>
-  services.AddDiscoveryClient(Configuration);
+    ...
+    <span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">...</span>)
+    </span>{
+        ...
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
+    </span>{
+        <span class="hljs-comment">// Add Steeltoe Discovery Client service</span>
+        services.AddDiscoveryClient(Configuration);
 
-		<span class="hljs-comment">// Add framework services.</span>
-  services.AddMvc();
-  ...
-}
-		<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app, ...</span>)
-</span>{
-  ...
-  app.UseStaticFiles();
-  app.UseMvc();
+        <span class="hljs-comment">// Add framework services.</span>
+        services.AddMvc();
+        ...
+    }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app, ...</span>)
+    </span>{
+        ...
+        app.UseStaticFiles();
+        app.UseMvc();
 
-		<span class="hljs-comment">// Use the Steeltoe Discovery Client service</span>
-  app.UseDiscoveryClient();
-}
-...
+        <span class="hljs-comment">// Use the Steeltoe Discovery Client service</span>
+        app.UseDiscoveryClient();
+    }
+    ...
 </code></pre>
 
 					<blockquote>
@@ -165,30 +164,29 @@
 
 					<p>This <code>FortuneService</code> class retrieves fortunes from the Fortune microservice, which is registered under a name of <code>fortuneService</code>:</p>
 
-<pre><code class="csharp hljs"><span class="hljs-keyword">using</span> Pivotal.Discovery.Client;
-<span class="hljs-comment">// or</span>
-<span class="hljs-comment">// using Steeltoe.Discovery.Client;</span>
+<pre><code class="csharp hljs">
+<span class="hljs-keyword">using Steeltoe.Discovery.Client;</span>
 
 ...
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">FortuneService</span> : <span class="hljs-title">IFortuneService</span>
 {
     DiscoveryHttpClientHandler _handler;
-					<span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">string</span> RANDOM_FORTUNE_URL = <span class="hljs-string">"https://fortuneService/api/fortunes/random"</span>;
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FortuneService</span>(<span class="hljs-params">IDiscoveryClient client</span>)
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">string</span> RANDOM_FORTUNE_URL = <span class="hljs-string">"https://fortuneService/api/fortunes/random"</span>;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FortuneService</span>(<span class="hljs-params">IDiscoveryClient client</span>)
     </span>{
         _handler = <span class="hljs-keyword">new</span> DiscoveryHttpClientHandler(client);
     }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task&lt;<span class="hljs-keyword">string</span>&gt; <span class="hljs-title">RandomFortuneAsync</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task&lt;<span class="hljs-keyword">string</span>&gt; <span class="hljs-title">RandomFortuneAsync</span>(<span class="hljs-params"></span>)
     </span>{
-					<span class="hljs-keyword">var</span> client = GetClient();
-					<span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> client.GetStringAsync(RANDOM_FORTUNE_URL);
+        <span class="hljs-keyword">var</span> client = GetClient();
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> client.GetStringAsync(RANDOM_FORTUNE_URL);
     }
-					<span class="hljs-function"><span class="hljs-keyword">private</span> HttpClient <span class="hljs-title">GetClient</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">private</span> HttpClient <span class="hljs-title">GetClient</span>(<span class="hljs-params"></span>)
     </span>{
-					<span class="hljs-comment">// WARNING: do NOT create a new HttpClient for every request in your code</span>
-					<span class="hljs-comment">// -- you may experience socket exhaustion if you do!</span>
-					<span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> HttpClient(_handler, <span class="hljs-literal">false</span>);
-					<span class="hljs-keyword">return</span> client;
+        <span class="hljs-comment">// WARNING: do NOT create a new HttpClient for every request in your code</span>
+        <span class="hljs-comment">// -- you may experience socket exhaustion if you do!</span>
+        <span class="hljs-keyword">var</span> client = <span class="hljs-keyword">new</span> HttpClient(_handler, <span class="hljs-literal">false</span>);
+        <span class="hljs-keyword">return</span> client;
     }
 }
 </code></pre>
@@ -214,20 +212,20 @@
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span>
 {
     ...
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
     </span>{
-      ...
-					<span class="hljs-comment">// Add Steeltoe handler to container (this line can be omitted when using Steeltoe versions &gt;= 2.2.0)</span>
-      services.AddTransient&lt;DiscoveryHttpMessageHandler&gt;();
+        ...
+        <span class="hljs-comment">// Add Steeltoe handler to container (this line can be omitted when using Steeltoe versions &gt;= 2.2.0)</span>
+        services.AddTransient&lt;DiscoveryHttpMessageHandler&gt;();
 
-					<span class="hljs-comment">// Configure HttpClient</span>
-      services.AddHttpClient(<span class="hljs-string">"fortunes"</span>, c =&gt;
-      {
-        c.BaseAddress = <span class="hljs-keyword">new</span> Uri(<span class="hljs-string">"https://fortuneService/api/fortunes/"</span>);
-      })
-      .AddHttpMessageHandler&lt;DiscoveryHttpMessageHandler&gt;()
-      .AddTypedClient&lt;IFortuneService, FortuneService&gt;();
-      ...
+        <span class="hljs-comment">// Configure HttpClient</span>
+        services.AddHttpClient(<span class="hljs-string">"fortunes"</span>, c =&gt;
+        {
+            c.BaseAddress = <span class="hljs-keyword">new</span> Uri(<span class="hljs-string">"https://fortuneService/api/fortunes/"</span>);
+        })
+        .AddHttpMessageHandler&lt;DiscoveryHttpMessageHandler&gt;()
+        .AddTypedClient&lt;IFortuneService, FortuneService&gt;();
+        ...
     }
     ...
 }
@@ -237,15 +235,15 @@
 
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">FortuneService</span> : <span class="hljs-title">IFortuneService</span>
 {
-					<span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">string</span> RANDOM_FORTUNE_URL = <span class="hljs-string">"https://fortuneService/api/fortunes/random"</span>;
-					<span class="hljs-keyword">private</span> HttpClient _client;
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FortuneService</span>(<span class="hljs-params">HttpClient client</span>)
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">string</span> RANDOM_FORTUNE_URL = <span class="hljs-string">"https://fortuneService/api/fortunes/random"</span>;
+    <span class="hljs-keyword">private</span> HttpClient _client;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FortuneService</span>(<span class="hljs-params">HttpClient client</span>)
     </span>{
         _client = client;
     }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task&lt;<span class="hljs-keyword">string</span>&gt; <span class="hljs-title">RandomFortuneAsync</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task&lt;<span class="hljs-keyword">string</span>&gt; <span class="hljs-title">RandomFortuneAsync</span>(<span class="hljs-params"></span>)
     </span>{
-					<span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> _client.GetStringAsync(RANDOM_FORTUNE_URL);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> _client.GetStringAsync(RANDOM_FORTUNE_URL);
     }
 }
 </code></pre>
@@ -285,22 +283,22 @@ IList&lt;<span class="hljs-keyword">string</span>&gt; Services { <span class="hl
 
 <pre><code class="csharp hljs">  <span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">ILoadBalancer</span>
   {
-					<span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
-					<span class="hljs-comment"><span class="hljs-doctag">///</span> Evaluates a Uri for a host name that can be resolved into a service instance</span>
-					<span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
-					<span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name="request"&gt;</span>A Uri containing a service name that can be resolved into one or more service instances<span class="hljs-doctag">&lt;/param&gt;</span></span>
-					<span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;returns&gt;</span>The original Uri, with serviceName replaced by the host:port of a service instance<span class="hljs-doctag">&lt;/returns&gt;</span></span>
-					<span class="hljs-function">Task&lt;Uri&gt; <span class="hljs-title">ResolveServiceInstanceAsync</span>(<span class="hljs-params">Uri request</span>)</span>;
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> Evaluates a Uri for a host name that can be resolved into a service instance</span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name="request"&gt;</span>A Uri containing a service name that can be resolved into one or more service instances<span class="hljs-doctag">&lt;/param&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;returns&gt;</span>The original Uri, with serviceName replaced by the host:port of a service instance<span class="hljs-doctag">&lt;/returns&gt;</span></span>
+        <span class="hljs-function">Task&lt;Uri&gt; <span class="hljs-title">ResolveServiceInstanceAsync</span>(<span class="hljs-params">Uri request</span>)</span>;
 
-					<span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
-					<span class="hljs-comment"><span class="hljs-doctag">///</span> A mechanism for tracking statistics for service instances</span>
-					<span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
-					<span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name="originalUri"&gt;</span>The original request Uri<span class="hljs-doctag">&lt;/param&gt;</span></span>
-					<span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name="resolvedUri"&gt;</span>The Uri resolved by the load balancer<span class="hljs-doctag">&lt;/param&gt;</span></span>
-					<span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name="responseTime"&gt;</span>The amount of time taken for a remote call to complete<span class="hljs-doctag">&lt;/param&gt;</span></span>
-					<span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name="exception"&gt;</span>Any exception called during calls to a resolved service instance<span class="hljs-doctag">&lt;/param&gt;</span></span>
-					<span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;returns&gt;</span>A task<span class="hljs-doctag">&lt;/returns&gt;</span></span>
-					<span class="hljs-function">Task <span class="hljs-title">UpdateStatsAsync</span>(<span class="hljs-params">Uri originalUri, Uri resolvedUri, TimeSpan responseTime, Exception exception</span>)</span>;
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> A mechanism for tracking statistics for service instances</span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name="originalUri"&gt;</span>The original request Uri<span class="hljs-doctag">&lt;/param&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name="resolvedUri"&gt;</span>The Uri resolved by the load balancer<span class="hljs-doctag">&lt;/param&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name="responseTime"&gt;</span>The amount of time taken for a remote call to complete<span class="hljs-doctag">&lt;/param&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;param name="exception"&gt;</span>Any exception called during calls to a resolved service instance<span class="hljs-doctag">&lt;/param&gt;</span></span>
+        <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;returns&gt;</span>A task<span class="hljs-doctag">&lt;/returns&gt;</span></span>
+        <span class="hljs-function">Task <span class="hljs-title">UpdateStatsAsync</span>(<span class="hljs-params">Uri originalUri, Uri resolvedUri, TimeSpan responseTime, Exception exception</span>)</span>;
   }
 </code></pre>
 
@@ -331,12 +329,12 @@ IList&lt;<span class="hljs-keyword">string</span>&gt; Services { <span class="hl
 					<p>The random load balancer can be used with the included <code>HttpClientHandler</code> that works with any <code>ILoadBalancer</code>:</p>
 
 <pre><code class="csharp hljs">  <span class="hljs-keyword">private</span> HttpClient _httpClient;
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FortuneService</span>(<span class="hljs-params">IDiscoveryClient discoveryClient</span>)
-  </span>{
-					<span class="hljs-keyword">var</span> loadBalancer = <span class="hljs-keyword">new</span> RandomLoadBalancer(discoveryClient);
-					<span class="hljs-keyword">var</span> handler = <span class="hljs-keyword">new</span> LoadBalancerHttpClientHandler(loadBalancer);
-      _httpClient = <span class="hljs-keyword">new</span> HttpClient(handler);
-  }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FortuneService</span>(<span class="hljs-params">IDiscoveryClient discoveryClient</span>)
+    </span>{
+        <span class="hljs-keyword">var</span> loadBalancer = <span class="hljs-keyword">new</span> RandomLoadBalancer(discoveryClient);
+        <span class="hljs-keyword">var</span> handler = <span class="hljs-keyword">new</span> LoadBalancerHttpClientHandler(loadBalancer);
+        _httpClient = <span class="hljs-keyword">new</span> HttpClient(handler);
+    }
 </code></pre>
 
 					<h3 id="1-4-3-round-robin-load-balancer">1.4.3 Round Robin Load Balancer</h3>
@@ -360,13 +358,14 @@ IList&lt;<span class="hljs-keyword">string</span>&gt; Services { <span class="hl
 
 					<p>The round robin load balancer can be used with the included <code>HttpClientHandler</code> that works with any <code>ILoadBalancer</code>:</p>
 
-<pre><code class="csharp hljs">  <span class="hljs-keyword">private</span> HttpClient _httpClient;
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FortuneService</span>(<span class="hljs-params">IDiscoveryClient discoveryClient</span>)
-  </span>{
-					<span class="hljs-keyword">var</span> loadBalancer = <span class="hljs-keyword">new</span> RoundRobinLoadBalancer(discoveryClient);
-					<span class="hljs-keyword">var</span> handler = <span class="hljs-keyword">new</span> LoadBalancerHttpClientHandler(loadBalancer);
-      _httpClient = <span class="hljs-keyword">new</span> HttpClient(handler);
-  }
+<pre><code class="csharp hljs">
+    <span class="hljs-keyword">private</span> HttpClient _httpClient;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FortuneService</span>(<span class="hljs-params">IDiscoveryClient discoveryClient</span>)
+    </span>{
+        <span class="hljs-keyword">var</span> loadBalancer = <span class="hljs-keyword">new</span> RoundRobinLoadBalancer(discoveryClient);
+        <span class="hljs-keyword">var</span> handler = <span class="hljs-keyword">new</span> LoadBalancerHttpClientHandler(loadBalancer);
+        _httpClient = <span class="hljs-keyword">new</span> HttpClient(handler);
+    }
 </code></pre>
 
 					<h3 id="1-4-4-custom-iloadbalancer">1.4.4 Custom ILoadBalancer</h3>
@@ -375,23 +374,24 @@ IList&lt;<span class="hljs-keyword">string</span>&gt; Services { <span class="hl
 
 					<p>This example shows a load balancer that would always return the first listed instance, no matter what:</p>
 
-<pre><code class="csharp hljs">  <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> IServiceInstanceProvider _serviceInstanceProvider;
+<pre><code class="csharp hljs">
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> IServiceInstanceProvider _serviceInstanceProvider;
 
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FirstInstanceLoadBalancer</span>(<span class="hljs-params">IServiceInstanceProvider serviceInstanceProvider</span>)
-  </span>{
-      _serviceInstanceProvider = serviceInstanceProvider;
-  }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FirstInstanceLoadBalancer</span>(<span class="hljs-params">IServiceInstanceProvider serviceInstanceProvider</span>)
+    </span>{
+        _serviceInstanceProvider = serviceInstanceProvider;
+    }
 
-					<span class="hljs-function"><span class="hljs-keyword">public</span> Task&lt;Uri&gt; <span class="hljs-title">ResolveServiceInstanceAsync</span>(<span class="hljs-params">Uri request</span>)
-  </span>{
-					<span class="hljs-keyword">var</span> availableServiceInstances = _serviceInstanceProvider.GetInstances(request.Host);
-					<span class="hljs-keyword">return</span> Task.FromResult(<span class="hljs-keyword">new</span> Uri(availableServiceInstances[<span class="hljs-number">0</span>].Uri, request.PathAndQuery));
-  }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Task&lt;Uri&gt; <span class="hljs-title">ResolveServiceInstanceAsync</span>(<span class="hljs-params">Uri request</span>)
+    </span>{
+        <span class="hljs-keyword">var</span> availableServiceInstances = _serviceInstanceProvider.GetInstances(request.Host);
+        <span class="hljs-keyword">return</span> Task.FromResult(<span class="hljs-keyword">new</span> Uri(availableServiceInstances[<span class="hljs-number">0</span>].Uri, request.PathAndQuery));
+    }
 
-					<span class="hljs-function"><span class="hljs-keyword">public</span> Task <span class="hljs-title">UpdateStatsAsync</span>(<span class="hljs-params">Uri originalUri, Uri resolvedUri, TimeSpan responseTime, Exception exception</span>)
-  </span>{
-					<span class="hljs-keyword">return</span> Task.CompletedTask;
-  }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Task <span class="hljs-title">UpdateStatsAsync</span>(<span class="hljs-params">Uri originalUri, Uri resolvedUri, TimeSpan responseTime, Exception exception</span>)
+    </span>{
+        <span class="hljs-keyword">return</span> Task.CompletedTask;
+    }
 </code></pre>
 
 					<h4 id="1-4-4-1-usage-with-httpclientfactory">1.4.4.1 Usage with HttpClientFactory</h4>
@@ -408,13 +408,14 @@ IList&lt;<span class="hljs-keyword">string</span>&gt; Services { <span class="hl
 
 					<p>Additionally, your custom load balancer can also be used with the included <code>HttpClientHandler</code>. Create an instance of your load balancer, pass it to a <code>LoadBalancerHttpClientHandler</code> and create an <code>HttpClient</code> that uses that handler:</p>
 
-<pre><code class="csharp hljs">  <span class="hljs-keyword">private</span> HttpClient _httpClient;
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FortuneService</span>(<span class="hljs-params">IDiscoveryClient discoveryClient</span>)
-  </span>{
-					<span class="hljs-keyword">var</span> loadBalancer = <span class="hljs-keyword">new</span> FirstInstanceLoadBalancer(discoveryClient);
-					<span class="hljs-keyword">var</span> handler = <span class="hljs-keyword">new</span> LoadBalancerHttpClientHandler(loadBalancer);
-      _httpClient = <span class="hljs-keyword">new</span> HttpClient(handler);
-  }
+<pre><code class="csharp hljs">
+    <span class="hljs-keyword">private</span> HttpClient _httpClient;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FortuneService</span>(<span class="hljs-params">IDiscoveryClient discoveryClient</span>)
+    </span>{
+        <span class="hljs-keyword">var</span> loadBalancer = <span class="hljs-keyword">new</span> FirstInstanceLoadBalancer(discoveryClient);
+        <span class="hljs-keyword">var</span> handler = <span class="hljs-keyword">new</span> LoadBalancerHttpClientHandler(loadBalancer);
+        _httpClient = <span class="hljs-keyword">new</span> HttpClient(handler);
+    }
 </code></pre>
 
 					<h2 id="1-5-enable-logging">1.5 Enable Logging</h2>
@@ -424,14 +425,14 @@ IList&lt;<span class="hljs-keyword">string</span>&gt; Services { <span class="hl
 					<p>Here is an example <code>appsettings.json</code> file:</p>
 
 <pre><code class="json hljs">{
-					<span class="hljs-attr">"Logging"</span>: {
-					<span class="hljs-attr">"IncludeScopes"</span>: <span class="hljs-literal">false</span>,
-					<span class="hljs-attr">"LogLevel"</span>: {
-					<span class="hljs-attr">"Default"</span>: <span class="hljs-string">"Warning"</span>,
-					<span class="hljs-attr">"Pivotal"</span>: <span class="hljs-string">"Debug"</span>,
-					<span class="hljs-attr">"Steeltoe"</span>: <span class="hljs-string">"Debug"</span>
-    }
-  },
+    <span class="hljs-attr">"Logging"</span>: {
+        <span class="hljs-attr">"IncludeScopes"</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">"LogLevel"</span>: {
+            <span class="hljs-attr">"Default"</span>: <span class="hljs-string">"Warning"</span>,
+            <span class="hljs-attr">"Pivotal"</span>: <span class="hljs-string">"Debug"</span>,
+            <span class="hljs-attr">"Steeltoe"</span>: <span class="hljs-string">"Debug"</span>
+        }
+    },
   ...
 }
 </code></pre>
@@ -761,14 +762,15 @@ IList&lt;<span class="hljs-keyword">string</span>&gt; Services { <span class="hl
 
 <pre><code class="json hljs">{
 <span class="hljs-attr">"spring"</span>: {
-					<span class="hljs-attr">"application"</span>: {
-					<span class="hljs-attr">"name"</span>: <span class="hljs-string">"fortuneUI"</span>
+    <span class="hljs-attr">"application"</span>:
+    {
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"fortuneUI"</span>
     }
   },
-					<span class="hljs-attr">"eureka"</span>: {
-					<span class="hljs-attr">"client"</span>: {
-					<span class="hljs-attr">"serviceUrl"</span>: <span class="hljs-string">"http://localhost:8761/eureka/"</span>,
-					<span class="hljs-attr">"shouldRegisterWithEureka"</span>: <span class="hljs-literal">false</span>
+<span class="hljs-attr">"eureka"</span>: {
+    <span class="hljs-attr">"client"</span>: {
+        <span class="hljs-attr">"serviceUrl"</span>: <span class="hljs-string">"http://localhost:8761/eureka/"</span>,
+        <span class="hljs-attr">"shouldRegisterWithEureka"</span>: <span class="hljs-literal">false</span>
     }
   }
   ...
@@ -786,20 +788,20 @@ IList&lt;<span class="hljs-keyword">string</span>&gt; Services { <span class="hl
 					<p>The following example shows the clients settings in JSON that are necessary to cause the client to register a service named <code>fortuneService</code> with a Eureka Server at an address of <code>http://localhost:8761/eureka/</code>:</p>
 
 <pre><code class="json hljs">{
-					<span class="hljs-attr">"spring"</span>: {
-					<span class="hljs-attr">"application"</span>: {
-					<span class="hljs-attr">"name"</span>:  <span class="hljs-string">"fortuneService"</span>
-    }
-  },
-					<span class="hljs-attr">"eureka"</span>: {
-					<span class="hljs-attr">"client"</span>: {
-					<span class="hljs-attr">"serviceUrl"</span>: <span class="hljs-string">"http://localhost:8761/eureka/"</span>,
-					<span class="hljs-attr">"shouldFetchRegistry"</span>: <span class="hljs-literal">false</span>
+    <span class="hljs-attr">"spring"</span>: {
+        <span class="hljs-attr">"application"</span>: {
+            <span class="hljs-attr">"name"</span>:  <span class="hljs-string">"fortuneService"</span>
+        }
     },
-					<span class="hljs-attr">"instance"</span>: {
-					<span class="hljs-attr">"port"</span>: <span class="hljs-number">5000</span>
+    <span class="hljs-attr">"eureka"</span>: {
+        <span class="hljs-attr">"client"</span>: {
+            <span class="hljs-attr">"serviceUrl"</span>: <span class="hljs-string">"http://localhost:8761/eureka/"</span>,
+            <span class="hljs-attr">"shouldFetchRegistry"</span>: <span class="hljs-literal">false</span>
+        },
+        <span class="hljs-attr">"instance"</span>: {
+        <span class="hljs-attr">"port"</span>: <span class="hljs-number">5000</span>
+        }
     }
-  }
   ...
 }
 </code></pre>
@@ -834,14 +836,14 @@ cf restage myApp
 					<p>Sometimes, it is desirable to turn on debug logging in the Eureka client. To do that simply add the following to your <code>appsettings.json</code>:</p>
 
 <pre><code class="json hljs">{
-					<span class="hljs-attr">"Logging"</span>: {
-					<span class="hljs-attr">"IncludeScopes"</span>: <span class="hljs-literal">false</span>,
-					<span class="hljs-attr">"LogLevel"</span>: {
-					<span class="hljs-attr">"Default"</span>: <span class="hljs-string">"Information"</span>,
-					<span class="hljs-attr">"Pivotal"</span>: <span class="hljs-string">"Debug"</span>,
-					<span class="hljs-attr">"Steeltoe"</span>:  <span class="hljs-string">"Debug"</span>
+    <span class="hljs-attr">"Logging"</span>: {
+        <span class="hljs-attr">"IncludeScopes"</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">"LogLevel"</span>: {
+            <span class="hljs-attr">"Default"</span>: <span class="hljs-string">"Information"</span>,
+            <span class="hljs-attr">"Pivotal"</span>: <span class="hljs-string">"Debug"</span>,
+            <span class="hljs-attr">"Steeltoe"</span>:  <span class="hljs-string">"Debug"</span>
+        }
     }
-  }
 }
 </code></pre>
 
@@ -1166,14 +1168,14 @@ cf restage myApp
 					<p>Sometimes, it is desirable to turn on debug logging. To do that simply add the following to your <code>appsettings.json</code>:</p>
 
 <pre><code class="json hljs">{
-					<span class="hljs-attr">"Logging"</span>: {
-					<span class="hljs-attr">"IncludeScopes"</span>: <span class="hljs-literal">false</span>,
-					<span class="hljs-attr">"LogLevel"</span>: {
-					<span class="hljs-attr">"Default"</span>: <span class="hljs-string">"Information"</span>,
-					<span class="hljs-attr">"Pivotal"</span>: <span class="hljs-string">"Debug"</span>,
-					<span class="hljs-attr">"Steeltoe"</span>:  <span class="hljs-string">"Debug"</span>
+    <span class="hljs-attr">"Logging"</span>: {
+        <span class="hljs-attr">"IncludeScopes"</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">"LogLevel"</span>: {
+            <span class="hljs-attr">"Default"</span>: <span class="hljs-string">"Information"</span>,
+            <span class="hljs-attr">"Pivotal"</span>: <span class="hljs-string">"Debug"</span>,
+            <span class="hljs-attr">"Steeltoe"</span>:  <span class="hljs-string">"Debug"</span>
+        }
     }
-  }
 }
 </code></pre>
 
@@ -1196,22 +1198,22 @@ cf restage myApp
 					<p>Tags with the form <code>key=value</code> will be split and used as <code>IDictionary</code> keys and values respectively. Tags without the equal sign will be used as both the key and value. You can add metadata with the <code>consul:discovery:tags</code> string array:</p>
 
 <pre><code class="json hljs">{
-					<span class="hljs-attr">"consul"</span>: {
-					<span class="hljs-attr">"discovery"</span>: {
-					<span class="hljs-attr">"tags"</span>: [
-					<span class="hljs-string">"somekey=somevalue"</span>,
-					<span class="hljs-string">"someothervalue"</span>
-      ]
+    <span class="hljs-attr">"consul"</span>: {
+        <span class="hljs-attr">"discovery"</span>: {
+            <span class="hljs-attr">"tags"</span>: [
+                <span class="hljs-string">"somekey=somevalue"</span>,
+                <span class="hljs-string">"someothervalue"</span>
+            ]
+        }
     }
-  }
 }
 </code></pre>
 
 					<p>The above tag list results in metadata that looks like this:</p>
 
 <pre><code class="json hljs">{
-					<span class="hljs-attr">"somekey"</span>: <span class="hljs-string">"somevalue"</span>,
-					<span class="hljs-attr">"someothervalue"</span>: <span class="hljs-string">"someothervalue"</span>
+    <span class="hljs-attr">"somekey"</span>: <span class="hljs-string">"somevalue"</span>,
+    <span class="hljs-attr">"someothervalue"</span>: <span class="hljs-string">"someothervalue"</span>
 }
 </code></pre>
 
@@ -1283,20 +1285,20 @@ cf push <span class="hljs-_">-f</span> manifest-windows.yml -p bin/Debug/net461/
 
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span> {
     ...
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IWebHost <span class="hljs-title">BuildWebHost</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IWebHost <span class="hljs-title">BuildWebHost</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>)
     </span>{
-					<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> WebHostBuilder()
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> WebHostBuilder()
             ...
             .UseCloudFoundryHosting()
             ...
             .ConfigureAppConfiguration((builderContext, configBuilder) =&gt;
             {
-					<span class="hljs-keyword">var</span> env = builderContext.HostingEnvironment;
+                <span class="hljs-keyword">var</span> env = builderContext.HostingEnvironment;
                 configBuilder.SetBasePath(env.ContentRootPath)
                     .AddJsonFile(<span class="hljs-string">"appsettings.json"</span>, optional: <span class="hljs-literal">true</span>, reloadOnChange: <span class="hljs-literal">true</span>)
                     .AddJsonFile(<span class="hljs-string">$"appsettings.<span class="hljs-subst">{env.EnvironmentName}</span>.json"</span>, optional: <span class="hljs-literal">true</span>)
                     .AddEnvironmentVariables()
-					<span class="hljs-comment">// Add to configuration the Cloudfoundry VCAP settings</span>
+                    <span class="hljs-comment">// Add to configuration the Cloudfoundry VCAP settings</span>
                     .AddCloudFoundry();
             })
             .Build();
