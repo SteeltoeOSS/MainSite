@@ -97,7 +97,7 @@
 
 <pre><code class="csharp hljs"><span class="hljs-keyword">using</span> (<span class="hljs-keyword">new</span> WindowsNetworkFileShare(<span class="hljs-string">@"\\server\path"</span>, <span class="hljs-keyword">new</span> System.Net.NetworkCredential(<span class="hljs-string">"username"</span>, <span class="hljs-string">"password"</span>)))
 {
-					<span class="hljs-comment">// Interact with an attached network share here</span>
+    <span class="hljs-comment">// Interact with an attached network share here</span>
 }
 </code></pre>
 
@@ -113,15 +113,15 @@
 
 <pre><code class="csharp hljs"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">SomeClassConstructor</span>(<span class="hljs-params">IOptions&lt;CloudFoundryServicesOptions&gt; serviceOptions</span>)
 </span>{
-					<span class="hljs-keyword">var</span> userName = serviceOptions.Services[<span class="hljs-string">"credhub"</span>]
+    <span class="hljs-keyword">var</span> userName = serviceOptions.Services[<span class="hljs-string">"credhub"</span>]
        .First(q =&gt; q.Name.Equals(<span class="hljs-string">"my-network-share"</span>))
        .Credentials[<span class="hljs-string">"share-username"</span>].Value;
-					<span class="hljs-keyword">var</span> password = serviceOptions.Services[<span class="hljs-string">"credhub"</span>]
+    <span class="hljs-keyword">var</span> password = serviceOptions.Services[<span class="hljs-string">"credhub"</span>]
        .First(q =&gt; q.Name.Equals(<span class="hljs-string">"my-network-share"</span>))
        .Credentials[<span class="hljs-string">"share-password"</span>].Value;
 
-					<span class="hljs-comment">// create credential object to pass to WindowsNetworkFileShare</span>
-					<span class="hljs-keyword">var</span> _shareCredential = <span class="hljs-keyword">new</span> NetworkCredential(userName, password);
+    <span class="hljs-comment">// create credential object to pass to WindowsNetworkFileShare</span>
+    <span class="hljs-keyword">var</span> _shareCredential = <span class="hljs-keyword">new</span> NetworkCredential(userName, password);
 }
 </code></pre>
 
