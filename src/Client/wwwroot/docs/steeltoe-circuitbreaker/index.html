@@ -111,7 +111,7 @@
 
 <pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
 ...
-					<span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.CircuitBreaker.HystrixCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.CircuitBreaker.HystrixCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
 ...
 <span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
 </code></pre>
@@ -122,7 +122,7 @@
 
 <pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
 ...
-					<span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.CircuitBreaker.Hystrix.MetricsEventsCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.CircuitBreaker.Hystrix.MetricsEventsCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
 ...
 <span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
 </code></pre>
@@ -157,8 +157,8 @@
 
 <pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
 ...
-					<span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.CircuitBreaker.Hystrix.MetricsStreamCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
-					<span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"RabbitMQ.Client"</span> <span class="hljs-attr">Version</span>=<span class="hljs-string">"5.0.1"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.CircuitBreaker.Hystrix.MetricsStreamCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"RabbitMQ.Client"</span> <span class="hljs-attr">Version</span>=<span class="hljs-string">"5.0.1"</span> /&gt;</span>
 ...
 <span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
 </code></pre>
@@ -169,7 +169,7 @@
 
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">HelloWorldCommand</span> : <span class="hljs-title">HystrixCommand</span>&lt;<span class="hljs-title">string</span>&gt;
 {
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HelloWorldCommand</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> name</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HelloWorldCommand</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> name</span>)
         : <span class="hljs-title">base</span>(<span class="hljs-params">HystrixCommandGroupKeyDefault.AsKey(<span class="hljs-string">"HelloWorldGroup"</span></span>),
                 (<span class="hljs-params"></span>) </span>=&gt; { <span class="hljs-keyword">return</span> <span class="hljs-string">"Hello"</span> + name; },
                 () =&gt; { <span class="hljs-keyword">return</span> <span class="hljs-string">"Hello"</span> + name + <span class="hljs-string">" via fallback"</span>; })
@@ -188,20 +188,21 @@
 
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">HelloWorldCommand</span> : <span class="hljs-title">HystrixCommand</span>&lt;<span class="hljs-title">string</span>&gt;
 {
-					<span class="hljs-keyword">private</span> <span class="hljs-keyword">string</span> _name;
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HelloWorldCommand</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> name</span>)
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">string</span> _name;
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HelloWorldCommand</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> name</span>)
         : <span class="hljs-title">base</span>(<span class="hljs-params">HystrixCommandGroupKeyDefault.AsKey(<span class="hljs-string">"HelloWorldGroup"</span></span>))
     </span>{
         _name = name;
     }
 
-					<span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">async</span> Task&lt;<span class="hljs-keyword">string</span>&gt; <span class="hljs-title">RunAsync</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">async</span> Task&lt;<span class="hljs-keyword">string</span>&gt; <span class="hljs-title">RunAsync</span>(<span class="hljs-params"></span>)
     </span>{
-					<span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> Task.FromResult(<span class="hljs-string">"Hello"</span> + _name);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> Task.FromResult(<span class="hljs-string">"Hello"</span> + _name);
     }
-					<span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">async</span> Task&lt;<span class="hljs-keyword">string</span>&gt; <span class="hljs-title">RunFallbackAsync</span>(<span class="hljs-params"></span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">async</span> Task&lt;<span class="hljs-keyword">string</span>&gt; <span class="hljs-title">RunFallbackAsync</span>(<span class="hljs-params"></span>)
     </span>{
-					<span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> Task.FromResult(<span class="hljs-string">"Hello"</span> + _name + <span class="hljs-string">" via fallback"</span>);
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> Task.FromResult(<span class="hljs-string">"Hello"</span> + _name + <span class="hljs-string">" via fallback"</span>);
     }
 }
 </code></pre>
@@ -733,25 +734,25 @@
 					<p>The following example shows some Hystrix settings in JSON that configure the <code>FortuneService</code> command to use a thread pool with a name of <code>FortuneServiceTPool</code>.</p>
 
 <pre><code class="json hljs">{
-					<span class="hljs-attr">"spring"</span>: {
-					<span class="hljs-attr">"application"</span>: {
-					<span class="hljs-attr">"name"</span>: <span class="hljs-string">"fortuneui"</span>
+    <span class="hljs-attr">"spring"</span>: {
+        <span class="hljs-attr">"application"</span>: {
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"fortuneui"</span>
+        }
+    },
+    <span class="hljs-attr">"eureka"</span>: {
+        <span class="hljs-attr">"client"</span>: {
+            <span class="hljs-attr">"serviceUrl"</span>: <span class="hljs-string">"http://localhost:8761/eureka/"</span>,
+            <span class="hljs-attr">"shouldRegisterWithEureka"</span>: <span class="hljs-literal">false</span>
+        }
+    },
+    <span class="hljs-attr">"hystrix"</span>: {
+        <span class="hljs-attr">"command"</span>: {
+            <span class="hljs-attr">"FortuneService"</span>: {
+                <span class="hljs-attr">"threadPoolKeyOverride"</span>: <span class="hljs-string">"FortuneServiceTPool"</span>
+            }
+        }
     }
-  },
-					<span class="hljs-attr">"eureka"</span>: {
-					<span class="hljs-attr">"client"</span>: {
-					<span class="hljs-attr">"serviceUrl"</span>: <span class="hljs-string">"http://localhost:8761/eureka/"</span>,
-					<span class="hljs-attr">"shouldRegisterWithEureka"</span>: <span class="hljs-literal">false</span>
-    }
-  },
-					<span class="hljs-attr">"hystrix"</span>: {
-					<span class="hljs-attr">"command"</span>: {
-					<span class="hljs-attr">"FortuneService"</span>: {
-					<span class="hljs-attr">"threadPoolKeyOverride"</span>: <span class="hljs-string">"FortuneServiceTPool"</span>
-      }
-    }
-  }
-  ...
+    ...
 }
 </code></pre>
 
@@ -771,20 +772,22 @@
 
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span> {
     ...
-					<span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
+    <span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
     </span>{
       Configuration = configuration;
     }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
     </span>{
-					<span class="hljs-comment">// Add Steeltoe Discovery Client service</span>
+        <span class="hljs-comment">// Add Steeltoe Discovery Client service</span>
         services.AddDiscoveryClient(Configuration);
 
-					<span class="hljs-comment">// Add Hystrix command FortuneService to Hystrix group "FortuneService"</span>
+        <span class="hljs-comment">// Add Hystrix command FortuneService to Hystrix group "FortuneService"</span>
         services.AddHystrixCommand&lt;FortuneServiceCommand&gt;(<span class="hljs-string">"FortuneService"</span>, Configuration);
 
-					<span class="hljs-comment">// Add framework services.</span>
+        <span class="hljs-comment">// Add framework services.</span>
         services.AddMvc();
         ...
     }
@@ -800,7 +803,7 @@
     IFortuneService _fortuneService;
     ILogger&lt;FortuneServiceCommand&gt; _logger;
 
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FortuneServiceCommand</span>(<span class="hljs-params">IHystrixCommandOptions options,
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FortuneServiceCommand</span>(<span class="hljs-params">IHystrixCommandOptions options,
         IFortuneService fortuneService, ILogger&lt;FortuneServiceCommand&gt; logger</span>) : <span class="hljs-title">base</span>(<span class="hljs-params">options</span>)
     </span>{
         _fortuneService = fortuneService;
@@ -824,23 +827,21 @@
 {
     FortuneServiceCommand _fortuneServiceCommand;
 
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HomeController</span>(<span class="hljs-params">FortuneServiceCommand fortuneServiceCommand</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HomeController</span>(<span class="hljs-params">FortuneServiceCommand fortuneServiceCommand</span>)
     </span>{
         _fortuneServiceCommand = fortuneServiceCommand;
     }
 
     [HttpGet(<span class="hljs-string">"random"</span>)]
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task&lt;Fortune&gt; <span class="hljs-title">Random</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task&lt;Fortune&gt; <span class="hljs-title">Random</span>(<span class="hljs-params"></span>)
     </span>{
-					<span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> _fortuneServiceCommand.RandomFortuneAsync();
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> _fortuneServiceCommand.RandomFortuneAsync();
     }
 
     [HttpGet]
-					<span class="hljs-function"><span class="hljs-keyword">public</span> IActionResult <span class="hljs-title">Index</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IActionResult <span class="hljs-title">Index</span>(<span class="hljs-params"></span>)
     </span>{
-					<span class="hljs-keyword">return</span> View();
-    }
-
+        <span class="hljs-keyword">return</span> View();
     }
 }
 </code></pre>
@@ -854,28 +855,28 @@
     IFortuneService _fortuneService;
     ILogger&lt;FortuneServiceCommand&gt; _logger;
 
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FortuneServiceCommand</span>(<span class="hljs-params">IHystrixCommandOptions options,
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FortuneServiceCommand</span>(<span class="hljs-params">IHystrixCommandOptions options,
         IFortuneService fortuneService, ILogger&lt;FortuneServiceCommand&gt; logger</span>) : <span class="hljs-title">base</span>(<span class="hljs-params">options</span>)
     </span>{
         _fortuneService = fortuneService;
         _logger = logger;
         IsFallbackUserDefined = <span class="hljs-literal">true</span>;
     }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task&lt;Fortune&gt; <span class="hljs-title">RandomFortuneAsync</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task&lt;Fortune&gt; <span class="hljs-title">RandomFortuneAsync</span>(<span class="hljs-params"></span>)
     </span>{
-					<span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> ExecuteAsync();
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> ExecuteAsync();
     }
-					<span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">async</span> Task&lt;Fortune&gt; <span class="hljs-title">RunAsync</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">async</span> Task&lt;Fortune&gt; <span class="hljs-title">RunAsync</span>(<span class="hljs-params"></span>)
     </span>{
-					<span class="hljs-keyword">var</span> result = <span class="hljs-keyword">await</span> _fortuneService.RandomFortuneAsync();
+        <span class="hljs-keyword">var</span> result = <span class="hljs-keyword">await</span> _fortuneService.RandomFortuneAsync();
         _logger.LogInformation(<span class="hljs-string">"Run: {0}"</span>, result);
-					<span class="hljs-keyword">return</span> result;
+        <span class="hljs-keyword">return</span> result;
     }
 
-					<span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">async</span> Task&lt;Fortune&gt; <span class="hljs-title">RunFallbackAsync</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">async</span> Task&lt;Fortune&gt; <span class="hljs-title">RunFallbackAsync</span>(<span class="hljs-params"></span>)
     </span>{
         _logger.LogInformation(<span class="hljs-string">"RunFallback"</span>);
-					<span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> Task.FromResult&lt;Fortune&gt;(<span class="hljs-keyword">new</span> Fortune() { Id = <span class="hljs-number">9999</span>, Text = <span class="hljs-string">"You will have a happy day!"</span> });
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">await</span> Task.FromResult&lt;Fortune&gt;(<span class="hljs-keyword">new</span> Fortune() { Id = <span class="hljs-number">9999</span>, Text = <span class="hljs-string">"You will have a happy day!"</span> });
     }
 }
 </code></pre>
@@ -938,20 +939,20 @@ IDisposable subscription = cold.Subscribe((result) =&gt; { Console.WriteLine(res
 
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span> {
     ...
-					<span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
+    <span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
     </span>{
       Configuration = configuration;
     }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
     </span>{
-					<span class="hljs-comment">// Add Steeltoe Discovery Client service</span>
+        <span class="hljs-comment">// Add Steeltoe Discovery Client service</span>
         services.AddDiscoveryClient(Configuration);
 
-					<span class="hljs-comment">// Add Hystrix collapser to the service container</span>
+        <span class="hljs-comment">// Add Hystrix collapser to the service container</span>
         services.AddHystrixCollapser&lt;FortuneServiceCollapser&gt;(<span class="hljs-string">"FortuneServiceCollapser"</span>, Configuration);
 
-					<span class="hljs-comment">// Add framework services.</span>
+        <span class="hljs-comment">// Add framework services.</span>
         services.AddMvc();
         ...
     }
@@ -969,7 +970,7 @@ IDisposable subscription = cold.Subscribe((result) =&gt; { Console.WriteLine(res
     ILoggerFactory _loggerFactory;
     IFortuneService _fortuneService;
 
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FortuneServiceCollapser</span>(<span class="hljs-params">IHystrixCollapserOptions options,
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FortuneServiceCollapser</span>(<span class="hljs-params">IHystrixCollapserOptions options,
         IFortuneService fortuneService, ILoggerFactory logFactory</span>) : <span class="hljs-title">base</span>(<span class="hljs-params">options</span>)
     </span>{
         _logger = logFactory.CreateLogger&lt;FortuneServiceCollapser&gt;();
@@ -993,30 +994,30 @@ IDisposable subscription = cold.Subscribe((result) =&gt; { Console.WriteLine(res
 {
     FortuneServiceCollapser _fortuneService;
 
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HomeController</span>(<span class="hljs-params">FortuneServiceCollapser fortuneService</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">HomeController</span>(<span class="hljs-params">FortuneServiceCollapser fortuneService</span>)
     </span>{
         _fortuneService = fortuneService;
     }
 
     [HttpGet(<span class="hljs-string">"random"</span>)]
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task&lt;Fortune&gt; <span class="hljs-title">Random</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">async</span> Task&lt;Fortune&gt; <span class="hljs-title">Random</span>(<span class="hljs-params"></span>)
     </span>{
-					<span class="hljs-comment">// Fortune IDs are 1000-1049</span>
-					<span class="hljs-keyword">int</span> id = random.Next(<span class="hljs-number">50</span>) + <span class="hljs-number">1000</span>;
-					<span class="hljs-keyword">return</span> GetFortuneById(id);
+        <span class="hljs-comment">// Fortune IDs are 1000-1049</span>
+        <span class="hljs-keyword">int</span> id = random.Next(<span class="hljs-number">50</span>) + <span class="hljs-number">1000</span>;
+        <span class="hljs-keyword">return</span> GetFortuneById(id);
     }
 
     [HttpGet]
-					<span class="hljs-function"><span class="hljs-keyword">public</span> IActionResult <span class="hljs-title">Index</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IActionResult <span class="hljs-title">Index</span>(<span class="hljs-params"></span>)
     </span>{
-					<span class="hljs-keyword">return</span> View();
+        <span class="hljs-keyword">return</span> View();
     }
 
-					<span class="hljs-function"><span class="hljs-keyword">protected</span> Task&lt;Fortune&gt; <span class="hljs-title">GetFortuneById</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> id</span>)
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> Task&lt;Fortune&gt; <span class="hljs-title">GetFortuneById</span>(<span class="hljs-params"><span class="hljs-keyword">int</span> id</span>)
     </span>{
-					<span class="hljs-comment">// Use the FortuneServiceCollapser to obtain a Fortune by its Fortune Id</span>
+        <span class="hljs-comment">// Use the FortuneServiceCollapser to obtain a Fortune by its Fortune Id</span>
         _fortuneService.FortuneId = id;
-					<span class="hljs-keyword">return</span> _fortuneService.ExecuteAsync();
+        <span class="hljs-keyword">return</span> _fortuneService.ExecuteAsync();
     }
 
 }
@@ -1032,7 +1033,7 @@ IDisposable subscription = cold.Subscribe((result) =&gt; { Console.WriteLine(res
     ILoggerFactory _loggerFactory;
     IFortuneService _fortuneService;
 
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FortuneServiceCollapser</span>(<span class="hljs-params">IHystrixCollapserOptions options,
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">FortuneServiceCollapser</span>(<span class="hljs-params">IHystrixCollapserOptions options,
         IFortuneService fortuneService, ILoggerFactory logFactory</span>) : <span class="hljs-title">base</span>(<span class="hljs-params">options</span>)
     </span>{
         _logger = logFactory.CreateLogger&lt;FortuneServiceCollapser&gt;();
@@ -1040,27 +1041,27 @@ IDisposable subscription = cold.Subscribe((result) =&gt; { Console.WriteLine(res
         _fortuneService = fortuneService;
     }
 
-					<span class="hljs-keyword">public</span> <span class="hljs-keyword">virtual</span> <span class="hljs-keyword">int</span> FortuneId { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">virtual</span> <span class="hljs-keyword">int</span> FortuneId { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
 
-					<span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">int</span> RequestArgument { <span class="hljs-keyword">get</span> { <span class="hljs-keyword">return</span> FortuneId; } }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">int</span> RequestArgument { <span class="hljs-keyword">get</span> { <span class="hljs-keyword">return</span> FortuneId; } }
 
-					<span class="hljs-keyword">protected</span> <span class="hljs-keyword">override</span> HystrixCommand&lt;List&lt;Fortune&gt;&gt; CreateCommand(ICollection&lt;ICollapsedRequest&lt;Fortune, <span class="hljs-keyword">int</span>&gt;&gt; requests)
+    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">override</span> HystrixCommand&lt;List&lt;Fortune&gt;&gt; CreateCommand(ICollection&lt;ICollapsedRequest&lt;Fortune, <span class="hljs-keyword">int</span>&gt;&gt; requests)
     {
         _logger.LogInformation(<span class="hljs-string">"Creating MultiFortuneServiceCommand to handle {0} number of requests"</span>, requests.Count);
-					<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MultiFortuneServiceCommand(
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> MultiFortuneServiceCommand(
             HystrixCommandGroupKeyDefault.AsKey(<span class="hljs-string">"MultiFortuneService"</span>),
             requests,
             _fortuneService,
             _loggerFactory.CreateLogger&lt;MultiFortuneServiceCommand&gt;());
     }
 
-					<span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">MapResponseToRequests</span>(<span class="hljs-params">List&lt;Fortune&gt; batchResponse, ICollection&lt;ICollapsedRequest&lt;Fortune, <span class="hljs-keyword">int</span>&gt;&gt; requests</span>)
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">MapResponseToRequests</span>(<span class="hljs-params">List&lt;Fortune&gt; batchResponse, ICollection&lt;ICollapsedRequest&lt;Fortune, <span class="hljs-keyword">int</span>&gt;&gt; requests</span>)
     </span>{
-					<span class="hljs-keyword">foreach</span>(<span class="hljs-keyword">var</span> f <span class="hljs-keyword">in</span> batchResponse)
+        <span class="hljs-keyword">foreach</span>(<span class="hljs-keyword">var</span> f <span class="hljs-keyword">in</span> batchResponse)
         {
-					<span class="hljs-keyword">foreach</span>(<span class="hljs-keyword">var</span> r <span class="hljs-keyword">in</span> requests)
+            <span class="hljs-keyword">foreach</span>(<span class="hljs-keyword">var</span> r <span class="hljs-keyword">in</span> requests)
             {
-					<span class="hljs-keyword">if</span> (r.Argument == f.Id)
+                <span class="hljs-keyword">if</span> (r.Argument == f.Id)
                 {
                     r.Response = f;
                 }
@@ -1138,23 +1139,23 @@ IDisposable subscription = cold.Subscribe((result) =&gt; { Console.WriteLine(res
 
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span> {
     ...
-					<span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
+    <span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
     </span>{
-      Configuration = configuration;
+        Configuration = configuration;
     }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
     </span>{
-					<span class="hljs-comment">// Add Steeltoe Discovery Client service</span>
+        <span class="hljs-comment">// Add Steeltoe Discovery Client service</span>
         services.AddDiscoveryClient(Configuration);
 
-					<span class="hljs-comment">// Add Hystrix command FortuneService to Hystrix group "FortuneServices"</span>
+        <span class="hljs-comment">// Add Hystrix command FortuneService to Hystrix group "FortuneServices"</span>
         services.AddHystrixCommand&lt;IFortuneService, FortuneService&gt;(<span class="hljs-string">"FortuneServices"</span>, Configuration);
 
-					<span class="hljs-comment">// Add framework services.</span>
+        <span class="hljs-comment">// Add framework services.</span>
         services.AddMvc();
 
-					<span class="hljs-comment">// Add Hystrix Metrics to container</span>
+        <span class="hljs-comment">// Add Hystrix Metrics to container</span>
         services.AddHystrixMetricsStream(Configuration);
         ...
     }
@@ -1171,25 +1172,25 @@ IDisposable subscription = cold.Subscribe((result) =&gt; { Console.WriteLine(res
 
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span> {
     ...
-					<span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
+    <span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
     </span>{
-      Configuration = configuration;
+        Configuration = configuration;
     }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
     </span>{
         ...
     }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app</span>)
     </span>{
         app.UseStaticFiles();
 
-					<span class="hljs-comment">// Use Hystrix Request contexts</span>
+        <span class="hljs-comment">// Use Hystrix Request contexts</span>
         app.UseHystrixRequestContext();
 
         app.UseMvc();
 
-					<span class="hljs-comment">// Start Hystrix metrics stream service</span>
+        <span class="hljs-comment">// Start Hystrix metrics stream service</span>
         app.UseHystrixMetricsStream();
     }
     ...
@@ -1287,20 +1288,20 @@ cf push <span class="hljs-_">-f</span> manifest-windows.yml -p bin/Debug/net461/
 
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span> {
     ...
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IWebHost <span class="hljs-title">BuildWebHost</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IWebHost <span class="hljs-title">BuildWebHost</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>)
     </span>{
-					<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> WebHostBuilder()
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> WebHostBuilder()
             ...
             .UseCloudFoundryHosting()
             ...
             .ConfigureAppConfiguration((builderContext, configBuilder) =&gt;
             {
-					<span class="hljs-keyword">var</span> env = builderContext.HostingEnvironment;
+                <span class="hljs-keyword">var</span> env = builderContext.HostingEnvironment;
                 configBuilder.SetBasePath(env.ContentRootPath)
                     .AddJsonFile(<span class="hljs-string">"appsettings.json"</span>, optional: <span class="hljs-literal">true</span>, reloadOnChange: <span class="hljs-literal">true</span>)
                     .AddJsonFile(<span class="hljs-string">$"appsettings.<span class="hljs-subst">{env.EnvironmentName}</span>.json"</span>, optional: <span class="hljs-literal">true</span>)
                     .AddEnvironmentVariables()
-					<span class="hljs-comment">// Add to configuration the Cloudfoundry VCAP settings</span>
+                    <span class="hljs-comment">// Add to configuration the Cloudfoundry VCAP settings</span>
                     .AddCloudFoundry();
             })
             .Build();

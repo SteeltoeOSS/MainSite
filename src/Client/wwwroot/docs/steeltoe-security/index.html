@@ -73,7 +73,7 @@
 
 <pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
 ...
-					<span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Security.Authentication.CloudFoundryCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Security.Authentication.CloudFoundryCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
 ...
 <span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
 </code></pre>
@@ -83,13 +83,13 @@
 					<p>Configuring settings for the provider beyond what is provided in a service binding is not typically required, but when Cloud Foundry is using self-signed certificates, you might need to disable certificate validation, as shown in the following example:</p>
 
 <pre><code class="json hljs">{
-					<span class="hljs-attr">"security"</span>: {
-					<span class="hljs-attr">"oauth2"</span>: {
-					<span class="hljs-attr">"client"</span>: {
-					<span class="hljs-attr">"validateCertificates"</span>: <span class="hljs-literal">false</span>
-      }
+    <span class="hljs-attr">"security"</span>: {
+        <span class="hljs-attr">"oauth2"</span>: {
+            <span class="hljs-attr">"client"</span>: {
+                <span class="hljs-attr">"validateCertificates"</span>: <span class="hljs-literal">false</span>
+            }
+        }
     }
-  }
 }
 </code></pre>
 
@@ -140,12 +140,12 @@
 
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span> {
     ...
-					<span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
+    <span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
     </span>{
         Configuration = configuration;
     }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
     </span>{
         ...
         services.AddAuthentication(options =&gt;
@@ -155,23 +155,23 @@
             })
             .AddCookie((options) =&gt;
             {
-					<span class="hljs-comment">// set values like login url, access denied path, etc here</span>
+                <span class="hljs-comment">// set values like login url, access denied path, etc here</span>
                 options.AccessDeniedPath = <span class="hljs-keyword">new</span> PathString(<span class="hljs-string">"/Home/AccessDenied"</span>);
             })
             .AddCloudFoundryOAuth(Configuration); <span class="hljs-comment">// Add Cloud Foundry authentication service</span>
         ...
     }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app, ...</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app, ...</span>)
     </span>{
         ...
-					<span class="hljs-comment">// Use the protocol from the original request when generating redirect uris</span>
-					<span class="hljs-comment">// (eg: when TLS termination is handled by an appliance in front of the app)</span>
+        <span class="hljs-comment">// Use the protocol from the original request when generating redirect uris</span>
+        <span class="hljs-comment">// (eg: when TLS termination is handled by an appliance in front of the app)</span>
         app.UseForwardedHeaders(<span class="hljs-keyword">new</span> ForwardedHeadersOptions
         {
             ForwardedHeaders = ForwardedHeaders.XForwardedProto
         });
 
-					<span class="hljs-comment">// Add authentication middleware to pipeline</span>
+        <span class="hljs-comment">// Add authentication middleware to pipeline</span>
         app.UseAuthentication();
     }
     ...
@@ -191,24 +191,23 @@
 ...
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">HomeController</span> : <span class="hljs-title">Controller</span>
 {
-					<span class="hljs-function"><span class="hljs-keyword">public</span> IActionResult <span class="hljs-title">Index</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IActionResult <span class="hljs-title">Index</span>(<span class="hljs-params"></span>)
     </span>{
-					<span class="hljs-keyword">return</span> View();
+        <span class="hljs-keyword">return</span> View();
     }
 
     [Authorize]
-					<span class="hljs-function"><span class="hljs-keyword">public</span> IActionResult <span class="hljs-title">About</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IActionResult <span class="hljs-title">About</span>(<span class="hljs-params"></span>)
     </span>{
         ViewData[<span class="hljs-string">"Message"</span>] = <span class="hljs-string">"Your About page."</span>;
-					<span class="hljs-keyword">return</span> View();
+        <span class="hljs-keyword">return</span> View();
     }
 
     [Authorize(Policy = <span class="hljs-string">"testgroup1"</span>)]
-					<span class="hljs-function"><span class="hljs-keyword">public</span> IActionResult <span class="hljs-title">Contact</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IActionResult <span class="hljs-title">Contact</span>(<span class="hljs-params"></span>)
     </span>{
         ViewData[<span class="hljs-string">"Message"</span>] = <span class="hljs-string">"Your contact page."</span>;
-
-					<span class="hljs-keyword">return</span> View();
+        <span class="hljs-keyword">return</span> View();
     }
     ...
 }
@@ -294,13 +293,13 @@
 					<p>Configuring settings for the provider beyond what is provided in a service binding is not typically required, but when Cloud Foundry is using self-signed certificates, you might need to disable certificate validation, as shown in the following example:</p>
 
 <pre><code class="json hljs">{
-					<span class="hljs-attr">"security"</span>: {
-					<span class="hljs-attr">"oauth2"</span>: {
-					<span class="hljs-attr">"client"</span>: {
-					<span class="hljs-attr">"validateCertificates"</span>: <span class="hljs-literal">false</span>
-      }
+    <span class="hljs-attr">"security"</span>: {
+        <span class="hljs-attr">"oauth2"</span>: {
+            <span class="hljs-attr">"client"</span>: {
+                <span class="hljs-attr">"validateCertificates"</span>: <span class="hljs-literal">false</span>
+            }
+        }
     }
-  }
 }
 </code></pre>
 
@@ -381,9 +380,9 @@
 
 <span class="hljs-keyword">namespace</span> <span class="hljs-title">CloudFoundrySingleSignon</span>
 {
-					<span class="hljs-keyword">public</span> <span class="hljs-keyword">partial</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">partial</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span>
     {
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configuration</span>(<span class="hljs-params">IAppBuilder app</span>)
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configuration</span>(<span class="hljs-params">IAppBuilder app</span>)
         </span>{
             app.SetDefaultSignInAsAuthenticationType(<span class="hljs-string">"ExternalCookie"</span>);
             app.UseCookieAuthentication(<span class="hljs-keyword">new</span> CookieAuthenticationOptions
@@ -417,7 +416,7 @@
 
 <pre><code class="csharp hljs"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AuthorizeSSO</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> returnUrl</span>)
 </span>{
-					<span class="hljs-keyword">var</span> properties = <span class="hljs-keyword">new</span> AuthenticationProperties { RedirectUri = returnUrl ?? Url.Action(<span class="hljs-string">"Secure"</span>, <span class="hljs-string">"Home"</span>) };
+    <span class="hljs-keyword">var</span> properties = <span class="hljs-keyword">new</span> AuthenticationProperties { RedirectUri = returnUrl ?? Url.Action(<span class="hljs-string">"Secure"</span>, <span class="hljs-string">"Home"</span>) };
     HttpContext.GetOwinContext().Authentication.Challenge(properties, CloudFoundryDefaults.DisplayName);
 }
 </code></pre>
@@ -430,19 +429,19 @@
 
 <pre><code class="csharp hljs"><span class="hljs-keyword">internal</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ChallengeResult</span> : <span class="hljs-title">HttpUnauthorizedResult</span>
 {
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ChallengeResult</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> authType, <span class="hljs-keyword">string</span> redirectUri</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ChallengeResult</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> authType, <span class="hljs-keyword">string</span> redirectUri</span>)
     </span>{
         AuthenticationType = authType;
         RedirectUri = redirectUri;
     }
 
-					<span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> AuthenticationType { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> AuthenticationType { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
 
-					<span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> RedirectUri { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> RedirectUri { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
 
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ExecuteResult</span>(<span class="hljs-params">ControllerContext context</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">override</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ExecuteResult</span>(<span class="hljs-params">ControllerContext context</span>)
     </span>{
-					<span class="hljs-keyword">var</span> properties = <span class="hljs-keyword">new</span> AuthenticationProperties { RedirectUri = RedirectUri };
+        <span class="hljs-keyword">var</span> properties = <span class="hljs-keyword">new</span> AuthenticationProperties { RedirectUri = RedirectUri };
         context.HttpContext.GetOwinContext().Authentication.Challenge(properties, AuthenticationType);
     }
 }
@@ -452,7 +451,7 @@
 
 <pre><code class="csharp hljs"><span class="hljs-function"><span class="hljs-keyword">public</span> ActionResult <span class="hljs-title">AuthorizeSSO</span>(<span class="hljs-params"><span class="hljs-keyword">string</span> returnUrl</span>)
 </span>{
-					<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ChallengeResult(CloudFoundryDefaults.DisplayName, returnUrl ?? Url.Action(<span class="hljs-string">"Secure"</span>, <span class="hljs-string">"Home"</span>));
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ChallengeResult(CloudFoundryDefaults.DisplayName, returnUrl ?? Url.Action(<span class="hljs-string">"Secure"</span>, <span class="hljs-string">"Home"</span>));
 }
 </code></pre>
 
@@ -464,16 +463,16 @@
 ...
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">HomeController</span> : <span class="hljs-title">Controller</span>
 {
-					<span class="hljs-function"><span class="hljs-keyword">public</span> ActionResult <span class="hljs-title">Index</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> ActionResult <span class="hljs-title">Index</span>(<span class="hljs-params"></span>)
     </span>{
-					<span class="hljs-keyword">return</span> View();
+        <span class="hljs-keyword">return</span> View();
     }
 
     [Authorize]
-					<span class="hljs-function"><span class="hljs-keyword">public</span> ActionResult <span class="hljs-title">Secure</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> ActionResult <span class="hljs-title">Secure</span>(<span class="hljs-params"></span>)
     </span>{
         ViewData[<span class="hljs-string">"Message"</span>] = <span class="hljs-string">"This page requires authentication"</span>;
-					<span class="hljs-keyword">return</span> View();
+        <span class="hljs-keyword">return</span> View();
     }
     ...
 }
@@ -486,14 +485,14 @@
 <span class="hljs-function"><span class="hljs-keyword">public</span> ActionResult <span class="hljs-title">TestGroupV1</span>(<span class="hljs-params"></span>)
 </span>{
     ViewBag.Message = <span class="hljs-string">"Congratulations, you have access to 'testgroup'"</span>;
-					<span class="hljs-keyword">return</span> View(<span class="hljs-string">"Index"</span>);
+    <span class="hljs-keyword">return</span> View(<span class="hljs-string">"Index"</span>);
 }
 
 [CustomClaimsAuthorize(<span class="hljs-string">"testgroup"</span>)]
 <span class="hljs-function"><span class="hljs-keyword">public</span> ActionResult <span class="hljs-title">TestGroupV2</span>(<span class="hljs-params"></span>)
 </span>{
     ViewBag.Message = <span class="hljs-string">"Congratulations, you have access to 'testgroup'"</span>;
-					<span class="hljs-keyword">return</span> View(<span class="hljs-string">"Index"</span>);
+    <span class="hljs-keyword">return</span> View(<span class="hljs-string">"Index"</span>);
 }
 </code></pre>
 
@@ -537,7 +536,7 @@
 
 <pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
 ...
-					<span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Security.Authentication.CloudFoundryCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Security.Authentication.CloudFoundryCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
 ...
 <span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
 </code></pre>
@@ -547,13 +546,13 @@
 					<p>Configuring additional settings for the provider is not typically required, but, when Cloud Foundry uses self-signed certificates, you might need to disable certificate validation, as shown in the following example:</p>
 
 <pre><code class="json hljs">{
-					<span class="hljs-attr">"security"</span>: {
-					<span class="hljs-attr">"oauth2"</span>: {
-					<span class="hljs-attr">"client"</span>: {
-					<span class="hljs-attr">"validateCertificates"</span>: <span class="hljs-literal">false</span>
-      }
+    <span class="hljs-attr">"security"</span>: {
+        <span class="hljs-attr">"oauth2"</span>: {
+            <span class="hljs-attr">"client"</span>: {
+                <span class="hljs-attr">"validateCertificates"</span>: <span class="hljs-literal">false</span>
+            }
+        }
     }
-  }
 }
 </code></pre>
 
@@ -594,17 +593,17 @@
 
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span> {
     ...
-					<span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
+    <span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
     </span>{
         Configuration = configuration;
     }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
     </span>{
-					<span class="hljs-comment">// Add Cloud Foundry JWT Authentication service as the default</span>
+        <span class="hljs-comment">// Add Cloud Foundry JWT Authentication service as the default</span>
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddCloudFoundryJwtBearer(Configuration);
-					<span class="hljs-comment">// Add authorization policies</span>
+        <span class="hljs-comment">// Add authorization policies</span>
         services.AddAuthorization(options =&gt;
         {
             options.AddPolicy(<span class="hljs-string">"Orders"</span>, policy =&gt; policy.RequireClaim(<span class="hljs-string">"scope"</span>, <span class="hljs-string">"order.me"</span>));
@@ -612,10 +611,10 @@
         });
         ...
     }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app, ...</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app, ...</span>)
     </span>{
         ...
-					<span class="hljs-comment">// Add the authentication middleware to the pipeline</span>
+        <span class="hljs-comment">// Add the authentication middleware to the pipeline</span>
         app.UseAuthentication();
     }
     ...
@@ -637,12 +636,12 @@
 [Route(<span class="hljs-string">"api/[controller]"</span>)]
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ValuesController</span> : <span class="hljs-title">Controller</span>
 {
-					<span class="hljs-comment">// GET api/values</span>
+    <span class="hljs-comment">// GET api/values</span>
     [HttpGet]
     [Authorize(Policy = <span class="hljs-string">"testgroup"</span>)]
-					<span class="hljs-function"><span class="hljs-keyword">public</span> IEnumerable&lt;<span class="hljs-keyword">string</span>&gt; <span class="hljs-title">Get</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IEnumerable&lt;<span class="hljs-keyword">string</span>&gt; <span class="hljs-title">Get</span>(<span class="hljs-params"></span>)
     </span>{
-					<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] { <span class="hljs-string">"value1"</span>, <span class="hljs-string">"value2"</span> };
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] { <span class="hljs-string">"value1"</span>, <span class="hljs-string">"value2"</span> };
     }
 }
 </code></pre>
@@ -680,13 +679,13 @@
 					<p>Configuring additional settings for the provider is not typically required, but, when Cloud Foundry uses self-signed certificates, you might need to disable certificate validation, as shown in the following example:</p>
 
 <pre><code class="json hljs">{
-					<span class="hljs-attr">"security"</span>: {
-					<span class="hljs-attr">"oauth2"</span>: {
-					<span class="hljs-attr">"client"</span>: {
-					<span class="hljs-attr">"validateCertificates"</span>: <span class="hljs-literal">false</span>
-      }
+    <span class="hljs-attr">"security"</span>: {
+        <span class="hljs-attr">"oauth2"</span>: {
+            <span class="hljs-attr">"client"</span>: {
+                <span class="hljs-attr">"validateCertificates"</span>: <span class="hljs-literal">false</span>
+            }
+        }
     }
-  }
 }
 </code></pre>
 
@@ -737,9 +736,9 @@
 
 <span class="hljs-keyword">namespace</span> <span class="hljs-title">CloudFoundryJwtAuthentication</span>
 {
-					<span class="hljs-keyword">public</span> <span class="hljs-keyword">partial</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">partial</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span>
     {
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureAuth</span>(<span class="hljs-params">IAppBuilder app</span>)
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureAuth</span>(<span class="hljs-params">IAppBuilder app</span>)
         </span>{
             app.UseCloudFoundryJwtBearerAuthentication(ApplicationConfig.Configuration);
         }
@@ -761,12 +760,12 @@
 
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ValuesController</span> : <span class="hljs-title">ApiController</span>
 {
-					<span class="hljs-comment">// GET: api/Values</span>
+    <span class="hljs-comment">// GET: api/Values</span>
     [CustomClaimsAuthorize(<span class="hljs-string">"testgroup"</span>)]
-					<span class="hljs-function"><span class="hljs-keyword">public</span> IEnumerable&lt;<span class="hljs-keyword">string</span>&gt; <span class="hljs-title">Get</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> IEnumerable&lt;<span class="hljs-keyword">string</span>&gt; <span class="hljs-title">Get</span>(<span class="hljs-params"></span>)
     </span>{
         Console.WriteLine(<span class="hljs-string">"Received GET Request"</span>);
-					<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] { <span class="hljs-string">"value1"</span>, <span class="hljs-string">"value2"</span> };
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-keyword">string</span>[] { <span class="hljs-string">"value1"</span>, <span class="hljs-string">"value2"</span> };
     }
 }
 </code></pre>
@@ -803,13 +802,13 @@
 					<p>Configuring additional settings for the provider is not typically required, but, when Cloud Foundry uses self-signed certificates, you might need to disable certificate validation, as shown in the following example:</p>
 
 <pre><code class="json hljs">{
-					<span class="hljs-attr">"security"</span>: {
-					<span class="hljs-attr">"oauth2"</span>: {
-					<span class="hljs-attr">"client"</span>: {
-					<span class="hljs-attr">"validateCertificates"</span>: <span class="hljs-literal">false</span>
-      }
+    <span class="hljs-attr">"security"</span>: {
+        <span class="hljs-attr">"oauth2"</span>: {
+            <span class="hljs-attr">"client"</span>: {
+                <span class="hljs-attr">"validateCertificates"</span>: <span class="hljs-literal">false</span>
+            }
+        }
     }
-  }
 }
 </code></pre>
 
@@ -868,10 +867,10 @@
 
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Global</span> : <span class="hljs-title">System</span>.<span class="hljs-title">Web</span>.<span class="hljs-title">HttpApplication</span>
 {
-					<span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Application_Start</span>(<span class="hljs-params"><span class="hljs-keyword">object</span> sender, EventArgs e</span>)
+    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Application_Start</span>(<span class="hljs-params"><span class="hljs-keyword">object</span> sender, EventArgs e</span>)
     </span>{
         ApplicationConfig.RegisterConfig(<span class="hljs-string">"development"</span>);
-					<span class="hljs-keyword">var</span> serviceHost = <span class="hljs-keyword">new</span> ServiceHost(<span class="hljs-keyword">typeof</span>(ValueService));
+        <span class="hljs-keyword">var</span> serviceHost = <span class="hljs-keyword">new</span> ServiceHost(<span class="hljs-keyword">typeof</span>(ValueService));
         serviceHost.AddJwtAuthorization(ApplicationConfig.Configuration);
     }
 }
@@ -890,12 +889,12 @@
 
 <span class="hljs-keyword">namespace</span> <span class="hljs-title">CloudFoundryWcf</span>
 {
-					<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ValueService</span> : <span class="hljs-title">IValueService</span>
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ValueService</span> : <span class="hljs-title">IValueService</span>
     {
         [ScopePermission(SecurityAction.Demand, Scope = <span class="hljs-string">"testgroup"</span>)]
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> <span class="hljs-title">GetData</span>(<span class="hljs-params"></span>)
+        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> <span class="hljs-title">GetData</span>(<span class="hljs-params"></span>)
         </span>{
-					<span class="hljs-keyword">return</span> <span class="hljs-string">"Hello from the WCF Sample!"</span>;
+            <span class="hljs-keyword">return</span> <span class="hljs-string">"Hello from the WCF Sample!"</span>;
         }
     }
 }
@@ -945,25 +944,27 @@
 
 					<p>Regardless of the method chosen for instantiating the <code>CloudFoundryOptions</code>, the code to apply the behavior should look something like this:</p>
 
-<pre><code class="csharp hljs">    <span class="hljs-comment">// create an instance of the WCF client</span>
-					<span class="hljs-keyword">var</span> sRef = <span class="hljs-keyword">new</span> ValueService.ValueServiceClient();
+<pre><code class="csharp hljs">
+    <span class="hljs-comment">// create an instance of the WCF client</span>
+    <span class="hljs-keyword">var</span> sRef = <span class="hljs-keyword">new</span> ValueService.ValueServiceClient();
 
-					<span class="hljs-comment">// apply the behavior, expecting it to manage and pass the token for the application</span>
+    <span class="hljs-comment">// apply the behavior, expecting it to manage and pass the token for the application</span>
     sRef.Endpoint.EndpointBehaviors.Add(<span class="hljs-keyword">new</span> JwtHeaderEndpointBehavior(<span class="hljs-keyword">new</span> CloudFoundryOptions(configuration)));
-					<span class="hljs-keyword">string</span> serviceResponse = <span class="hljs-keyword">await</span> sRef.GetDataAsync();
+    <span class="hljs-keyword">string</span> serviceResponse = <span class="hljs-keyword">await</span> sRef.GetDataAsync();
 </code></pre>
 
 					<p>To pass a user’s token (instead of the application’s) to the backing service, first set <code>security:oauth2:client:forwardUserCredentials</code> to <code>true</code> in your configuration. You will also need to retrieve the user’s token and pass that into the <code>JwtHeaderEndpointBehavior</code> when making requests, as seen in this example:</p>
 
-<pre><code class="csharp hljs">    <span class="hljs-comment">// retrieve the user's token</span>
-					<span class="hljs-keyword">var</span> token = Request.GetOwinContext().Authentication.User.Claims.First(c =&gt; c.Type == ClaimTypes.Authentication)?.Value;
+<pre><code class="csharp hljs">
+    <span class="hljs-comment">// retrieve the user's token</span>
+    <span class="hljs-keyword">var</span> token = Request.GetOwinContext().Authentication.User.Claims.First(c =&gt; c.Type == ClaimTypes.Authentication)?.Value;
 
-					<span class="hljs-comment">// create an instance of the WCF client</span>
-					<span class="hljs-keyword">var</span> sRef = <span class="hljs-keyword">new</span> ValueService.ValueServiceClient(binding, address);
+    <span class="hljs-comment">// create an instance of the WCF client</span>
+    <span class="hljs-keyword">var</span> sRef = <span class="hljs-keyword">new</span> ValueService.ValueServiceClient(binding, address);
 
-					<span class="hljs-comment">// apply the behavior, including the user's token</span>
+    <span class="hljs-comment">// apply the behavior, including the user's token</span>
     sRef.Endpoint.EndpointBehaviors.Add(<span class="hljs-keyword">new</span> JwtHeaderEndpointBehavior(<span class="hljs-keyword">new</span> CloudFoundryOptions(ApplicationConfig.Configuration), token));
-					<span class="hljs-keyword">string</span> serviceResponse = <span class="hljs-keyword">await</span> sRef.GetDataAsync();
+    <span class="hljs-keyword">string</span> serviceResponse = <span class="hljs-keyword">await</span> sRef.GetDataAsync();
 </code></pre>
 
 					<h1 id="4-0-redis-key-storage-provider">4.0 Redis Key Storage Provider</h1>
@@ -991,7 +992,7 @@
 
 <pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
 ...
-					<span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Security.DataProtection.RedisCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Security.DataProtection.RedisCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
 ...
 <span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
 </code></pre>
@@ -1002,7 +1003,7 @@
 
 <pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
 ...
-					<span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.CloudFoundry.ConnectorCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.CloudFoundry.ConnectorCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
 ...
 <span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
 </code></pre>
@@ -1037,17 +1038,17 @@ cf restage myApp
 
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span> {
     ...
-					<span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
+    <span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
     </span>{
         Configuration = configuration;
     }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
     </span>{
-					<span class="hljs-comment">// Add StackExchange ConnectionMultiplexer configured from Cloud Foundry</span>
+        <span class="hljs-comment">// Add StackExchange ConnectionMultiplexer configured from Cloud Foundry</span>
         services.AddRedisConnectionMultiplexer(Configuration);
 
-					<span class="hljs-comment">// Add framework services.</span>
+        <span class="hljs-comment">// Add framework services.</span>
         services.AddMvc();
         ...
     }
@@ -1066,22 +1067,22 @@ cf restage myApp
 
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span> {
     ...
-					<span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
+    <span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">private</span> <span class="hljs-keyword">set</span>; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
     </span>{
         Configuration = configuration;
     }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
     </span>{
-					<span class="hljs-comment">// Add StackExchange ConnectionMultiplexer configured from Cloud Foundry</span>
+        <span class="hljs-comment">// Add StackExchange ConnectionMultiplexer configured from Cloud Foundry</span>
         services.AddRedisConnectionMultiplexer(Configuration);
 
-					<span class="hljs-comment">// Add DataProtection and persist keys to Cloud Foundry Redis service</span>
+        <span class="hljs-comment">// Add DataProtection and persist keys to Cloud Foundry Redis service</span>
         services.AddDataProtection()
             .PersistKeysToRedis()
             .SetApplicationName(<span class="hljs-string">"Some Name"</span>);
 
-					<span class="hljs-comment">// Add framework services.</span>
+        <span class="hljs-comment">// Add framework services.</span>
         services.AddMvc();
         ...
     }
@@ -1122,7 +1123,7 @@ cf restage myApp
 
 <pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
 ...
-					<span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Security.DataProtection.CredHubCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Security.DataProtection.CredHubCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
 ...
 <span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
 </code></pre>
@@ -1131,10 +1132,11 @@ cf restage myApp
 
 					<p>Settings for this library are expected to have a prefix of <code>CredHubClient</code>. The following example shows what that looks like in JSON:</p>
 
-<pre><code class="json hljs">{
+<pre><code class="json hljs">
+{
   ...
-					<span class="hljs-attr">"credHubClient"</span>: {
-					<span class="hljs-attr">"validateCertificates"</span>: <span class="hljs-string">"false"</span>
+    <span class="hljs-attr">"credHubClient"</span>: {
+    <span class="hljs-attr">"validateCertificates"</span>: <span class="hljs-string">"false"</span>
   }
   ...
 }
@@ -1193,13 +1195,13 @@ cf restage myApp
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span>
 {
     ILoggerFactory logFactory;
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration, ILoggerFactory logFactory</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration, ILoggerFactory logFactory</span>)
     </span>{
         Configuration = configuration;
-					<span class="hljs-keyword">this</span>.logFactory = logFactory;
+        <span class="hljs-keyword">this</span>.logFactory = logFactory;
     }
-					<span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
+    <span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
     </span>{
         services.AddMvc();
         services.AddCredHubClient(Configuration, logFactory);
@@ -1341,21 +1343,21 @@ cf restage myApp
 					<p>The following example shows a typical request object for the <code>Interpolate</code> endpoint:</p>
 
 <pre><code class="json hljs">{
-					<span class="hljs-attr">"p-demo-resource"</span>: [
+    <span class="hljs-attr">"p-demo-resource"</span>: [
     {
-					<span class="hljs-attr">"credentials"</span>: {
-					<span class="hljs-attr">"credhub-ref"</span>: <span class="hljs-string">"((/config-server/credentials))"</span>
-      },
-					<span class="hljs-attr">"label"</span>: <span class="hljs-string">"p-config-server"</span>,
-					<span class="hljs-attr">"name"</span>: <span class="hljs-string">"config-server"</span>,
-					<span class="hljs-attr">"plan"</span>: <span class="hljs-string">"standard"</span>,
-					<span class="hljs-attr">"provider"</span>: <span class="hljs-literal">null</span>,
-					<span class="hljs-attr">"syslog_drain_url"</span>: <span class="hljs-literal">null</span>,
-					<span class="hljs-attr">"tags"</span>: [
-					<span class="hljs-string">"configuration"</span>,
-					<span class="hljs-string">"spring-cloud"</span>
-      ],
-					<span class="hljs-attr">"volume_mounts"</span>: []
+        <span class="hljs-attr">"credentials"</span>: {
+            <span class="hljs-attr">"credhub-ref"</span>: <span class="hljs-string">"((/config-server/credentials))"</span>
+        },
+        <span class="hljs-attr">"label"</span>: <span class="hljs-string">"p-config-server"</span>,
+        <span class="hljs-attr">"name"</span>: <span class="hljs-string">"config-server"</span>,
+        <span class="hljs-attr">"plan"</span>: <span class="hljs-string">"standard"</span>,
+        <span class="hljs-attr">"provider"</span>: <span class="hljs-literal">null</span>,
+        <span class="hljs-attr">"syslog_drain_url"</span>: <span class="hljs-literal">null</span>,
+        <span class="hljs-attr">"tags"</span>: [
+            <span class="hljs-string">"configuration"</span>,
+            <span class="hljs-string">"spring-cloud"</span>
+        ],
+        <span class="hljs-attr">"volume_mounts"</span>: []
     }
   ]
 }
@@ -1364,28 +1366,28 @@ cf restage myApp
 					<p>The following example shows a typical response object from the <code>Interpolate</code> endpoint:</p>
 
 <pre><code class="json hljs">{
-					<span class="hljs-attr">"p-demo-resource"</span>: [
-    {
-					<span class="hljs-attr">"credentials"</span>: {
-					<span class="hljs-attr">"key"</span>: <span class="hljs-number">123</span>,
-					<span class="hljs-attr">"key_list"</span>: [
-					<span class="hljs-string">"val1"</span>,
-					<span class="hljs-string">"val2"</span>
-        ],
-					<span class="hljs-attr">"is_true"</span>: <span class="hljs-literal">true</span>
-      },
-					<span class="hljs-attr">"label"</span>: <span class="hljs-string">"p-config-server"</span>,
-					<span class="hljs-attr">"name"</span>: <span class="hljs-string">"config-server"</span>,
-					<span class="hljs-attr">"plan"</span>: <span class="hljs-string">"standard"</span>,
-					<span class="hljs-attr">"provider"</span>: <span class="hljs-literal">null</span>,
-					<span class="hljs-attr">"syslog_drain_url"</span>: <span class="hljs-literal">null</span>,
-					<span class="hljs-attr">"tags"</span>: [
-					<span class="hljs-string">"configuration"</span>,
-					<span class="hljs-string">"spring-cloud"</span>
-      ],
-					<span class="hljs-attr">"volume_mounts"</span>: []
-    }
-  ]
+    <span class="hljs-attr">"p-demo-resource"</span>: [
+        {
+            <span class="hljs-attr">"credentials"</span>: {
+                <span class="hljs-attr">"key"</span>: <span class="hljs-number">123</span>,
+                <span class="hljs-attr">"key_list"</span>: [
+                    <span class="hljs-string">"val1"</span>,
+                    <span class="hljs-string">"val2"</span>
+                ],
+                <span class="hljs-attr">"is_true"</span>: <span class="hljs-literal">true</span>
+            },
+            <span class="hljs-attr">"label"</span>: <span class="hljs-string">"p-config-server"</span>,
+            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"config-server"</span>,
+            <span class="hljs-attr">"plan"</span>: <span class="hljs-string">"standard"</span>,
+            <span class="hljs-attr">"provider"</span>: <span class="hljs-literal">null</span>,
+            <span class="hljs-attr">"syslog_drain_url"</span>: <span class="hljs-literal">null</span>,
+            <span class="hljs-attr">"tags"</span>: [
+                <span class="hljs-string">"configuration"</span>,
+                <span class="hljs-string">"spring-cloud"</span>
+            ],
+            <span class="hljs-attr">"volume_mounts"</span>: []
+        }
+    ]
 }
 </code></pre>
 
@@ -1655,20 +1657,20 @@ cf push <span class="hljs-_">-f</span> manifest-windows.yml -p bin/Debug/net461/
 
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span> {
     ...
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IWebHost <span class="hljs-title">BuildWebHost</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IWebHost <span class="hljs-title">BuildWebHost</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>)
     </span>{
-					<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> WebHostBuilder()
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> WebHostBuilder()
             ...
             .UseCloudFoundryHosting()
             ...
             .ConfigureAppConfiguration((builderContext, configBuilder) =&gt;
             {
-					<span class="hljs-keyword">var</span> env = builderContext.HostingEnvironment;
+                <span class="hljs-keyword">var</span> env = builderContext.HostingEnvironment;
                 configBuilder.SetBasePath(env.ContentRootPath)
                     .AddJsonFile(<span class="hljs-string">"appsettings.json"</span>, optional: <span class="hljs-literal">true</span>, reloadOnChange: <span class="hljs-literal">true</span>)
                     .AddJsonFile(<span class="hljs-string">$"appsettings.<span class="hljs-subst">{env.EnvironmentName}</span>.json"</span>, optional: <span class="hljs-literal">true</span>)
                     .AddEnvironmentVariables()
-					<span class="hljs-comment">// Add the Cloudfoundry VCAP settings to configuration</span>
+                    <span class="hljs-comment">// Add the Cloudfoundry VCAP settings to configuration</span>
                     .AddCloudFoundry();
             })
             .Build();

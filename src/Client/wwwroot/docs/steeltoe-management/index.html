@@ -247,12 +247,12 @@
 
 <pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
 ...
-					<span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Management.EndpointCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.2.0"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Management.EndpointCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.2.0"</span>/&gt;</span>
 ...
 <span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
 </code></pre>
 
-					<p>or</p>
+<p>or</p>
 
 <pre><code class="powershell hljs css"><span class="hljs-selector-tag">PM</span>&gt;<span class="hljs-selector-tag">Install-Package</span>  <span class="hljs-selector-tag">Steeltoe</span><span class="hljs-selector-class">.Management</span><span class="hljs-selector-class">.EndpointWeb</span> <span class="hljs-selector-tag">-Version</span> 2<span class="hljs-selector-class">.2</span><span class="hljs-selector-class">.0</span>
 </code></pre>
@@ -320,14 +320,14 @@
 					</p>
 
 <pre><code class="json hljs"><span class="hljs-string">"management"</span>: {
-					<span class="hljs-attr">"endpoints"</span>: {
-					<span class="hljs-attr">"actuator"</span>:{
-					<span class="hljs-attr">"exposure"</span>: {
-					<span class="hljs-attr">"include"</span>: [ <span class="hljs-string">"*"</span> ],
-					<span class="hljs-attr">"exclude"</span>: [ <span class="hljs-string">"env"</span>, <span class="hljs-string">"refresh"</span>]
-            }
-        }
+  <span class="hljs-attr">"endpoints"</span>: {
+    <span class="hljs-attr">"actuator"</span>:{
+      <span class="hljs-attr">"exposure"</span>: {
+        <span class="hljs-attr">"include"</span>: [ <span class="hljs-string">"*"</span> ],
+        <span class="hljs-attr">"exclude"</span>: [ <span class="hljs-string">"env"</span>, <span class="hljs-string">"refresh"</span>]
+      }
     }
+  }
 }
 </code></pre>
 
@@ -524,15 +524,15 @@
 					<p>The default value is <code>always</code>. Authorized roles can be configured using <code>management:endpoints:health:claim or management:endpoints:health:role</code>. A user is considered to be authorized when they are in the given role or have the specified claim. For example:</p>
 
 <pre><code class="json hljs"><span class="hljs-string">"management"</span>: {
-					<span class="hljs-attr">"endpoints"</span>: {
-					<span class="hljs-attr">"health"</span>: {
-					<span class="hljs-attr">"showdetails"</span>: <span class="hljs-string">"whenauthorized"</span>,
-					<span class="hljs-attr">"claim"</span>: {
-					<span class="hljs-attr">"type"</span>: <span class="hljs-string">"health_actuator"</span>,
-					<span class="hljs-attr">"value"</span>: <span class="hljs-string">"see_details"</span>
-            }
-        }
+  <span class="hljs-attr">"endpoints"</span>: {
+    <span class="hljs-attr">"health"</span>: {
+      <span class="hljs-attr">"showdetails"</span>: <span class="hljs-string">"whenauthorized"</span>,
+      <span class="hljs-attr">"claim"</span>: {
+        <span class="hljs-attr">"type"</span>: <span class="hljs-string">"health_actuator"</span>,
+        <span class="hljs-attr">"value"</span>: <span class="hljs-string">"see_details"</span>
+      }
     }
+  }
 }
 </code></pre>
 
@@ -579,17 +579,17 @@
 
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">CustomHealthContributor</span> : <span class="hljs-title">IHealthContributor</span>
 {
-					<span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Id =&gt; <span class="hljs-string">"CustomHealthContributor"</span>;
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">string</span> Id =&gt; <span class="hljs-string">"CustomHealthContributor"</span>;
 
-					<span class="hljs-function"><span class="hljs-keyword">public</span> HealthCheckResult <span class="hljs-title">Health</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> HealthCheckResult <span class="hljs-title">Health</span>(<span class="hljs-params"></span>)
     </span>{
-					<span class="hljs-keyword">var</span> result = <span class="hljs-keyword">new</span> HealthCheckResult {
-					<span class="hljs-comment">// this is used as part of the aggregate, it is not directly part of the middleware response</span>
+        <span class="hljs-keyword">var</span> result = <span class="hljs-keyword">new</span> HealthCheckResult {
+            <span class="hljs-comment">// this is used as part of the aggregate, it is not directly part of the middleware response</span>
             Status = HealthStatus.UP,
             Description = <span class="hljs-string">"This health check does not check anything"</span>
         };
         result.Details.Add(<span class="hljs-string">"status"</span>, HealthStatus.UP.ToString());
-					<span class="hljs-keyword">return</span> result;
+        <span class="hljs-keyword">return</span> result;
     }
 }
 </code></pre>
@@ -651,22 +651,25 @@
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span>
 {
     ...
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
-    </span>{
-					<span class="hljs-comment">// Add your own IHealthContributor, registered with the interface</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
+    </span>
+    {
+        <span class="hljs-comment">// Add your own IHealthContributor, registered with the interface</span>
         services.AddSingleton&lt;IHealthContributor, CustomHealthContributor&gt;();
 
-					<span class="hljs-comment">// Add health actuator</span>
+        <span class="hljs-comment">// Add health actuator</span>
         services.AddHealthActuator(Configuration);
 
-					<span class="hljs-comment">// Add framework services.</span>
+        <span class="hljs-comment">// Add framework services.</span>
         services.AddMvc();
     }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory</span>)
-    </span>{
+    
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory</span>)
+    </span>
+    {
         app.UseStaticFiles();
 
-					<span class="hljs-comment">// Add management endpoint into pipeline</span>
+        <span class="hljs-comment">// Add management endpoint into pipeline</span>
         app.UseHealthActuator();
     }
 }
@@ -686,24 +689,26 @@
 
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ManagementConfig</span>
 {
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureManagementActuators</span>(<span class="hljs-params">IConfiguration configuration, ILoggerFactory loggerFactory = <span class="hljs-literal">null</span></span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureManagementActuators</span>(<span class="hljs-params">IConfiguration configuration, ILoggerFactory loggerFactory = <span class="hljs-literal">null</span></span>)
     </span>{
         ...
         ActuatorConfigurator.UseHealthActuator(
             configuration,
-					<span class="hljs-keyword">new</span> DefaultHealthAggregator(),
+            <span class="hljs-keyword">new</span> DefaultHealthAggregator(),
             GetHealthContributors(configuration),
             loggerFactory);
         ...
     }
-					<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> IEnumerable&lt;IHealthContributor&gt; <span class="hljs-title">GetHealthContributors</span>(<span class="hljs-params">IConfiguration configuration</span>)
-    </span>{
-					<span class="hljs-keyword">var</span> healthContributors = <span class="hljs-keyword">new</span> List&lt;IHealthContributor&gt;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> IEnumerable&lt;IHealthContributor&gt; <span class="hljs-title">GetHealthContributors</span>(<span class="hljs-params">IConfiguration configuration</span>)
+    </span>
+    {
+        <span class="hljs-keyword">var</span> healthContributors = <span class="hljs-keyword">new</span> List&lt;IHealthContributor&gt;
         {
-					<span class="hljs-keyword">new</span> DiskSpaceContributor(),
+            <span class="hljs-keyword">new</span> DiskSpaceContributor(),
             RelationalHealthContributor.GetMySqlContributor(configuration)
         };
-					<span class="hljs-keyword">return</span> healthContributors;
+        <span class="hljs-keyword">return</span> healthContributors;
     }
 </code></pre>
 
@@ -722,20 +727,22 @@
     </span>{
         ...
         app.UseHealthActuator(
-					<span class="hljs-keyword">new</span> HealthOptions(ApplicationConfig.Configuration),
-					<span class="hljs-keyword">new</span> DefaultHealthAggregator(),
+            <span class="hljs-keyword">new</span> HealthOptions(ApplicationConfig.Configuration),
+            <span class="hljs-keyword">new</span> DefaultHealthAggregator(),
             GetHealthContributors(ApplicationConfig.Configuration),
             LoggingConfig.LoggerFactory);
         ...
     }
-					<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> IEnumerable&lt;IHealthContributor&gt; <span class="hljs-title">GetHealthContributors</span>(<span class="hljs-params">IConfiguration configuration</span>)
-    </span>{
-					<span class="hljs-keyword">var</span> healthContributors = <span class="hljs-keyword">new</span> List&lt;IHealthContributor&gt;
-        {
-					<span class="hljs-keyword">new</span> DiskSpaceContributor(),
-            RelationalHealthContributor.GetMySqlContributor(configuration)
-        };
-					<span class="hljs-keyword">return</span> healthContributors;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> IEnumerable&lt;IHealthContributor&gt; <span class="hljs-title">GetHealthContributors</span>(<span class="hljs-params">IConfiguration configuration</span>)
+    </span>
+    {
+        <span class="hljs-keyword">var</span> healthContributors = <span class="hljs-keyword">new</span> List&lt;IHealthContributor&gt;
+            {
+                <span class="hljs-keyword">new</span> DiskSpaceContributor(),
+                RelationalHealthContributor.GetMySqlContributor(configuration)
+            };
+        <span class="hljs-keyword">return</span> healthContributors;
     }
 }
 </code></pre>
@@ -777,9 +784,10 @@
 
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ArbitraryInfoContributor</span> : <span class="hljs-title">IInfoContributor</span>
 {
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Contribute</span>(<span class="hljs-params">IInfoBuilder builder</span>)
-    </span>{
-					<span class="hljs-comment">// pass in the info</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Contribute</span>(<span class="hljs-params">IInfoBuilder builder</span>)
+    </span>
+    {
+        <span class="hljs-comment">// pass in the info</span>
         builder.WithInfo(<span class="hljs-string">"arbitraryInfo"</span>, <span class="hljs-keyword">new</span> { someProperty = <span class="hljs-string">"someValue"</span> });
     }
 }
@@ -850,22 +858,24 @@
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span>
 {
     ...
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
-    </span>{
-					<span class="hljs-comment">// Add custom info contributor, specifying the interface type</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
+    </span>
+    {
+        <span class="hljs-comment">// Add custom info contributor, specifying the interface type</span>
         services.AddSingleton&lt;IInfoContributor, ArbitraryInfoContributor&gt;();
 
-					<span class="hljs-comment">// Add Info actuator</span>
+        <span class="hljs-comment">// Add Info actuator</span>
         services.AddInfoActuator(Configuration);
 
-					<span class="hljs-comment">// Add framework services.</span>
+        <span class="hljs-comment">// Add framework services.</span>
         services.AddMvc();
     }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory</span>)
     </span>{
         app.UseStaticFiles();
 
-					<span class="hljs-comment">// Add management endpoint into pipeline</span>
+        <span class="hljs-comment">// Add management endpoint into pipeline</span>
         app.UseInfoActuator();
     }
 }
@@ -881,16 +891,19 @@
 
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ManagementConfig</span>
 {
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureManagementActuators</span>(<span class="hljs-params">IConfiguration configuration, ILoggerFactory loggerFactory</span>)
-    </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureManagementActuators</span>(<span class="hljs-params">IConfiguration configuration, ILoggerFactory loggerFactory</span>)
+    </span>
+    {
         ...
         ActuatorConfigurator.UseInfoActuator(configuration, GetInfoContributors(configuration), loggerFactory);
         ...
     }
-					<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> IEnumerable&lt;IInfoContributor&gt; <span class="hljs-title">GetInfoContributors</span>(<span class="hljs-params">IConfiguration configuration</span>)
-    </span>{
-					<span class="hljs-keyword">var</span> contributors = <span class="hljs-keyword">new</span> List&lt;IInfoContributor&gt;() { <span class="hljs-keyword">new</span> GitInfoContributor(), <span class="hljs-keyword">new</span> AppSettingsInfoContributor(configuration) }
-					<span class="hljs-keyword">return</span> contributors;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> IEnumerable&lt;IInfoContributor&gt; <span class="hljs-title">GetInfoContributors</span>(<span class="hljs-params">IConfiguration configuration</span>)
+    </span>
+    {
+        <span class="hljs-keyword">var</span> contributors = <span class="hljs-keyword">new</span> List&lt;IInfoContributor&gt;() { <span class="hljs-keyword">new</span> GitInfoContributor(), <span class="hljs-keyword">new</span> AppSettingsInfoContributor(configuration) }
+        <span class="hljs-keyword">return</span> contributors;
     }
 </code></pre>
 
@@ -905,8 +918,9 @@
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span>
 {
     ...
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configuration</span>(<span class="hljs-params">IAppBuilder app</span>)
-    </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configuration</span>(<span class="hljs-params">IAppBuilder app</span>)
+    </span>
+    {
         ...
         app.UseInfoActuator(
             ApplicationConfig.Configuration,
@@ -914,10 +928,12 @@
             LoggingConfig.LoggerFactory);
         ...
     }
-					<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> IEnumerable&lt;IInfoContributor&gt; <span class="hljs-title">GetInfoContributors</span>(<span class="hljs-params">IConfiguration configuration</span>)
-    </span>{
-					<span class="hljs-keyword">var</span> contributors = <span class="hljs-keyword">new</span> List&lt;IInfoContributor&gt;() { <span class="hljs-keyword">new</span> GitInfoContributor(), <span class="hljs-keyword">new</span> AppSettingsInfoContributor(configuration) }
-					<span class="hljs-keyword">return</span> contributors;
+
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> IEnumerable&lt;IInfoContributor&gt; <span class="hljs-title">GetInfoContributors</span>(<span class="hljs-params">IConfiguration configuration</span>)
+    </span>
+    {
+        <span class="hljs-keyword">var</span> contributors = <span class="hljs-keyword">new</span> List&lt;IInfoContributor&gt;() { <span class="hljs-keyword">new</span> GitInfoContributor(), <span class="hljs-keyword">new</span> AppSettingsInfoContributor(configuration) }
+        <span class="hljs-keyword">return</span> contributors;
     }
 }
 </code></pre>
@@ -989,9 +1005,10 @@
 <pre><code class="csharp hljs"><span class="hljs-keyword">using</span> Steeltoe.Extensions.Logging;
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Program</span>
 {
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>)
-    </span>{
-					<span class="hljs-keyword">var</span> host = <span class="hljs-keyword">new</span> WebHostBuilder()
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Main</span>(<span class="hljs-params"><span class="hljs-keyword">string</span>[] args</span>)
+    </span>
+    {
+        <span class="hljs-keyword">var</span> host = <span class="hljs-keyword">new</span> WebHostBuilder()
             .UseKestrel()
             .UseContentRoot(Directory.GetCurrentDirectory())
             .UseStartup&lt;Startup&gt;()
@@ -1006,7 +1023,7 @@
             {
                 loggingBuilder.AddConfiguration(builderContext.Configuration.GetSection(<span class="hljs-string">"Logging"</span>));
 
-					<span class="hljs-comment">// Add Steeltoe dynamic console logger</span>
+                <span class="hljs-comment">// Add Steeltoe dynamic console logger</span>
                 loggingBuilder.AddDynamicConsole();
             })
             .Build();
@@ -1026,7 +1043,7 @@
 
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ManagementConfig</span>
 {
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureManagementActuators</span>(<span class="hljs-params">IConfiguration configuration</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureManagementActuators</span>(<span class="hljs-params">IConfiguration configuration</span>)
     </span>{
         ...
         ActuatorConfigurator.UseLoggerActuator(configuration, LoggingConfig.LoggerProvider, LoggingConfig.LoggerProvider);
@@ -1038,10 +1055,10 @@
 
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">LoggingConfig</span>
 {
-					<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ILoggerFactory LoggerFactory { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
-					<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ILoggerProvider LoggerProvider { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ILoggerFactory LoggerFactory { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ILoggerProvider LoggerProvider { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
 
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IConfiguration configuration</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IConfiguration configuration</span>)
     </span>{
         LoggerProvider = <span class="hljs-keyword">new</span> DynamicLoggerProvider(<span class="hljs-keyword">new</span> ConsoleLoggerSettings().FromConfiguration(configuration));
         LoggerFactory = <span class="hljs-keyword">new</span> LoggerFactory();
@@ -1061,7 +1078,7 @@
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span>
 {
     ...
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configuration</span>(<span class="hljs-params">IAppBuilder app</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configuration</span>(<span class="hljs-params">IAppBuilder app</span>)
     </span>{
         ...
         app.UseLoggersActuator(
@@ -1077,10 +1094,10 @@
 
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">class</span> <span class="hljs-title">LoggingConfig</span>
 {
-					<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ILoggerFactory LoggerFactory { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
-					<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ILoggerProvider LoggerProvider { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ILoggerFactory LoggerFactory { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> ILoggerProvider LoggerProvider { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
 
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IConfiguration configuration</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IConfiguration configuration</span>)
     </span>{
         LoggerProvider = <span class="hljs-keyword">new</span> DynamicLoggerProvider(<span class="hljs-keyword">new</span> ConsoleLoggerSettings().FromConfiguration(configuration));
         LoggerFactory = <span class="hljs-keyword">new</span> LoggerFactory();
@@ -1096,7 +1113,7 @@
 					<p>Log levels can be changed at namespace or class levels with an HTTP POST request to <code>/{LoggersActuatorPath}/{NamespaceOrClassName}</code> and a JSON request body that defines the minimum level you wish to log:</p>
 
 <pre><code class="json hljs">{
-					<span class="hljs-attr">"configuredLevel"</span>:<span class="hljs-string">"INFO"</span>
+    <span class="hljs-attr">"configuredLevel"</span>:<span class="hljs-string">"INFO"</span>
 }
 </code></pre>
 
@@ -1684,7 +1701,7 @@
 
 <pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
 ...
-					<span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Management.ExporterCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.1.0"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Management.ExporterCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.1.0"</span>/&gt;</span>
 ...
 <span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
 </code></pre>
@@ -1934,7 +1951,7 @@
 
 <pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
 ...
-					<span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Management.TracingCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.1.0"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Management.TracingCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.1.0"</span>/&gt;</span>
 ...
 <span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
 </code></pre>
@@ -2036,23 +2053,23 @@
 
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span>
 {
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
     </span>{
         Configuration = configuration;
     }
 
-					<span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
 
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
     </span>{
         ...
-					<span class="hljs-comment">// Add Distributed tracing</span>
+        <span class="hljs-comment">// Add Distributed tracing</span>
         services.AddDistributedTracing(Configuration);
 
-					<span class="hljs-comment">// Add framework services.</span>
+        <span class="hljs-comment">// Add framework services.</span>
         services.AddMvc();
     }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app</span>)
     </span>{
         app.UseStaticFiles();
 
@@ -2081,7 +2098,7 @@
 
 <pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
 ...
-					<span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Management.ExporterCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.1.0"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Management.ExporterCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.1.0"</span>/&gt;</span>
 ...
 <span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
 </code></pre>
@@ -2149,25 +2166,27 @@
 
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span>
 {
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
     </span>{
         Configuration = configuration;
     }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
     </span>{
-					<span class="hljs-comment">// Add Distributed tracing</span>
+        <span class="hljs-comment">// Add Distributed tracing</span>
         services.AddDistributedTracing(Configuration);
 
-					<span class="hljs-comment">// Export traces to Zipkin</span>
+        <span class="hljs-comment">// Export traces to Zipkin</span>
         services.AddZipkinExporter(Configuration);
         ...
     }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app</span>)
     </span>{
         app.UseStaticFiles();
         app.UseMvc();
 
-					<span class="hljs-comment">// Start up trace exporter</span>
+        <span class="hljs-comment">// Start up trace exporter</span>
         app.UseTracingExporter();
     }
 }
@@ -2187,7 +2206,7 @@
 
 <pre><code class="xml hljs"><span class="hljs-tag">&lt;<span class="hljs-name">ItemGroup</span>&gt;</span>
 ...
-					<span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Management.TaskCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">PackageReference</span> <span class="hljs-attr">Include</span>=<span class="hljs-string">"Steeltoe.Management.TaskCore"</span> <span class="hljs-attr">Version</span>= <span class="hljs-string">"2.3.0"</span>/&gt;</span>
 ...
 <span class="hljs-tag">&lt;/<span class="hljs-name">ItemGroup</span>&gt;</span>
 </code></pre>
@@ -2213,15 +2232,15 @@
 <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
 <span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title">IApplicationTask</span>
 {
-					<span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
-					<span class="hljs-comment"><span class="hljs-doctag">///</span> Gets globally unique name for the task</span>
-					<span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
-					<span class="hljs-keyword">string</span> Name { <span class="hljs-keyword">get</span>; }
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> Gets globally unique name for the task</span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
+    <span class="hljs-keyword">string</span> Name { <span class="hljs-keyword">get</span>; }
 
-					<span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
-					<span class="hljs-comment"><span class="hljs-doctag">///</span> Action which to run</span>
-					<span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
-					<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Run</span>(<span class="hljs-params"></span>)</span>;
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;summary&gt;</span></span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> Action which to run</span>
+    <span class="hljs-comment"><span class="hljs-doctag">///</span> <span class="hljs-doctag">&lt;/summary&gt;</span></span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Run</span>(<span class="hljs-params"></span>)</span>;
 }
 </code></pre>
 
@@ -2288,10 +2307,10 @@
 <pre><code class="bash hljs"><span class="hljs-comment"># Push to Linux cell</span>
 cf push <span class="hljs-_">-f</span> manifest.yml -p bin/Debug/netcoreapp2.1/ubuntu.14.04-x64/publish
 
-					<span class="hljs-comment"># Push to Windows cell, .NET Core</span>
+    <span class="hljs-comment"># Push to Windows cell, .NET Core</span>
 cf push <span class="hljs-_">-f</span> manifest-windows.yml -p bin/Debug/netcoreapp2.1/win10-x64/publish
 
-					<span class="hljs-comment"># Push to Windows cell, .NET Framework</span>
+    <span class="hljs-comment"># Push to Windows cell, .NET Framework</span>
 cf push <span class="hljs-_">-f</span> manifest-windows.yml -p bin/Debug/net461/win10-x64/publish
 </code></pre>
 
@@ -2315,25 +2334,27 @@ cf push <span class="hljs-_">-f</span> manifest-windows.yml -p bin/Debug/net461/
 
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span>
 {
-					<span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
+    <span class="hljs-keyword">public</span> IConfiguration Configuration { <span class="hljs-keyword">get</span>; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Startup</span>(<span class="hljs-params">IConfiguration configuration</span>)
     </span>{
         Configuration = configuration;
     }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureServices</span>(<span class="hljs-params">IServiceCollection services</span>)
     </span>{
         ...
-					<span class="hljs-comment">// Add all management endpoint services</span>
+        <span class="hljs-comment">// Add all management endpoint services</span>
         services.AddCloudFoundryActuators(Configuration);
         ...
     }
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory</span>)
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configure</span>(<span class="hljs-params">IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory</span>)
     </span>{
         ...
-					<span class="hljs-comment">// Add all management endpoints into pipeline</span>
+        <span class="hljs-comment">// Add all management endpoints into pipeline</span>
         app.UseCloudFoundryActuators();
 
-					<span class="hljs-comment">// Add ASP.NET Core MVC middleware to pipeline</span>
+        <span class="hljs-comment">// Add ASP.NET Core MVC middleware to pipeline</span>
         app.UseMvc();
         ...
     }
@@ -2377,9 +2398,9 @@ cf push <span class="hljs-_">-f</span> manifest-windows.yml -p bin/Debug/net461/
 
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">ManagementConfig</span>
 {
-					<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IMetricsExporter MetricsExporter { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> IMetricsExporter MetricsExporter { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
 
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureActuators</span>(<span class="hljs-params">
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ConfigureActuators</span>(<span class="hljs-params">
         IConfiguration config,
         ILoggerProvider logger,
          IEnumerable&lt;IHealthContributor&gt; contrib,
@@ -2389,19 +2410,19 @@ cf push <span class="hljs-_">-f</span> manifest-windows.yml -p bin/Debug/net461/
         ActuatorConfigurator.UseCloudFoundryActuators(config, logger, contrib, api, factory);
     }
 
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)
     </span>{
         DiagnosticsManager.Instance.Start();
-					<span class="hljs-keyword">if</span> (MetricsExporter != <span class="hljs-literal">null</span>)
+        <span class="hljs-keyword">if</span> (MetricsExporter != <span class="hljs-literal">null</span>)
         {
             MetricsExporter.Start();
         }
     }
 
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Stop</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Stop</span>(<span class="hljs-params"></span>)
     </span>{
         DiagnosticsManager.Instance.Stop();
-					<span class="hljs-keyword">if</span> (MetricsExporter != <span class="hljs-literal">null</span>)
+        <span class="hljs-keyword">if</span> (MetricsExporter != <span class="hljs-literal">null</span>)
         {
             MetricsExporter.Stop();
         }
@@ -2447,11 +2468,11 @@ cf push <span class="hljs-_">-f</span> manifest-windows.yml -p bin/Debug/net461/
 
 <pre><code class="csharp hljs"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title">Startup</span>
 {
-					<span class="hljs-keyword">private</span> IMetricsExporter MetricsExporter { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
+    <span class="hljs-keyword">private</span> IMetricsExporter MetricsExporter { <span class="hljs-keyword">get</span>; <span class="hljs-keyword">set</span>; }
 
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configuration</span>(<span class="hljs-params">IAppBuilder app</span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Configuration</span>(<span class="hljs-params">IAppBuilder app</span>)
     </span>{
-					<span class="hljs-keyword">var</span> config = GlobalConfiguration.Configuration;
+        <span class="hljs-keyword">var</span> config = GlobalConfiguration.Configuration;
 
         app.UseCloudFoundryActuators(
             ApplicationConfig.Configuration,
@@ -2463,19 +2484,19 @@ cf push <span class="hljs-_">-f</span> manifest-windows.yml -p bin/Debug/net461/
         Start();
     }
 
-					<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Start</span>(<span class="hljs-params"></span>)
     </span>{
         DiagnosticsManager.Instance.Start();
-					<span class="hljs-keyword">if</span> (MetricsExporter != <span class="hljs-literal">null</span>)
+        <span class="hljs-keyword">if</span> (MetricsExporter != <span class="hljs-literal">null</span>)
         {
             MetricsExporter.Start();
         }
     }
 
-					<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Stop</span>(<span class="hljs-params"></span>)
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Stop</span>(<span class="hljs-params"></span>)
     </span>{
         DiagnosticsManager.Instance.Stop();
-					<span class="hljs-keyword">if</span> (MetricsExporter != <span class="hljs-literal">null</span>)
+        <span class="hljs-keyword">if</span> (MetricsExporter != <span class="hljs-literal">null</span>)
         {
             MetricsExporter.Stop();
         }
