@@ -1,6 +1,7 @@
 ﻿@page "/"
 @page "/index"
 @page "/docs"
+@inject HttpClient Http
 
 <div class="bg-midnight-blue text-white width-all">
 	<div class="width-60 container">
@@ -161,36 +162,32 @@
 <div class="left-yellow-slant bg-midnight-blue text-white width-all pb-4">
 	<div class="width-60 container">
 		<div class="text-center width-all pb-3"><h2>News</h2></div>
-		<div class="row no-gutters">
-			<div class="col news">
-				<div class="date"><span>october</span> 6-7 2019</div>
-				<div class="title">.NET developer pre-conference training at Spring One Platform</div>
-				<div class="desc">A two-day course that demonstrates how to build cloud-native .NET applications using Steeltoe. Get signed up today!</div>
-				<div class=""><a class="special-link" href="https://springoneplatform.io/2019/training/steeltoe" target="_blank">read more &gt;</a></div>
-			</div>
-		</div>
-		<div class="row no-gutters">
-			<div class="col"><hr class="border-steeltoe-blue" /></div>
-		</div>
-		<div class="row no-gutters">
-			<div class="col news">
-				<div class="date"><span>september</span> 30 2019</div>
-				<div class="title">Steeltoe 2.3 is available</div>
-				<div class="desc">With new features in logging, cloud management, and cloud connectors as well as quite a few notable issues resolved the 2.3 release is another milestone in Steeltoe's roadmap.</div>
-				<div class=""><a class="special-link" href="https://github.com/SteeltoeOSS/steeltoe/blob/master/roadmaps/2.3.0.md" target="_blank">read more &gt;</a></div>
-			</div>
-		</div>
-		<div class="row no-gutters">
-			<div class="col"><hr class="border-steeltoe-blue" /></div>
-		</div>
-		<div class="row no-gutters">
-			<div class="col news">
-				<div class="date"><span>august</span> 9 2019</div>
-				<div class="title">Update to Steeltoe 3.0 roadmap</div>
-				<div class="desc">This new major version of Steeltoe will continue the Spring Cloud theme with the addition of streaming support as well as well as introduce big enhancements to the existing features.</div>
-				<div class=""><a class="special-link" href="https://github.com/SteeltoeOSS/steeltoe/blob/master/roadmaps/3.0.0.md" target="_blank">read more &gt;</a></div>
-			</div>
-		</div>
+		@if (calendarEvents == null)
+		{
+			<span>&nbsp;</span>
+		}
+		else
+		{
+			int i = 1;
+			@foreach (var calendarEvent in calendarEvents)
+			{
+				<div class="row no-gutters">
+					<div class="col news">
+						<div class="date">@((MarkupString)calendarEvent.Date)</div>
+						<div class="title">@((MarkupString)calendarEvent.Title)</div>
+						<div class="desc">@((MarkupString)calendarEvent.Description)</div>
+						<div class=""><a class="special-link" href="@calendarEvent.URL" target="_blank">read more &gt;</a></div>
+					</div>
+				</div>
+				@if (i++ < calendarEvents.Count()) {
+					<div class="row no-gutters">
+						<div class="col"><hr class="border-steeltoe-blue" /></div>
+					</div>
+				}
+			}
+		}
+
+
 	</div>
 	@*<div class="text-center width-all"><h5>MORE NEWS &gt;</h5></div>*@
 </div>
@@ -215,3 +212,23 @@
 		</div>
 	 </div>
 	</div>*@
+
+@code {
+	private CalendarEvent[] calendarEvents;
+	
+  protected override async Task OnInitializedAsync()
+	{
+		calendarEvents = await Http.GetJsonAsync<CalendarEvent[]>("site-data/CalendarEvents.json");
+	}
+
+	public class CalendarEvent
+	{
+		public string Date { get; set; }
+
+		public string Title { get; set; }
+
+		public string Description { get; set; }
+
+		public string URL { get; set; }
+	}
+}
