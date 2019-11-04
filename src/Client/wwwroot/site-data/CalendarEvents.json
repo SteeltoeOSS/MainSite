@@ -6,12 +6,6 @@
 		"url": "https://github.com/SteeltoeOSS/steeltoe/blob/master/roadmaps/2.4.0.md"
 	},
 	{
-		"date": "<span>october</span> 6-7 2019",
-		"title": ".NET developer pre-conference training at Spring One Platform",
-		"description": "A two-day course that demonstrates how to build cloud-native .NET applications using Steeltoe. Get signed up today!",
-		"url": "https://springoneplatform.io/2019/training/steeltoe"
-	},
-	{
 		"date": "<span>september</span> 30 2019",
 		"title": "Steeltoe 2.3 is available",
 		"description": "With new features in logging, cloud management, and cloud connectors as well as quite a few notable issues resolved the 2.3 release is another milestone in Steeltoe's roadmap.",
