@@ -34,5 +34,9 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
   </ItemGroup>
+  
+  <ItemGroup>
+    <Folder Include="wwwroot\images\new-vs-proj\" />
+  </ItemGroup>
 
 </Project>

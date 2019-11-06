@@ -27,7 +27,7 @@
 						<img src="images/new-vs-proj/configure-new-project.png" class="img-fluid" />
 						<ul>
 							<li><b>Project Name:</b> @ProjectName</li>
-							<li><b>Solution Name:</b> @ProjectNam</li>
+							<li><b>Solution Name:</b> @ProjectName</li>
 							<li><b>Framework:</b> (>= 4.5)</li>
 						</ul>
 					</li>
@@ -141,8 +141,8 @@ public class ManagementConfig{
 		DiagnosticsManager.Instance.Stop();
 	}
 
-	private static IEnumerable<IHealthContributor> GetHealthContributors(IConfiguration configuration){
-		var healthContributors = new List<IHealthContributor>{
+	private static IEnumerable&lt;IHealthContributor&gt; GetHealthContributors(IConfiguration configuration){
+		var healthContributors = new List&lt;IHealthContributor&gt;{
 				new DiskSpaceContributor()
 		};
 
