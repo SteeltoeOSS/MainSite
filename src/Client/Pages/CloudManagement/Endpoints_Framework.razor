@@ -4,9 +4,13 @@
 						 ParentLinkName="Cloud Management"
 						 ParentLinkUrl="/cloud-management"
 						 ShowGetStarted=true />
-<Note>
+
+<div class="width-all">
+ <div class="width-60 container">
+<Tip>
 	<Message>Looking for a .NET Core example? <NavLink href="cloud-management/get-started/endpoints" class="nav-link">Have a look</NavLink>.</Message>
-</Note>
+</Tip>
+</div></div>
 
 <Tutorial>
 	<Title>Using @ServiceName for debugging</Title>
@@ -38,6 +42,30 @@
 					<li>
 						Once created, the project should be loaded
 						<img src="images/new-vs-proj/create-successful.png" class="img-fluid" />
+					</li>
+				</ol>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-header">Next, <b>install packages</b> needed</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+				<ol>
+					<li>
+						Open the package manager console
+						<img src="images/initializr/open-package-manager-console.png" class="img-fluid" />
+					</li>
+					<li>
+						Install NuGet distributed packages
+<pre><code>Install-Package -Id Microsoft.Extensions.Configuration -Version 2.2
+Install-Package -Id Microsoft.Extensions.Logging -Version 2.2
+Install-Package -Id Microsoft.Extensions.Logging.Console -Version 2.2
+Install-Package -Id OpenCensus -IncludePrerelease
+Install-Package -Id Steeltoe.Extensions.Logging.DynamicLogger -Version 2.3
+Install-Package -Id Steeltoe.Management.EndpointBase -Version 2.3
+Install-Package -Id Steeltoe.Extensions.Configuration.CloudFoundryBase -Version 2.3
+Install-Package -Id Steeltoe.Management.EndpointWeb -Version 2.3</code></pre>
 					</li>
 				</ol>
 			</div>
@@ -203,7 +231,7 @@ public static class LoggingConfig{
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-12 getting-started-header">Finally, <b>enable actuators</b> in the app</div>
+			<div class="col-12 getting-started-header">Finally, <b>enable actuators</b> in the app and run</div>
 		</div>
 		<div class="row">
 			<div class="col-12 getting-started-ordered-list">
@@ -248,8 +276,24 @@ protected void Application_Stop(){
 
 }</code></pre>
 					</li>
-				</ol>
+					<li>
+						<div>Run the application</div>
+						<div>
+							<TabSet>
+								@*<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" LocalEndpointAddress="http://localhost/actuators" />*@
+								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFProvider=true NoCFServices=true NoPackageManager=true>
+									<AdditionalSteps>
+										<li>
+											With the application successfully pushed, navigate to App Manager to see the new features enabled.
+											<img src="images/initializr/actuators-app-manager.png" class="img-fluid" />
+										</li>
+									</AdditionalSteps>
+								</Steeltoe.Client.Components.RunAppTab.CloudFoundry>
+							</TabSet>
 			</div>
+			</li>
+			</ol>
+		</div>
 		</div>
 	</TutorialSteps>
 </Tutorial>
