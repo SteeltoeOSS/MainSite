@@ -1,19 +1,20 @@
 ﻿@page "/cloud-management/get-started/endpoints/framework"
 
-<Breadcrumbs NavName="Management Endpoints"
+<Breadcrumbs NavName="Management Endpoints (.NET Framework)"
 						 ParentLinkName="Cloud Management"
 						 ParentLinkUrl="/cloud-management"
 						 ShowGetStarted=true />
 
 <div class="width-all">
- <div class="width-60 container">
-<Tip>
-	<Message>Looking for a .NET Core example? <NavLink href="cloud-management/get-started/endpoints" class="nav-link">Have a look</NavLink>.</Message>
-</Tip>
-</div></div>
+	<div class="width-60 container">
+		<Tip>
+			<Message>Looking for a .NET Core example? <NavLink href="cloud-management/get-started/endpoints" class="nav-link">Have a look</NavLink>.</Message>
+		</Tip>
+	</div>
+</div>
 
 <Tutorial>
-	<Title>Using @ServiceName for debugging</Title>
+	<Title>Using @ServiceName (.NET Framework)</Title>
 	<Description>This tutorial takes you through setting up a ASP.NET 4.x Framework application with cloud management endpoints and dynamic logging levels enabled.</Description>
 	<TutorialSteps>
 		<div class="row">
@@ -58,14 +59,14 @@
 					</li>
 					<li>
 						Install NuGet distributed packages
-<pre><code>Install-Package -Id Microsoft.Extensions.Configuration -Version 2.2
-Install-Package -Id Microsoft.Extensions.Logging -Version 2.2
-Install-Package -Id Microsoft.Extensions.Logging.Console -Version 2.2
+<pre><code>Install-Package -Id Microsoft.Extensions.Configuration -Version @DotNetVersion
+Install-Package -Id Microsoft.Extensions.Logging -Version @DotNetVersion
+Install-Package -Id Microsoft.Extensions.Logging.Console -Version @DotNetVersion
 Install-Package -Id OpenCensus -IncludePrerelease
-Install-Package -Id Steeltoe.Extensions.Logging.DynamicLogger -Version 2.3
-Install-Package -Id Steeltoe.Management.EndpointBase -Version 2.3
-Install-Package -Id Steeltoe.Extensions.Configuration.CloudFoundryBase -Version 2.3
-Install-Package -Id Steeltoe.Management.EndpointWeb -Version 2.3</code></pre>
+Install-Package -Id Steeltoe.Extensions.Logging.DynamicLogger -Version @SteeltoeVersion
+Install-Package -Id Steeltoe.Management.EndpointBase -Version @SteeltoeVersion
+Install-Package -Id Steeltoe.Extensions.Configuration.CloudFoundryBase -Version @SteeltoeVersion
+Install-Package -Id Steeltoe.Management.EndpointWeb -Version @SteeltoeVersion</code></pre>
 					</li>
 				</ol>
 			</div>
@@ -283,13 +284,13 @@ protected void Application_Stop(){
 								@*<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" LocalEndpointAddress="http://localhost/actuators" />*@
 								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFProvider=true NoCFServices=true NoPackageManager=true>
 									<AdditionalSteps>
-										<li>
-											With the application successfully pushed, navigate to App Manager to see the new features enabled.
-											<img src="images/initializr/actuators-app-manager.png" class="img-fluid" />
-										</li>
-									</AdditionalSteps>
-								</Steeltoe.Client.Components.RunAppTab.CloudFoundry>
-							</TabSet>
+					<li>
+						With the application successfully pushed, navigate to App Manager to see the new features enabled.
+						<img src="images/initializr/actuators-app-manager.png" class="img-fluid" />
+					</li>
+					</AdditionalSteps>
+					</Steeltoe.Client.Components.RunAppTab.CloudFoundry>
+					</TabSet>
 			</div>
 			</li>
 			</ol>
@@ -302,4 +303,7 @@ protected void Application_Stop(){
 	private string ServiceName = "Management Endpoints";
 	//private string InstanceName = "myEndpointsExample";
 	private string ProjectName = "Management_Endpoints_Example";
+	private string SteeltoeVersion = "2.3";
+	private string DotNetVersion = "2.2";
+}
 }
