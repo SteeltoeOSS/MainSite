@@ -44,7 +44,7 @@
 
 				@if (item.MenuItems != null && item.IsVisible)
 				{
-					<BlazoredSubMenu MatchLink="@item.MatchLink" Link="@item.Link" Header="@item.Title" IsEnabled="@item.IsEnabled" MenuItems="@item.MenuItems" Css="" />
+					<BlazoredSubMenu MatchLink="@item.MatchLink" Link="@item.Link" Header="@item.Title" IsEnabled="@item.IsEnabled" MenuItems="@item.MenuItems.OrderBy(q => q.Position)" Css="" />
 				}
 				else if (item.IsVisible)
 				{

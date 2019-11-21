@@ -13,7 +13,7 @@ else
 {
 	<nav role="navigation" class="blazored-menu-container @Css">
 		<ul class="blazored-menu">
-			@foreach (var item in MenuBuilder.Build(x => x.Position))
+			@foreach (var item in MenuBuilder.Build())
 			{
 				@if (item.MenuItems != null && item.IsVisible)
 				{

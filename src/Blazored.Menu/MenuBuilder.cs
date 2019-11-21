@@ -19,9 +19,9 @@ namespace Blazored.Menu
 		}
 		public List<MenuItem> MenuItems { get { return _menuItems; }}
 
-    public List<MenuItem> Build(Func<MenuItem, int> orderBy)
+    public List<MenuItem> Build()
     {
-        //var menuItems = _menuItems.OrderBy(orderBy);
+        var menuItems = _menuItems.OrderBy(q => q.Position);
         return _menuItems.ToList();
 		}
   }

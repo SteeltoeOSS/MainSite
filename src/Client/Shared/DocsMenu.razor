@@ -2,11 +2,12 @@
 @inject System.Net.Http.HttpClient Http
 @using System.Diagnostics
 @using Blazored.Menu
+@inject NavigationManager NavigationManager
 
 @if (MenuBuilder == null)
 {
 
-	<p><em>...</em></p>
+	<p><em>&nbsp;</em></p>
 }
 else
 {
@@ -15,12 +16,35 @@ else
 
 @code {
 	MenuBuilder MenuBuilder;
+	private List<MenuItem> menuItems;
+	private List<MenuItem> finalItems = new List<MenuItem>();
 
 	protected override async Task OnInitializedAsync()
 	{
-		Debug.WriteLine("Getting json");	
-	MenuItem[] menuItems = await Http.GetJsonAsync<MenuItem[]>("site-data/docs/toc.json");
-		Debug.WriteLine("Building menu");
-		MenuBuilder = new MenuBuilder(menuItems.ToList());
+		menuItems = await Http.GetJsonAsync<List<MenuItem>>("site-data/docs/toc.json");
+		MenuBuilder = new MenuBuilder(RenderMenu());
+	}
+	protected override void OnAfterRender(bool firstRender)
+	{
+		//MenuBuilder = new MenuBuilder(RenderMenu());
+	}
+	private List<MenuItem> RenderMenu()
+	{
+		List<MenuItem> finalItems = new List<MenuItem>();
+		if (menuItems == null)
+			return finalItems;
+
+		string path = NavigationManager.Uri;
+		
+		foreach(MenuItem menuitem in menuItems)
+		{
+			if (! path.Contains(menuitem.Link)){
+				menuitem.MenuItems = new List<MenuItem>();
+			}
+
+			finalItems.Add(menuitem);
+		}
+
+		return finalItems;
 	}
 }
