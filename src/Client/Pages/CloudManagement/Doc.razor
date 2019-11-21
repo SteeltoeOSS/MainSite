@@ -1,11 +1,12 @@
 ﻿@page "/cloud-management/docs"
 @page "/steeltoe-management/docs"
 @page "/docs/steeltoe-management"
+@page "/management"
+@page "/management/{Area}"
 
-<Breadcrumbs NavName="Docs"
-						 ParentLinkName="Cloud Management"
-						 ParentLinkUrl="/cloud-management" />
-<Docs FrameUrl="docs/steeltoe-management/index.html" />
+<Docs Component="management" Page="@(string.IsNullOrEmpty(Area) ? "management-tasks-overview.html" : Area+".html")" />
 @code {
-
+	[Parameter]
+	public string Area { get; set; }
+}
 }

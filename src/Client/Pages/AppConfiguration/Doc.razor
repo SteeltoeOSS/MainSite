@@ -1,11 +1,11 @@
 ﻿@page "/app-configuration/docs"
 @page "/steeltoe-configuration/docs"
 @page "/docs/steeltoe-configuration"
+@page "/configuration"
+@page "/configuration/{Area}"
 
-<Breadcrumbs NavName="Docs"
-						 ParentLinkName="App Configuration"
-						 ParentLinkUrl="/app-configuration" />
-<Docs FrameUrl="docs/steeltoe-configuration/index.html" />
+<Docs Component="configuration" Page="@(string.IsNullOrEmpty(Area) ? "configuration-overview.html" : Area+".html")" />
 @code {
-
+	[Parameter]
+	public string Area { get; set; }
 }

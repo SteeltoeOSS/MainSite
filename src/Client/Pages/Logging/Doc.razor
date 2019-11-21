@@ -2,11 +2,10 @@
 @page "/logging/docs"
 @page "/steeltoe-logging/docs"
 @page "/docs/steeltoe-logging"
+@page "/logging/{Area}"
 
-<Breadcrumbs NavName="Docs"
-						 ParentLinkName="Logging"
-						 ParentLinkUrl="/" />
-<Docs FrameUrl="docs/steeltoe-logging/index.html" />
+<Docs Component="logging" Page="@(string.IsNullOrEmpty(Area) ? "logging-overview.html" : Area+".html")" />
 @code {
-
+	[Parameter]
+	public string Area { get; set; }
 }

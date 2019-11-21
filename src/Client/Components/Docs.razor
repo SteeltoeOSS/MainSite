@@ -1,14 +1,32 @@
-﻿<div class="width-all">
-	<div class="width-70 container" style="max-width: 1420px;">
-		<div class="row">
-			<div class="col-12 p-0 m-0">
-				<iframe id="iframe" src="@FrameUrl"></iframe>
+﻿@inject HttpClient Http
+@using System.Diagnostics
+
+<div class="width-all">
+	<div class="width-90 container">
+		<div class="row no-gutters mt-4">
+			<div class="col-3 position-sticky">
+				<DocsMenu />
+			</div>
+			<div class="col-9">
+				@((MarkupString)Content)
 			</div>
 		</div>
 	</div>
 </div>
 
 @code {
- [Parameter]
- public string FrameUrl {get;set;}
+	[Parameter]
+	public string Component { get; set; }
+	[Parameter]
+	public string Page { get; set; }
+
+	private string Content { get; set; }
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+		var filePath =  "site-data/docs/" + Component + "/" + Page;
+
+		Content = await Http.GetStringAsync(filePath);
+	}
+
 }

@@ -21,22 +21,13 @@
   </ItemGroup>
   
   <ItemGroup>
+    <ProjectReference Include="..\Blazored.Menu\Blazored.Menu.csproj" />
     <ProjectReference Include="..\Shared\Steeltoe.Shared.csproj" />
   </ItemGroup>
   
   <ItemGroup>
-    <Content Update="wwwroot\stylesheets\site.css">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-    <Content Update="wwwroot\stylesheets\tocbot.css">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-  
-  <ItemGroup>
     <Folder Include="wwwroot\images\new-vs-proj\" />
+    <Folder Include="wwwroot\site-data\docs\" />
   </ItemGroup>
 
 </Project>

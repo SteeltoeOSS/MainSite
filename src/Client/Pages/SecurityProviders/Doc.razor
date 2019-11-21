@@ -1,11 +1,11 @@
 ﻿@page "/security-providers/docs"
 @page "/steeltoe-security/docs"
 @page "/docs/steeltoe-security"
+@page "/security"
+@page "/security/{Area}"
 
-<Breadcrumbs NavName="Docs"
-						 ParentLinkName="Security Providers"
-						 ParentLinkUrl="/security-providers" />
-<Docs FrameUrl="docs/steeltoe-security/index.html" />
+<Docs Component="security" Page="@(string.IsNullOrEmpty(Area) ? "security-overview.html" : Area+".html")" />
 @code {
-
+	[Parameter]
+	public string Area { get; set; }
 }

@@ -1,11 +1,11 @@
 ﻿@page "/network-file-sharing/docs"
 @page "/steeltoe-smb/docs"
 @page "/docs/steeltoe-smb"
+@page "/fileshares"
+@page "/fileshares/{Area}"
 
-<Breadcrumbs NavName="Docs"
-						 ParentLinkName="Network File Sharing"
-						 ParentLinkUrl="/" />
-<Docs FrameUrl="docs/steeltoe-smb/index.html" />
+<Docs Component="fileshares" Page="@(string.IsNullOrEmpty(Area) ? "fileshares-overview.html" : Area+".html")" />
 @code {
-
+	[Parameter]
+	public string Area { get; set; }
 }

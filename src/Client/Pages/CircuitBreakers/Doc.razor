@@ -1,11 +1,11 @@
 ﻿@page "/circuit-breakers/docs"
 @page "/steeltoe-circuitbreaker/docs"
 @page "/docs/steeltoe-circuitbreaker"
+@page "/circuitbreaker"
+@page "/circuitbreaker/{Area}"
 
-<Breadcrumbs NavName="Docs"
-						 ParentLinkName="Circuit Breakers"
-						 ParentLinkUrl="/circuit-breakers" />
-<Docs FrameUrl="docs/steeltoe-circuitbreaker/index.html" />
+<Docs Component="circuitbreaker" Page="@(string.IsNullOrEmpty(Area) ? "circuitbreaker-overview.html" : Area+".html")" />
 @code {
-
+	[Parameter]
+	public string Area { get; set; }
 }
