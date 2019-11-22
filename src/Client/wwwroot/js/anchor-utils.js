@@ -3,7 +3,6 @@
 
 	if (selector && selector.length > 1) {
 		var element = document.querySelector(selector);
-		//console.info(element);
 		if (element) {
 			var y = element.getBoundingClientRect().top + window.pageYOffset;
 			y -= document.querySelector("header").offsetHeight;

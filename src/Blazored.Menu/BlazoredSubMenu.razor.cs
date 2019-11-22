@@ -61,9 +61,9 @@ namespace Blazored.Menu
 			{
 				string path = NavigationManager.Uri;
 
-				Debug.WriteLine("==" + Header);
-				Debug.WriteLine(path);
-				Debug.WriteLine(Link);
+				//Debug.WriteLine("==" + Header);
+				//Debug.WriteLine(path);
+				//Debug.WriteLine(Link);
 
 				if (string.IsNullOrEmpty(Link))
 					return;

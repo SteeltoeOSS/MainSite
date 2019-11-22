@@ -1,50 +1,9 @@
-﻿
-@inject System.Net.Http.HttpClient Http
-@using System.Diagnostics
-@using Blazored.Menu
-@inject NavigationManager NavigationManager
+﻿@inherits DocsMenuBase
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Routing
 
-@if (MenuBuilder == null)
-{
-
+@if (MenuBuilder == null) {
 	<p><em>&nbsp;</em></p>
-}
-else
-{
-	<BlazoredMenu Css="sticky-top" MenuBuilder="@MenuBuilder" />
-}
-
-@code {
-	MenuBuilder MenuBuilder;
-	private List<MenuItem> menuItems;
-	private List<MenuItem> finalItems = new List<MenuItem>();
-
-	protected override async Task OnInitializedAsync()
-	{
-		menuItems = await Http.GetJsonAsync<List<MenuItem>>("site-data/docs/toc.json");
-		MenuBuilder = new MenuBuilder(RenderMenu());
-	}
-	protected override void OnAfterRender(bool firstRender)
-	{
-		//MenuBuilder = new MenuBuilder(RenderMenu());
-	}
-	private List<MenuItem> RenderMenu()
-	{
-		List<MenuItem> finalItems = new List<MenuItem>();
-		if (menuItems == null)
-			return finalItems;
-
-		string path = NavigationManager.Uri;
-		
-		foreach(MenuItem menuitem in menuItems)
-		{
-			if (! path.Contains(menuitem.Link)){
-				menuitem.MenuItems = new List<MenuItem>();
-			}
-
-			finalItems.Add(menuitem);
-		}
-
-		return finalItems;
-	}
+} else {
+	<BlazoredMenu Css="" MenuBuilder="@MenuBuilder" />
 }

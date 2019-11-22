@@ -37,6 +37,19 @@ namespace Blazored.Menu
 		public bool IsEnabled { get; set; } = true;
 		public string MatchLink { get; set; }
 
+		public MenuItem Clone() {
+			return new MenuItem {
+				Position = this.Position,
+				Link = this.Link,
+				Title = this.Title,
+				Match = this.Match,
+				MenuItems = this.MenuItems,
+				IsVisible = this.IsVisible,
+				IsEnabled = this.IsEnabled,
+				MatchLink = this.MatchLink
+			};
+		}
+
 	}
 	
 }
