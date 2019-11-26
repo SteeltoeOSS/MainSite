@@ -781,6 +781,12 @@ pre code {
 	padding: 5px;
 }
 /* =========================NAVIGATION======================== */
+nav {
+	overflow: hidden;
+	position: fixed; /* Set the navbar to fixed position */
+	top: 100px; /* Position the navbar at the top of the page */
+	width: 13%;
+}
 ul.blazored-menu li {
 	list-style: none;
 }
@@ -866,7 +872,11 @@ div[role=button] a.active,
 .blazored-sub-menu .blazored-sub-menu-header.open .blazored-sub-menu li a.active {
 	background-color: white;
 }
-
-	.blazored-sub-menu .blazored-sub-menu-header.open .blazored-sub-menu li a.active::before {
-		content: ">";
-	}
+.blazored-sub-menu .blazored-sub-menu-header.open .blazored-sub-menu li {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.blazored-sub-menu .blazored-sub-menu-header.open .blazored-sub-menu li a.active::before {
+	content: ">";
+}
