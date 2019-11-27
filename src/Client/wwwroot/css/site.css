@@ -814,7 +814,7 @@ li.blazored-sub-menu-header {
 		color: #3371e3;
 	}
 
-.blazored-sub-menu-header div::before {
+li.blazored-sub-menu-header::before {
 	content: "";
 	position: absolute;
 	top: 10px;
@@ -824,9 +824,10 @@ li.blazored-sub-menu-header {
 	border-color: transparent transparent transparent #3371e3;
 	transform: rotate(0deg);
 	transition: 0.3s;
+	cursor: default;
 }
 
-.blazored-sub-menu-header.open div::before {
+li.blazored-sub-menu-header.open::before {
 	transform: rotate(90deg);
 }
 
@@ -848,21 +849,7 @@ li.blazored-sub-menu-header {
 	display: block;
 }
 
-.blazored-sub-menu .blazored-sub-menu-header div::before {
-	content: "";
-	position: absolute;
-	top: 10px;
-	left: -13px;
-	border-style: solid;
-	border-width: 5px 0 5px 8px;
-	border-color: transparent transparent transparent #3371e3;
-	transform: rotate(0deg);
-	transition: 0.3s;
-}
 
-.blazored-sub-menu .blazored-sub-menu-header.open div::before {
-	transform: rotate(90deg);
-}
 
 div[role=button] a.active,
 .blazored-sub-menu li a.active {
