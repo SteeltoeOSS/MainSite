@@ -107,6 +107,8 @@ using System.IO;
 using Microsoft.Extensions.Configuration;
 using Steeltoe.Extensions.Configuration.CloudFoundry;
 
+...
+
 public class ApplicationConfig {
 	public static CloudFoundryApplicationOptions CloudFoundryApplication {
 
@@ -156,6 +158,8 @@ using Steeltoe.Common.Diagnostics;
 using Steeltoe.Common.HealthChecks;
 using Steeltoe.Management.Endpoint;
 using Steeltoe.Management.Endpoint.Health.Contributor;
+
+...
 
 public class ManagementConfig{
 	public static void ConfigureManagementActuators(IConfiguration configuration, ILoggerProvider dynamicLogger, IApiExplorer apiExplorer, ILoggerFactory loggerFactory = null){
@@ -217,6 +221,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using Steeltoe.Extensions.Logging;
 
+...
+
 public static class LoggingConfig{
 	public static ILoggerFactory LoggerFactory { get; set; }
 	public static ILoggerProvider LoggerProvider { get; set; }
@@ -241,6 +247,7 @@ public static class LoggingConfig{
 						Modify Application_Start and Application_stop in <b>Global.asax.cs</b>
 <pre><code>using System.Web.Http;
 using System.Web.Mvc;
+using Management_Endpoints_Example.App_Start;
 
 ...
 
@@ -282,7 +289,7 @@ protected void Application_Stop(){
 						<div>
 							<TabSet>
 								@*<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" LocalEndpointAddress="http://localhost/actuators" />*@
-								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFProvider=true NoCFServices=true NoPackageManager=true>
+								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFProvider=true NoCFServices=true NoPackageManager=true AsDotNetFramework=true>
 									<AdditionalSteps>
 					<li>
 						With the application successfully pushed, navigate to App Manager to see the new features enabled.

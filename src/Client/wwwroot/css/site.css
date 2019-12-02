@@ -153,7 +153,6 @@ app {
 pre {
 	background-color: #242937;
 	border: 0; /*1px solid #373737;*/
-	overflow: inherit;
 	padding: 15px;
 	margin-left: 0;
 	font-size: 83%;
