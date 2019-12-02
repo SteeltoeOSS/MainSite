@@ -3,9 +3,10 @@
 It is built using [Blazor](https://docs.microsoft.com/en-us/aspnet/core/blazor/) in Visual Studio. 
 
 ## Install Dependencies
+Requires .NET Core SDK 3.0
 
 ```bash
-dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.0.0-preview9.19465.2
+> dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.0.0-preview9.19465.2
 ```
 
 ## Local testing of Steeltoe site
@@ -13,10 +14,11 @@ dotnet new -i Microsoft.AspNetCore.Blazor.Templates::3.0.0-preview9.19465.2
 This will run the site locally.
 
 ```bash
-dotnet run
+> cd src/Server
+> dotnet run
 ```
 
-Visit site locally at [http://localhost](http://localhost)
+Visit site locally at [http://localhost:52198](http://localhost:52198)
 
 <!-- ### Instructions for Updating Documentation Staging Site
 

@@ -1,5 +1,11 @@
 [
 	{
+		"date": "<span>november</span> 27 2019",
+		"title": "Steeltoe 2.4 is available",
+		"description": "Steeltoe 2.4 boosts .NET microservices development with a code generator, new getting started guides, and more.",
+		"url": "https://content.pivotal.io/dotnet/steeltoe-2-4-boosts-dotnet-microservices-development"
+	},
+	{
 		"date": "<span>november</span> 1 2019",
 		"title": "Steeltoe 2.4 RC1 is available",
 		"description": "Featuring support for .NET Core 3.0 as well as closing a few resolved issues.",
@@ -16,11 +22,5 @@
 		"title": "Steeltoe 2.3 is available",
 		"description": "With new features in logging, cloud management, and cloud connectors as well as quite a few notable issues resolved the 2.3 release is another milestone in Steeltoe's roadmap.",
 		"url": "https://github.com/SteeltoeOSS/steeltoe/blob/master/roadmaps/2.3.0.md"
-	},
-	{
-		"date": "<span>august</span> 9 2019",
-		"title": "Update to Steeltoe 3.0 roadmap",
-		"description": "This new major version of Steeltoe will continue the Spring Cloud theme with the addition of streaming support as well as well as introduce big enhancements to the existing features.",
-		"url": "https://github.com/SteeltoeOSS/steeltoe/blob/master/roadmaps/3.0.0.md"
 	}
 ] 
