@@ -3,18 +3,7 @@
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JSRuntime
 
-<div class="width-all">
-	<div class="width-90 container">
-		<div class="row no-gutters mt-4">
-			<div class="col-3 position-sticky" style="min-height:800px">
-				<DocsMenu />
-			</div>
-			<div class="col-9">
-				@((MarkupString)Content)
-			</div>
-		</div>
-	</div>
-</div>
+@((MarkupString)Content)
 
 @code {
 	[Parameter]
@@ -41,7 +30,7 @@
 		string fragment = NavigationManager.ToAbsoluteUri(e.Location).Fragment;
 		ParseUri();
 
-		if(string.IsNullOrEmpty(fragment))
+		if (string.IsNullOrEmpty(fragment))
 			await UpdateContent();
 
 		ScrollToAnchor(fragment);
@@ -53,7 +42,7 @@
 
 		try {
 			tmp = await Http.GetStringAsync(filePath);
-		}catch(HttpRequestException http) {
+		} catch (HttpRequestException http) {
 			if (http.Message.Contains("404")) {
 				filePath = "site-data/docs/introduction/overview.html";
 				tmp = await Http.GetStringAsync(filePath);

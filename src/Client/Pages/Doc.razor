@@ -26,7 +26,20 @@
 @page "/docs/{Component}"
 @page "/{Component}/docs"
 
-<Docs Area="@(Area)" Component="@(Component)" />
+	<div class="width-all">
+		<div class="width-90 container">
+			<div class="row docs-row">
+				<div class="col-3 position-sticky docs-nav-col">
+					<DocsMenu />
+				</div>
+				<div class="col-9 docs-content-col">
+					<Docs Area="@(Area)" Component="@(Component)" />
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 @code {
 	private string _area;
 	private string _component;
