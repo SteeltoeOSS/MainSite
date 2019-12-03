@@ -745,16 +745,16 @@ background-color: #f7f7f7;
 	padding-right: 1.5%;
 	font-size: 16px;
 }
-.docs-content-col p, h1, h2, h3, h4 {
-	color: #373737;
-}
+	.docs-content-col p, .docs-content-col h1, .docs-content-col h2, .docs-content-col h3, .docs-content-col h4 {
+		color: #373737;
+	}
 	.docs-content-col ul {
 		padding-left: 2%;
 	}
-h2, h3, h4 {
-	margin-top: 5%;
-}
-table + p {
+	.docs-content-col h2, .docs-content-col h3, .docs-content-col h4 {
+		margin-top: 5%;
+	}
+/*table + p {
 	font-size: smaller;
 	font-style: italic;
 	text-align: center;
@@ -766,7 +766,7 @@ table + p::before {
 	margin: 0;
 	font-weight: bold;
 	font-size: 20px;
-}
+}*/
 
 /* =========================DOCS NAVIGATION======================== */
 nav {
@@ -774,6 +774,7 @@ nav {
 	position: fixed; /* Set the navbar to fixed position */
 	/*top: 100px;*/ /* Position the navbar at the top of the page */
 	font-size: 16px;
+	width: 20%;
 }
 .blazored-menu .blazored-sub-menu-header div[role=button]{
 	font-weight:bold;
