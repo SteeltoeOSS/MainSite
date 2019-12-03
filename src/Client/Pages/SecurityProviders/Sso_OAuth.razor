@@ -18,7 +18,7 @@
 			<div class="col-12">
 				<TabSet>
 					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<CFCreateServiceCmd>cf create-service p.identity my-sso-plan @InstanceName</CFCreateServiceCmd>
+						<CFCreateServiceCmd>cf create-service p-identity my-sso-plan @InstanceName</CFCreateServiceCmd>
 						<AdditionalSteps>
 							Use the <NavLink href="https://docs.pivotal.io/p-identity" target="_blank" class="nav-link">Pivotal Single Sign-On guide</NavLink> to deploying the SSO tile. Choose from the list of supported identity providers.
 						</AdditionalSteps>
@@ -168,6 +168,5 @@ public class ValuesController : ControllerBase{
 	private string ServiceName = "SSO";
 	private string InstanceName = "myoAuthSSOExample";
 	private string ProjectName = "OAuth_SSO_Example";
-	private string SteeltoeVersion = "2.3";
-	private string DotNetVersion = "2.2";
+	private string SteeltoeVersion = "2.4";
 }

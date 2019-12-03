@@ -25,16 +25,16 @@
 		<div class="row">
 			<div class="col-12">
 				<TabSet>
-					<Steeltoe.Client.Components.StartInstanceTab.Local ServiceName="@ServiceName">
+					@*<Steeltoe.Client.Components.StartInstanceTab.Local ServiceName="@ServiceName">
 						<DockerCmd>
 							docker run --rm -ti -p 8080:8080 --name steeltoe-uaa steeltoeoss/workshop-uaa-server
 						</DockerCmd>
 						<AdditionalSteps>
 							<Note><Message>This is a developer image of the Cloud Foundry User Account and Authentication (UAA) OAuth identity provider. It is meant for development purposes only.</Message></Note>
 						</AdditionalSteps>
-					</Steeltoe.Client.Components.StartInstanceTab.Local>
+					</Steeltoe.Client.Components.StartInstanceTab.Local>*@
 					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<CFCreateServiceCmd>cf create-service p.identity my-sso-plan @InstanceName</CFCreateServiceCmd>
+						<CFCreateServiceCmd>cf create-service p-identity my-sso-plan @InstanceName</CFCreateServiceCmd>
 						<AdditionalSteps>
 							Use the <NavLink href="https://docs.pivotal.io/p-identity" target="_blank" class="nav-link">Pivotal Single Sign-On guide</NavLink> to deploying the SSO tile. Choose from the list of supported identity providers.
 						</AdditionalSteps>
@@ -197,37 +197,18 @@ using System.Web.Mvc;
 using Microsoft.Owin.Security;
 using System.Web;
 
-public class AccountController : System.Web.Http.ApiController{
+...
+
+public class AccountController : System.Web.Http.ApiController {
 
 	public AccountController() {
 	}
 
-	[HttpPost]
+	[HttpGet]
 	[AllowAnonymous]
-	public ActionResult Login(string ReturnUrlParameter) {
-		//redirect the user to login
-		return new ChallengeResult(CloudFoundryDefaults.AuthenticationScheme, ReturnUrlParameter ?? Url.Action("Get","Values")); //default to values controller if no param provided
-	}
-
-	private IAuthenticationManager AuthenticationManager => HttpContext.Current.GetOwinContext().Authentication;
-}
-
-internal class ChallengeResult : HttpUnauthorizedResult{
-	public ChallengeResult(string providerName, string redirectUri){
-		LoginProvider = providerName;
-		RedirectUri = redirectUri;
-	}
-
-	public string LoginProvider { get; set; }
-
-	public string RedirectUri { get; set; }
-
-	public override void ExecuteResult(ControllerContext context){
-		var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
-		var owin = context.HttpContext.GetOwinContext();
-
-		// issues a 302 Redirect to the LoginProvider, in this case named "CloudFoundry"
-		owin.Authentication.Challenge(properties, LoginProvider);
+	public void Get(string ReturnUrl) {
+		var properties = new AuthenticationProperties { RedirectUri = ReturnUrl };
+		HttpContext.Current.GetOwinContext().Authentication.Challenge(properties, CloudFoundryDefaults.DisplayName);
 	}
 }</code></pre>
 					</li>
@@ -273,24 +254,35 @@ protected void Application_Start(){
 					</li>
 					<li>
 						Update configuration of the new <b>Startup.cs</b> OWIN class
-<pre><code>using System.Security.Claims;
+<pre><code>using System;
+using Microsoft.Owin;
+using Microsoft.AspNet.Identity;
+using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security;
+using Microsoft.Extensions.Logging;
+using System.Security.Claims;
 using System.Web.Helpers;
+using Owin;
+using Steeltoe.Security.Authentication.CloudFoundry.Owin;
+using Steeltoe.Security.Authentication.CloudFoundry;
+using OpenID_SSO_Example;
+using OpenID_SSO_Example.App_Start;
 
-[assembly: OwinStartup(typeof(Steeltoe_CloudFoundry_Template1.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
 
 ...
 
-public class Startup{
-	public void Configuration(IAppBuilder app){
+public class Startup {
+	public void Configuration(IAppBuilder app) {
 		app.SetDefaultSignInAsAuthenticationType(DefaultAuthenticationTypes.ExternalCookie);
 
 		// Enable the application to use a cookie to store information for the signed in user
 		app.UseCookieAuthentication(new CookieAuthenticationOptions {
 			AuthenticationType = DefaultAuthenticationTypes.ExternalCookie,
-			AuthenticationMode = AuthenticationMode.Active,
+			AuthenticationMode = AuthenticationMode.Passive,
 			CookieSecure = CookieSecureOption.Always,
-			CookieName = ".AspNet.ApplicationCookie",
-			LoginPath = new PathString("/api/Account/Login"),
+			CookieName = ".AspNet.ExternalCookie",
+			LoginPath = new PathString("/api/account"),
 			SlidingExpiration = true,
 			ExpireTimeSpan = TimeSpan.FromMinutes(5)
 		});
@@ -298,12 +290,11 @@ public class Startup{
 		//Cloud Foundry
 		app.UseCloudFoundryOpenIdConnect(
 				ApplicationConfig.Configuration,
-				CloudFoundryDefaults.AuthenticationScheme,
+				CloudFoundryDefaults.DisplayName,
 				(LoggerFactory)LoggingConfig.LoggerFactory);
 
 		AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
 	}
-		
 }</code></pre>
 					</li>
 				</ol>
@@ -373,13 +364,13 @@ public class ValuesController : ApiController{
 						<div>Run the application</div>
 						<div>
 							<TabSet>
-								<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName">
+								@*<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName">
 									<AdditionalSteps>
 					<li>
 						Once the app loads in the browser go to the <code>/api/values</code> endpoint. It should load with no issue. Then try going to the <code>/api/values/5</code> endpoint. This will redirect you to the UAA login page. Login with the user <b>fortuneTeller</b> and password <b>password</b>. You will be redirected back to the app's page where the output of <samp>value: 5</samp> is shown.
 					</li>
 					</AdditionalSteps>
-					</Steeltoe.Client.Components.RunAppTab.Local>
+					</Steeltoe.Client.Components.RunAppTab.Local>*@
 					<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" InstanceName="@InstanceName">
 						<AdditionalSteps>
 							<li>
@@ -400,7 +391,6 @@ public class ValuesController : ApiController{
 	private string ServiceName = "SSO";
 	private string InstanceName = "myOidSSOExample";
 	private string ProjectName = "OpenID_SSO_Example";
-	private string SteeltoeVersion = "2.3";
-	private string DotNetVersion = "2.2";
+	private string SteeltoeVersion = "2.4";
 }
 }
