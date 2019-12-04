@@ -27,11 +27,11 @@
 @page "/docs/{Component}/{Area}"
 @page "/docs/{Component}"
 @page "/{Component}/docs"
-
+ 
 	<div class="width-all">
 		<div class="width-90 container">
 			<div class="row docs-row">
-				<div class="col-3 position-sticky docs-nav-col">
+				<div class="col-3 docs-nav-col">
 					<DocsMenu />
 				</div>
 				<div class="col-9 docs-content-col">
@@ -62,7 +62,7 @@
 	public string Component {
 		get {
 			if (!string.IsNullOrEmpty(_component))
-				return _component.Replace("steeltoe-", "");
+				return _component;
 
 			return null;
 		}

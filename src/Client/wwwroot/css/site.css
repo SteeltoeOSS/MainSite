@@ -3,10 +3,11 @@
 
 /* DEVELOP WIDTH = 1400px */
 html, body {
-    font-family: 'Raleway', sans-serif;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: normal;
+	font-family: 'Raleway', sans-serif;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: normal;
+	scroll-behavior: smooth;
 }
 
 app {
@@ -734,47 +735,33 @@ background-color: #f7f7f7;
 	padding: 1.5% 2% 1.5% 2%;
 }
 .docs-row {
+	font-size: 16px;
 }
 .docs-nav-col {
-	margin-top: 6%;
-	min-height: 800px;
-	padding-left: 2.5%;
+	margin-top: 3%;
+	position: sticky;
+	top: 0;
+	width: 14%;
 }
+
 .docs-content-col {
 	margin-top: 3%;
 	padding-right: 1.5%;
-	font-size: 16px;
+	min-height: 400px;
 }
-	.docs-content-col p, .docs-content-col h1, .docs-content-col h2, .docs-content-col h3, .docs-content-col h4 {
-		color: #373737;
-	}
-	.docs-content-col ul {
-		padding-left: 2%;
-	}
-	.docs-content-col h2, .docs-content-col h3, .docs-content-col h4 {
-		margin-top: 5%;
-	}
-/*table + p {
-	font-size: smaller;
-	font-style: italic;
-	text-align: center;
-	font-weight: bold;
+.docs-content-col p, .docs-content-col h1, .docs-content-col h2, .docs-content-col h3, .docs-content-col h4 {
+	color: #373737;
 }
-table + p::before {
-	content: "**";
-	width: 100%;
-	margin: 0;
-	font-weight: bold;
-	font-size: 20px;
-}*/
+.docs-content-col ul {
+	padding-left: 2%;
+}
+.docs-content-col h2, .docs-content-col h3, .docs-content-col h4 {
+	margin-top: 5%;
+}
 
 /* =========================DOCS NAVIGATION======================== */
 nav {
-	overflow-x: hidden;
-	position: fixed; /* Set the navbar to fixed position */
-	/*top: 100px;*/ /* Position the navbar at the top of the page */
-	font-size: 16px;
-	width: 20%;
+	position: fixed;
 }
 .blazored-menu .blazored-sub-menu-header div[role=button]{
 	font-weight:bold;
@@ -784,13 +771,13 @@ ul.blazored-menu li {
 	color: #001f3f;
 }
 
-	ul.blazored-menu li a {
-		cursor: pointer;
-	}
+ul.blazored-menu li a {
+	cursor: pointer;
+}
 
-		ul.blazored-menu li a.active {
-			color: #333;
-		}
+ul.blazored-menu li a.active {
+	color: #333;
+}
 
 ul.blazored-sub-menu {
 	padding-left: 15px;
@@ -859,4 +846,17 @@ div[role=button] a.active,
 }
 .blazored-sub-menu-header.open .blazored-sub-menu .blazored-sub-menu-header div[role=button] {
 	font-weight: normal;
+}
+
+@media (max-height: 800px) {
+	.docs-nav-col {
+		position: unset;
+		top: unset;
+	}
+	nav {
+		position: unset;
+	}
+	.docs-content-col {
+		min-height: 200px;
+	}
 }
