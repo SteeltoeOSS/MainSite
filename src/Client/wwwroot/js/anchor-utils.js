@@ -13,3 +13,8 @@
 	else
 		window.scroll(0, 0);
 }
+function setPageTitle(title) {
+	console.debug(title);
+	document.title = title;
+	console.debug(document.title);
+}
