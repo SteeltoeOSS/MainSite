@@ -762,6 +762,7 @@ background-color: #f7f7f7;
 /* =========================DOCS NAVIGATION======================== */
 nav {
 	position: fixed;
+	width: 21%;
 }
 .blazored-menu .blazored-sub-menu-header div[role=button]{
 	font-weight:bold;
