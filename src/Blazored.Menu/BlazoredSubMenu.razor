@@ -18,7 +18,7 @@
 	}
 	else
 	{
-		<div role="button" tabindex="0" @onclick="ToggleSubMenu" @onkeydown="KeyDownHandler">
+		<div role="button" tabindex="0" @onclick="OnInitialized" @onkeydown="KeyDownHandler">
 			@if (Link != null && !IsOpen)
 			{
 				<NavLink href="@Link" class="" Match="@Match">@Header</NavLink>

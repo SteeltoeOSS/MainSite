@@ -4,11 +4,9 @@
 	[Parameter]
 	public string Title {get;set;}
 
-	protected override async Task OnAfterRenderAsync(bool firstRender) {
-		await SetPageTitle("Steeltoe - " + Title);
-	}
-	private async Task SetPageTitle(string title = "") {
+	protected override async Task OnParametersSetAsync() {
+		string title = !string.IsNullOrEmpty(Title) ? "Steeltoe - " + Title : "Steeltoe";
 		await JSRuntime.InvokeAsync<string>("setPageTitle", title);
-    StateHasChanged();
+		StateHasChanged();
 	}
 }

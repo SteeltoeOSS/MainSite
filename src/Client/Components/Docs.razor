@@ -3,6 +3,8 @@
 @inject NavigationManager NavigationManager
 @inject IJSRuntime JSRuntime
 
+<PageTitle Title="@pageTitle" />
+
 @((MarkupString)Content)
 
 @code {
@@ -12,6 +14,7 @@
 	public string Area { get; set; }
 
 	private string Content { get; set; }
+	public string pageTitle;
 
 	protected override void OnInitialized() {
 		NavigationManager.LocationChanged += LocationChanged;
@@ -36,6 +39,7 @@
 		ScrollToAnchor(fragment);
 	}
 	private async Task UpdateContent() {
+		pageTitle = parseTitleFromFileName(Component) + " Documentation";
 		var filePath = "site-data/docs/" + Component + "/" + Area + ".html";
 
 		var tmp = "";
@@ -73,4 +77,21 @@
 		if (segments.Length > 1 && string.IsNullOrEmpty(Area))
 			Area = segments[1];
 	}
+	private string parseTitleFromFileName(string fileName)
+		{
+			string str = fileName.Replace("-", " ");
+			string ret = "";
+			int idx = 0;
+			foreach (string s in str.Split(char.Parse(" ")))
+			{
+				int t;
+				if (idx == 0 && int.TryParse(s, out t)) //if the item has a position index, don't add to title
+					continue;
+
+				ret += Char.ToUpperInvariant(s[0]) + s.Substring(1).ToLower() + " ";
+				idx++;
+			}
+
+			return ret.Trim();
+		}
 }

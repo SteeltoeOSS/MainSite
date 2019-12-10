@@ -14,7 +14,15 @@
 		window.scroll(0, 0);
 }
 function setPageTitle(title) {
-	console.debug(title);
 	document.title = title;
-	console.debug(document.title);
+}
+function closeSubMenu(a) {
+	var itms = document.getElementsByClassName("blazored-sub-menu-header open");
+
+	if (!itms)
+		return;
+
+	for (var i = 0; i < itms.length; i++) {
+		itms[i].classList.remove("open");
+	}
 }

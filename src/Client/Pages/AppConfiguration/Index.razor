@@ -2,12 +2,11 @@
 @page "/app-config"
 @page "/steeltoe-configuration"
 
-<SteeltoeComponent>
+<SteeltoeComponent Name="App Configuration">
 	<DocsURL><NavLink class="component-button nav-link" href="/docs/2-configuration">VIEW THE DOCS</NavLink></DocsURL>
 	<GettingStartedURL>
 		<NavLink class="component-button nav-link" href="app-configuration/get-started">GET STARTED TUTORIAL</NavLink>
 	</GettingStartedURL>
-	<ComponentName>App Configuration</ComponentName>
 	<ComponentDescription>Separating configuration from application code is an important discipline in cloud-native development. Spring Cloud Config Server provides a mechanism to store your application’s configuration externally, and have it injected into your application at runtime. Steeltoe includes a custom .NET Configuration Provider that utilizes Spring Cloud Config Server to pull in config values stored in Git, the filesystem, or Hashicorp Vault.</ComponentDescription>
 	<WhatIsComponent>Steeltoe Configuration builds on the new .NET configuration API, which enables developers to configure an application with values from a variety of sources by using Configuration Providers.</WhatIsComponent>
 	<WhyUseComponent>With the added providers, Steeltoe Configuration takes care of managing connections to external config servers and provides new resources, such as placeholders and random values.</WhyUseComponent>
