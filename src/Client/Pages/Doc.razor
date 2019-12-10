@@ -1,7 +1,6 @@
 @using System.IO;
 @using System;
 
-@page "/docs"
 
 @page "/configuration"
 @page "/configuration/{Area}"
@@ -27,6 +26,8 @@
 @page "/discovery"
 @page "/discovery/{Area}"
 
+@page "/doc"
+@page "/docs"
 @page "/docs/{Component}/{Area}"
 @page "/docs/{Component}"
 @page "/{Component}/docs"
@@ -51,24 +52,13 @@
 
 	[Parameter]
 	public string Area {
-		get {
-			if (string.IsNullOrEmpty(_area)) {
-				return "overview";
-			} else {
-				return _area;
-			}
-		}
+		get { return _area ?? "overview"; }
 		set { _area = value; }
 	}
 
 	[Parameter]
 	public string Component {
-		get {
-			if (!string.IsNullOrEmpty(_component))
-				return _component;
-
-			return null;
-		}
+		get { return _component ?? "0-welcome"; }
 		set { _component = value; }
 	}
 }
