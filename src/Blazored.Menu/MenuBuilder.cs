@@ -33,8 +33,6 @@ namespace Blazored.Menu
 		public string Title { get; set; }
 		public NavLinkMatch Match { get; set; } = NavLinkMatch.Prefix;
 		public List<MenuItem> MenuItems { get; set; }
-		public bool IsVisible { get; set; } = true;
-		public bool IsEnabled { get; set; } = true;
 		public string MatchLink { get; set; }
 
 		public MenuItem Clone() {
@@ -44,8 +42,6 @@ namespace Blazored.Menu
 				Title = this.Title,
 				Match = this.Match,
 				MenuItems = this.MenuItems,
-				IsVisible = this.IsVisible,
-				IsEnabled = this.IsEnabled,
 				MatchLink = this.MatchLink
 			};
 		}

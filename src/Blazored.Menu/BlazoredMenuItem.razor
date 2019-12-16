@@ -1,25 +1,14 @@
-﻿@inherits BlazoredMenuItemBase
-@using Microsoft.AspNetCore.Components.Routing
+﻿@using Microsoft.AspNetCore.Components.Routing
 @using DevExpress.Blazor.AnchorUtils
 
-@if (ChildContent != null)
-{
-	<li class="@CssString" disabled="@(!IsEnabled)">
-		@ChildContent
-	</li>
-}
-else
-{
-	if (IsEnabled)
-	{
-		<li class="@CssString">
-			<AnchorLink href="@MenuItem.Link" class=""> @MenuItem.Title</AnchorLink>
-		</li>
-	}
-	else
-	{
-		<li class="@CssString" disabled>
-			@MenuItem.Title
-		</li>
-	}
+<li class="@Css">
+	<AnchorLink href="@MenuItem.Link">@MenuItem.Title</AnchorLink>
+</li>
+
+@code{
+  [Parameter]
+  public string Css { get; set; } = string.Empty;
+
+  [Parameter]
+  public MenuItem MenuItem { get; set; }
 }
