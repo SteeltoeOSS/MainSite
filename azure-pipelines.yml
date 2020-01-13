@@ -26,11 +26,9 @@ steps:
 
 - script: cp "manifest-staging.yml" "$(Build.ArtifactStagingDirectory)/manifest-staging.yml"
   displayName: "Copy staging manifest"
-  displayName: 'dotnet build $(buildConfiguration)'
 
 - script: cp "manifest-prod.yml" "$(Build.ArtifactStagingDirectory)/manifest-prod.yml"
   displayName: "Copy prod manifest"
-  displayName: 'dotnet build $(buildConfiguration)'
 
 - task: PublishBuildArtifacts@1
   displayName: "Upload Artifacts"
