@@ -6,9 +6,18 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: dotnet publish './src/Server/Steeltoe.Server.csproj' --output './publish' --configuration Release --framework netcoreapp3.0 --runtime linux-x64 --self-contained
+# ASP.NET Core
+- task: UseDotNet@2
+  displayName: "Install .NET Core 3.1.x"
+  inputs:
+    packageType: 'sdk'
+    version: '3.1.x'
+
+- script: dotnet publish './src/Server/Steeltoe.Server.csproj' --output './publish' --configuration Release --framework netcoreapp3.1 --runtime linux-x64 --self-contained
+  displayName: 'dotnet publish project'
 
 - task: CopyFiles@2
+  displayName: "Copy publish result to staging"
   inputs:
     SourceFolder: './publish'
     Contents: '**'
@@ -16,9 +25,13 @@ steps:
     CleanTargetFolder: true
 
 - script: cp "manifest-staging.yml" "$(Build.ArtifactStagingDirectory)/manifest-staging.yml"
+  displayName: "Copy staging manifest"
+
 - script: cp "manifest-prod.yml" "$(Build.ArtifactStagingDirectory)/manifest-prod.yml"
+  displayName: "Copy prod manifest"
 
 - task: PublishBuildArtifacts@1
+  displayName: "Upload Artifacts"
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'

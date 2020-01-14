@@ -1,0 +1,21 @@
+﻿@using DevExpress.Blazor.AnchorUtils
+
+<nav role="navigation" class="blazored-menu-container @Css">
+	<ul class="blazored-menu">
+		@foreach (var item in MenuBuilder.Build()){
+			@if (item.MenuItems != null){
+				<BlazoredSubMenu MenuItem="@item" MenuLevel="1" @key="item" />
+			}else{
+				<BlazoredMenuItem MenuItem="@item" />
+			}
+		}
+	</ul>
+</nav>
+<AnchorUtilsComponent />
+@code{
+	[Parameter]
+	public MenuBuilder MenuBuilder { get; set; }
+
+  [Parameter]
+	public string Css { get; set; }
+}

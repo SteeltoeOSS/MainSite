@@ -32,11 +32,18 @@ var builder = WebHost.CreateDefaultBuilder(args)
 applications:
 - name: @(ProjectName)
   buildpacks:
-  - dotnet_core_buildpack
-  stack: cflinuxfs3</code>
+    - </code>@if (AsDotNetFramework) {
+<code>hwc_buildpack</code>
+} else {
+<code>dotnet_core_buildpack</code>
+}<code>  stack: </code>@if (AsDotNetFramework) {
+<code>windows</code>
+} else {
+<code>cflinuxfs3</code>
+}
  @if(!NoCFServices && !string.IsNullOrEmpty(InstanceName)){
 <code>  services:
-  - @InstanceName</code>
+    - @InstanceName</code>
  }</pre>
 		</li>
 		<Tip><Message>With yaml files indention and line endings matter. Use an IDE like VS Code to confirm spacing and that line endings are set to <code>LF</code> (not the Windows default <code>CR LF</code>)</Message></Tip>
@@ -66,6 +73,8 @@ applications:
 	public bool NoPackageManager { get; set; } = false;
 	[Parameter]
 	public bool IncludeNavigateToApp { get; set; } = true;
+	[Parameter]
+	public bool AsDotNetFramework { get; set; } = false;
 
 	[Parameter]
 	public RenderFragment AdditionalSteps { get; set; }

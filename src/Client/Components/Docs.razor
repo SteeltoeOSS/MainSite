@@ -1,14 +1,97 @@
-﻿<div class="width-all">
-	<div class="width-70 container" style="max-width: 1420px;">
-		<div class="row">
-			<div class="col-12 p-0 m-0">
-				<iframe id="iframe" src="@FrameUrl"></iframe>
-			</div>
-		</div>
-	</div>
-</div>
+﻿@using System.Diagnostics
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+
+<PageTitle Title="@pageTitle" />
+
+@((MarkupString)Content)
 
 @code {
- [Parameter]
- public string FrameUrl {get;set;}
+	[Parameter]
+	public string Component { get; set; }
+	[Parameter]
+	public string Area { get; set; }
+
+	private string Content { get; set; }
+	public string pageTitle;
+
+	protected override void OnInitialized() {
+		NavigationManager.LocationChanged += LocationChanged;
+	}
+	protected override async Task OnAfterRenderAsync(bool firstRender) {
+		if (firstRender) {
+			ParseUri();
+			await UpdateContent();
+			ScrollToAnchor(forceScroll: true);
+		}
+	}
+	private async void LocationChanged(object sender, LocationChangedEventArgs e) {
+		//string navigationMethod = e.IsNavigationIntercepted ? "HTML" : "code";
+		//Debug.WriteLine($"Notified of navigation via {navigationMethod} to {e.Location}");
+
+		string fragment = NavigationManager.ToAbsoluteUri(e.Location).Fragment;
+		ParseUri();
+
+		if (string.IsNullOrEmpty(fragment))
+			await UpdateContent();
+
+		ScrollToAnchor(fragment);
+	}
+	private async Task UpdateContent() {
+		pageTitle = parseTitleFromFileName(Component) + " Documentation";
+		var filePath = "site-data/docs/" + Component + "/" + Area + ".html";
+
+		var tmp = "";
+
+		try {
+			tmp = await Http.GetStringAsync(filePath);
+		} catch (HttpRequestException http) {
+			if (http.Message.Contains("404")) {
+				filePath = "site-data/docs/welcome/overview.html";
+				tmp = await Http.GetStringAsync(filePath);
+			}
+		} finally {
+			Content = tmp;
+			StateHasChanged();
+		}
+	}
+
+	private void ScrollToAnchor(string anchor = "", bool forceScroll = false) {
+		if (!string.IsNullOrEmpty(anchor) || forceScroll)
+			JSRuntime.InvokeAsync<string>("scrollToAnchor", anchor);
+	}
+	private void Dispose() {
+		NavigationManager.LocationChanged -= LocationChanged;
+	}
+	private void ParseUri() {
+		var path = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+		string[] segments = path.Split(Char.Parse("/"));
+
+		if (segments.Length == 0)
+			return; //nothing to see here
+
+		if (segments.Length > 0 && string.IsNullOrEmpty(Component))
+			Component = segments[0];
+
+		if (segments.Length > 1 && string.IsNullOrEmpty(Area))
+			Area = segments[1];
+	}
+	private string parseTitleFromFileName(string fileName)
+		{
+			string str = fileName.Replace("-", " ");
+			string ret = "";
+			int idx = 0;
+			foreach (string s in str.Split(char.Parse(" ")))
+			{
+				int t;
+				if (idx == 0 && int.TryParse(s, out t)) //if the item has a position index, don't add to title
+					continue;
+
+				ret += Char.ToUpperInvariant(s[0]) + s.Substring(1).ToLower() + " ";
+				idx++;
+			}
+
+			return ret.Trim();
+		}
 }

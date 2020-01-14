@@ -32,7 +32,7 @@
 			<div class="col-12 getting-started-ordered-list">
 				<ol>
 					<li>
-						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="service-discovery.png" DependencyName="Discovery" ProjectName="@RegisterProjectName" />
+						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="service-discovery.png" DependencyName="Discovery" ProjectName="@(RegisterProjectName.Replace("-","_"))" />
 					</li>
 					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
 					<li>
@@ -70,9 +70,9 @@
 						</TabSet>
 					</li>
 					<li>
-						Run the application and confirm it has registered with Eureka
+						Run the application and confirm it has registered with Consul
 						<TabSet>
-							<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@RegisterProjectName">
+							<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@RegisterProjectName.Replace("-","_")">
 								<AdditionalSteps>
 					<li>
 						Navigate to the Consol dashboard at <a href="http://localhost:8500/" target="_blank">http://localhost:8500/</a> to see the service listed.
@@ -101,7 +101,7 @@
 			<div class="col-12 getting-started-ordered-list">
 				<ol>
 					<li>
-						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="service-discovery.png" DependencyName="Discovery" ProjectName="@DiscoverProjectName" />
+						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="service-discovery.png" DependencyName="Discovery" ProjectName="@DiscoverProjectName.Replace("-","_")" />
 					</li>
 					<li>
 						Update the discovery values to not register in <b>appsettings.json</b>
@@ -129,7 +129,7 @@ using Microsoft.AspNetCore.Mvc;
 using Steeltoe.Common.Discovery;
 using System.Net.Http;
 
-namespace Eureka_Discover_Example.Controllers
+namespace Consul_Discover_Example.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -157,7 +157,7 @@ namespace Eureka_Discover_Example.Controllers
 					<li>
 						Run the app to see discovery in action
 						<TabSet>
-							<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@DiscoverProjectName" VSEndpointAddress="http://localhost:8081/api/values" />
+							<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@DiscoverProjectName.Replace("-","_")" VSEndpointAddress="http://localhost:8081/api/values" />
 							@*<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@DiscoverProjectName" InstanceName="@ServiceName" />
 								<Steeltoe.Client.Components.RunAppTab.StTooling ProjectName="@DiscoverProjectName" />*@
 						</TabSet>
@@ -176,6 +176,6 @@ namespace Eureka_Discover_Example.Controllers
 {
 	private string ServiceName = "Consul";
 	//private string InstanceName = "myConsulExample";
-	private string RegisterProjectName = "Consul_Register_Example";
-	private string DiscoverProjectName = "Consul_Discover_Example";
+	private string RegisterProjectName = "Consul-Register-Example";
+	private string DiscoverProjectName = "Consul-Discover-Example";
 }

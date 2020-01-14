@@ -4,8 +4,15 @@
 						 ParentLinkName="Cloud Management"
 						 ParentLinkUrl="/cloud-management"
 						 ShowGetStarted=true />
+<div class="width-all">
+ <div class="width-60 container">
+<Tip>
+	<Message>Looking for a .NET Framework example? <NavLink href="cloud-management/get-started/endpoints/framework" class="nav-link">Have a look</NavLink>.</Message>
+</Tip>
+	 </div></div>
+
 <Tutorial>
-	<Title>Using @ServiceName for debugging</Title>
+	<Title>Using @ServiceName</Title>
 	<Description>This tutorial takes you through setting up a .NET Core application with cloud management endpoints automatically added in.</Description>
 	<TutorialSteps>
 		<div class="row">
@@ -31,16 +38,18 @@
 							<TabSet>
 								@*<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" LocalEndpointAddress="http://localhost/actuators" />*@
 								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFServices=true NoPackageManager=true>
-								<AdditionalSteps>
-									<li>With the application successfully pushed, navigate to App Manager to see the new features enabled.
-									<img src="images/initializr/actuators-app-manager.png" class="img-fluid" /></li>
-								</AdditionalSteps>
+									<AdditionalSteps>
+										<li>
+											With the application successfully pushed, navigate to App Manager to see the new features enabled.
+											<img src="images/initializr/actuators-app-manager.png" class="img-fluid" />
+										</li>
+									</AdditionalSteps>
 								</Steeltoe.Client.Components.RunAppTab.CloudFoundry>
 							</TabSet>
-						</div>
-					</li>
-				</ol>
 			</div>
+			</li>
+			</ol>
+		</div>
 		</div>
 	</TutorialSteps>
 </Tutorial>

@@ -3,17 +3,18 @@
 
 /* DEVELOP WIDTH = 1400px */
 html, body {
-    font-family: 'Raleway', sans-serif;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: normal;
+	font-family: 'Raleway', sans-serif;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: normal;
+	scroll-behavior: smooth;
 }
 
 app {
     display: block;
 }
 
-/* /*=====================CONTAINER SIZING===================== */
+/*=====================CONTAINER SIZING===================== */
 .width-90 {
 	max-width: 90%;
 }
@@ -108,7 +109,7 @@ app {
 }*/
 
 
-/* /*=====================FONT COLORS===================== */
+/*=====================FONT COLORS===================== */
 .yellow {
 	color: #ffd700;
 }
@@ -153,13 +154,13 @@ app {
 pre {
 	background-color: #242937;
 	border: 0; /*1px solid #373737;*/
-	overflow: inherit;
 	padding: 15px;
 	margin-left: 0;
 	font-size: 83%;
 	color: white;
 	tab-size: 4;
 	overflow-x: scroll;
+	overflow-x: visible;
 }
 code.inline, code.inline-no-ps {
 	display: block;
@@ -692,4 +693,171 @@ font-family: 'Raleway', sans-serif;
 	margin: 0 0 10px 0;
 }
 .tools-item .desc {
+}
+
+/* =========================DOCS======================== */
+.table {
+	margin: 2% 0 3% 0;
+}
+
+.table thead {
+	background-color: #e4f1ff;
+	color: #00376e;
+}
+
+.table thead th, .table td, .table th {
+	border: 0;
+	color: #00376e;
+}
+
+.table tbody tr:nth-child(2n) {
+background-color: #f7f7f7;
+}
+
+.blockquote {
+	font-size: inherit;
+	margin-top: 5%;
+}
+.blockquote::before {
+	content: '! Note';
+	width: 100%;
+	background-color: #1abc9c;
+	text-transform: capitalize;
+	color: white;
+	padding: 8px 0 8px 14px;
+	display: block;
+	margin: 0;
+	font-weight: bold;
+	font-size: 20px;
+}
+.blockquote p {
+	background-color: #dbfaf4;
+	padding: 1.5% 2% 1.5% 2%;
+}
+.docs-row {
+	font-size: 16px;
+}
+.docs-nav-col {
+	margin-top: 3%;
+	position: sticky;
+	top: 0;
+	width: 14%;
+}
+
+.docs-content-col {
+	margin-top: 3%;
+	padding-right: 1.5%;
+	min-height: 400px;
+}
+.docs-content-col p, .docs-content-col h1, .docs-content-col h2, .docs-content-col h3, .docs-content-col h4 {
+	color: #373737;
+}
+.docs-content-col ul {
+	padding-left: 2%;
+}
+.docs-content-col h2, .docs-content-col h3, .docs-content-col h4 {
+	margin-top: 5%;
+}
+
+/* =========================DOCS NAVIGATION======================== */
+nav {
+	position: fixed;
+	width: 21%;
+}
+.blazored-menu .blazored-sub-menu-header div[role=button]{
+	font-weight:bold;
+}
+ul.blazored-menu li {
+	list-style: none;
+	color: #001f3f;
+}
+
+ul.blazored-menu li a {
+	cursor: pointer;
+}
+
+ul.blazored-menu li a.active {
+	color: #333;
+}
+
+ul.blazored-sub-menu {
+	padding-left: 15px;
+}
+
+li.blazored-sub-menu-header {
+	color: #303030;
+	position: relative;
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+	li.blazored-sub-menu-header div:hover {
+		color: #3371e3;
+	}
+
+li.blazored-sub-menu-header::before {
+	content: "";
+	position: absolute;
+	top: 6px;
+	left: -14px;
+	border-style: solid;
+	border-width: 5px 0 5px 8px;
+	border-color: transparent transparent transparent #3371e3;
+	transform: rotate(0deg);
+	transition: 0.3s;
+	cursor: default;
+}
+
+li.blazored-sub-menu-header.open::before {
+	transform: rotate(90deg);
+}
+
+.blazored-sub-menu {
+	display: none;
+	list-style: none;
+}
+
+.blazored-sub-menu-header.open .blazored-sub-menu {
+	display: block;
+}
+
+.blazored-sub-menu .blazored-sub-menu-header .blazored-sub-menu {
+	display: none;
+	list-style: none;
+}
+
+.blazored-sub-menu .blazored-sub-menu-header.open .blazored-sub-menu {
+	display: block;
+}
+
+div[role=button] a.active,
+.blazored-sub-menu li a.active {
+	/*background-color: #dddddd;*/
+	padding:3px;
+}
+
+.blazored-sub-menu .blazored-sub-menu-header.open .blazored-sub-menu li a.active {
+	background-color: #dddddd;
+	padding: 3px;
+}
+.blazored-sub-menu .blazored-sub-menu-header.open .blazored-sub-menu li {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.blazored-sub-menu-header.open .blazored-sub-menu .blazored-sub-menu-header div[role=button] {
+	font-weight: normal;
+}
+
+@media (max-height: 800px) {
+	.docs-nav-col {
+		position: unset;
+		top: unset;
+	}
+	nav {
+		position: unset;
+	}
+	.docs-content-col {
+		min-height: 200px;
+	}
 }

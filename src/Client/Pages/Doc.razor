@@ -1,0 +1,64 @@
+@using System.IO;
+@using System;
+
+
+@page "/configuration"
+@page "/configuration/{Area}"
+
+@page "/circuitbreaker"
+@page "/circuitbreaker/{Area}"
+
+@page "/management"
+@page "/management/{Area}"
+
+@page "/logging"
+@page "/logging/{Area}"
+
+@page "/fileshares"
+@page "/fileshares/{Area}"
+
+@page "/security"
+@page "/security/{Area}"
+
+@page "/connectors"
+@page "/connectors/{Area}"
+
+@page "/discovery"
+@page "/discovery/{Area}"
+
+@page "/doc"
+@page "/docs"
+@page "/docs/{Component}/{Area}"
+@page "/docs/{Component}"
+@page "/{Component}/docs"
+
+	<div class="width-all">
+		<div class="width-90 container">
+			<div class="row docs-row">
+				<div class="col-3 docs-nav-col">
+					<DocsMenu />
+				</div>
+				<div class="col-9 docs-content-col">
+					<Docs Area="@(Area)" Component="@(Component)" />
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+@code {
+	private string _area;
+	private string _component;
+
+	[Parameter]
+	public string Area {
+		get { return _area ?? "overview"; }
+		set { _area = value; }
+	}
+
+	[Parameter]
+	public string Component {
+		get { return _component ?? "0-welcome"; }
+		set { _component = value; }
+	}
+}
