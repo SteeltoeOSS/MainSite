@@ -213,6 +213,11 @@ a {
 .font-sm {
 	font-size: 90%;
 }
+.font-normal {
+	font-style: normal;
+	font-weight: normal;
+	font-size: 20px;
+}
 .line-height-30 {
 	line-height: 30px;
 }
