@@ -1,7 +1,6 @@
 @using System.IO;
 @using System;
 
-
 @page "/configuration"
 @page "/configuration/{Area}"
 
@@ -58,7 +57,7 @@
 
 	[Parameter]
 	public string Component {
-		get { return _component ?? "0-welcome"; }
+		get { return _component ?? "welcome"; }
 		set { _component = value; }
 	}
 }
