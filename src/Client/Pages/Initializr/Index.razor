@@ -13,14 +13,19 @@
 		<div class="row no-gutters">
 			<div class="col component-desc">One of the biggest secrets to highly productive .NET development teams is application generators. Enterprises have found that developers adopt platforms far quicker when everything they need to get started is right there, at their fingertips. Application generators help developers to get started quickly by providing useful guide rails that reduce toil and ease their burden. Application generators also encourage common approaches to common problems, which is particularly useful if you have lots of teams creating microservices at the same time.
 			<br /><br />
-			The Steeltoe Initializr project is an application generator meant to get cloud-native .NET developers going very quickly. But it doesn’t stop there. Chances are your apps aren’t just using the typical .NET Core or Steeltoe libraries. It’s also using internal custom libraries specific to your business. Every business has libraries: tools they rely on to simplify tasks or take care of the plumbing. These libraries are quite important and often include proprietary business logic that’s both private and unique. Application generators can help developers to get easy access to these libraries without having to delve into docs, wade through wikis, or search in NuGet repositories.</div>
+			The Steeltoe Initializr project is an application generator meant to get cloud-native .NET developers going very quickly. But it doesn’t stop there. Chances are your apps aren’t just using the typical .NET Core or Steeltoe libraries. It’s also using internal custom libraries specific to your business. Every business has libraries: tools they rely on to simplify tasks or take care of the plumbing. These libraries are quite important and often include proprietary business logic that’s both private and unique. Application generators can help developers to get easy access to these libraries without having to delve into docs, wade through wikis, or search in NuGet repositories.
+			<br /><br />
+			Additionally an application generator can help bond development teams and security teams to the same vision by making the right thing, the easy thing. Instead of developers using previous projects to start a new project they use the application generator. Now they can start with an up to date version of all required dependencies!</div>
 		</div>
 	</div>
 </div>
 <div class="width-all yellow-slant" style="min-height: 321px;">
 	<div class="width-60 container">
 		<div class="row no-gutters">
-			<div class="col"><NavLink class="component-button nav-link" href="/initializr/get-started">GET STARTED</NavLink></div>
+			<div class="col-4"><NavLink class="component-button nav-link" href="/initializr/get-started">GET STARTED</NavLink></div>
+			<div class="col">
+				<NavLink class="component-button nav-link" href="/docs/developer-tools/initializr">VIEW THE DOCS</NavLink>
+			</div>
 		</div>
 	</div>
 </div>
@@ -33,37 +38,20 @@
 		</div>
 		<div class="row mb-5 no-gutters">
 			<div class="col component-whyuse-desc">
-				There are a few ways you can use Steeltoe Initializr. Every option gives you the same ready to go Visual Studio project.
-				<h4>Public Site <span class="font-normal">(<NavLink class="nav-link" href="https://start.steeltoe.io" target="_blank">https://start.steeltoe.io</NavLink>)</span></h4>
-				Using the Initializr website is the fastest way to get going. If you are evaluating Initializr as an option or using it as your chosen application generator, the website will give you the latest and greatest options with a click of the button.
-				<br /><br />
-				The basics are to choose a Steeltoe version, .NET Core version, and name the project. From there you can optionally add dependencies. Things like actuators, dynamic logging, and SQL Server are just a few of the options.
+				There are a few ways you can use Steeltoe Initializr. Every option gives you the same ready to go Visual Studio project. The typical use of Initializr is hosting the service in-house. Because it is a nuget distributed package included in an even simple'r .NET Core app, hosting and staying up to date doesn't come with a bunch of debt. Hosting in-house also gives teams the option to add their own private dependencies to the service, but stay up to date with the community.
 			</div>
 			<div class="col component-whyuse-desc">
-				<h4>Web Requests <span class="font-normal">(using curl)</span></h4>
-				If you fancy a terminal based approach, or you’re looking to automate application generation all together the Initializr’s curl option is for you. With this, you craft a GET call to the api with your desired options. Consider the following example:
-<pre><code>$ curl https://start.steeltoe.io/starter.zip -d “dependencies=Actuators,DynamicLogger,SQL Server” -d “projectName=MyCompany.MySample” -o “myProject.zip”</code></pre>
-				The result will be a zipped Visual Studio solution named “myProject.zip”. Within will be a ready to compile .NET Core project with the namespace “MyCompany.MySample”. The project will have all the goodness of .NET Core best practices along with Steeltoe actuators, dynamic logging, and a mock’d connection to SQL.
-				<Note><Message>Using a Windows desktop? To get the most out of curl, try the <NavLink class="nav-link" href="https://docs.microsoft.com/en-us/windows/wsl/install-win10" target="_blank">Windows subsystem for linux</NavLink> (WSL) and the new <NavLink class="nav-link" href="https://github.com/microsoft/terminal" target="_blank">Terminal project</NavLink>. Together they will provide a quick start to full curl.</Message></Note>
+				<h4>Hosted Service</h4>
+				<div>
+					As a hosted service, Initializr offers both API and browser interfaces. The service itself is distributed as a Nuget package which you include in a new .NET Core web project. From there you can run the project as a web-based service. Out of the box you'll get all the <NavLink class="nav-link" href="xxxx" target="_blank">default dependencies</NavLink> along with endpoints for interaction. Try the below curl command that uses our hosted Initializr service to get started.<br /><br />
+<pre><code>$ curl https://start.steeltoe.io/starter.zip -d "dependencies=Actuators,DynamicLogger,SQL Server" -d "projectName=MyCompany.MySample" -o "myProject.zip"</code></pre>
+				</div>
 			</div>
 			<div class="col component-whyuse-desc">
-				<h4>Dotnet templates</h4>
-				If you’ve already got the <NavLink class="nav-link" href="https://docs.microsoft.com/en-us/dotnet/core/tools" target="_blank">.NET cli</NavLink> installed (you do, right!?) then getting started with Steeltoe Initializr is just one command away. Install the template:
-<pre><code>PS C:\> dotnet new -i steeltoe.templates::2.2.1 --nuget-source https://www.myget.org/F/steeltoedev/api/v3/index.json </code></pre>
-				Then create a new project with dependencies:
-<pre><code>PS C:\> dotnet new Steeltoe-WebApi --Actuators --DynamicLogger --name “MyCompany.MySample”</code></pre>
-				This will give you a ready to go .NET Core Visual Studio project with the namespace “MyCompany.MySample”. The Steeltoe actuators and dynamic logging components will be baked in as well.
-			</div>
-			<div class="col component-whyuse-desc">
-				<h4>Off-line</h4>
-				The examples described above all require a public internet connection. Reality is many developers don’t have this, or their connection is very limited. Also Initializr is meant to be customized with internal libraries. To do this you’ll need to bring the project in-house.
-				<br /><br />
-				Initializr is distributed as a Nuget package you can add to any .NET Core project. The idea is to give you all the core functions and templates, but let you customize the UI as well as what dependencies developers have access to.
-				<br /><br />
-				To get started create a new .NET Core app and add the Initializr package
-<pre><code>PS C:\> dotnet new webapp
-PS c:\> dotnet add package Steeltoe.Initializr</code></pre>
-				The result will be a ready to run Visual Studio project, that has a single endpoint to handle web requests using curl. For interacting with your Initializr through a browser you can create your own web ui or clone the start.steeltoe.io repo as a jump start.
+				<h4>Browser UI</h4>
+				<div>
+					Along with adding the Initializr package, you can optionally add a web site in the same .NET Core project. This gives developers an additional interaction with the Initializr service. We have created a <NavLink class="nav-link" href="xxxx" target="_blank">basic web project</NavLink> doing just that to help get started. If you'de like to see the UI in action head over to <NavLink class="nav-link" href="https://start.steeltoe.io" target="_blank">https://start.steeltoe.io</NavLink> and create your first Initializr project now!
+				</div>
 			</div>
 		</div>
 		<div class="row no-gutters">
@@ -73,26 +61,23 @@ PS c:\> dotnet add package Steeltoe.Initializr</code></pre>
 		</div>
 		<div class="row mb-5 no-gutters">
 			<div class="col component-whyuse-desc">
-				That's what Initializr templates are all about. Under the covers Initializr is using the .NET template engine, so building your own is simple! Bla bla bla bla
-				<br /><br />
-				Learn more about using .NET templating, here.
-				<h4>Creating for off-line use</h4>
-				Running Initializr off line isn’t just about limited network connections. The Steeltoe Initializr is meant to be extended. While having the ability to generate Steeltoe projects automatically is super awesome, what if you could also add in your own dependencies? What if your organization could offer a starting place for all developers, that (safely) includes your best practices and secret sauce?
+				No matter the way you choose to use Initializr, the value is in the distribution of pre-packaged dependencies. The <NavLink class="nav-link" href="xxxx" target="_blank">default dependencies</NavLink> included in Initializr are mostly Steeltoe focused. Things like database connectors, a Spring config client, a Consol discovery client, and many others. But this is a community driven project, so it only makes sense to offer ways for the .NET community to contribute.
+				<h4>Creating private dependencies</h4>
+				Running Initializr in-house isn’t just about limited network connections. The Steeltoe Initializr is meant to be extended. While having the ability to generate Steeltoe projects automatically is super awesome, what if you could also add in your own dependencies? What if your organization could offer a starting place for all developers, that (safely) includes your best practices and secret sauce?
+				<br /><br />TODO: provide more detail about how to create a dependency and add it in to an Initializr instance
 				<h4>Creating for public use on start.steeltoe.io</h4>
-				You need to follow these guidelines.
+				If you would like for your Initializr dependency to be a part of the publicly hosted service, please review the <NavLink class="nav-link" href="https://github.com/SteeltoeOSS/initializr/blob/master/THIRD-PARTY-CONTRIBUTIONS.md" target="_blank">guidelines</NavLink>. Once you have everything in place, submit a request to XXXXXXXX.
 				<h4>Getting listed in the incubator</h4>
-				Use these guidelines as a reference and promote it use individually.
+				Sometimes you have a great idea for a very useful dependency but don't have the time to maintain it. If that's the case, follow the <NavLink class="nav-link" href="https://github.com/SteeltoeOSS/initializr/blob/master/THIRD-PARTY-CONTRIBUTIONS.md" target="_blank">guidelines</NavLink> as closely as possible, and request a new repo in Steeltoe's <NavLink class="nav-link" href="https://github.com/SteeltoeOSS-incubator" target="_blank">incubator org</NavLink>. This is a place to share Steeltoe based ideas with the community, giving them the option to use.
 			</div>
 		</div>
-
-
 		<div class="row py-5 no-gutters">
 			<div class="col"></div>
 			<div class="col text-center pr-4">
 				<div class="width-all"><NavLink class="component-button nav-link" href="/initializr/get-started">GET STARTED</NavLink></div>
 			</div>
 			<div class="col text-center pl-4">
-				<div class="width-all"><NavLink class="component-button nav-link" href="https://github.com/steeltoeoss/initializr" target="_blank">VIEW THE SOURCE</NavLink></div>
+				<div class="width-all"><NavLink class="component-button nav-link" href="/docs/developer-tools/initializr" target="_blank">VIEW THE DOCS</NavLink></div>
 			</div>
 			<div class="col"></div>
 		</div>
