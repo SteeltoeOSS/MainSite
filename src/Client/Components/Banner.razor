@@ -3,7 +3,7 @@
 		<div class="row no-gutters align-items-center">
 			<div class="col" style="margin: .7% 3% .7% 5%;max-width: 11%;">
 				<div class="sign rounded-pill special-link">
-				<div style="padding: 2px 0px 2px 0px;">event</div>
+				<div style="padding: 2px 0px 2px 0px;">@BannerTypeName</div>
 				</div>
 			</div>
 			<div class="col desc">
@@ -21,9 +21,12 @@
 
 
 @code {
- [Parameter]
- public RenderFragment ChildContent { get; set; }
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
 
- [Parameter]
- public string Href {get;set;}
+	[Parameter]
+	public string Href {get;set;}
+
+	[Parameter]
+	public string BannerTypeName { get; set; } = "event";
 }
