@@ -1,0 +1,93 @@
+﻿@page "/observability/grafana"
+
+	<Breadcrumbs NavName="Grafana"
+							 ParentLinkName="Observability"
+							 ParentLinkUrl="/observability"
+							 ShowGetStarted=true />
+<Tutorial>
+	<Title>Using Grafana for app container metrics, distributed tracing, and observability</Title>
+	<Description>This tutorial takes you creating a simple Steeltoe app with actuators, logging, and distributed tracing. With that app running you then export the data to an instance of Prometheus and visualize things in a Grafana dashboard.</Description>
+	<TutorialSteps>
+		<div class="row">
+			<div class="col-12 getting-started-header bold">First, <b>start a Prometheus instance</b>. Depending on your hosting platform this is done in several ways.</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<TabSet>
+					<Steeltoe.Client.Components.StartInstanceTab.Local ServiceName="@ServiceName">
+						<DockerCmd>docker run -d --name @InstanceName prometheus</DockerCmd>
+					</Steeltoe.Client.Components.StartInstanceTab.Local>
+					<Steeltoe.Client.Components.StartInstanceTab.Kubernetes InstanceName="@InstanceName" ServiceName="@ServiceName">
+						<HelmGettingStartedUrl>https://hub.helm.sh/charts/stable/mongodb</HelmGettingStartedUrl>
+						<HelmCmd>helm install prometheus --name @InstanceName</HelmCmd>
+					</Steeltoe.Client.Components.StartInstanceTab.Kubernetes>
+				</TabSet>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-header">Next, <b>create a .NET Core WebAPI</b> with the correct Steeltoe dependencies</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+				<ol>
+					<li>
+						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="actuators.png" DependencyName="Actuators" ProjectName="@ProjectName" />
+					</li>
+					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
+					<li>
+						Set the instance address in <b>appsettings.json</b>
+						<TabSet>
+							<Steeltoe.Client.Components.AppSettingsTab.Local ServiceName="@ServiceName"
+																												ServicePort="27017"
+																												ParentSettingsParamName="mongodb"
+																												ChildSettingsParamName="client"
+																												ServiceServer="127.0.0.1"
+																												ServiceUsername="steeltoe"
+																												ServicePassword="Steeltoe234" />
+							<Steeltoe.Client.Components.AppSettingsTab.Azure InstanceName="@InstanceName"
+																												ServiceName="@ServiceName"
+																												ParentSettingsParamName="mongodb"
+																												ChildSettingsParamName="client"
+																												ServicePort="AZURE_PROVIDED"
+																												ServiceServer="AZURE_PROVIDED"
+																												ServiceUsername="AZURE_PROVIDED"
+																												ServicePassword="AZURE_PROVIDED"
+																												ServiceDatabase="AZURE_PROVIDED" />
+							<Steeltoe.Client.Components.AppSettingsTab.Kubernetes InstanceName="@InstanceName"
+																														 ServiceName="@ServiceName"
+																														 ServicePort="HELM_PROVIDED_PORT_NUMBER"
+																														 ParentSettingsParamName="mongodb"
+																														 ChildSettingsParamName="client"
+																														 ServiceServer="HELM_PROVIDED_HOST_ADDRESS"
+																														 ServiceUsername="root"
+																														 ServicePassword="Steeltoe234" />
+						</TabSet>
+					</li>
+					<li>
+						<div>Run the application</div>
+						<div>
+							<TabSet>
+								<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" />
+								<Steeltoe.Client.Components.RunAppTab.AzureAppService>
+									<AzureDeployHowToUrl>https://docs.microsoft.com/en-us/visualstudio/deployment/quickstart-deploy-to-azure?view=vs-2019</AzureDeployHowToUrl>
+								</Steeltoe.Client.Components.RunAppTab.AzureAppService>
+								<Steeltoe.Client.Components.RunAppTab.Kubernetes ProjectName="@ProjectName" />
+							</TabSet>
+						</div>
+					</li>
+					<li>
+						Once the app loads in the browser you will see a list of the default databases installed with @ServiceName.
+						<br /><samp>["admin","config","local"]</samp>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</TutorialSteps>
+</Tutorial>
+
+@code
+{
+	private string ServiceName = "wavefront";
+	private string InstanceName = "mywavefrontservice";
+	private string ProjectName = "Wavefront Observability";
+}

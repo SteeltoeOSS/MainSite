@@ -1,0 +1,90 @@
+﻿@page "/observability/tanzu"
+
+	<Breadcrumbs NavName="Tanzu App Manager"
+							 ParentLinkName="Observability"
+							 ParentLinkUrl="/observability"
+							 ShowGetStarted=true />
+<Tutorial>
+	<Title>Using Tanzu App Manager for app container metrics, distributed tracing, and observability</Title>
+	<Description>This tutorial takes you creating a simple Steeltoe app with actuators, logging, and distributed tracing. With that app running you then export the data to a Tanzu Application Services foundation.</Description>
+	<TutorialSteps>
+		<div class="row">
+			<div class="col-12 getting-started-header bold">Prereq's.</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				You'll need acces to Tanzu Application Services to complete this guide. If you don't already have creds and the URL to app manager, create a free account <NavLink class="nav-link" href="https://run.pivotal.io/" target="_blank">here</NavLink>.
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-header">First, <b>start a Zipkin instance</b>.</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<TabSet>
+					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="Zipkin" ShowServiceLookup=false>
+						<CFCreateServiceCmd>cf push @InstanceName --docker-image steeltoeoss/zipkin</CFCreateServiceCmd>
+						<AdditionalSteps>
+							<li>Once the app is deployed and the Zipkin server is started, the cf cli will print out the public route. An example route would be <code>mytracingexample.cfapps.io</code>. You will need this value below.</li>
+						</AdditionalSteps>
+					</Steeltoe.Client.Components.StartInstanceTab.CloudFoundry>
+				</TabSet>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-header">Next, <b>create a .NET Core WebAPI</b> with the correct Steeltoe dependencies.</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+				<ol>
+					<li>
+						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="actuators.png" ProjectName="@ProjectName" DependencyName="Actuators, DynamicLogging" />
+					</li>
+					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
+					<li>
+						Set the actuators prefix in <b>appsettings.json</b>
+						<TabSet>
+							<Steeltoe.Client.Components.AppSettingsTab.CloudFoundry ServiceName="@ServiceName" SpringApplicationName="@ProjectName" ManagementEndpointPath="/cloudfoundryapplication" />
+						</TabSet>
+					</li>
+					<li>
+						Set the Zipkin instance address in <b>appsettings.json</b>
+						<TabSet>
+							<Steeltoe.Client.Components.AppSettingsTab.CloudFoundry ServiceName="Zipkin Server"  SpringApplicationName="@ProjectName" ZipkinEndpoint="https://&lt;ZIPKIN_SERVER_ROUTE&gt;/api/v2/spans" />
+						</TabSet>
+					</li>
+					<li>
+						<div>Run the application</div>
+						<div>
+							<TabSet>
+								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" InstanceName="@InstanceName" NoCFServices=true NoPackageManager=true>
+									<AdditionalSteps>
+										<li>
+											With the application successfully pushed, navigate to App Manager to see the new features enabled.
+											<img src="images/initializr/actuators-app-manager.png" class="img-fluid" />
+										</li>
+									</AdditionalSteps>
+								</Steeltoe.Client.Components.RunAppTab.CloudFoundry>
+							</TabSet>
+						</div>
+					</li>
+					<li>
+						Now that you have successfully run a request through the app, navigate back to the zipkin dashboard and click the "Find Traces" button. This will search for recent traces. The result should show the trace for your request.
+						<img src="images/initializr/zipkin-search.png" class="img-fluid" />
+					</li>
+					<li>
+						Clicking on that trace will drill into the details. Then clicking on a specific action within the trace will give you even more detail.
+						<img src="images/initializr/zipkin-detail.png" class="img-fluid" />
+					</li>
+				</ol>
+			</div>
+		</div>
+	</TutorialSteps>
+</Tutorial>
+
+@code
+{
+	private string ServiceName = "appmanager";
+	private string InstanceName = "myappmanagerservice";
+	private string ProjectName = "TAS Observability";
+}
