@@ -3,17 +3,17 @@
 	<Breadcrumbs NavName="Wavefront"
 							 ParentLinkName="Observability"
 							 ParentLinkUrl="/observability"
-							 ShowGetStarted=true />
+							 ShowGetStarted=false />
 <Tutorial>
 	<Title>Using Wavefront for app container metrics, distributed tracing, and observability</Title>
 	<Description>This tutorial takes you creating a simple Steeltoe app with actuators, logging, and distributed tracing. With that app running you then export the data to a Wavefront account.</Description>
 	<TutorialSteps>
 		<div class="row">
-			<div class="col-12 getting-started-header bold">Prereq's.</div>
+			<div class="col-12 getting-started-header bold">Prereq's</div>
 		</div>
 		<div class="row">
 			<div class="col-12">
-				You'll need a Wavefront account to complete this guide successfully <NavLink class="nav-link" href="https://www.wavefront.com/sign-up/" target="_blank">go here</NavLink> to create a 30 day trial, if you don't already have access. With your account established replace <code>YOUR_API_TOKEN</code> below with your account token. Lean how to retrieve that token <NavLink class="nav-link" href="https://docs.wavefront.com/users_account_managing.html" target="_blank">here</NavLink>.
+				You'll need a Wavefront account to complete this guide successfully. <NavLink class="nav-link" href="https://www.wavefront.com/sign-up/" target="_blank">Create a 30 day trial</NavLink>, if you don't already have access. With your account established replace <code>YOUR_API_TOKEN</code> below with your account token. Lean how to retrieve that token <NavLink class="nav-link" href="https://docs.wavefront.com/users_account_managing.html" target="_blank">here</NavLink>.
 			</div>
 		</div>
 		<div class="row">
@@ -22,64 +22,181 @@
 		<div class="row">
 			<div class="col-12">
 				<TabSet>
-					<Steeltoe.Client.Components.StartInstanceTab.Local ServiceName="@ServiceName">
-						<DockerCmd>docker run -d --name @InstanceName `
--e WAVEFRONT_URL=https://longboard.wavefront.com/api/ `
--e WAVEFRONT_TOKEN=<YOUR_API_TOKEN> `
--e JAVA_HEAP_USAGE=512m `
--p 2878:2878 `
--p 9411:9411 `
--e WAVEFRONT_PROXY_ARGS="--traceZipkinListenerPorts 9411" `
-wavefronthq/proxy:latest</DockerCmd>
-					</Steeltoe.Client.Components.StartInstanceTab.Local>
-					<Steeltoe.Client.Components.StartInstanceTab.Kubernetes InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<HelmGettingStartedUrl>https://hub.helm.sh/charts/stable/mongodb</HelmGettingStartedUrl>
-						<HelmCmd>helm install wavefront/wavefront --name @InstanceName --namespace wavefront `
---set clusterName=<K8s-CLUSTER-NAME> `
---set wavefront.url=https://<YOUR_CLUSTER>.wavefront.com `
---set wavefront.token=<YOUR_API_TOKEN> `
---set proxy.zipkinPort=9411</HelmCmd>
-					</Steeltoe.Client.Components.StartInstanceTab.Kubernetes>
+					<Tab Title="Local">
+						Using the <NavLink class="nav-link" href="https://hub.docker.com/r/wavefronthq/proxy" target="_blank">docker image</NavLink>, start a local instance of @ServiceName. Remember to replace &lt;YOUR_API_TOKEN&gt; with your account's token.
+						<pre><code>PS C:\> docker run -d --name @InstanceName `
+  -e WAVEFRONT_URL=https://longboard.wavefront.com/api/ `
+  -e WAVEFRONT_TOKEN=&lt;YOUR_API_TOKEN&gt; `
+  -e JAVA_HEAP_USAGE=512m `
+  -p 2878:2878 `
+  -p 9411:9411 `
+  -e WAVEFRONT_PROXY_ARGS="--traceZipkinListenerPorts 9411" `
+  wavefronthq/proxy:latest</code></pre>
+					</Tab>
+					<Tab Title="Kubernetes">
+						Using the <NavLink class="nav-link" href="https://github.com/wavefrontHQ/helm/tree/master/wavefront" target="_blank">helm chart</NavLink>, start an instance of @ServiceName. Remember to replace &lt;YOUR_API_TOKEN&gt; with your account's token and CLUSTER information with your K8's cluster info.
+						<pre><code>PS C:\> helm install `
+  wavefront/wavefront `
+  --name @InstanceName `
+  --namespace wavefront `
+  --set clusterName=&lt;K8s-CLUSTER-NAME&gt; `
+  --set wavefront.url=https://&lt;YOUR_CLUSTER&gt;.wavefront.com `
+  --set wavefront.token=&lt;YOUR_API_TOKEN&gt; `
+  --set proxy.zipkinPort=9411</code></pre>
+					</Tab>
 				</TabSet>
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-12 getting-started-header">Next, <b>create a .NET Core WebAPI</b> with the correct Steeltoe dependencies</div>
+			<div class="col-12 getting-started-header">Then <b>create a .NET Core WebAPI</b> with the correct Steeltoe dependencies</div>
 		</div>
 		<div class="row">
 			<div class="col-12 getting-started-ordered-list">
 				<ol>
 					<li>
-						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="actuators.png" DependencyName="Actuators" ProjectName="@ProjectName" />
+						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="actuators.png" DependencyName="Actuators, DynamicLogging" ProjectName="@ProjectName" />
 					</li>
 					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
 					<li>
-						Set the instance address in <b>appsettings.json</b>
+						Add the other needed actuators in <b>startup.cs</b>
+<pre><code>using Steeltoe.Management.Endpoint.Metrics;
+using Steeltoe.Management.Tracing;
+using Steeltoe.Management.Exporter.Tracing;
+
+...
+
+public class Startup
+{
+  public Startup(IConfiguration configuration)
+  {
+		Configuration = configuration;
+  }
+
+  public IConfiguration Configuration { get; }
+
+  // This method gets called by the runtime. Use this method to add services to the container.
+  public void ConfigureServices(IServiceCollection services)
+  {
+    services.AddPrometheusActuator(Configuration);
+    services.AddMetricsActuator(Configuration);
+    services.AddDistributedTracing(Configuration);
+    services.AddZipkinExporter(Configuration);
+    services.AddControllers();
+  }
+ 
+  // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+  public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+  {
+    if (env.IsDevelopment())
+    {
+			app.UseDeveloperExceptionPage();
+    }
+		app.UsePrometheusActuator();
+		app.UseMetricsActuator();
+		app.UseTracingExporter();
+		app.UseRouting();
+    app.UseEndpoints(endpoints =>
+    {
+			endpoints.MapControllers();
+    });
+  }
+}</code></pre>
+					</li>
+					<li>
+						Set the actuator path, exposure, and zipkin server address in <b>appsettings.json</b>
 						<TabSet>
-							<Steeltoe.Client.Components.AppSettingsTab.Local ServiceName="@ServiceName"
-																												ServicePort="27017"
-																												ParentSettingsParamName="mongodb"
-																												ChildSettingsParamName="client"
-																												ServiceServer="127.0.0.1"
-																												ServiceUsername="steeltoe"
-																												ServicePassword="Steeltoe234" />
-							<Steeltoe.Client.Components.AppSettingsTab.Azure InstanceName="@InstanceName"
-																												ServiceName="@ServiceName"
-																												ParentSettingsParamName="mongodb"
-																												ChildSettingsParamName="client"
-																												ServicePort="AZURE_PROVIDED"
-																												ServiceServer="AZURE_PROVIDED"
-																												ServiceUsername="AZURE_PROVIDED"
-																												ServicePassword="AZURE_PROVIDED"
-																												ServiceDatabase="AZURE_PROVIDED" />
-							<Steeltoe.Client.Components.AppSettingsTab.Kubernetes InstanceName="@InstanceName"
-																														 ServiceName="@ServiceName"
-																														 ServicePort="HELM_PROVIDED_PORT_NUMBER"
-																														 ParentSettingsParamName="mongodb"
-																														 ChildSettingsParamName="client"
-																														 ServiceServer="HELM_PROVIDED_HOST_ADDRESS"
-																														 ServiceUsername="root"
-																														 ServicePassword="Steeltoe234" />
+							<Tab Title="Local">
+								<pre><code>{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  },
+  "spring": {
+    "application": {
+      "name": "Wavefront_demo_app"
+    }
+  },
+  "management": {
+    "endpoints": {
+      "actuator": {
+        "exposure": {
+          "include": [ "*" ]
+        }
+      },
+      "path": "/",
+      "cloudfoundry": {
+        "validateCertificates": false
+      }
+    },
+    "metrics": {
+      "exporter": {
+        "cloudfoundry": {
+          "validateCertificates": false
+        }
+      }
+    },
+    "tracing": {
+      "alwaysSample": true,
+      "useShortTraceIds ": true,
+      "exporter": {
+        "zipkin": {
+          "endpoint": "http://localhost:9411/api/v2/spans",
+          "validateCertificates": false
+        }
+      }
+    }
+  }
+}</code></pre>
+							</Tab>
+							<Tab Title="Kubernetes">
+								<pre><code>{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  },
+  "spring": {
+    "application": {
+      "name": "Wavefront_demo_app"
+    }
+  },
+  "management": {
+    "endpoints": {
+      "actuator": {
+        "exposure": {
+          "include": [ "*" ]
+        }
+      },
+      "path": "/",
+      "cloudfoundry": {
+        "validateCertificates": false
+      }
+    },
+    "metrics": {
+      "exporter": {
+        "cloudfoundry": {
+          "validateCertificates": false
+        }
+      }
+    },
+    "tracing": {
+      "alwaysSample": true,
+      "useShortTraceIds ": true,
+      "exporter": {
+        "zipkin": {
+          "endpoint": "http://&lt;HELM_PROVIDED_HOST_ADDRESS&gt;:9411/api/v2/spans",
+          "validateCertificates": false
+        }
+      }
+    }
+  }
+}</code></pre>
+							</Tab>
 						</TabSet>
 					</li>
 					<li>
@@ -87,19 +204,60 @@ wavefronthq/proxy:latest</DockerCmd>
 						<div>
 							<TabSet>
 								<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" />
-								<Steeltoe.Client.Components.RunAppTab.AzureAppService>
-									<AzureDeployHowToUrl>https://docs.microsoft.com/en-us/visualstudio/deployment/quickstart-deploy-to-azure?view=vs-2019</AzureDeployHowToUrl>
-								</Steeltoe.Client.Components.RunAppTab.AzureAppService>
 								<Steeltoe.Client.Components.RunAppTab.Kubernetes ProjectName="@ProjectName" />
 							</TabSet>
 						</div>
 					</li>
+				</ol>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-header bold">Next <b>start the Telegraf service</b> with the correct configuration</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+				<ol>
+					<li>Create a Telegraf configuration file <b>telegraf.conf</b> in a known place (like c:\source\telegraf\).
+						<TabSet>
+							<Tab Title="Local">
+								<pre><code># Telegraf Configuration
+# # Configuration for Wavefront server to send metrics to
+[[outputs.wavefront]]
+	url = "http://localhost:2878"
+	prefix = "my.steeltoe.app."
+
+# # Read metrics from one or many prometheus clients
+[[inputs.prometheus]]
+	urls = ["http://localhost:8080/actuators/prometheus"]
+	metric_version = 2</code></pre>
+							</Tab>
+							<Tab Title="Kubernetes">
+								<pre><code># Telegraf Configuration
+# # Configuration for Wavefront server to send metrics to
+[[outputs.wavefront]]
+	url = "http://&lt;HELM_PROVIDED_HOST_ADDRESS&gt;:&lt;HELM_PROVIDED_PORT_NUMBER&gt;"
+	prefix = "my.steeltoe.app."
+
+# # Read metrics from one or many prometheus clients
+[[inputs.prometheus]]
+	urls = ["http://&lt;IP_ADDRESS_FROM_LAST_STEP&gt;:&lt;PORT_FROM_LAST_STEP&gt;/actuators/prometheus"]
+	metric_version = 2</code></pre>
+							</Tab>
+						</TabSet>
+					</li>
 					<li>
-						Once the app loads in the browser you will see a list of the default databases installed with @ServiceName.
-						<br /><samp>["admin","config","local"]</samp>
+						Follow the <NavLink class="nav-link" href="https://docs.influxdata.com/telegraf/v1.13/introduction/installation/" target="_blank">Telegraf installation guide</NavLink> to install the service, using the above configuration file.
 					</li>
 				</ol>
 			</div>
+    </div>
+    <div class="row">
+			<div class="col-12 getting-started-header bold">Finally <b>log in to Wavefront</b> to view the metrics and traces being fed in</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+        xxx
+      </div>
 		</div>
 	</TutorialSteps>
 </Tutorial>

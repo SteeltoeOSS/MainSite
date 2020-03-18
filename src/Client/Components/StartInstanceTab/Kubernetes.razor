@@ -4,7 +4,7 @@
 	<Tab Title="Kubernetes">
 		<ol>
 			<li>
-				Using Helm Charts, start the <a href="@HelmGettingStartedUrl" target="_blank">@ServiceName chart</a> providing connecting values. Learn more about using Helm <a href="https://helm.sh/docs/using_helm/" target="_blank">here</a>.
+				Using Helm Charts, start the <NavLink class="nav-link" href="@HelmGettingStartedUrl" target="_blank">@ServiceName chart</NavLink> providing connecting values. Learn more about using Helm <a href="https://helm.sh/docs/using_helm/" target="_blank">here</a>.
 				<code class="inline">@HelmCmd</code>
 			</li>
 			@*<AdditionalSteps>
@@ -14,7 +14,7 @@
 			</li>
 		</AdditionalSteps>*@
 			<li>
-				Once deployed, Helm will give feedback how to "connect to your database directly from outside the K8s cluster". You'll need the host IP and port # in the following steps.
+				Once deployed, Helm will give feedback how to "connect to your instance directly from outside the K8s cluster". You'll need the host IP and port # in the following steps.
 			</li>
 			@AdditionalSteps
 		</ol>
