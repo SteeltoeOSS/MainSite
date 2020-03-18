@@ -42,16 +42,96 @@
 					</li>
 					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
 					<li>
-						Set the actuators prefix in <b>appsettings.json</b>
-						<TabSet>
-							<Steeltoe.Client.Components.AppSettingsTab.CloudFoundry ServiceName="@ServiceName" SpringApplicationName="@ProjectName" ManagementEndpointPath="/cloudfoundryapplication" />
-						</TabSet>
+						Add the other needed actuators in <b>startup.cs</b>
+<pre><code>using Steeltoe.Management.Endpoint.Metrics;
+using Steeltoe.Management.Tracing;
+using Steeltoe.Management.Exporter.Tracing;
+
+...
+
+public class Startup
+{
+  public Startup(IConfiguration configuration)
+  {
+		Configuration = configuration;
+  }
+
+  public IConfiguration Configuration { get; }
+
+  // This method gets called by the runtime. Use this method to add services to the container.
+  public void ConfigureServices(IServiceCollection services)
+  {
+    services.AddPrometheusActuator(Configuration);
+    services.AddMetricsActuator(Configuration);
+    services.AddDistributedTracing(Configuration);
+    services.AddZipkinExporter(Configuration);
+    services.AddControllers();
+  }
+ 
+  // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+  public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+  {
+    if (env.IsDevelopment())
+    {
+			app.UseDeveloperExceptionPage();
+    }
+		app.UsePrometheusActuator();
+		app.UseMetricsActuator();
+		app.UseTracingExporter();
+		app.UseRouting();
+    app.UseEndpoints(endpoints =>
+    {
+			endpoints.MapControllers();
+    });
+  }
+}</code></pre>
 					</li>
 					<li>
-						Set the Zipkin instance address in <b>appsettings.json</b>
-						<TabSet>
-							<Steeltoe.Client.Components.AppSettingsTab.CloudFoundry ServiceName="Zipkin Server"  SpringApplicationName="@ProjectName" ZipkinEndpoint="https://&lt;ZIPKIN_SERVER_ROUTE&gt;/api/v2/spans" />
-						</TabSet>
+						Set the actuator path, exposure, and zipkin server address in <b>appsettings.json</b>
+						<pre><code>{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  },
+  "spring": {
+    "application": {
+      "name": "@ProjectName"
+    }
+  },
+  "management": {
+    "endpoints": {
+      "actuator": {
+        "exposure": {
+          "include": [ "*" ]
+        }
+      },
+      "path": "/",
+      "cloudfoundry": {
+        "validateCertificates": false
+      }
+    },
+    "metrics": {
+      "exporter": {
+        "cloudfoundry": {
+          "validateCertificates": false
+        }
+      }
+    },
+    "tracing": {
+      "alwaysSample": true,
+      "useShortTraceIds ": true,
+      "exporter": {
+        "zipkin": {
+          "endpoint": "http://&lt;ZIPKIN_SERVER_ROUTE&gt;/api/v2/spans",
+          "validateCertificates": false
+        }
+      }
+    }
+  }
+}</code></pre>
 					</li>
 					<li>
 						<div>Run the application</div>
@@ -86,5 +166,5 @@
 {
 	private string ServiceName = "appmanager";
 	private string InstanceName = "myappmanagerservice";
-	private string ProjectName = "TAS Observability";
+	private string ProjectName = "TAS_Observability";
 }
