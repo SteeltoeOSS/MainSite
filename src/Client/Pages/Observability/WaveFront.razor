@@ -212,38 +212,14 @@ public class Startup
 			</div>
 		</div>
     <div class="row">
-			<div class="col-12 getting-started-header">Now <b>deploy the container</b> with Docker</div>
+			<div class="col-12 getting-started-header">Now <b>deploy the app</b> as a container</div>
 		</div>
 		<div class="row">
 			<div class="col-12 getting-started-ordered-list">
-				<ol>
-          <li>
-            Create <b>Dockerfile</b> in the same folder as @(ProjectName).csproj
-<pre><code>using mcr.microsoft.com/netcore
-asdasd
-  asdasd
-  asdasd
-</code></pre>
-          </li>
-          <li>
-			      Publish the application locally using the .NET cli. The following command will create a publish folder automatically.
-			      <code class="inline">dotnet publish -o .\publish &lt;PATH_TO&gt;\@(ProjectName).csproj</code>
-		      </li>
-					<li>Build the image using the Dockerfile and output of the publish
-           <code class="inline">docker build -t "@(ProjectName)" -f &lt;PATH_TO&gt;\Dockerfile .\publish</code>
-          </li>
-          <li>Run the image as a container
-            <TabSet>
-							<Tab Title="Local">
-                Using the previously created docker network, start the container.
-                <code class="inline">docker run --name "steeltoe-actuator-app" --network "steeltoe" -d -p 8080:8080 steeltoe-actuator-app</code>
-							</Tab>
-							<Tab Title="Kubernetes">
-                <code class="inline">kubectl XXXXXX</code>
-							</Tab>
-						</TabSet>
-          </li>
-				</ol>
+        <TabSet>
+				  <Steeltoe.Client.Components.RunAppTab.Docker ProjectName="@ProjectName" ImageName="steeltoe-actuator-app" ContainerName="steeltoe-actuator-app" />
+				  <Steeltoe.Client.Components.RunAppTab.Kubernetes ProjectName="@ProjectName" IncludeNavigateToApp="false" />
+			  </TabSet>
 			</div>
 		</div>
 		<div class="row">
