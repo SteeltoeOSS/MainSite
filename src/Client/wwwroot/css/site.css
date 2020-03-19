@@ -162,19 +162,27 @@ pre {
 	overflow-x: scroll;
 	overflow-x: visible;
 }
-code.inline, code.inline-no-ps {
+code.inline, code.inline-no-ps, code.multiline {
 	display: block;
 	margin: 10px 0 10px 0;
 	background-color: #fff0b3;
 	color: black;
 	padding: 5px 15px 5px 15px;
 	font-size: 83%;
+	overflow-x: scroll;
+	overflow-x: visible;
 }
-code.inline:before {
-	content: "PS C:\\>";
-	display: inline-block;
+code.multiline:before, code.inline:before {
+	content: "PS C:\\> ";
+}
+code.multiline {
+	tab-size: 4;
+	white-space: pre-wrap
+}
+code.inline {
 	padding-right: 5px;
 }
+
 ol {
 	margin: 0;
 	padding: 0;

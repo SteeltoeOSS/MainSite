@@ -23,21 +23,30 @@
 			<div class="col-12">
 				<TabSet>
 					<Tab Title="Local">
+            <ol>
+              <li>Create a docker network for all the containers to run within
+                <code class="inline">docker network create "steeltoe"</code>
+              </li>
+              <li>
 						Using the <NavLink class="nav-link" href="https://hub.docker.com/r/wavefronthq/proxy" target="_blank">docker image</NavLink>, start a local instance of @ServiceName. Remember to replace &lt;YOUR_API_TOKEN&gt; with your account's token.
-						<pre><code>PS C:\> docker run -d --name @InstanceName `
+						<code class="multiline">docker run -d `
+  --name "wavefront-proxy" `
+  -n "steeltoe" `
   -e WAVEFRONT_URL=https://longboard.wavefront.com/api/ `
   -e WAVEFRONT_TOKEN=&lt;YOUR_API_TOKEN&gt; `
   -e JAVA_HEAP_USAGE=512m `
   -p 2878:2878 `
   -p 9411:9411 `
   -e WAVEFRONT_PROXY_ARGS="--traceZipkinListenerPorts 9411" `
-  wavefronthq/proxy:latest</code></pre>
+  wavefronthq/proxy:latest</code>
+              </li>
+            </ol>
 					</Tab>
 					<Tab Title="Kubernetes">
 						Using the <NavLink class="nav-link" href="https://github.com/wavefrontHQ/helm/tree/master/wavefront" target="_blank">helm chart</NavLink>, start an instance of @ServiceName. Remember to replace &lt;YOUR_API_TOKEN&gt; with your account's token and CLUSTER information with your K8's cluster info.
 						<pre><code>PS C:\> helm install `
   wavefront/wavefront `
-  --name @InstanceName `
+  --name "wavefront-proxy" `
   --namespace wavefront `
   --set clusterName=&lt;K8s-CLUSTER-NAME&gt; `
   --set wavefront.url=https://&lt;YOUR_CLUSTER&gt;.wavefront.com `
@@ -199,15 +208,41 @@ public class Startup
 							</Tab>
 						</TabSet>
 					</li>
-					<li>
-						<div>Run the application</div>
-						<div>
-							<TabSet>
-								<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" />
-								<Steeltoe.Client.Components.RunAppTab.Kubernetes ProjectName="@ProjectName" />
-							</TabSet>
-						</div>
-					</li>
+				</ol>
+			</div>
+		</div>
+    <div class="row">
+			<div class="col-12 getting-started-header">Now <b>deploy the container</b> with Docker</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+				<ol>
+          <li>
+            Create <b>Dockerfile</b> in the same folder as @(ProjectName).csproj
+<pre><code>using mcr.microsoft.com/netcore
+asdasd
+  asdasd
+  asdasd
+</code></pre>
+          </li>
+          <li>
+			      Publish the application locally using the .NET cli. The following command will create a publish folder automatically.
+			      <code class="inline">dotnet publish -o .\publish &lt;PATH_TO&gt;\@(ProjectName).csproj</code>
+		      </li>
+					<li>Build the image using the Dockerfile and output of the publish
+           <code class="inline">docker build -t "@(ProjectName)" -f &lt;PATH_TO&gt;\Dockerfile .\publish</code>
+          </li>
+          <li>Run the image as a container
+            <TabSet>
+							<Tab Title="Local">
+                Using the previously created docker network, start the container.
+                <code class="inline">docker run --name "steeltoe-actuator-app" --network "steeltoe" -d -p 8080:8080 steeltoe-actuator-app</code>
+							</Tab>
+							<Tab Title="Kubernetes">
+                <code class="inline">kubectl XXXXXX</code>
+							</Tab>
+						</TabSet>
+          </li>
 				</ol>
 			</div>
 		</div>
@@ -216,47 +251,117 @@ public class Startup
 		</div>
 		<div class="row">
 			<div class="col-12 getting-started-ordered-list">
-				<ol>
-					<li>Create a Telegraf configuration file <b>telegraf.conf</b> in a known place (like c:\source\telegraf\).
-						<TabSet>
+          <TabSet>
 							<Tab Title="Local">
-								<pre><code># Telegraf Configuration
-# # Configuration for Wavefront server to send metrics to
-[[outputs.wavefront]]
-	url = "http://localhost:2878"
-	prefix = "my.steeltoe.app."
+                <ol>
+                  <li>Create a Telegraf configuration file <b>telegraf.conf</b> in the same folder as @(ProjectName).csproj
+                    <pre><code># Telegraf Configuration
+  # # Configuration for Wavefront server to send metrics to
+  [[outputs.wavefront]]
+	  url = "http://wavefront-proxy:2878"
+	  prefix = "my.steeltoe.app."
 
-# # Read metrics from one or many prometheus clients
-[[inputs.prometheus]]
-	urls = ["http://localhost:8080/actuators/prometheus"]
-	metric_version = 2</code></pre>
+  # # Read metrics from one or many prometheus clients
+  [[inputs.prometheus]]
+	  urls = ["http://steeltoe-actuator-app:8080/actuators/prometheus"]
+	  metric_version = 2</code></pre>
+                  </li>
+                  <li>Using the previously created docker network, start the container.
+                    <code class="inline">docker run -d -n "steeltoe" -v &lt;PATH_TO&gt;/telegraf.conf:/etc/telegraf/telegraf.conf:ro telegraf</code>
+                  </li>
+                </ol>
 							</Tab>
 							<Tab Title="Kubernetes">
-								<pre><code># Telegraf Configuration
-# # Configuration for Wavefront server to send metrics to
-[[outputs.wavefront]]
-	url = "http://&lt;HELM_PROVIDED_HOST_ADDRESS&gt;:&lt;HELM_PROVIDED_PORT_NUMBER&gt;"
-	prefix = "my.steeltoe.app."
+                <ol>
+                  <li>Create a Telegraf configuration file <b>telegraf.yaml</b> in the same folder as @(ProjectName).csproj
+                    <pre><code>## Default values.yaml for Telegraf
+replicaCount: 1
+image:
+  repo: "telegraf"
+  tag: "1.12-alpine"
+  pullPolicy: IfNotPresent
+podAnnotations: {}
+imagePullSecrets: []
+env:
+  - name: HOSTNAME
+    value: "telegraf-polling-service"
+service:
+  enabled: true
+  type: ClusterIP
+  annotations: {}
+rbac:
+  # Specifies whether RBAC resources should be created
+  create: true
+  # Create only for the release namespace or cluster wide (Role vs ClusterRole)
+  clusterWide: false
+  # Rules for the created rule
+  rules: []
+serviceAccount:
+  # Specifies whether a ServiceAccount should be created
+  create: true
+  # The name of the ServiceAccount to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name:
 
-# # Read metrics from one or many prometheus clients
-[[inputs.prometheus]]
-	urls = ["http://&lt;IP_ADDRESS_FROM_LAST_STEP&gt;:&lt;PORT_FROM_LAST_STEP&gt;/actuators/prometheus"]
-	metric_version = 2</code></pre>
+## Exposed telegraf configuration
+## For full list of possible values see `/docs/all-config-values.yaml` and `/docs/all-config-values.toml`
+## ref: https://docs.influxdata.com/telegraf/v1.1/administration/configuration/
+config:
+  agent:
+    interval: "10s"
+    round_interval: true
+    metric_batch_size: 1000
+    metric_buffer_limit: 10000
+    collection_jitter: "0s"
+    flush_interval: "10s"
+    flush_jitter: "0s"
+    precision: ""
+    debug: false
+    quiet: false
+    logfile: ""
+    hostname: "$HOSTNAME"
+    omit_hostname: false
+  processors:
+    - enum:
+        mapping:
+          field: "status"
+          dest: "status_code"
+          value_mappings:
+            healthy: 1
+            problem: 2
+            critical: 3
+  outputs:
+    - wavefront:
+        urls:
+          - "http://&lt;HELM_PROVIDED_HOST_ADDRESS&gt;:&lt;HELM_PROVIDED_PORT_NUMBER&gt;"
+        prefix: "my.steeltoe.app."
+  inputs:
+    - prometheus:
+	      urls:
+          - "http://&lt;IP_ADDRESS_FROM_LAST_STEP&gt;:&lt;PORT_FROM_LAST_STEP&gt;/actuators/prometheus"</code></pre>
+                  </li>
+                  <li>
+                    Install the Telegraf chart with a supplied config
+                    <code class="inline">helm install -f &lt;PATH_TO&gt;/telegraf.conf --name telegraf --namespace monitoring stable/telegraf</code>
+                  </li>
+                </ol>
 							</Tab>
 						</TabSet>
-					</li>
-					<li>
-						Follow the <NavLink class="nav-link" href="https://docs.influxdata.com/telegraf/v1.13/introduction/installation/" target="_blank">Telegraf installation guide</NavLink> to install the service, using the above configuration file.
-					</li>
-				</ol>
 			</div>
     </div>
     <div class="row">
-			<div class="col-12 getting-started-header bold">Finally <b>log in to Wavefront</b> to view the metrics and traces being fed in</div>
+			<div class="col-12 getting-started-header bold">Finally <b>use Wavefront</b> to view the metrics and traces being fed in</div>
 		</div>
 		<div class="row">
 			<div class="col-12 getting-started-ordered-list">
-        xxx
+        <ol>
+          <li>Create a new dashboard using the json template
+          <pre><code>{ TODO }</code></pre>
+
+          </li>
+          <li>Visit the dashboard to see all the data being logged</li>
+          <li>Click one of the "Top 5 Routes" to see the tracing for that request</li>
+        </ol>
       </div>
 		</div>
 	</TutorialSteps>
@@ -265,6 +370,6 @@ public class Startup
 @code
 {
 	private string ServiceName = "wavefront";
-	private string InstanceName = "mywavefrontservice";
-	private string ProjectName = "Wavefront Observability";
+	private string InstanceName = "mywavefrontapp";
+	private string ProjectName = "Wavefront_Observability";
 }
