@@ -8,86 +8,435 @@
 	<Title>Using Grafana for app container metrics, distributed tracing, and observability</Title>
 	<Description>This tutorial takes you creating a simple Steeltoe app with actuators, logging, and distributed tracing. With that app running you then export the data to an instance of Prometheus and visualize things in a Grafana dashboard.</Description>
 	<TutorialSteps>
-		<div class="row">
-			<div class="col-12 getting-started-header bold">First, <b>start a Prometheus instance</b>. Depending on your hosting platform this is done in several ways.</div>
-		</div>
-		<div class="row">
-			<div class="col-12">
-				<TabSet>
-					<Steeltoe.Client.Components.StartInstanceTab.Local ServiceName="@ServiceName">
-						<DockerCmd>docker run -d --name @InstanceName prometheus</DockerCmd>
-					</Steeltoe.Client.Components.StartInstanceTab.Local>
-					<Steeltoe.Client.Components.StartInstanceTab.Kubernetes InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<HelmGettingStartedUrl>https://hub.helm.sh/charts/stable/mongodb</HelmGettingStartedUrl>
-						<HelmCmd>helm install prometheus --name @InstanceName</HelmCmd>
-					</Steeltoe.Client.Components.StartInstanceTab.Kubernetes>
-				</TabSet>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-header">Next, <b>create a .NET Core WebAPI</b> with the correct Steeltoe dependencies</div>
+    <div class="row">
+			<div class="col-12 getting-started-header">First, <b>create a .NET Core WebAPI</b> with the correct Steeltoe dependencies</div>
 		</div>
 		<div class="row">
 			<div class="col-12 getting-started-ordered-list">
 				<ol>
 					<li>
-						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="actuators.png" DependencyName="Actuators" ProjectName="@ProjectName" />
+						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="actuators.png" DependencyName="Actuators, DynamicLogging" ProjectName="@ProjectName" />
 					</li>
 					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
 					<li>
-						Set the instance address in <b>appsettings.json</b>
+						Add the other needed actuators in <b>startup.cs</b>
+<pre><code>using Steeltoe.Management.Endpoint.Metrics;
+
+...
+
+public class Startup
+{
+  public Startup(IConfiguration configuration)
+  {
+		Configuration = configuration;
+  }
+
+  public IConfiguration Configuration { get; }
+
+  // This method gets called by the runtime. Use this method to add services to the container.
+  public void ConfigureServices(IServiceCollection services)
+  {
+  
+    ...
+
+    services.AddPrometheusActuator(Configuration);
+    services.AddMetricsActuator(Configuration);
+
+    ...
+
+  }
+ 
+  // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+  public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+  {
+
+    ...
+
+		app.UsePrometheusActuator();
+		app.UseMetricsActuator();
+
+    ...
+
+  }
+}</code></pre>
+					</li>
+					<li>
+						Set the actuator path and exposure addresses in <b>appsettings.json</b>
 						<TabSet>
-							<Steeltoe.Client.Components.AppSettingsTab.Local ServiceName="@ServiceName"
-																												ServicePort="27017"
-																												ParentSettingsParamName="mongodb"
-																												ChildSettingsParamName="client"
-																												ServiceServer="127.0.0.1"
-																												ServiceUsername="steeltoe"
-																												ServicePassword="Steeltoe234" />
-							<Steeltoe.Client.Components.AppSettingsTab.Azure InstanceName="@InstanceName"
-																												ServiceName="@ServiceName"
-																												ParentSettingsParamName="mongodb"
-																												ChildSettingsParamName="client"
-																												ServicePort="AZURE_PROVIDED"
-																												ServiceServer="AZURE_PROVIDED"
-																												ServiceUsername="AZURE_PROVIDED"
-																												ServicePassword="AZURE_PROVIDED"
-																												ServiceDatabase="AZURE_PROVIDED" />
-							<Steeltoe.Client.Components.AppSettingsTab.Kubernetes InstanceName="@InstanceName"
-																														 ServiceName="@ServiceName"
-																														 ServicePort="HELM_PROVIDED_PORT_NUMBER"
-																														 ParentSettingsParamName="mongodb"
-																														 ChildSettingsParamName="client"
-																														 ServiceServer="HELM_PROVIDED_HOST_ADDRESS"
-																														 ServiceUsername="root"
-																														 ServicePassword="Steeltoe234" />
+							<Tab Title="Local">
+								<pre><code>{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  },
+  "spring": {
+    "application": {
+      "name": "Grafana_demo_app"
+    }
+  },
+  "management": {
+    "endpoints": {
+      "actuator": {
+        "exposure": {
+          "include": [ "*" ]
+        }
+      },
+      "path": "/actuators",
+      "cloudfoundry": {
+        "validateCertificates": false
+      }
+    },
+    "metrics": {
+      "exporter": {
+        "cloudfoundry": {
+          "validateCertificates": false
+        }
+      }
+    }
+  }
+}</code></pre>
+							</Tab>
+							<Tab Title="Kubernetes">
+								<pre><code>{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Debug",
+      "System": "Information",
+      "Microsoft": "Information"
+    }
+  },
+  "spring": {
+    "application": {
+      "name": "Grafana_demo_app"
+    }
+  },
+  "management": {
+    "endpoints": {
+      "actuator": {
+        "exposure": {
+          "include": [ "*" ]
+        }
+      },
+      "path": "/actuators",
+      "cloudfoundry": {
+        "validateCertificates": false
+      }
+    },
+    "metrics": {
+      "exporter": {
+        "cloudfoundry": {
+          "validateCertificates": false
+        }
+      }
+    }
+  }
+}</code></pre>
+							</Tab>
 						</TabSet>
-					</li>
-					<li>
-						<div>Run the application</div>
-						<div>
-							<TabSet>
-								<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" />
-								<Steeltoe.Client.Components.RunAppTab.AzureAppService>
-									<AzureDeployHowToUrl>https://docs.microsoft.com/en-us/visualstudio/deployment/quickstart-deploy-to-azure?view=vs-2019</AzureDeployHowToUrl>
-								</Steeltoe.Client.Components.RunAppTab.AzureAppService>
-								<Steeltoe.Client.Components.RunAppTab.Kubernetes ProjectName="@ProjectName" />
-							</TabSet>
-						</div>
-					</li>
-					<li>
-						Once the app loads in the browser you will see a list of the default databases installed with @ServiceName.
-						<br /><samp>["admin","config","local"]</samp>
 					</li>
 				</ol>
 			</div>
+		</div>
+    <div class="row">
+			<div class="col-12 getting-started-header">Next, <b>deploy the app</b> as a container</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+        <TabSet>
+				  <Steeltoe.Client.Components.RunAppTab.Docker ProjectName="@ProjectName" ImageName="grafana-app-image" ContainerName="grafana-app" ContainerPort="80" PublicPort="80" IncludeCreateNetworkStep="true">
+            <AdditionalSteps><Note><Message>Confirm the app started successfully by running <code>docker ps</code>. You should see a running container named "grafana-app". You can also navigate to <NavLink class="nav-link" href="http://localhost:80/actuators" target="_blank">http://localhost:80/actuators</NavLink>. This should display a list of available endpoints including the prometheus.</Message></Note></AdditionalSteps>
+          </Steeltoe.Client.Components.RunAppTab.Docker>
+				  <Steeltoe.Client.Components.RunAppTab.Kubernetes ProjectName="@ProjectName" IncludeNavigateToApp="false" />
+			  </TabSet>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-header bold">Now, <b>start a Prometheus instance</b> that will scrap metrics from your app. Depending on your hosting platform this is done in several ways.</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+        <ol>
+          <li>
+            Create a Prometheus configuration file <b>prometheus.yml</b> in the same folder as @(ProjectName).csproj
+            <TabSet>
+							<Tab Title="Local">
+                    <pre><code>global:
+  scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+scrape_configs:
+  - job_name: 'steeltoe-prometheus'
+    metrics_path: '/actuators/prometheus'
+    scrape_interval: 2s
+    static_configs:
+      - targets: ['grafana-app:80']</code></pre>
+							</Tab>
+							<Tab Title="Kubernetes">
+                    <pre><code>global:
+  scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+scrape_configs:
+  - job_name: 'steeltoe-prometheus'
+    metrics_path: '/actuators/prometheus'
+    scrape_interval: 2s
+    static_configs:
+      - targets: ['&lt;IP_ADDRESS_TO_INGRESS&gt;:&lt;PORT_OF_INGRESS&gt;']</code></pre>
+							</Tab>
+						</TabSet>
+          </li>
+          <li>
+            Start the Promethus instance
+            <TabSet>
+					    <Steeltoe.Client.Components.StartInstanceTab.Local ServiceName="my-prometheus-service">
+						    <DockerCmd>docker run -d --name my-prometheus-service -p 9090:9090 -v &lt;ABSOLUTE_PATH_TO&gt;/prometheus.yml:/etc/prometheus/prometheus.yml --network "steeltoe" prom/prometheus</DockerCmd>
+                <AdditionalSteps>
+                  <li>
+                    Confirm Prometheus is running by navigating to the dashboard <NavLink class="nav-link" href="http://localhost:9090" target="_blank">http://localhost:9090</NavLink>
+                  </li>
+                  <Tip><Message>Once you navigate to the Prometheus dashboard, go to Status>Targets to confirm the app has registered successfully and data is being scraped correctly.</Message></Tip>
+                </AdditionalSteps>
+					    </Steeltoe.Client.Components.StartInstanceTab.Local>
+					    <Steeltoe.Client.Components.StartInstanceTab.Kubernetes InstanceName="@InstanceName" ServiceName="my-prometheus-service">
+						    <HelmGettingStartedUrl>https://hub.helm.sh/charts/stable/mongodb</HelmGettingStartedUrl>
+						    <HelmCmd>helm install --name my-prometheus-service stable/prometheus -f &lt;PATH_TO&gt;/prometheus.yml</HelmCmd>
+                <AdditionalSteps>
+                  <li>
+                    Confirm Prometheus is running by navigating to the dashboard http://&lt;HELM_PORVIDED_ADDRESS&gt;:&lt;HELM_PORVIDED_PORT&gt;
+                  </li>
+                </AdditionalSteps>
+					    </Steeltoe.Client.Components.StartInstanceTab.Kubernetes>
+				    </TabSet>
+          </li>
+        </ol>
+      </div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-header bold">Next, <b>start a Grafana instance</b> that will set the Promethus instance as datasource and load a dashboard. Depending on your hosting platform this is done in several ways.</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+        <ol>
+          <li>
+            Create a Grafana dashboard provider config <b>dashboard.yml</b> in the same folder as @(ProjectName).csproj
+            <pre><code>apiVersion: 1
+
+providers:
+- name: 'Steeltoe Dashboard'
+  folder: 'steeltoe'
+  type: file
+  options:
+    path: /var/lib/grafana/dashboards</code></pre>
+          </li>
+          <li>
+            Create a Grafana dashboard file <b>dashboard.json</b> in the same folder as @(ProjectName).csproj
+            <pre><code>{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "gnetId": null,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "panels": [
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": null,
+      "fill": 1,
+      "fillGradient": 0,
+      "gridPos": {
+        "h": 9,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "hiddenSeries": false,
+      "id": 2,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "nullPointMode": "null",
+      "options": {
+        "dataLinks": []
+      },
+      "percentage": false,
+      "pointradius": 2,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "http_server_request_count",
+          "interval": "",
+          "legendFormat": "",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeRegions": [],
+      "timeShift": null,
+      "title": "HTTP Server Request Count",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
+    }
+  ],
+  "schemaVersion": 22,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-15m",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "",
+  "title": "Steeltoe Grafana App",
+  "uid": "1oK9av9Wz",
+  "variables": {
+    "list": []
+  },
+  "version": 2
+}</code></pre>
+          </li>
+           <li>
+            Create a Grafana datasource configuration file <b>datasource.yml</b> in the same folder as @(ProjectName).csproj
+            <TabSet>
+							<Tab Title="Local">
+                    <pre><code>apiVersion: 1
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://my-prometheus-service:9090
+    basicAuth: false
+    isDefault: true
+    editable: false</code></pre>
+							</Tab>
+							<Tab Title="Kubernetes">
+                    <pre><code>apiVersion: 1
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://&lt;IP_ADDRESS_TO_INGRESS&gt;:&lt;PORT_ASSIGNED_APP_POD&gt;
+    basicAuth: false
+    isDefault: true
+    editable: false</code></pre>
+							</Tab>
+						</TabSet>
+          </li>
+          <li>
+            Start the Grafana instance
+            <TabSet>
+					    <Steeltoe.Client.Components.StartInstanceTab.Local ServiceName="@ServiceName">
+						    <DockerCmd>docker run -d --name my-grafana-service -p 3000:3000 --network "steeltoe" -v &lt;ABSOLUTE_PATH_TO&gt;/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml -v &lt;ABSOLUTE_PATH_TO&gt;/dashboard.json:/var/lib/grafana/dashboards/steeltoe.json -v &lt;ABSOLUTE_PATH_TO&gt;/dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml grafana/grafana</DockerCmd>
+					    </Steeltoe.Client.Components.StartInstanceTab.Local>
+					    <Steeltoe.Client.Components.StartInstanceTab.Kubernetes InstanceName="@InstanceName" ServiceName="@ServiceName">
+						    <HelmGettingStartedUrl>https://hub.helm.sh/charts/stable/mongodb</HelmGettingStartedUrl>
+						    <HelmCmd>helm install --name my-grafana-service stable/grafana -f &lt;PATH_TO&gt;/prometheus.yml -f &lt;PATH_TO&gt;/dashboard.json</HelmCmd>
+					    </Steeltoe.Client.Components.StartInstanceTab.Kubernetes>
+				    </TabSet>
+          </li>
+        </ol>
+			</div>
+		</div>
+    <div class="row">
+			<div class="col-12 getting-started-header">Finally, <b>navigate to Grafana</b> to see the default dashboard showing the app's metrics.</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+        <Note><Message>The default username is <code>admin</code> and the password is <code>admin.</code></Message></Note>
+        <TabSet>
+				  <Tab Title="Local">
+            Grafana is available at <NavLink class="nav-link" href="http://localhost:3000" target="_blank">http://localhost:3000</NavLink>.
+          </Tab>
+				  <Tab Title="kubernetes">
+            Grafana is available at http://&lt;HELM_PROVIDED_HOST_ADDRESS&gt;:&lt;HELM_PROVIDED_PORT_NUMBER&gt;
+          </Tab>
+			  </TabSet>
+      </div>
 		</div>
 	</TutorialSteps>
 </Tutorial>
 
 @code
 {
-	private string ServiceName = "wavefront";
-	private string InstanceName = "mywavefrontservice";
-	private string ProjectName = "Wavefront Observability";
+	private string ServiceName = "grafana";
+	private string InstanceName = "mygrafanaservice";
+	private string ProjectName = "Grafana_Observability";
 }
