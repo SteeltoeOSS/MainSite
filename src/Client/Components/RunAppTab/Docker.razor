@@ -23,12 +23,20 @@ COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "@(ProjectName).dll"]
 </code></pre>
     </li>
+		<li>Change into the folder that contains the project file (.csproj)
+			<code class="inline">cd &lt;PATH_TO_CSPROJ_FOLDER&gt;</code>
+		</li>
 		<li>Build the image using the Dockerfile and output of the publish
-      <code class="inline">docker build -t @(ImageName)/@(ProjectName.ToLower()) &lt;PATH_TO_PROJECT_FOLDER&gt;</code>
+      <code class="inline">docker build -t @(ImageName) .</code>
     </li>
-		<Tip><Message>With the container image built, you can test locally by running <code>docker run -p 80:80 &lt;YOUR_DOCKER_NAME&gt;/@(ProjectName.ToLower())</code>. Then navigate to <a href="http://localhost:8080/api/values" target="_blank">http://localhost/api/values</a>.</Message></Tip>
+		@*<Tip><Message>With the container image built, you can test locally by running <code>docker run -p 80:80 &lt;YOUR_DOCKER_NAME&gt;/@(ProjectName.ToLower())</code>. Then navigate to <a href="http://localhost:8080/api/values" target="_blank">http://localhost/api/values</a>.</Message></Tip>*@
+		@if(IncludeCreateNetworkStep == true){
+			<li>Create a docker network for all the containers to run within
+				<code class="inline">docker network create "@NetworkName"</code>
+			</li>
+		}
     <li>Run the image as a container
-			<code class="inline">docker run --name "@ContainerName" --network "@NetworkName" -d -p @ContainerPort:@PublicPort @ImageName</code>
+			<code class="inline">docker run --name "@ContainerName" @(!string.IsNullOrEmpty(NetworkName) ? "--network \""+NetworkName+"\"" : "") -d -p @ContainerPort:@PublicPort @ImageName</code>
 		</li>
 	@AdditionalSteps
 	</ol>
@@ -46,13 +54,17 @@ ENTRYPOINT ["dotnet", "@(ProjectName).dll"]
 	[Parameter]
 	public string PublicPort { get; set; } = "8080";
 	[Parameter]
-	public string NetworkName { get; set; } = "Steeltoe";
+	public bool IncludeCreateNetworkStep { get; set; } = false;
+	[Parameter]
+	public string NetworkName { get; set; } = null;
 
 	[Parameter]
 	public RenderFragment AdditionalSteps { get; set; }
 
 	protected override void OnInitialized()
 	{
+		if(IncludeCreateNetworkStep == true)
+			NetworkName = "steeltoe";
 	}
 
 	public void Dispose()
