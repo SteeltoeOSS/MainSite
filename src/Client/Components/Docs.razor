@@ -18,6 +18,7 @@
 
 	protected override void OnInitialized() {
 		NavigationManager.LocationChanged += LocationChanged;
+		fixNavChar();
 	}
 	protected override async Task OnAfterRenderAsync(bool firstRender) {
 		if (firstRender) {
@@ -29,6 +30,8 @@
 	private async void LocationChanged(object sender, LocationChangedEventArgs e) {
 		//string navigationMethod = e.IsNavigationIntercepted ? "HTML" : "code";
 		//Debug.WriteLine($"Notified of navigation via {navigationMethod} to {e.Location}");
+
+		fixNavChar();
 
 		string fragment = NavigationManager.ToAbsoluteUri(e.Location).Fragment;
 		ParseUri();
@@ -79,19 +82,28 @@
 	}
 	private string parseTitleFromFileName(string fileName)
 		{
-			string str = fileName.Replace("-", " ");
-			string ret = "";
-			int idx = 0;
-			foreach (string s in str.Split(char.Parse(" ")))
-			{
-				int t;
-				if (idx == 0 && int.TryParse(s, out t)) //if the item has a position index, don't add to title
-					continue;
+		string str = fileName.Replace("-", " ");
+		string ret = "";
+		int idx = 0;
+		foreach (string s in str.Split(char.Parse(" ")))
+		{
+			int t;
+			if (idx == 0 && int.TryParse(s, out t)) //if the item has a position index, don't add to title
+				continue;
 
-				ret += Char.ToUpperInvariant(s[0]) + s.Substring(1).ToLower() + " ";
-				idx++;
-			}
-
-			return ret.Trim();
+			ret += Char.ToUpperInvariant(s[0]) + s.Substring(1).ToLower() + " ";
+			idx++;
 		}
+
+		return ret.Trim();
+	}
+	private void fixNavChar() {
+		//A fix for the misconfigured docs url
+		if(!string.IsNullOrEmpty(Component) && Component.IndexOf("-") > 0) {
+			int t;
+			if(int.TryParse(Component.Substring(0,Component.IndexOf("-")), out t)){
+				Component = Component.Substring(Component.IndexOf("-") + 1,Component.Length - Component.IndexOf("-")-1);
+			}
+		}
+	}
 }
