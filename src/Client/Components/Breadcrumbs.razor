@@ -6,8 +6,10 @@
 				<ul>
 					<li><NavLink class="nav-link" href="/index"><span class="oi oi-home"></span></NavLink></li>
 					<li class="delimiter">&gt;</li>
-					<li class=""><a href="@ParentLinkUrl">@ParentLinkName</a></li>
-					<li class="delimiter">&gt;</li>
+					@if (!string.IsNullOrEmpty(ParentLinkName)){
+						<li class=""><a href="@ParentLinkUrl">@ParentLinkName</a></li>
+						<li class="delimiter">&gt;</li>
+					}
 					@if (ShowGetStarted)
 					{
 						<li class=""><a href="@ParentLinkUrl/get-started">Get Started</a></li>

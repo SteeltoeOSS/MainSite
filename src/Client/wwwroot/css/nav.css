@@ -1,0 +1,179 @@
+﻿.top-bar {
+  padding: 5px 0 5px 0;
+}
+
+  .top-bar .col .nav-link {
+    color: #00376e
+  }
+.has-menu{
+  color: #00376e;
+  display: inline-block;
+  padding: 0;
+}
+
+#nav-items a:focus, .has-menu span:focus {
+  outline: none !important;
+  color: #0066cc;
+}
+
+.drop-menu li a {
+  transition: color .2s
+}
+
+.drop-menu li a:focus, .drop-menu li a:hover {
+  color: #001f3f;
+  outline: none
+}
+
+#nav-items > li > a, #nav-items > li > div {
+  font-weight: 700;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: color .2s;
+  font-size: .9375rem
+}
+
+#nav-items > li > a:hover, #nav-items > li > div:hover {
+  color: #001f3f;
+}
+
+.has-menu:focus .drop-menu, .has-menu:hover .drop-menu {
+  display: block
+}
+
+.drop-menu {
+ position: absolute;
+  white-space: nowrap;
+  transition: all 0s linear;
+  top: 25px;
+  /*margin: 10px;*/
+  opacity: 0
+}
+
+.drop-menu ul {
+  box-sizing: border-box;
+  width: 230px;
+  margin: 0
+}
+
+.drop-menu li {
+  display: none
+}
+
+.drop-target {
+  display: block;
+  /*height: 67px;*/
+  /*padding-bottom: 8px*/
+}
+
+#scope {
+  background: #fff;
+  width: 240px;
+  box-shadow: 0 5px 30px 0 rgba(108,135,135,.5);
+  top: 38px;
+  opacity: 0
+}
+
+#scope, #scope.why-scope {
+  transition: all .2s ease-out
+}
+
+#why-target {
+  /*width: 135px*/
+}
+#why-items {
+  right: 708px
+}
+#scope.why-scope {
+  right: 697px;
+  height: 210px;
+  opacity: 1
+}
+
+#learn-target, #why-target {
+  transform: translateX(-10px)
+}
+
+#learn-target {
+  /*width: 95px*/
+}
+#learn-items {
+  right: 517px
+}
+#scope.learn-scope {
+  right: 508px;
+  height: 130px;
+  opacity: 1
+}
+
+#project-target {
+  /*width: 100px;*/
+  transform: translateX(-10px)
+}
+#project-items {
+  right: 389px
+}
+#scope.project-scope {
+  right: 380px;
+  height: 621px;
+  opacity: 1
+}
+
+#community-target {
+  width: 110px;
+  transform: translateX(87px)
+}
+#community-items {
+  right: -80px
+}
+#scope.community-scope {
+  right: -80px;
+  height: 196px;
+  opacity: 1
+}
+
+.drop-menu.active {
+  opacity: 1;
+  transition: all .3s ease-in
+}
+
+.drop-menu.active ul {
+  padding: 37px 30px;
+  height: auto
+}
+
+.drop-menu.active li {
+  display: block;
+  margin-bottom: 10px;
+  transition: opacity 0s
+}
+
+.drop-menu li:last-child {
+  margin-bottom: 0
+}
+
+.has-menu.active {
+  color: #6db33f
+}
+.nav-arrow {
+  transform: rotate(45deg) translateY(-6px);
+  -webkit-transform: rotate(45deg) translateY(-6px);
+  border: solid #191e1e;
+  border-width: 0 1px 1px 0;
+  display: inline-block;
+  padding: 3px;
+  margin-left: 5px
+}
+
+.relative {
+  height: 100%;
+  width: 100%
+}
+
+.rel, .relative {
+  position: relative
+}
+
+.abs {
+  position: absolute
+}

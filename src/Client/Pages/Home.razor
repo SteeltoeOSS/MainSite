@@ -13,11 +13,15 @@
 				</Banner>
 			</div>
 		</div>
-		<div class="row mb-4 no-gutters">
-			<div class="col"><h1>Steeltoe is a .NET framework that provides libraries for quickly creating cloud-native microservices.</h1></div>
-		</div>
 		<div class="row no-gutters">
+			<div class="col text-center"><h1>A .NET framework for creating<br />cloud-native microservices</h1></div>
+		</div>
+		@*<div class="row no-gutters">
 			<div class="col"><span class="line-height-35 font-weight-normal">Need to containerize .NET Framework apps for the cloud? Steeltoe can help reach a few of those 12 factors in a snap. Creating new .NET Core applications? With little effort, Steeltoe will have your app getting the most out of its platform. Steeltoe also provides tools for the cloud-native .NET developer to work locally and on a cloud platform with little change.<br /><br />Learn more about the tools & components within Steeltoe below, or <NavLink class="nav-link text-white font-weight-bold" href="/get-started" style="text-decoration:underline;">get started now</NavLink>!</span></div>
+		</div>*@
+		<div class="row no-gutters width-all mt-5">
+			<div class="col text-right mr-3"><NavLink class="font-weight-bold btn btn-default text-white border-white p-3 nav-link" href="/why-steeltoe" role="button">WHY STEELTOE</NavLink></div>
+			<div class="col ml-3"><NavLink class="font-weight-bold btn btn-default text-white border-white p-3 nav-link" href="/quickstart" role="button">QUICKSTART</NavLink></div>
 		</div>
 	</div>
 </div>
@@ -26,95 +30,39 @@
 		<div class="width-all text-center"><h2>What Steeltoe can do</h2></div>
 		<div class="">
 			<div class="row no-gutters">
-				<div class="col component">
-					<div class="title"><h3>Cloud Management</h3></div>
-					<div class="desc">Monitor and manage your app while it runs in production with Steeltoe Cloud Management.</div>
-					<div class="links">
-						<NavLink class="nav-link" href="/cloud-management/get-started">get started</NavLink>
-						<NavLink class="nav-link" href="/docs/management">docs</NavLink>
-						<NavLink class="nav-link" href="/cloud-management">about</NavLink>
-					</div>
-				</div>
-				<div class="col component">
-					<div class="title"><h3>App Configuration</h3></div>
-					<div class="desc">Store external config values in Git, the filesystem, or Hashicorp Vault with Spring Cloud Config.</div>
-					<div class="links">
-						<NavLink class="nav-link" href="/app-configuration/get-started">get started</NavLink>
-						<NavLink class="nav-link" href="/docs/configuration">docs</NavLink>
-						<NavLink class="nav-link" href="/app-configuration">about</NavLink>
-					</div>
-				</div>
+				
+				<div class="col component"><NavLink class="nav-link" href="/microservices">
+					<div class="text-center"><img class="w-75" src="/images/icon-microservices-dfc414fd79f67718216adaffb5d99947.svg" /></div>
+					<div class="title"><h3>Microservices</h3></div>
+					<div class="desc">Quickly deliver production‑grade features with independently evolvable microservices.</div>
+				</NavLink></div>
+				
+				<div class="col component"><NavLink class="nav-link" href="/cloud">
+					<div class="text-center"><img class="w-75" src="/images/icon-cloud-73c3f4c15437e8493b3d3124fc667a08.svg" /></div>
+					<div class="title"><h3>Cloud</h3></div>
+					<div class="desc">Your code, any cloud—we’ve got you covered. Connect and scale your services, whatever your platform.</div>
+				</NavLink></div>
+				
+				<div class="col component"><NavLink class="nav-link" href="/web-applications">
+					<div class="text-center"><img class="w-75" src="/images/icon-webapps-16f6e97a1447fefba82fbdfc302262af.svg" /></div>
+					<div class="title"><h3>Web Apps</h3></div>
+					<div class="desc">A framework for fast, secure, and responsive web applications connected to any data store.</div>
+				</NavLink></div>
+				
+				<div class="col component"><NavLink class="nav-link" href="/event-driven">
+					<div class="text-center"><img class="w-75" src="/images/icon-streams-825456b79c33345f5bf4a6ef73dc8cbd.svg" /></div>
+					<div class="title"><h3>Event Driven</h3></div>
+					<div class="desc">Integrate with your enterprise. React to business events. Act on your streaming data in realtime.</div>
+				</NavLink></div>
 			</div>
-			<div class="row no-gutters">
-				<div class="col component">
-					<NavLink class="nav-link" href="/cloud-native-developer">
-						<div class="title"><h3>Cloud-Native .NET Tools</h3></div>
-					</NavLink>
-					<div class="desc mb-3">Along with the framework, the Steeltoe team has developed tooling to help you code microservices and interact with cloud platforms easier.</div>
-					<div class="links">
-						<NavLink class="nav-link" href="/cloud-native-developer">learn more</NavLink>
-					</div>
-				</div>
-			</div>
-			<div class="row no-gutters">
-				<div class="col component">
-					<div class="title"><h3>Service Discovery</h3></div>
-					<div class="desc">Steeltoe includes a .NET client to both register and discover microservices in your registry of choice.</div>
-					<div class="links">
-						<NavLink class="nav-link" href="/service-discovery/get-started">get started</NavLink>
-						<NavLink class="nav-link" href="/docs/discovery">docs</NavLink>
-						<NavLink class="nav-link" href="/service-discovery">about</NavLink>
-					</div>
-				</div>
-				<div class="col component">
-					<div class="title"><h3>Service Connectors</h3></div>
-					<div class="desc">
-						Automatically configure and manage connections to common cloud services like databases, caches, and more.
-					</div>
-					<div class="links">
-						<NavLink class="nav-link" href="/service-connectors/get-started">get started</NavLink>
-						<NavLink class="nav-link" href="/docs/connectors">docs</NavLink>
-						<NavLink class="nav-link" href="/service-connectors">about</NavLink>
-					</div>
-				</div>
-			</div>
-			<div class="row no-gutters">
-				<div class="col component">
-					<div class="title"><h3>Cloud Security Providers</h3></div>
-					<div class="desc">Integrate ASP.NET authentication and authorization features in your app, no matter what platform you use.</div>
-					<div class="links">
-						<NavLink class="nav-link" href="/security-providers/get-started">get started</NavLink>
-						<NavLink class="nav-link" href="/docs/security">docs</NavLink>
-						<NavLink class="nav-link" href="/security-providers">about</NavLink>
-					</div>
-				</div>
-				<div class="col component">
-					<div class="title"><h3>Stream</h3></div>
-					<div class="desc">Build highly scalable event-driven microservices connected to shared messaging systems.</div>
-					<div class="links">
-						<NavLink class="nav-link" href="/stream/get-started">get started</NavLink>
-						<NavLink class="nav-link" href="/docs/stream">docs</NavLink>
-						<NavLink class="nav-link" href="/stream">about</NavLink>
-					</div>
-				</div>
-			</div>
-			<div class="row no-gutters">
-				<div class="col component">
-					<div class="title"><h3>Circuit Breakers</h3></div>
-					<div class="desc">Implement the Netflix Hystrix, a proven circuit breaker pattern with rich metrics and monitoring features.</div>
-					<div class="links">
-						<NavLink class="nav-link" href="/circuit-breakers/get-started">get started</NavLink>
-						<NavLink class="nav-link" href="/docs/circuitbreaker">docs</NavLink>
-						<NavLink class="nav-link" href="/circuit-breakers">about</NavLink>
-					</div>
-				</div>
-				<div class="col component">
-					<div class="title"><h3>Cloud Observability</h3></div>
-					<div class="desc">Use Steeltoe to integrate application metrics & data with your observability platform of choice.</div>
-					<div class="links">
-						<NavLink class="nav-link" href="/observability">get started</NavLink>
-					</div>
-				</div>
+		</div>
+	</div>
+</div>
+<div class="width-all">
+	<div class="width-60 container py-5">
+		<div class="row no-gutters text-center mt-3">
+			<div class="col stat">
+				Steeltoe has been downloaded over <span class="number">8 million</span> times on NuGet!
 			</div>
 		</div>
 	</div>
@@ -172,21 +120,9 @@
 				}
 			}
 		}
-
-
-	</div>
-	@*<div class="text-center width-all"><h5>MORE NEWS &gt;</h5></div>*@
-</div>
-<div class="width-all">
-	<div class="width-60 container py-5">
-		@*<div class="text-center width-all"><h2>Stats</h2></div>*@
-		<div class="row no-gutters text-center mt-3">
-			<div class="col stat">
-				Steeltoe has been downloaded over <span class="number">8 million</span> times on NuGet!
-			</div>
-		</div>
 	</div>
 </div>
+
 @*<div class="bg-grey width-all grey">
 	 <div class="width-60 container py-5">
 		<div class="text-center width-all black"><h3>Testimonials</h3></div>
@@ -205,6 +141,8 @@
   protected override async Task OnInitializedAsync()
 	{
 		calendarEvents = await Http.GetJsonAsync<CalendarEvent[]>("site-data/CalendarEvents.json");
+		
+		await base.OnInitializedAsync();
 	}
 
 	public class CalendarEvent

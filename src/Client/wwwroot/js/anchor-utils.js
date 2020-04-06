@@ -32,3 +32,23 @@ function toggleSubMenu(a) {
 			itms[i].classList.add("open");
 	}
 }
+
+function hov(a) {
+	var s = document.getElementById("scope");
+	var v = document.getElementById(a + '-items');
+
+	unhov('why');
+	unhov('learn');
+	unhov('project');
+	unhov('community');
+
+	s.classList.add(a +'-scope');
+	v.classList.add("active");
+}
+function unhov(a) {
+	var s = document.getElementById("scope");
+	var v = document.getElementById(a + '-items');
+
+	if (s) { s.classList.remove(a + '-scope'); }
+	if (v) { v.classList.remove("active"); }
+}

@@ -1,36 +1,14 @@
 @page "/initializr"
-<style>
-	h4 {
-		margin-top: 5%;
-	}
-</style>
-<PageTitle Title="Initializr" />
-<div class="width-all bg-yellow">
-	<div class="width-60 container">
-		<div class="row no-gutters">
-			<div class="col component-title">Steeltoe Initializr</div>
-		</div>
-		<div class="row no-gutters">
-			<div class="col component-desc">One of the biggest secrets to highly productive .NET development teams is application generators. Enterprises have found that developers adopt platforms far quicker when everything they need to get started is right there, at their fingertips. Application generators help developers to get started quickly by providing useful guide rails that reduce toil and ease their burden. Application generators also encourage common approaches to common problems, which is particularly useful if you have lots of teams creating microservices at the same time.
+
+<SteeltoeComponent Name="Steeltoe Initializr">
+	<ComponentDescription>One of the biggest secrets to highly productive .NET development teams is application generators. Enterprises have found that developers adopt platforms far quicker when everything they need to get started is right there, at their fingertips. Application generators help developers to get started quickly by providing useful guide rails that reduce toil and ease their burden. Application generators also encourage common approaches to common problems, which is particularly useful if you have lots of teams creating microservices at the same time.
 			<br /><br />
 			The Steeltoe Initializr project is an application generator meant to get cloud-native .NET developers going very quickly. But it doesn’t stop there. Chances are your apps aren’t just using the typical .NET Core or Steeltoe libraries. It’s also using internal custom libraries specific to your business. Every business has libraries: tools they rely on to simplify tasks or take care of the plumbing. These libraries are quite important and often include proprietary business logic that’s both private and unique. Application generators can help developers to get easy access to these libraries without having to delve into docs, wade through wikis, or search in NuGet repositories.
 			<br /><br />
-			Additionally an application generator can help bond development teams and security teams to the same vision by making the right thing, the easy thing. Instead of developers using previous projects to start a new project they use the application generator. Now they can start with an up to date version of all required dependencies!</div>
-		</div>
-	</div>
-</div>
-<div class="width-all yellow-slant" style="min-height: 321px;">
-	<div class="width-60 container">
-		<div class="row no-gutters">
-			<div class="col-4"><NavLink class="component-button nav-link" href="/initializr/get-started">GET STARTED</NavLink></div>
-			<div class="col">
-				<NavLink class="component-button nav-link" href="/docs/developer-tools/initializr">VIEW THE DOCS</NavLink>
-			</div>
-		</div>
-	</div>
-</div>
-<div class="width-all" style="margin-top: -4%;">
-	<div class="width-60 container">
+			Additionally an application generator can help bond development teams and security teams to the same vision by making the right thing, the easy thing. Instead of developers using previous projects to start a new project they use the application generator. Now they can start with an up to date version of all required dependencies!</ComponentDescription>
+	<GettingStartedURL><NavLink class="component-button nav-link" href="/initializr/get-started">GET STARTED</NavLink></GettingStartedURL>
+	<DocsURL><NavLink class="component-button nav-link" href="/docs/developer-tools/initializr">VIEW THE DOCS</NavLink></DocsURL>
+	<Features>
 		<div class="row no-gutters">
 			<div class="col component-whyuse-title mt-0">
 				<h2>Using Initializr</h2>
@@ -71,41 +49,15 @@
 				Sometimes you have a great idea for a very useful dependency but don't have the time to maintain it. If that's the case, follow the <NavLink class="nav-link" href="https://github.com/SteeltoeOSS/initializr/blob/master/THIRD-PARTY-CONTRIBUTIONS.md" target="_blank">guidelines</NavLink> as closely as possible, and request a new repo in Steeltoe's <NavLink class="nav-link" href="https://github.com/SteeltoeOSS-incubator" target="_blank">incubator org</NavLink>. This is a place to share Steeltoe based ideas with the community, giving them the option to use.
 			</div>
 		</div>
-		<div class="row py-5 no-gutters">
-			<div class="col"></div>
-			<div class="col text-center pr-4">
-				<div class="width-all"><NavLink class="component-button nav-link" href="/initializr/get-started">GET STARTED</NavLink></div>
-			</div>
-			<div class="col text-center pl-4">
-				<div class="width-all"><NavLink class="component-button nav-link" href="/docs/developer-tools/initializr" target="_blank">VIEW THE DOCS</NavLink></div>
-			</div>
-			<div class="col"></div>
+	</Features>
+	<OtherArea>
+		<div class="col text-center m-5">
+			<div class="mb-5"><h2>Ready to get started?</h2></div>
+			<div class=""><NavLink href="/initializr/get-started" role="button" class="border border-dark font-weight-bold btn btn-default border-black p-3 nav-link">TRY THIS TUTORIAL</NavLink></div>
 		</div>
-	</div>
-</div>
+	</OtherArea>
+</SteeltoeComponent>
+
 
 @code {
-	[Parameter]
-	public String Name { get; set; }
-
-	[Parameter]
-	public RenderFragment ComponentDescription { get; set; }
-
-	[Parameter]
-	public RenderFragment WhatIsComponent { get; set; }
-
-	[Parameter]
-	public RenderFragment WhyUseComponent { get; set; }
-
-	[Parameter]
-	public RenderFragment Features { get; set; }
-
-	[Parameter]
-	public RenderFragment GettingStartedURL { get; set; }
-
-	[Parameter]
-	public RenderFragment DocsURL { get; set; }
-
-	[Parameter]
-	public RenderFragment Resources { get; set; }
 }

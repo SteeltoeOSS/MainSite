@@ -1,0 +1,89 @@
+﻿@using System.Threading
+@using System.Diagnostics
+@inject NavigationManager NavigationManager
+@inject HttpClient Http
+@inject IJSRuntime JSRuntime
+@inject Session Session
+
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Routing
+
+@if (MenuBuilder == null) {
+	<p><em>&nbsp;</em></p>
+} else {
+	<BlazoredMenu Css="" MenuBuilder="@MenuBuilder" />
+}
+@code {
+	[Parameter]
+	public string Component { get; set; }
+	[Parameter]
+	public string Area { get; set; }
+	[Parameter]
+	public int Version { get; set; }
+
+	protected MenuBuilder MenuBuilder;
+
+	public PageTitle pageTitle;
+
+	protected override async Task OnInitializedAsync() {
+		NavigationManager.LocationChanged += LocationChanged;
+
+		RenderMenu(NavigationManager.Uri) ;
+
+		await base.OnInitializedAsync();
+	}
+	private void LocationChanged(object sender, LocationChangedEventArgs e) {
+		RenderMenu(e.Location);
+		StateHasChanged();
+	}
+	private void RenderMenu(string location) {
+		var menuItems = GetMenuItems(Version);
+
+		List<MenuItem> finalItems = new List<MenuItem>();
+		foreach (MenuItem menuitem in menuItems) {
+			finalItems.Add(menuitem.Clone());
+
+			if (!location.Contains(menuitem.Link)) {
+				finalItems[finalItems.Count - 1].MenuItems = new List<MenuItem>();
+			}
+		}
+
+		MenuBuilder = new MenuBuilder(finalItems);
+	}
+	private List<MenuItem> GetMenuItems(int version) {
+		List<MenuItem> ret = null;
+
+		switch (Version) {
+			case (2):
+				ret = Session.Version2_MenuItems;
+				break;
+			case (3):
+				ret = Session.Version3_MenuItems;
+				break;
+		};
+
+		//if (ret == null) {
+		//	Debug.WriteLine("Sleeping");
+		//	Thread.Sleep(500);
+
+		//	switch (Version) {
+		//		case (2):
+		//			ret = Session.Version2_MenuItems;
+		//			break;
+		//		case (3):
+		//			ret = Session.Version3_MenuItems;
+		//			break;
+		//	};
+		//}
+
+		if (ret == null) {
+			Debug.WriteLine("No menu items found");
+			ret = new List<MenuItem>();
+		}
+
+		return ret;
+	}
+	private void Dispose() {
+		NavigationManager.LocationChanged -= LocationChanged;
+	}
+}

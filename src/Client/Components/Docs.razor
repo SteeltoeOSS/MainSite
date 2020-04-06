@@ -12,13 +12,17 @@
 	public string Component { get; set; }
 	[Parameter]
 	public string Area { get; set; }
+	[Parameter]
+	public int Version { get; set; }
 
 	private string Content { get; set; }
 	public string pageTitle;
 
-	protected override void OnInitialized() {
+	protected override async Task OnInitializedAsync() {
 		NavigationManager.LocationChanged += LocationChanged;
 		fixNavChar();
+
+		await base.OnInitializedAsync();
 	}
 	protected override async Task OnAfterRenderAsync(bool firstRender) {
 		if (firstRender) {
@@ -26,6 +30,8 @@
 			await UpdateContent();
 			ScrollToAnchor(forceScroll: true);
 		}
+
+		await base.OnAfterRenderAsync(firstRender);
 	}
 	private async void LocationChanged(object sender, LocationChangedEventArgs e) {
 		//string navigationMethod = e.IsNavigationIntercepted ? "HTML" : "code";
@@ -36,14 +42,16 @@
 		string fragment = NavigationManager.ToAbsoluteUri(e.Location).Fragment;
 		ParseUri();
 
-		if (string.IsNullOrEmpty(fragment))
+		if (string.IsNullOrEmpty(fragment)) {
 			await UpdateContent();
+			StateHasChanged();
+		}
 
 		ScrollToAnchor(fragment);
 	}
 	private async Task UpdateContent() {
 		pageTitle = parseTitleFromFileName(Component) + " Documentation";
-		var filePath = "site-data/docs/" + Component + "/" + Area + ".html";
+		var filePath = "site-data/docs/" + Version + "/" + Component + "/" + Area + ".html";
 
 		var tmp = "";
 
@@ -51,7 +59,7 @@
 			tmp = await Http.GetStringAsync(filePath);
 		} catch (HttpRequestException http) {
 			if (http.Message.Contains("404")) {
-				filePath = "site-data/docs/welcome/overview.html";
+				filePath = "site-data/docs/" + Version + "/welcome/overview.html";
 				tmp = await Http.GetStringAsync(filePath);
 			}
 		} finally {

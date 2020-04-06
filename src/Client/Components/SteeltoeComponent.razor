@@ -9,31 +9,39 @@
 		</div>
 	</div>
 </div>
-<div class="width-all yellow-slant">
+<div class="width-all yellow-slant" style="min-height:260px;">
 	<div class="width-60 container">
 		<div class="row no-gutters">
+			@if (GettingStartedURL != null) {
 			<div class="col-4">
 				@GettingStartedURL
 			</div>
+			}
+			@if (DocsURL != null) {
 			<div class="col">
 				@DocsURL
 			</div>
+			}
 		</div>
-		<div class="row no-gutters">
-			<div class="col component-whatis-title">
-				<h2>What is @Name?</h2>
+		@if (WhatIsComponent != null) {
+			<div class="row no-gutters">
+				<div class="col component-whatis-title">
+					<h2>What @(NameIsPlural ? "are" : "is") @Name?</h2>
+				</div>
 			</div>
-		</div>
+		}
 	</div>
 </div>
 <div class="width-all">
 	<div class="width-60 container">
-
+		@if (WhatIsComponent != null) {
 		<div class="row no-gutters">
 			<div class="col component-whatis-desc">
 				@WhatIsComponent
 			</div>
 		</div>
+		}
+		@if (WhyUseComponent != null) {
 		<div class="row no-gutters">
 			<div class="col component-whyuse-title">
 				<h2>Why use @Name?</h2>
@@ -44,6 +52,7 @@
 				@WhyUseComponent
 			</div>
 		</div>
+		}
 		@Features
 		<div class="row py-5 no-gutters">
 			<div class="col"></div>
@@ -56,19 +65,23 @@
 			<div class="col"></div>
 		</div>
 	</div>
-	@*<div class="component-resources">
-		<div class="width-60">
-			<div class="row no-gutters">
-				<div class="col component-resources-title">resources</div>
-				@Resources
+	@if(OtherArea != null) {
+		<div class="component-resources">
+			<div class="width-60 container">
+				<div class="row no-gutters">
+					@OtherArea
+				</div>
 			</div>
 		</div>
-	</div>*@
+	}
 </div>
 
 @code {
 	[Parameter]
 	public String Name { get; set; }
+
+	[Parameter]
+	public bool NameIsPlural { get; set; } = false;
 
 	[Parameter]
 	public RenderFragment ComponentDescription { get; set; }
@@ -89,5 +102,5 @@
 	public RenderFragment DocsURL { get; set; }
 
 	[Parameter]
-	public RenderFragment Resources { get; set; }
+	public RenderFragment OtherArea { get; set; }
 }

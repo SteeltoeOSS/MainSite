@@ -1,0 +1,53 @@
+﻿@page "/event-driven"
+
+<SteeltoeComponent Name="Event Driven">
+	<ComponentDescription>Event-driven systems reflect how modern businesses actually work–thousands of small changes happening all day, every day. Spring’s ability to handle events and enable developers to build applications around them, means your apps will stay in sync with your business. Spring has a number of event-driven options to choose from, from integration and streaming all the way to cloud functions and data flows.</ComponentDescription>
+	<GettingStartedURL><NavLink class="component-button nav-link" href="quickstart">GET STARTED</NavLink></GettingStartedURL>
+	<Features>
+		<div class="row component-feature">
+			<div class="col-6">
+				<div class="component-feature-title">Spring Cloud architecture highlights</div>
+				<div class="component-feature-desc">XXXXXXXX</div>
+			</div>
+			<div class="col-6 text-center"><div class="component-feature-img"><img class="img-fluid" src="images/Icon_down-arrow.svg" /></div></div>
+		</div>
+		<div class="row component-feature">
+			<div class="col-6 text-center"><div class=" component-feature-img"><img class="img-fluid" src="images/Icon_tool.svg" /></div></div>
+			<div class="col-6">
+				<div class="component-feature-title">Service discovery</div>
+				<div class="component-feature-desc">In the cloud, applications can’t always know the exact location of other services. A service registry, such as Netflix Eureka, or a sidecar solution, such as HashiCorp Consul, can help. Spring Cloud provides DiscoveryClient implementations for popular registries such as Eureka, Consul, Zookeeper, and even Kubernetes' built-in system. There’s also a Spring Cloud Load Balancer to help you distribute the load carefully among your service instances.
+				<br /><br /><NavLink href="/service-discovery/get-started" role="button" class="nav-link">Get started with Steeltoe Discovery</NavLink></div>
+			</div>
+		</div>
+		<div class="row component-feature">
+			<div class="col-6">
+				<div class="component-feature-title">Cloud configuration</div>
+				<div class="component-feature-desc">In the cloud, configuration can’t simply be embedded inside the application. The configuration has to be flexible enough to cope with multiple applications, environments, and service instances, as well as deal with dynamic changes without downtime. Spring Cloud Config is designed to ease these burdens and offers integration with version control systems like Git to help you keep your configuration safe.
+				<br /><br /><NavLink href="/app-configuration/get-started" role="button" class="nav-link">Get started with Steeltoe Config</NavLink></div>
+			</div>
+			<div class="col-6 text-center"><div class="component-feature-img"><img class="img-fluid" src="images/Icon_data-transfer.svg" /></div></div>
+		</div>
+		<div class="row component-feature">
+			<div class="col-6 text-center"><div class="component-feature-img"><img src="images/cloud-foundry.png" height="108" /></div></div>
+			<div class="col-6">
+				<div class="component-feature-title">Circuit breakers</div>
+				<div class="component-feature-desc">Distributed systems can be unreliable. Requests might encounter timeouts or fail completely. A circuit breaker can help mitigate these issues, and Spring Cloud Circuit Breaker gives you the choice of three popular options: Resilience4J, Sentinel, or Hystrix.
+				<br /><br /><NavLink href="/circuit-breaker/get-started" role="button" class="nav-link">Get started with Steeltoe Circuit Breaker</NavLink></div>
+			</div>
+		</div>
+		<div class="row component-feature">
+			<div class="col-6">
+				<div class="component-feature-title">Tracing</div>
+				<div class="component-feature-desc">Debugging distributed applications can be complex and take a long time. For any given failure, you might need to piece together traces of information from several independent services. Spring Cloud Sleuth can instrument your applications in a predictable and repeatable way. And when used in conjunction with Zipkin, you can zero in on any latency problems you might have.
+				<br /><br /><NavLink href="/cloud-management/get-started/distributed-tracing" role="button" class="nav-link">Get started with Steeltoe Distributed Tracing</NavLink></div>
+			</div>
+			<div class="col-6 text-center"><div class="component-feature-img"><img class="img-fluid" src="images/Icon_data-transfer.svg" /></div></div>
+		</div>
+	</Features>
+	<OtherArea>
+		<div class="col text-center m-5">
+			<div class="mb-5"><h2>Ready to get started?</h2></div>
+			<div class=""><NavLink href="/quickstart" role="button" class="border border-dark font-weight-bold btn btn-default border-black p-3 nav-link">TRY THIS TUTORIAL</NavLink></div>
+		</div>
+	</OtherArea>
+</SteeltoeComponent>

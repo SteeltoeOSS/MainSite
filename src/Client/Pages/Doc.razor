@@ -1,5 +1,8 @@
-@using System.IO;
-@using System;
+@using System.IO
+@using System
+@using System.Diagnostics
+@inject NavigationManager NavigationManager
+@inject Session Session
 
 @*@page "/docs/0-welcome"
 @page "/docs/1-circuitbreaker"
@@ -12,7 +15,7 @@
 @page "/docs/8-security"
 @page "/docs/9-developer-tools"*@
 
-@page "/configuration"
+@*@page "/configuration"
 @page "/configuration/{Area}"
 
 @page "/circuitbreaker"
@@ -31,44 +34,93 @@
 @page "/security/{Area}"
 
 @page "/connectors"
-@page "/connectors/{Area}"
-
-@page "/discovery"
-@page "/discovery/{Area}"
+@page "/connectors/{Area}"*@
 
 @page "/doc"
 @page "/docs"
-@page "/docs/{Component}/{Area}"
-@page "/docs/{Component}"
-@page "/{Component}/docs"
 
-	<div class="width-all">
-		<div class="width-90 container">
-			<div class="row docs-row">
-				<div class="col-3 docs-nav-col">
-					<DocsMenu />
+@page "/{Component}"
+@page "/{Component}/{Area}"
+@page "/{Component}/docs"
+@page "/docs/{Component}"
+@page "/docs/{Component}/{Area}"
+
+@page "/docs/{Version:int}"
+@page "/docs/{Version:int}/{Component}"
+@page "/docs/{Version:int}/{Component}/{Area}"
+
+<div class="width-all">
+	<div class="width-90 container">
+		<div class="row docs-row no-gutters">
+			<div class="col-3 docs-nav-col">
+				<div class="row no-gutters">
+					<div class="col text-center nav-version @(Version == 3 ? "selected":"")">
+						@if(Version == 3) {
+							<b>Steeltoe v3</b>
+						} else {
+							<NavLink class="nav-link" href="/docs/3/welcome/overview" title="Current">Steeltoe v3</NavLink>
+						}
+					</div>
+					<div class="col text-center nav-version @(Version == 2 ? "selected":"")">
+						@if(Version == 2) {
+							<b>Steeltoe v2</b>
+						} else {
+							<NavLink class="nav-link" href="/docs/2/welcome/overview">Steeltoe v2</NavLink>
+						}
+					</div>
 				</div>
-				<div class="col-9 docs-content-col">
-					<Docs Area="@(Area)" Component="@(Component)" />
-				</div>
+				<div class="row no-gutters"><div class="col bg-white">
+					<DocsMenu Area="@(Area)" Component="@(Component)" Version="@(Version)" />
+				</div></div>
+			</div>
+			<div class="col-9 docs-content-col">
+				<Docs Area="@(Area)" Component="@(Component)" Version="@(Version)" />
 			</div>
 		</div>
 	</div>
-
+</div>
 
 @code {
 	private string _area;
 	private string _component;
+	private int currentVersion = 3;
+	private string defaultArea = "overview";
+	private string defaultComponent =  "welcome";
 
 	[Parameter]
 	public string Area {
-		get { return _area ?? "overview"; }
+		get { return (_area ?? defaultArea); }
 		set { _area = value; }
 	}
 
 	[Parameter]
 	public string Component {
-		get { return _component ?? "welcome"; }
-		set { _component = value; }
+		get { return (_component ?? defaultComponent); }
+		set {
+			if (string.IsNullOrEmpty(value))
+				NavigationManager.NavigateTo("/docs/" + Version + "/" + Component + "/" + Area);
+			else
+				_component = value;
+		}
+	}
+
+	[Parameter]
+	public int Version {
+		get { return Session.Version; }
+		set {
+			Session.Version = (value < 2 || value > currentVersion ? currentVersion : value);
+
+			if(value == 0)//blazor defaults this to 0 if not provided in URL
+				NavigationManager.NavigateTo("/docs/" + Version + "/" + Component + "/" + Area);	
+		}
+	}
+
+	protected override void OnAfterRender(bool firstRender) {
+		//Debug.WriteLine(Version);
+		//Debug.WriteLine(Component);
+		//Debug.WriteLine(Area);
+
+		//Debug.WriteLine(Session.Count);
+		base.OnAfterRender(firstRender);
 	}
 }

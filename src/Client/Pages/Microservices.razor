@@ -1,0 +1,48 @@
+﻿@page "/microservices"
+@page "/microservice"
+
+<SteeltoeComponent Name="Microservices" NameIsPlural="true">
+	<ComponentDescription>Microservice architectures are the ‘new normal’. Building small, self-contained, ready to run applications can bring great flexibility and added resilience to your code. Spring Boot’s many purpose-built features make it easy to build and run your microservices in production at scale. And don’t forget, no microservice architecture is complete without <NavLink class="nav-link" href="/cloud">Steeltoe Cloud components</NavLink> ‒ easing administration and boosting your fault-tolerance.</ComponentDescription>
+	<GettingStartedURL><NavLink class="component-button nav-link" href="quickstart">GET STARTED</NavLink></GettingStartedURL>
+	<WhatIsComponent>Microservices are a modern approach to software whereby application code is delivered in small, manageable pieces, independent of others.</WhatIsComponent>
+	<WhyUseComponent>Their small scale and relative isolation can lead to many additional benefits, such as easier maintenance, improved productivity, greater fault tolerance, better business alignment, and more.</WhyUseComponent>
+	<Features>
+		<div class="row component-feature">
+			<div class="col-6">
+				<div class="component-feature-title">Microservices with Steeltoe</div>
+				<div class="component-feature-desc">With Steeltoe, your microservices can start small and iterate fast. That’s why it quickly becomning the standard for .NET microservices. Quickstart your project with Steeltoe Initializr and then package as a container. With Steeltoe’s middleware pipeline model, you’re ready to go in minutes.
+				<br /><br /><NavLink href="/quickstart" role="button" class="border border-dark font-weight-bold btn btn-default border-black p-3 nav-link">TRY OUR QUICKSTART GUIDE</NavLink></div>
+			</div>
+			<div class="col-6 text-center"><div class="component-feature-img"><img class="img-fluid" src="images/Icon_down-arrow.svg" /></div></div>
+		</div>
+		<div class="row component-feature">
+			<div class="col-6 text-center"><div class=" component-feature-img"><img class="img-fluid" src="images/Icon_tool.svg" /></div></div>
+			<div class="col-6">
+				<div class="component-feature-title">Microservice resilience with Steeltoe Cloud Components</div>
+				<div class="component-feature-desc">The distributed nature of microservices brings challenges. Steeltoe helps you mitigate these. With several ready-to-run cloud patterns, <NavLink class="nav-link" href="/cloud">Steeltoe Cloud components</NavLink> can help with service discovery, load-balancing, circuit-breaking, distributed tracing, monitoring, and more.</div>
+			</div>
+		</div>
+		<div class="row component-feature">
+			<div class="col-6">
+				<div class="component-feature-title">Build streaming data microservices with Steeltoe Stream</div>
+				<div class="component-feature-desc">Steeltoe Stream makes it easy to consume and produce events, no matter which messaging platform you choose. Steeltoe Stream connects your microservices with real-time messaging in just a few lines of code, to help you build highly scalable, event-driven systems.
+				<br /><br /><NavLink href="/streams/get-started" role="button" class="nav-link">Get started with Steeltoe Stream</NavLink></div>
+			</div>
+			<div class="col-6 text-center"><div class="component-feature-img"><img class="img-fluid" src="images/Icon_data-transfer.svg" /></div></div>
+		</div>
+		<div class="row component-feature">
+			<div class="col-6 text-center"><div class="component-feature-img"><img src="images/cloud-foundry.png" height="108" /></div></div>
+			<div class="col-6">
+				<div class="component-feature-title">Microservices on Cloud Foundry</div>
+				<div class="component-feature-desc">The small, stateless nature of microservices makes them ideal for horizontal scaling. Platforms like Tanzu Application Service and Pivotal Container Service can provide scalable infrastructure to match, with and greatly reduce your administrative overhead. Using cloud connectors, you can also consume multiple backend services with ease.
+				<br /><br /><NavLink href="https://run.pivotal.io" role="button" class="nav-link" target="_blank">Try Pivotal Web Services for free</NavLink></div>
+			</div>
+		</div>
+	</Features>
+	<OtherArea>
+		<div class="col text-center m-5">
+			<div class="mb-5"><h2>Ready to get started?</h2></div>
+			<div class=""><NavLink href="/quickstart" role="button" class="border border-dark font-weight-bold btn btn-default border-black p-3 nav-link">TRY THIS TUTORIAL</NavLink></div>
+		</div>
+	</OtherArea>
+</SteeltoeComponent>
