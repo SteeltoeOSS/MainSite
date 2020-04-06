@@ -22,7 +22,7 @@
 		else
 			footerClass = "";
 
-		await base OnInitializedAsync();
+		await base.OnInitializedAsync();
 	}
 	private void LocationChanged(object sender, LocationChangedEventArgs e) {
 		if (e.Location.Contains("docs"))
