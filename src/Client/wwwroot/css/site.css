@@ -244,6 +244,7 @@ a {
 	/*padding-bottom: 2%;*/
 }
 .bottom-bar {
+	margin-top: 6%;
 	padding-top: 3%;
 }
 .bottom-bar .col, .bottom-bar .col .nav-link {

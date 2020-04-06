@@ -45,6 +45,12 @@ function hov(a) {
 	s.classList.add(a +'-scope');
 	v.classList.add("active");
 }
+function unhovAll() {
+	unhov('why');
+	unhov('learn');
+	unhov('project');
+	unhov('community');
+}
 function unhov(a) {
 	var s = document.getElementById("scope");
 	var v = document.getElementById(a + '-items');

@@ -45,7 +45,7 @@
  position: absolute;
   white-space: nowrap;
   transition: all 0s linear;
-  top: 25px;
+  top: -51px;
   /*margin: 10px;*/
   opacity: 0
 }
@@ -62,7 +62,7 @@
 
 .drop-target {
   display: block;
-  /*height: 67px;*/
+  height: 80px;
   /*padding-bottom: 8px*/
 }
 
@@ -79,10 +79,10 @@
 }
 
 #why-target {
-  /*width: 135px*/
+  width: 135px
 }
 #why-items {
-  right: 708px
+  right: 702px
 }
 #scope.why-scope {
   right: 697px;
