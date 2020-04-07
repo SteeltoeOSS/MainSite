@@ -2,39 +2,6 @@
 @using System
 @using System.Diagnostics
 @inject NavigationManager NavigationManager
-@inject Session Session
-
-@*@page "/docs/0-welcome"
-@page "/docs/1-circuitbreaker"
-@page "/docs/2-configuration"
-@page "/docs/3-connectors"
-@page "/docs/4-discovery"
-@page "/docs/5-fileshares"
-@page "/docs/6-logging"
-@page "/docs/7-management"
-@page "/docs/8-security"
-@page "/docs/9-developer-tools"*@
-
-@*@page "/configuration"
-@page "/configuration/{Area}"
-
-@page "/circuitbreaker"
-@page "/circuitbreaker/{Area}"
-
-@page "/management"
-@page "/management/{Area}"
-
-@page "/logging"
-@page "/logging/{Area}"
-
-@page "/fileshares"
-@page "/fileshares/{Area}"
-
-@page "/security"
-@page "/security/{Area}"
-
-@page "/connectors"
-@page "/connectors/{Area}"*@
 
 @page "/doc"
 @page "/docs"
@@ -56,16 +23,16 @@
 				<div class="row no-gutters">
 					<div class="col text-center nav-version @(Version == 3 ? "selected":"")">
 						@if(Version == 3) {
-							<b>Steeltoe v3</b>
+							<span>Steeltoe v3</span>
 						} else {
-							<NavLink class="nav-link" href="/docs/3/welcome/overview" title="Current">Steeltoe v3</NavLink>
+							<NavLink class="nav-link" href="@("/docs/3/" + Component + "/" + Area)" title="Current">Steeltoe v3</NavLink>
 						}
 					</div>
 					<div class="col text-center nav-version @(Version == 2 ? "selected":"")">
 						@if(Version == 2) {
-							<b>Steeltoe v2</b>
+							<span>Steeltoe v2</span>
 						} else {
-							<NavLink class="nav-link" href="/docs/2/welcome/overview">Steeltoe v2</NavLink>
+							<NavLink class="nav-link" href="@("/docs/2/" + Component + "/" + Area)">Steeltoe v2</NavLink>
 						}
 					</div>
 				</div>
@@ -83,6 +50,7 @@
 @code {
 	private string _area;
 	private string _component;
+	private int _version;
 	private int currentVersion = 3;
 	private string defaultArea = "overview";
 	private string defaultComponent =  "welcome";
@@ -106,21 +74,12 @@
 
 	[Parameter]
 	public int Version {
-		get { return Session.Version; }
+		get { return _version; }
 		set {
-			Session.Version = (value < 2 || value > currentVersion ? currentVersion : value);
+			_version = (value < 2 || value > currentVersion ? currentVersion : value);
 
 			if(value == 0)//blazor defaults this to 0 if not provided in URL
 				NavigationManager.NavigateTo("/docs/" + Version + "/" + Component + "/" + Area);	
 		}
-	}
-
-	protected override void OnAfterRender(bool firstRender) {
-		//Debug.WriteLine(Version);
-		//Debug.WriteLine(Component);
-		//Debug.WriteLine(Area);
-
-		//Debug.WriteLine(Session.Count);
-		base.OnAfterRender(firstRender);
 	}
 }

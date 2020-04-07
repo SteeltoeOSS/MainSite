@@ -53,21 +53,16 @@
 		pageTitle = parseTitleFromFileName(Component) + " Documentation";
 		var filePath = "site-data/docs/" + Version + "/" + Component + "/" + Area + ".html";
 
-		var tmp = "";
-
 		try {
-			tmp = await Http.GetStringAsync(filePath);
+			Content = await Http.GetStringAsync(filePath);
+			StateHasChanged();
 		} catch (HttpRequestException http) {
 			if (http.Message.Contains("404")) {
-				filePath = "site-data/docs/" + Version + "/welcome/overview.html";
-				tmp = await Http.GetStringAsync(filePath);
+				NavigationManager.NavigateTo("/docs/" + Version + "/welcome/overview");
+				return;
 			}
-		} finally {
-			Content = tmp;
-			StateHasChanged();
 		}
 	}
-
 	private void ScrollToAnchor(string anchor = "", bool forceScroll = false) {
 		if (!string.IsNullOrEmpty(anchor) || forceScroll)
 			JSRuntime.InvokeAsync<string>("scrollToAnchor", anchor);

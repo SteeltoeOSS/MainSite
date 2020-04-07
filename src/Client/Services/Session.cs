@@ -5,14 +5,11 @@ using Blazored.Menu;
 using Microsoft.AspNetCore.Components;
 
 public class Session {
-  private int _version = 3;
   private HttpClient _http;
 
   public Session(HttpClient httpClient) {
     _http = httpClient;
   }
-
-  public int Version { get { return _version; } set { _version = value;  } }
 
   public List<MenuItem> Version2_MenuItems { get; private set; }
   public List<MenuItem> Version3_MenuItems { get; private set; }
