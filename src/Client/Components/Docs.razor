@@ -18,22 +18,22 @@
 	private string Content { get; set; }
 	public string pageTitle;
 
-	protected override async Task OnInitializedAsync() {
+	protected override Task OnInitializedAsync() {
 		NavigationManager.LocationChanged += LocationChanged;
 		fixNavChar();
 
-		await base.OnInitializedAsync();
+		return base.OnInitializedAsync();
 	}
-	protected override async Task OnAfterRenderAsync(bool firstRender) {
+	protected override Task OnAfterRenderAsync(bool firstRender) {
 		if (firstRender) {
 			ParseUri();
-			await UpdateContent();
+			UpdateContent();
 			ScrollToAnchor(forceScroll: true);
 		}
 
-		await base.OnAfterRenderAsync(firstRender);
+		return base.OnAfterRenderAsync(firstRender);
 	}
-	private async void LocationChanged(object sender, LocationChangedEventArgs e) {
+	private void LocationChanged(object sender, LocationChangedEventArgs e) {
 		//string navigationMethod = e.IsNavigationIntercepted ? "HTML" : "code";
 		//Debug.WriteLine($"Notified of navigation via {navigationMethod} to {e.Location}");
 
@@ -43,13 +43,13 @@
 		ParseUri();
 
 		if (string.IsNullOrEmpty(fragment)) {
-			await UpdateContent();
+			UpdateContent();
 			StateHasChanged();
 		}
 
 		ScrollToAnchor(fragment);
 	}
-	private async Task UpdateContent() {
+	private async void UpdateContent() {
 		pageTitle = parseTitleFromFileName(Component) + " Documentation";
 		var filePath = "site-data/docs/" + Version + "/" + Component + "/" + Area + ".html";
 

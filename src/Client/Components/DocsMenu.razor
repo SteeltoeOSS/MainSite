@@ -1,18 +1,22 @@
 ﻿@using System.Threading
 @using System.Diagnostics
 @inject NavigationManager NavigationManager
-@inject HttpClient Http
 @inject IJSRuntime JSRuntime
-@inject Session Session
+@inject INavMenu NavMenu
 
 @using Microsoft.AspNetCore.Components.Web
 @using Microsoft.AspNetCore.Components.Routing
 
-@if (MenuBuilder == null) {
-	<p><em>&nbsp;</em></p>
+@if (menuItemsV2 == null && menuItemsV3 == null) {
+	<p>Loading...</p>
 } else {
-	<BlazoredMenu Css="" MenuBuilder="@MenuBuilder" />
+	@if (MenuBuilder == null) {
+		<p>Still Loading...</p>
+	} else {
+		<BlazoredMenu Css="" MenuBuilder="@MenuBuilder" />
+	}
 }
+
 @code {
 	[Parameter]
 	public string Component { get; set; }
@@ -21,23 +25,40 @@
 	[Parameter]
 	public int Version { get; set; }
 
-	protected MenuBuilder MenuBuilder;
+	private MenuBuilder MenuBuilder;
+	private MenuItem[] menuItemsV2;
+	private MenuItem[] menuItemsV3;
+	private MenuItem[] menuItems {
+		get {
+			switch (Version) {
+				case (2):
+					return menuItemsV2;
+				case (3):
+					return menuItemsV3;
+				default:
+					return null;
+			}
+		}
+	}
 
 	public PageTitle pageTitle;
 
 	protected override async Task OnInitializedAsync() {
-		NavigationManager.LocationChanged += LocationChanged;
+		menuItemsV2 = await NavMenu.GetMenuItemsAsync(2);
+		menuItemsV3 = await NavMenu.GetMenuItemsAsync(3);
 
-		RenderMenu(NavigationManager.Uri) ;
+		NavigationManager.LocationChanged += LocationChanged;
+		RenderMenu(NavigationManager.Uri);
 
 		await base.OnInitializedAsync();
 	}
 	private void LocationChanged(object sender, LocationChangedEventArgs e) {
 		RenderMenu(e.Location);
-		StateHasChanged();
 	}
 	private void RenderMenu(string location) {
-		var menuItems = GetMenuItems(Version);
+		if (menuItems == null) {
+			return;
+		}
 
 		List<MenuItem> finalItems = new List<MenuItem>();
 		foreach (MenuItem menuitem in menuItems) {
@@ -49,39 +70,8 @@
 		}
 
 		MenuBuilder = new MenuBuilder(finalItems);
-	}
-	private List<MenuItem> GetMenuItems(int version) {
-		List<MenuItem> ret = null;
-
-		switch (Version) {
-			case (2):
-				ret = Session.Version2_MenuItems;
-				break;
-			case (3):
-				ret = Session.Version3_MenuItems;
-				break;
-		};
-
-		//if (ret == null) {
-		//	Debug.WriteLine("Sleeping");
-		//	Thread.Sleep(500);
-
-		//	switch (Version) {
-		//		case (2):
-		//			ret = Session.Version2_MenuItems;
-		//			break;
-		//		case (3):
-		//			ret = Session.Version3_MenuItems;
-		//			break;
-		//	};
-		//}
-
-		if (ret == null) {
-			Debug.WriteLine("No menu items found");
-			ret = new List<MenuItem>();
-		}
-
-		return ret;
+		StateHasChanged();
+		return;
 	}
 	private void Dispose() {
 		NavigationManager.LocationChanged -= LocationChanged;

@@ -36,31 +36,32 @@ namespace tmp.Server
           });
         }
 
-        services.AddScoped<Session>();
+        services.AddScoped<INavMenu, NavMenu>();
+        services.AddScoped<ICalendarEvents, CalendarEvents>();
+    }
+
+      // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+      public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+      {
+          app.UseResponseCompression();
+
+      if (env.IsDevelopment())
+          {
+              app.UseDeveloperExceptionPage();
+              app.UseBlazorDebugging();
+          }
+
+          app.UseStaticFiles();
+          app.UseClientSideBlazorFiles<Steeltoe.Client.Startup>();
+
+          app.UseRouting();
+
+          app.UseEndpoints(endpoints =>
+          {
+              endpoints.MapDefaultControllerRoute();
+							endpoints.MapFallbackToPage("/_Host");
+              //endpoints.MapFallbackToClientSideBlazor<Steeltoe.Client.Startup>("index.html");
+          });
       }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            app.UseResponseCompression();
-
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-                app.UseBlazorDebugging();
-            }
-
-            app.UseStaticFiles();
-            app.UseClientSideBlazorFiles<Steeltoe.Client.Startup>();
-
-            app.UseRouting();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-								endpoints.MapFallbackToPage("/_Host");
-                //endpoints.MapFallbackToClientSideBlazor<Steeltoe.Client.Startup>("index.html");
-            });
-        }
     }
 }
