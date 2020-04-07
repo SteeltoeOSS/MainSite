@@ -1,7 +1,4 @@
-﻿@using System
-@implements IDisposable
-
-<Tab Title="Local">
+﻿<Tab Title="Local">
 	<ol>
     <li>
       Create <b>Dockerfile</b> in the same folder as @(ProjectName).csproj
@@ -65,9 +62,7 @@ ENTRYPOINT ["dotnet", "@(ProjectName).dll"]
 	{
 		if(IncludeCreateNetworkStep == true)
 			NetworkName = "steeltoe";
-	}
 
-	public void Dispose()
-	{
+	 base.OnInitializedAsync();
 	}
 }

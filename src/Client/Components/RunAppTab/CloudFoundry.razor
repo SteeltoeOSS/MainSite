@@ -1,7 +1,4 @@
-﻿@using System
-@implements IDisposable
-
-<Tab Title="Cloud Foundry">
+﻿<Tab Title="Cloud Foundry">
 	<ol>
 		<li class="@(NoCFProvider || NoPackageManager?"hide":"")">
 			Open the package manager console
@@ -78,12 +75,4 @@ applications:
 
 	[Parameter]
 	public RenderFragment AdditionalSteps { get; set; }
-
-	protected override void OnInitialized()
-	{
-	}
-
-	public void Dispose()
-	{
-	}
 }

@@ -8,25 +8,26 @@
 </li>
 
 @code {
-    [CascadingParameter]
-    public TabSet ContainerTabSet { get; set; }
+	[CascadingParameter]
+	public TabSet ContainerTabSet { get; set; }
 
-    [Parameter]
-    public string Title { get; set; }
+	[Parameter]
+	public string Title { get; set; }
 
-    [Parameter]
-    public RenderFragment ChildContent { get; set; }
+	[Parameter]
+	public RenderFragment ChildContent { get; set; }
 
-    private string TitleCssClass => ContainerTabSet.ActiveTab == this ? "active" : null;
+	private string TitleCssClass => ContainerTabSet.ActiveTab == this ? "active" : null;
 
-    protected override void OnInitialized()
-    {
-        ContainerTabSet.AddTab(this);
-    }
+	protected override void OnInitialized()
+	{
+		ContainerTabSet.AddTab(this);
 
-    private void Activate()
-    {
-        ContainerTabSet.SetActivateTab(this);
-				
-    }
+		base.OnInitialized();
+	}
+
+	private void Activate()
+	{
+		ContainerTabSet.SetActivateTab(this);
+	}
 }
