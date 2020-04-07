@@ -1,5 +1,6 @@
 ﻿@page "/"
 @page "/index"
+@inject Session Session
 @inject HttpClient Http
 
 <PageTitle Title="Home" />
@@ -96,15 +97,11 @@
 <div class="left-yellow-slant bg-midnight-blue text-white width-all pb-4">
 	<div class="width-60 container">
 		<div class="text-center width-all pb-3"><h2>News</h2></div>
-		@if (calendarEvents == null)
-		{
+		@if (Session.CalendarEvents == null){
 			<span>&nbsp;</span>
-		}
-		else
-		{
+		}else{
 			int i = 1;
-			@foreach (var calendarEvent in calendarEvents)
-			{
+			@foreach (var calendarEvent in Session.CalendarEvents){
 				<div class="row no-gutters">
 					<div class="col news">
 						<div class="date">@((MarkupString)calendarEvent.Date)</div>
@@ -113,7 +110,7 @@
 						<div class=""><a class="special-link" href="@calendarEvent.URL" target="_blank">read more &gt;</a></div>
 					</div>
 				</div>
-				@if (i++ < calendarEvents.Count()) {
+				@if (i++ < Session.CalendarEvents.Count()) {
 					<div class="row no-gutters">
 						<div class="col"><hr class="border-steeltoe-blue" /></div>
 					</div>
@@ -134,25 +131,3 @@
 		</div>
 	 </div>
 	</div>*@
-
-@code {
-	private CalendarEvent[] calendarEvents;
-	
-  protected override async Task OnInitializedAsync()
-	{
-		calendarEvents = await Http.GetJsonAsync<CalendarEvent[]>("site-data/CalendarEvents.json");
-		
-		await base.OnInitializedAsync();
-	}
-
-	public class CalendarEvent
-	{
-		public string Date { get; set; }
-
-		public string Title { get; set; }
-
-		public string Description { get; set; }
-
-		public string URL { get; set; }
-	}
-}
