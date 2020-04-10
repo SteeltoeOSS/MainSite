@@ -5,10 +5,11 @@
   .top-bar .col .nav-link {
     color: #00376e
   }
-.has-menu{
+.has-menu {
   color: #00376e;
   display: inline-block;
   padding: 0;
+  white-space: nowrap;
 }
 
 #nav-items a:focus, .has-menu span:focus {
@@ -42,10 +43,10 @@
 }
 
 .drop-menu {
- position: absolute;
+  position: absolute;
   white-space: nowrap;
   transition: all 0s linear;
-  top: -51px;
+  top: -24px;
   /*margin: 10px;*/
   opacity: 0
 }
@@ -70,7 +71,7 @@
   background: #fff;
   width: 240px;
   box-shadow: 0 5px 30px 0 rgba(108,135,135,.5);
-  top: 38px;
+  top: 71px;
   opacity: 0
 }
 
@@ -79,13 +80,13 @@
 }
 
 #why-target {
-  width: 135px
 }
 #why-items {
-  right: 702px
+  right: 559px;
+  width: 135px
 }
 #scope.why-scope {
-  right: 697px;
+  right: 459px;
   height: 210px;
   opacity: 1
 }
@@ -95,27 +96,26 @@
 }
 
 #learn-target {
-  /*width: 95px*/
 }
 #learn-items {
-  right: 517px
+  right: 449px;
+  width: 95px
 }
 #scope.learn-scope {
-  right: 508px;
+  right: 309px;
   height: 130px;
   opacity: 1
 }
 
 #project-target {
-  /*width: 100px;*/
-  transform: translateX(-10px)
 }
 #project-items {
-  right: 389px
+  right: 333px;
+  width: 100px;
 }
 #scope.project-scope {
-  right: 380px;
-  height: 621px;
+  right: 204px;
+  height: 488px;
   opacity: 1
 }
 

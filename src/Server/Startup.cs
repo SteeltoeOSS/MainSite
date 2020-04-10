@@ -1,67 +1,48 @@
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Newtonsoft.Json.Serialization;
-using System;
 using System.Linq;
-using System.Net.Http;
 
-namespace tmp.Server
-{
-    public class Startup
-    {
-      // This method gets called by the runtime. Use this method to add services to the container.
-      // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
-      public void ConfigureServices(IServiceCollection services)
-      {
-        services.AddMvc().AddNewtonsoftJson();
-        services.AddResponseCompression(opts =>
-        {
-            opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
-                new[] { "application/octet-stream" });
-        });
+namespace Steeltoe.Server {
+	public class Startup {
+		public Startup(IConfiguration configuration) {
+			Configuration = configuration;
+		}
 
-        //// Server Side Blazor doesn't register HttpClient by default
-        if (!services.Any(x => x.ServiceType == typeof(HttpClient))) {
-          // Setup HttpClient for server side in a client side compatible fashion
-          services.AddScoped<HttpClient>(s => {
-            // Creating the URI helper needs to wait until the JS Runtime is initialized, so defer it.      
-            var uriHelper = s.GetRequiredService<NavigationManager>();
-            return new HttpClient {
-              BaseAddress = new Uri(uriHelper.BaseUri)
-            };
-          });
-        }
+		public IConfiguration Configuration { get; }
 
-        services.AddScoped<INavMenu, NavMenu>();
-        services.AddScoped<ICalendarEvents, CalendarEvents>();
-    }
+		// This method gets called by the runtime. Use this method to add services to the container.
+		// For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
+		public void ConfigureServices(IServiceCollection services) {
 
-      // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-      public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-      {
-          app.UseResponseCompression();
+			services.AddControllersWithViews();
+		}
 
-      if (env.IsDevelopment())
-          {
-              app.UseDeveloperExceptionPage();
-              app.UseBlazorDebugging();
-          }
+		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
+			if (env.IsDevelopment()) {
+				app.UseDeveloperExceptionPage();
+				app.UseWebAssemblyDebugging();
+			} else {
+				app.UseExceptionHandler("/Error");
+				// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+				app.UseHsts();
+			}
 
-          app.UseStaticFiles();
-          app.UseClientSideBlazorFiles<Steeltoe.Client.Startup>();
+			app.UseHttpsRedirection();
+			app.UseBlazorFrameworkFiles();
+			app.UseStaticFiles();
 
-          app.UseRouting();
+			app.UseRouting();
 
-          app.UseEndpoints(endpoints =>
-          {
-              endpoints.MapDefaultControllerRoute();
-							endpoints.MapFallbackToPage("/_Host");
-              //endpoints.MapFallbackToClientSideBlazor<Steeltoe.Client.Startup>("index.html");
-          });
-      }
-    }
+			app.UseEndpoints(endpoints => {
+				endpoints.MapControllers();
+				endpoints.MapFallbackToFile("index.html");
+			});
+		}
+	}
 }

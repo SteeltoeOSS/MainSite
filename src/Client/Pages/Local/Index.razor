@@ -1,13 +1,11 @@
 @page "/local"
 @page "/steeltoe-local"
 
-<SteeltoeComponent Name="Steeltoe Local">
-	<ComponentDescription>Cloud platforms boast many gains in productivity, but applications don’t start there. They are developed locally and then pushed.
+<Template Name="Steeltoe Local" GettingStartedURL="/local/get-startedd" DocsURL="/docs/developer-tools/local">
+	<Description>Cloud platforms boast many gains in productivity, but applications don’t start there. They are developed locally and then pushed.
 			<br /><br />
-			Steeltoe Local helps developers recreate how their app will be deployed in production, locally. The worst practice one can have is coding in decisions based on the environment the app is running in. This complicates testing by adding too many possible scenarios. It’s true you can’t account for every option and feature in every environment, but you can create an application that is resilient to those changes. You can create something that expects that change.</ComponentDescription>
-	<GettingStartedURL><NavLink class="component-button nav-link" href="/local/get-started">GET STARTED</NavLink></GettingStartedURL>
-	<DocsURL><NavLink class="component-button nav-link" href="/docs/developer-tools/local">VIEW THE DOCS</NavLink></DocsURL>
-	<Features>
+			Steeltoe Local helps developers recreate how their app will be deployed in production, locally. The worst practice one can have is coding in decisions based on the environment the app is running in. This complicates testing by adding too many possible scenarios. It’s true you can’t account for every option and feature in every environment, but you can create an application that is resilient to those changes. You can create something that expects that change.</Description>
+	<OtherArea>
 		<div class="row no-gutters">
 			<div class="col component-whyuse-title mt-0">
 				<h2>Installing the CLI</h2>
@@ -15,7 +13,7 @@
 		</div>
 		<div class="row mb-5 no-gutters">
 			<div class="col component-whyuse-desc">
-				To install the CLI, use the <NavLink class="nav-link" href="https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools" target="_blank">dotnet global tools</NavLink> feature of the <NavLink class="nav-link" href="https://docs.microsoft.com/en-us/dotnet/core/tools" target="_blank">dotnet cli</NavLink>.
+				To install the CLI, use the <Href href="https://docs.microsoft.com/en-us/dotnet/core/tools/global-tools" target="_blank">dotnet global tools</Href> feature of the <Href href="https://docs.microsoft.com/en-us/dotnet/core/tools" target="_blank">dotnet cli</Href>.
 <pre><code>PS C:\> dotnet tool install --global --version 1.0.0-m1 Steeltoe.Cli</code></pre>
 				<Note><Message>To use the CLI you will need to have Docker running. For Windows we suggest Docker Desktop using the linux containers option. For OSX, the defaults for Docker are good.</Message></Note>
 			</div>
@@ -45,14 +43,12 @@
 				Steeltoe CLI has written this manifest for you at the root of the project. Tweak any customizations you might want to include and use this in a manual push command like “cf push -f..” or “kubectl apply -f..”, or check-in the manifest with your code for use in a pipeline.
 			</div>*@
 		</div>
-	</Features>
-	<OtherArea>
 		<div class="col text-center m-5">
 			<div class="mb-5"><h2>Ready to get started?</h2></div>
-			<div class=""><NavLink href="/local/get-started" role="button" class="border border-dark font-weight-bold btn btn-default border-black p-3 nav-link">TRY THIS TUTORIAL</NavLink></div>
+			<div class=""><Href href="/local/get-started" role="button" class="border border-dark font-weight-bold btn btn-default border-black p-3 nav-link">TRY THIS TUTORIAL</Href></div>
 		</div>
 	</OtherArea>
-</SteeltoeComponent>
+</Template>
 
 
 @code {

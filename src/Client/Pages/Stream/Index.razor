@@ -1,45 +1,60 @@
 ﻿@page "/stream"
 @page "/streams"
 
-<SteeltoeComponent Name="Stream">
-	<DocsURL><a class="component-button nav-link" href="/docs/stream">VIEW THE DOCS</a></DocsURL>
-	<GettingStartedURL>
-		<a class="component-button nav-link" href="stream/get-started">GET STARTED TUTORIAL</a>
-	</GettingStartedURL>
-	<ComponentDescription>Build highly scalable event-driven microservices connected to shared messaging systems.</ComponentDescription>
-	<WhatIsComponent>XXXXXXXX</WhatIsComponent>
-	<WhyUseComponent>
+<Template Name="Stream" GettingStartedURL="/stream/get-started" DocsURL="/docs/stream">
+	<Description>Build highly scalable event-driven microservices connected to shared messaging systems.</Description>
+	<WhatIs>XXXXXXXX</WhatIs>
+	<WhyUse>
 		YYYYYYYY
-	</WhyUseComponent>
-	<Features>
-		<div class="row component-feature">
-			<div class="col-6">
-				<div class="component-feature-title">Support for Multiple Message Brokers</div>
-				<div class="component-feature-desc">Steeltoe stream support for both <a class="nav-link" href="https://github.com/steeltoeoss/steeltoe/rabbitmq-binder" target="_blank">RabbitMQ</a> as well as <a class="nav-link" href="https://github.com/steeltoeoss/steeltoe/kafka-binder" target="_blank">Kafka</a>, you have flexibility with little to no code change when choosing the right broker.</div>
-			</div>
-			<div class="col-6 text-center"><div class="component-feature-img"><img class="" src="images/Icon_computers.svg" /></div></div>
-		</div>
-		<div class="row component-feature">
-			<div class="col-6 text-center"><div class="component-feature-img"><img class="" src="images/Icon_cloud.svg" /></div></div>
-			<div class="col-6">
-				<div class="component-feature-title">Logging & Health Checks Built In</div>
-				<div class="component-feature-desc">Stream logs are automatically fed to your app’s logging interface, and health contributors are automatically configured and made available to your application.</div>
+	</WhyUse>
+	<FeatureTemplate Context="Feature">
+		<div class="row component-feature no-gutters">
+			<div class="col-6 text-center"><div class="component-feature-img"><img class="img-fluid" src="@Feature.Img" /></div></div>
+			<div class="col">
+				<div class="component-feature-title">@Feature.Title</div>
+				<div class="component-feature-desc">@Feature.Description</div>
 			</div>
 		</div>
-		<div class="row component-feature">
+	</FeatureTemplate>
+	<AltFeatureTemplate Context="Feature">
+		<div class="row component-feature no-gutters">
 			<div class="col-6">
-				<div class="component-feature-title">Event Driven Architectures</div>
-				<div class="component-feature-desc">xxxxxx.</div>
+				<div class="component-feature-title">@Feature.Title</div>
+				<div class="component-feature-desc">@Feature.Description</div>
 			</div>
-			<div class="col-6 text-center"><div class="component-feature-img"><img class="" src="images/Icon_data-transfer.svg" /></div></div>
+			<div class="col-6 text-center"><div class="component-feature-img"><img class="img-fluid" src="@Feature.Img" /></div></div>
 		</div>
-		<div class="row component-feature">
-			<div class="col-6 text-center"><div class="component-feature-img"><img class="" src="images/Icon_data-transfer.svg" /></div></div>
-			<div class="col-6">
-				<div class="component-feature-title">Messagaing</div>
-				<div class="component-feature-desc">XXXXXX.</div>
-			</div>
-		</div>
-	</Features>
-</SteeltoeComponent>
-
+	</AltFeatureTemplate>
+</Template>
+@code{
+	private Feature[] features = new[] { 
+		new Feature() {
+			Title = (MarkupString)"Support for Multiple Message Brokers",
+			Description = (b => {
+				b.AddMarkupContent(1,"Steeltoe stream support for both RabbitMQ as well as Kafka, you have flexibility with little to no code change when choosing the right broker.");
+			}),
+			Img = "/images/Icon_computers.svg"
+		},
+		new Feature() {
+			Title = (MarkupString)"Logging & Health Checks Built In",
+			Description = (b => {
+				b.AddMarkupContent(1,"Stream logs are automatically fed to your app’s logging interface, and health contributors are automatically configured and made available to your application.");
+			}),
+			Img = "/images/Icon_cloud.svg"
+		},
+		new Feature() {
+			Title = (MarkupString)"Event Driven Architectures",
+			Description = (b => {
+				b.AddMarkupContent(1,"aaaaaaa");
+			}),
+			Img = "/images/Icon_data-transfer.svg"
+		},
+		new Feature() {
+			Title = (MarkupString)"Messagaing",
+			Description = (b => {
+				b.AddMarkupContent(1,"aaaaaaa");
+			}),
+			Img = "/images/Icon_data-transfer.svg"
+		}
+	};
+}

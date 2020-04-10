@@ -13,7 +13,7 @@
 		</div>
 		<div class="row">
 			<div class="col-12">
-				You'll need a Wavefront account to complete this guide successfully. <NavLink class="nav-link" href="https://www.wavefront.com/sign-up/" target="_blank">Create a 30 day trial</NavLink>, if you don't already have access. With your account established replace <code>YOUR_API_TOKEN</code> below with your account token. Lean how to retrieve that token <NavLink class="nav-link" href="https://docs.wavefront.com/users_account_managing.html" target="_blank">here</NavLink>.
+				You'll need a Wavefront account to complete this guide successfully. <Href href="https://www.wavefront.com/sign-up/" target="_blank">Create a 30 day trial</Href>, if you don't already have access. With your account established replace <code>YOUR_API_TOKEN</code> below with your account token. Lean how to retrieve that token <Href href="https://docs.wavefront.com/users_account_managing.html" target="_blank">here</Href>.
 			</div>
 		</div>
 		<div class="row">
@@ -28,7 +28,7 @@
                 <code class="inline">docker network create "steeltoe"</code>
               </li>
               <li>
-						Using the <NavLink class="nav-link" href="https://hub.docker.com/r/wavefronthq/proxy" target="_blank">docker image</NavLink>, start a local instance of @ServiceName. Remember to replace &lt;YOUR_API_TOKEN&gt; with your account's token.
+						Using the <Href href="https://hub.docker.com/r/wavefronthq/proxy" target="_blank">docker image</Href>, start a local instance of @ServiceName. Remember to replace &lt;YOUR_API_TOKEN&gt; with your account's token.
 						<code class="multiline">docker run -d `
   --name "wavefront-proxy" `
   -n "steeltoe" `
@@ -43,7 +43,7 @@
             </ol>
 					</Tab>
 					<Tab Title="Kubernetes">
-						Using the <NavLink class="nav-link" href="https://github.com/wavefrontHQ/helm/tree/master/wavefront" target="_blank">helm chart</NavLink>, start an instance of @ServiceName. Remember to replace &lt;YOUR_API_TOKEN&gt; with your account's token and CLUSTER information with your K8's cluster info.
+						Using the <Href href="https://github.com/wavefrontHQ/helm/tree/master/wavefront" target="_blank">helm chart</Href>, start an instance of @ServiceName. Remember to replace &lt;YOUR_API_TOKEN&gt; with your account's token and CLUSTER information with your K8's cluster info.
 						<pre><code>PS C:\> helm install `
   wavefront/wavefront `
   --name "wavefront-proxy" `

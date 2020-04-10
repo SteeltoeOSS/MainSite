@@ -1,5 +1,11 @@
 [
 	{
+		"date": "<span>april</span> 9 2020",
+		"title": "Steeltoe 3.0.0-m2 is available",
+		"description": "The second milestone of Steeltoe 3.0 has been reached! With a focus on .NET Core, this new major version will offer message streaming, the Initializr project, tooling for local development, and more.",
+		"url": "https://github.com/SteeltoeOSS/steeltoe/blob/master/roadmaps/3.0.0.md"
+	},
+	{
 		"date": "<span>february</span> 23 2020",
 		"title": "Steeltoe 3.0.0-m1 is available",
 		"description": "The first milestone of Steeltoe 3.0 has been reached! With a focus on .NET Core, this new major version will offer message streaming, the Initializr project, tooling for local development, and more.",
@@ -16,17 +22,5 @@
 		"title": "Steeltoe 2.4 RC1 is available",
 		"description": "Featuring support for .NET Core 3.0 as well as closing a few resolved issues.",
 		"url": "https://github.com/SteeltoeOSS/steeltoe/blob/master/roadmaps/2.4.0.md"
-	},
-	{
-		"date": "<span>october</span> 6-7 2019",
-		"title": ".NET developer pre-conference training at Spring One Platform",
-		"description": "A two-day course that demonstrates how to build cloud-native .NET applications using Steeltoe. Get signed up today!",
-		"url": "https://springoneplatform.io/2019/training/steeltoe"
-	},
-	{
-		"date": "<span>september</span> 30 2019",
-		"title": "Steeltoe 2.3 is available",
-		"description": "With new features in logging, cloud management, and cloud connectors as well as quite a few notable issues resolved the 2.3 release is another milestone in Steeltoe's roadmap.",
-		"url": "https://github.com/SteeltoeOSS/steeltoe/blob/master/roadmaps/2.3.0.md"
 	}
 ] 

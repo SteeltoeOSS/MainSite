@@ -1,90 +1,110 @@
 ﻿@page "/why-steeltoe"
 
-<SteeltoeComponent Name="Why Steeltoe">
-	<ComponentDescription>Steeltoe makes programming .NET quicker, easier, and safer for everybody. Steeltoe’s focus on speed, simplicity, and productivity has made it one of the world's most popular >NET frameworks.</ComponentDescription>
-	<GettingStartedURL><NavLink class="component-button nav-link" href="quickstart">GET STARTED</NavLink></GettingStartedURL>
-	<Features>
-		<div class="row component-feature">
-			<div class="col-6">
-				<div class="component-feature-title">Steeltoe is everywhere</div>
-				<div class="row no-gutters">
-					<div class="col-3">
-						<img src="" />
-					</div>
-					<div class="col component-feature-desc">Steeltoe’s flexible libraries are trusted by developers all over the world. Steeltoe delivers delightful experiences to millions of end-users every day—whether that’s streaming TV, connected cars, online shopping, or countless other innovative solutions. Steeltoe also has contributions from all the big names in tech, including Alibaba, Amazon, Google, Microsoft, and more.</div>
+<Template Name="Why Steeltoe" ShowBottomGetStarted="false" GettingStartedURL="/quickstart" Features="@features">
+	<Description>Steeltoe makes programming .NET quicker, easier, and safer for everybody. Steeltoe’s focus on speed, simplicity, and productivity has made it one of the world's most popular .NET frameworks.</Description>
+	<FeatureTemplate Context="Feature">
+		<div class="col-6 pr-5">
+			<div class="component-feature-title">@Feature.Title</div>
+			<div class="row no-gutters">
+				<div class="col-3">
+					<img src="@Feature.Img" class="img-fluid" />
 				</div>
-			</div>
-			<div class="col-6">
-				<div class="component-feature-title">Steeltoe is flexible</div>
-				<div class="row no-gutters">
-					<div class="col-3">
-						<img src="" />
-					</div>
-					<div class="component-feature-desc">Steeltoe’s flexible and comprehensive set of extensions and third-party libraries let developers build almost any application imaginable. At its core, Steeltoe Framework’s Inversion of Control (IoC) and Dependency Injection (DI) features provide the foundation for a wide-ranging set of features and functionality. Whether you’re building secure, reactive, cloud-based microservices for the web, or complex streaming data flows for the enterprise, Steeltoe has the tools to help.</div>
-				</div>
+				<div class="col component-feature-desc mb-5">@Feature.Description</div>
 			</div>
 		</div>
-		<div class="row component-feature">
-			<div class="col-6">
-				<div class="component-feature-title">Steeltoe is productive</div>
-				<div class="component-feature-desc">Steeltoe Boot transforms how you approach Java programming tasks, radically streamlining your experience. Steeltoe Boot combines necessities such as an application context and an auto-configured, embedded web server to make microservice development a cinch. To go even faster, you can combine Steeltoe Boot with Steeltoe Cloud’s rich set of supporting libraries, servers, patterns, and templates, to safely deploy entire microservices-based architectures into the cloud, in record time.</div>
-			</div>
-			<div class="col-6">
-				<div class="component-feature-title">Steeltoe is fast</div>
-				<div class="row no-gutters">
-					<div class="col-3">
-						<img src="" />
-					</div>
-					<div class="component-feature-desc">Our engineers care deeply about performance. With Steeltoe, you’ll notice fast startup, fast shutdown, and optimized execution, by default. Increasingly, Steeltoe projects also support the reactive (nonblocking) programming model for even greater efficiency. Developer productivity is Steeltoe’s superpower. Steeltoe Boot helps developers build applications with ease and with far less toil than other competing paradigms. Embedded web servers, auto-configuration, and “fat jars” help you get started quickly, and innovations like LiveReload in Steeltoe DevTools mean developers can iterate faster than ever before. You can even start a new Steeltoe project in seconds, with the Steeltoe Initializr at start.Steeltoe.io.</div>
+	</FeatureTemplate>
+	<AltFeatureTemplate Context="Feature">
+		<div class="col-6 pl-5">
+			<div class="component-feature-title">@Feature.Title</div>
+			<div class="row no-gutters">
+				<div class="col-3">
+					<img src="@Feature.Img" class="img-fluid" />
 				</div>
+				<div class="col component-feature-desc mb-5">@Feature.Description</div>
 			</div>
 		</div>
-		<div class="row component-feature">
-			<div class="col-6">
-				<div class="component-feature-title">Steeltoe is secure</div>
-				<div class="component-feature-desc">Steeltoe has a proven track record of dealing with security issues quickly and responsibly. The Steeltoe committers work with security professionals to patch and test any reported vulnerabilities. Third-party dependencies are also monitored closely, and regular updates are issued to help keep your data and applications as safe as possible. In addition, Steeltoe Security makes it easier for you to integrate with industry-standard security schemes and deliver trustworthy solutions that are secure by default.</div>
-			</div>
-			<div class="col-6">
-				<div class="component-feature-title">Steeltoe is supportive</div>
-				<div class="row no-gutters">
-					<div class="col-3">
-						<img src="" />
-					</div>
-					<div class="component-feature-desc">The Steeltoe community is enormous, global, diverse, and spans folks of all ages and capabilities, from complete beginners to seasoned pros. No matter where you are on your journey, you can find the support and resources you need to get you to the next level: quickstarts, guides & tutorials, videos, meetups, support, or even formal training and certification.</div>
-				</div>
-			</div>
-		</div>
-	</Features>
-</SteeltoeComponent>
-<div class="width-all bg-dk-midnight-blue py-5">
+	</AltFeatureTemplate>
+</Template>
+<div class="width-all bg-dk-midnight-blue pt-5">
 	<div class="width-70 container text-white">
 		<div class="width-all text-center"><h2>What Steeltoe can do</h2></div>
 		<div class="">
 			<div class="row no-gutters">
-				<div class="col component"><NavLink class="nav-link" href="/microservices">
-					<div class="text-center"><img class="w-75" src="/images/icon-microservices-dfc414fd79f67718216adaffb5d99947.svg" /></div>
+				<div class="col component-dark"><Href href="/microservices">
+					<div class="text-center"><img class="img-fluid" src="/images/icon-microservices-white.svg" /></div>
 					<div class="title text-white"><h3>Microservices</h3></div>
 					<div class="desc text-white">Quickly deliver production‑grade features with independently evolvable microservices.</div>
-				</NavLink></div>
+				</Href></div>
 				
-				<div class="col component"><NavLink class="nav-link" href="/cloud">
-					<div class="text-center"><img class="w-75" src="/images/icon-cloud-73c3f4c15437e8493b3d3124fc667a08.svg" /></div>
+				<div class="col component-dark"><Href href="/cloud">
+					<div class="text-center"><img class="img-fluid" src="/images/icon-cloud-white.svg" /></div>
 					<div class="title text-white"><h3>Cloud</h3></div>
 					<div class="desc text-white">Your code, any cloud—we’ve got you covered. Connect and scale your services, whatever your platform.</div>
-				</NavLink></div>
+				</Href></div>
 				
-				<div class="col component"><NavLink class="nav-link" href="/web-applications">
-					<div class="text-center"><img class="w-75" src="/images/icon-webapps-16f6e97a1447fefba82fbdfc302262af.svg" /></div>
+				<div class="col component-dark"><Href href="/web-applications">
+					<div class="text-center"><img class="img-fluid" src="/images/icon-webapps-white.svg" /></div>
 					<div class="title text-white"><h3>Web Apps</h3></div>
 					<div class="desc text-white">A framework for fast, secure, and responsive web applications connected to any data store.</div>
-				</NavLink></div>
+				</Href></div>
 				
-				<div class="col component"><NavLink class="nav-link" href="/event-driven">
-					<div class="text-center"><img class="w-75" src="/images/icon-streams-825456b79c33345f5bf4a6ef73dc8cbd.svg" /></div>
+				<div class="col component-dark"><Href href="/event-driven">
+					<div class="text-center"><img class="img-fluid" src="/images/icon-streams-white.svg" /></div>
 					<div class="title text-white"><h3>Event Driven</h3></div>
 					<div class="desc text-white">Integrate with your enterprise. React to business events. Act on your streaming data in realtime.</div>
-				</NavLink></div>
+				</Href></div>
 			</div>
 		</div>
 	</div>
 </div>
+
+@code{
+	private Feature[] features = new[] { 
+		new Feature() {
+			Title = (MarkupString)"Steeltoe is proven",
+			Description = (b => {
+				b.AddMarkupContent(1,"Steeltoe’s libraries are trusted by developers all over the world. Steeltoe delivers delightful experiences to millions of end-users every day. Steeltoe also has contributions from development teams at Microsoft, and more.");
+			}),
+			Img = "/images/img-everywhere-2573c9d8470aed5621745921ac8733c8.svg"
+		},
+		new Feature() {
+			Title = (MarkupString)"Steeltoe is flexible",
+			Description = (b => {
+				b.AddMarkupContent(1,"Steeltoe’s flexible and comprehensive set of extensions and third-party libraries let developers build almost any web application imaginable. At its core, Steeltoe Framework’s features provide the foundation for a wide-ranging set of features and functionality. Whether you’re building secure, cloud-based microservices for the web, or complex streaming data flows for the enterprise, Steeltoe has the tools to help.");
+			}),
+			Img = "/images/img-flexible-a5992de389ba231fc0dd93479df70b62.svg"
+		},
+		new Feature() {
+			Title = (MarkupString)"Steeltoe is productive",
+			Description = (b => {
+				b.AddMarkupContent(1,"Steeltoe transforms how you approach .NET programming tasks, radically streamlining your experience. To go even faster, you can use Steeltoe with Spring Cloud’s rich set of supporting libraries, servers, patterns, and templates, to safely deploy entire microservices-based architectures into the cloud, in record time.");
+			}),
+			Img = "/images/img-innovative-16683bc64538d1462c6b77930f8b71ee.svg"
+		},
+		new Feature() {
+			Title = (MarkupString)"Steeltoe is fast",
+			Description = (b => {
+				b.AddMarkupContent(1,"Developer productivity is one of Steeltoe’s superpowers. Steeltoe helps developers build applications with ease and with far less toil than other competing paradigms. You can even start a new Steeltoe project in seconds, with the Steeltoe Initializr at ");
+				b.OpenComponent<Href>(2);
+					b.AddAttribute(3, "href","https://start.Steeltoe.io");
+					b.AddAttribute(4, "ChildContent", (RenderFragment)((b) => {b.AddContent(5, "start.Steeltoe.io");}));
+				b.CloseComponent();
+			}),
+			Img = "/images/img-fast-f8bdb07b7bf02133827ec6bd3069eb29.svg"
+		},
+		new Feature() {
+			Title = (MarkupString)"Steeltoe is secure",
+			Description = (b => {
+				b.AddMarkupContent(1,"Steeltoe has a proven track record of remediating security issues quickly and responsibly. The Steeltoe committers work with security professionals to patch and test any reported vulnerabilities. Third-party dependencies are also monitored closely, and regular updates are issued to help keep your data and applications as safe as possible. In addition, Steeltoe Security makes it easier for you to integrate with industry-standard security schemes and deliver trustworthy solutions that are secure by default.");
+			}),
+			Img = "/images/img-secure-9a8f8b676bec21edfc4a9809c6cfa646.svg"
+		},
+		new Feature() {
+			Title = (MarkupString)"Steeltoe is supportive",
+			Description = (b => {
+				b.AddMarkupContent(1,"The Steeltoe community is global, diverse, and spans folks of all ages and capabilities, from complete beginners to seasoned pros. No matter where you are on your journey, you can find the support and resources you need to get you to the next level: quickstarts, guides & tutorials, videos, support, or even formal training and certification.");
+			}),
+			Img = "/images/img-indemand-3f63d4a71b8af531028c46842a45cf49.svg"
+		}
+	};
+}

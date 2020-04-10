@@ -147,7 +147,7 @@ public class Startup
 			<div class="col-12 getting-started-ordered-list">
         <TabSet>
 				  <Steeltoe.Client.Components.RunAppTab.Docker ProjectName="@ProjectName" ImageName="grafana-app-image" ContainerName="grafana-app" ContainerPort="80" PublicPort="80" IncludeCreateNetworkStep="true">
-            <AdditionalSteps><Note><Message>Confirm the app started successfully by running <code>docker ps</code>. You should see a running container named "grafana-app". You can also navigate to <NavLink class="nav-link" href="http://localhost:80/actuators" target="_blank">http://localhost:80/actuators</NavLink>. This should display a list of available endpoints including the prometheus.</Message></Note></AdditionalSteps>
+            <AdditionalSteps><Note><Message>Confirm the app started successfully by running <code>docker ps</code>. You should see a running container named "grafana-app". You can also navigate to <Href href="http://localhost:80/actuators" target="_blank">http://localhost:80/actuators</Href>. This should display a list of available endpoints including the prometheus.</Message></Note></AdditionalSteps>
           </Steeltoe.Client.Components.RunAppTab.Docker>
 				  <Steeltoe.Client.Components.RunAppTab.Kubernetes ProjectName="@ProjectName" IncludeNavigateToApp="false" />
 			  </TabSet>
@@ -199,13 +199,12 @@ scrape_configs:
 						    <DockerCmd>docker run -d --name my-prometheus-service -p 9090:9090 -v &lt;ABSOLUTE_PATH_TO&gt;/prometheus.yml:/etc/prometheus/prometheus.yml --network "steeltoe" prom/prometheus</DockerCmd>
                 <AdditionalSteps>
                   <li>
-                    Confirm Prometheus is running by navigating to the dashboard <NavLink class="nav-link" href="http://localhost:9090" target="_blank">http://localhost:9090</NavLink>
+                    Confirm Prometheus is running by navigating to the dashboard <Href href="http://localhost:9090" target="_blank">http://localhost:9090</Href>
                   </li>
                   <Tip><Message>Once you navigate to the Prometheus dashboard, go to Status>Targets to confirm the app has registered successfully and data is being scraped correctly.</Message></Tip>
                 </AdditionalSteps>
 					    </Steeltoe.Client.Components.StartInstanceTab.Local>
 					    <Steeltoe.Client.Components.StartInstanceTab.Kubernetes InstanceName="@InstanceName" ServiceName="my-prometheus-service">
-						    <HelmGettingStartedUrl>https://hub.helm.sh/charts/stable/mongodb</HelmGettingStartedUrl>
 						    <HelmCmd>helm install --name my-prometheus-service stable/prometheus -f &lt;PATH_TO&gt;/prometheus.yml</HelmCmd>
                 <AdditionalSteps>
                   <li>
@@ -413,7 +412,6 @@ datasources:
 						    <DockerCmd>docker run -d --name my-grafana-service -p 3000:3000 --network "steeltoe" -v &lt;ABSOLUTE_PATH_TO&gt;/datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml -v &lt;ABSOLUTE_PATH_TO&gt;/dashboard.json:/var/lib/grafana/dashboards/steeltoe.json -v &lt;ABSOLUTE_PATH_TO&gt;/dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml grafana/grafana</DockerCmd>
 					    </Steeltoe.Client.Components.StartInstanceTab.Local>
 					    <Steeltoe.Client.Components.StartInstanceTab.Kubernetes InstanceName="@InstanceName" ServiceName="@ServiceName">
-						    <HelmGettingStartedUrl>https://hub.helm.sh/charts/stable/mongodb</HelmGettingStartedUrl>
 						    <HelmCmd>helm install --name my-grafana-service stable/grafana -f &lt;PATH_TO&gt;/prometheus.yml -f &lt;PATH_TO&gt;/dashboard.json</HelmCmd>
 					    </Steeltoe.Client.Components.StartInstanceTab.Kubernetes>
 				    </TabSet>
@@ -429,7 +427,7 @@ datasources:
         <Note><Message>The default username is <code>admin</code> and the password is <code>admin.</code></Message></Note>
         <TabSet>
 				  <Tab Title="Local">
-            Grafana is available at <NavLink class="nav-link" href="http://localhost:3000" target="_blank">http://localhost:3000</NavLink>.
+            Grafana is available at <Href href="http://localhost:3000" target="_blank">http://localhost:3000</Href>.
           </Tab>
 				  <Tab Title="kubernetes">
             Grafana is available at http://&lt;HELM_PROVIDED_HOST_ADDRESS&gt;:&lt;HELM_PROVIDED_PORT_NUMBER&gt;

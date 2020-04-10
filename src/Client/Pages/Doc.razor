@@ -25,14 +25,14 @@
 						@if(Version == 3) {
 							<span>Steeltoe v3</span>
 						} else {
-							<NavLink class="nav-link" href="@("/docs/3/" + Component + "/" + Area)" title="Current">Steeltoe v3</NavLink>
+							<Href href="@("/docs/3/" + Component + "/" + Area)" title="Current">Steeltoe v3</Href>
 						}
 					</div>
 					<div class="col text-center nav-version @(Version == 2 ? "selected":"")">
 						@if(Version == 2) {
 							<span>Steeltoe v2</span>
 						} else {
-							<NavLink class="nav-link" href="@("/docs/2/" + Component + "/" + Area)">Steeltoe v2</NavLink>
+							<Href href="@("/docs/2/" + Component + "/" + Area)">Steeltoe v2</Href>
 						}
 					</div>
 				</div>

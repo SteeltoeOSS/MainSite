@@ -1,10 +1,9 @@
-﻿@using Microsoft.JSInterop
-@inject IJSRuntime JSRuntime
+﻿@inject IJSRuntime JSRuntime
 
 <div class="width-all">
 	<div class="width-90 container">
-		<div class="row top-bar align-items-center">
-			<div class="col-4"><a class="nav-link" href="index"><?xml version="1.0" encoding="utf-8"?>
+		<div class="row top-bar">
+			<div class="col-3"><Href href="index"><?xml version="1.0" encoding="utf-8"?>
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="75px" preserveAspectRatio="xMidYMid meet"
 	 viewBox="0 0 812.7 288.5" xml:space="preserve">
 <style type="text/css">
@@ -67,59 +66,54 @@
 	C805.4,115.2,805.3,115.2,805.2,115.2L805.2,115.2z"/>
 
 </svg>
-</a></div>
-			<div class="col text-center">
-				<div class="has-menu"><span>Why Steeltoe</span><div class="nav-arrow"></div></div>
+</Href></div>
+			<div class="col text-center offset-2 mt-4">
+				<div class="has-menu"><span>Why Steeltoe</span><span class="nav-arrow"></span></div>
 			</div>
-			<div class="col text-center">
+			<div class="col text-center mt-4">
 				<div class="has-menu"><span>Learn</span><div class="nav-arrow"></div></div>
 			</div>
-			<div class="col text-center">
+			<div class="col text-center mt-4">
 				<div class="has-menu"><span>Projects</span><div class="nav-arrow"></div></div>
 			</div>
-			<div class="col text-center"><NavLink class="nav-link" href="/training">Training</NavLink></div>
-			<div class="col text-center"><NavLink class="nav-link" href="/support">Support</NavLink></div>
-			<div class="col text-center"><NavLink class="nav-link" href="/community">Community</NavLink></div>
+			<div class="col text-center mt-4"><Href href="/training">Training</Href></div>
+			<div class="col text-center mt-4"><Href href="/support">Support</Href></div>
+			<div class="col text-center mt-4"><Href href="/community">Community</Href></div>
 			<div class="rel" id="dropdown-menus">
 				<div class="abs" id="scope"></div>
 				<div class="drop-menu" id="why-items" onmouseleave="unhovAll()">
 					<div class="drop-target" id="why-target" @onmouseover="@(() => showHover("why"))"></div>
 					<ul onmouseleave="unhovAll()">
-						<li><NavLink class="nav-link" href="/why-steeltoe" @onclick="hideHover">Overview</NavLink></li>
-						<li><NavLink class="nav-link" href="/microservices" @onclick="hideHover">Microservices</NavLink></li>
-						<li><NavLink class="nav-link" href="/cloud" @onclick="hideHover">Cloud</NavLink></li>
-						<li><NavLink class="nav-link" href="/web-applications" @onclick="hideHover">Web Applications</NavLink></li>
-						<li><NavLink class="nav-link" href="/event-driven" @onclick="hideHover">Event Driven</NavLink></li>
+						<li><Href href="/why-steeltoe" @onclick="hideHover">Overview</Href></li>
+						<li><Href href="/microservices" @onclick="hideHover">Microservices</Href></li>
+						<li><Href href="/cloud" @onclick="hideHover">Cloud</Href></li>
+						<li><Href href="/web-applications" @onclick="hideHover">Web Applications</Href></li>
+						<li><Href href="/event-driven" @onclick="hideHover">Event Driven</Href></li>
 					</ul>
 				</div>
 				<div class="drop-menu" id="learn-items" onmouseleave="unhovAll()">
 					<div class="drop-target" id="learn-target" @onmouseover="@(() => showHover("learn"))"></div>
 					<ul onmouseleave="unhovAll()">
-						<li><NavLink class="nav-link" href="/quickstart" @onclick="hideHover">Quickstart</NavLink></li>
-						<li><NavLink class="nav-link" href="/get-started" @onclick="hideHover">Guides</NavLink></li>
-						<li><NavLink class="nav-link" href="/docs" @onclick="hideHover">Documentation</NavLink></li>
+						<li><Href href="/quickstart" @onclick="hideHover">Quickstart</Href></li>
+						<li><Href href="/get-started" @onclick="hideHover">Guides</Href></li>
+						<li><Href href="/docs" @onclick="hideHover">Documentation</Href></li>
 					</ul>
 				</div>
 				<div class="drop-menu" id="project-items" onmouseleave="unhovAll()">
 					<div class="drop-target" id="project-target" @onmouseover="@(() => showHover("project"))"></div>
 					<ul onmouseleave="unhovAll()">
-						<li class=""><NavLink class="nav-link" href="/app-configuration" @onclick="hideHover">Steeltoe Config</NavLink></li>
-						<li class=""><NavLink class="nav-link" href="/service-discovery" @onclick="hideHover">Steeltoe Discovery</NavLink></li>
-						<li class=""><NavLink class="nav-link" href="/cloud" @onclick="hideHover">Steeltoe Security</NavLink></li>
-						<li class=""><NavLink class="nav-link" href="/integration" @onclick="hideHover">Steeltoe Integration</NavLink></li>
-						<li class=""><NavLink class="nav-link" href="/messaging" @onclick="hideHover">Steeltoe Messagaing</NavLink></li>
-						<li class=""><NavLink class="nav-link" href="/service-connectors" @onclick="hideHover">Steeltoe Connectors</NavLink></li>
-						<li class=""><NavLink class="nav-link" href="/security-providers" @onclick="hideHover">Steeltoe Security</NavLink></li>
-						<li class=""><NavLink class="nav-link" href="/streams" @onclick="hideHover">Steeltoe Streams</NavLink></li>
-						<li class=""><NavLink class="nav-link" href="/circuit-breaker" @onclick="hideHover">Steeltoe Circuit Breakers</NavLink></li>
-						<li class=""><NavLink class="nav-link" href="/file-sharing" @onclick="hideHover">Steeltoe File Sharing</NavLink></li>
-						@*<li class=""><NavLink class="nav-link" href="/common" @onclick="hideHover">Steeltoe Common</NavLink></li>*@
-						<li class=""><NavLink class="nav-link" href="/logging" @onclick="hideHover">Steeltoe Logging</NavLink></li>
-						@*<li class=""><NavLink class="nav-link" href="/cloud-foundry" @onclick="hideHover">Cloud Foundry</NavLink></li>*@
-						<li class="small">Development Tools</li>
-						<li class="pl-2"><NavLink class="nav-link" href="/initializr">Initializr</NavLink></li>
-						<li class="pl-2"><NavLink class="nav-link" href="/steeltoe-local">Steeltoe Local</NavLink></li>
-						@*<li class="pt-2"><NavLink class="nav-link" href="/">All Projects</NavLink></li>*@
+						<li class=""><Href href="/app-configuration" @onclick="hideHover">Steeltoe Config</Href></li>
+						<li class=""><Href href="/service-discovery" @onclick="hideHover">Steeltoe Discovery</Href></li>
+						@*<li class=""><Href href="/messaging" @onclick="hideHover">Steeltoe Messaging</Href></li>*@
+						<li class=""><Href href="/service-connectors" @onclick="hideHover">Steeltoe Connectors</Href></li>
+						<li class=""><Href href="/security-providers" @onclick="hideHover">Steeltoe Security</Href></li>
+						@*<li class=""><Href href="/stream" @onclick="hideHover">Steeltoe Stream</Href></li>*@
+						<li class=""><Href href="/circuit-breakers" @onclick="hideHover">Steeltoe Circuit Breakers</Href></li>
+						<li class=""><Href href="/file-sharing" @onclick="hideHover">Steeltoe File Sharing</Href></li>
+						<li class=""><Href href="/logging" @onclick="hideHover">Steeltoe Logging</Href></li>
+						<li class="small pt-4">Development Tools</li>
+						<li class="pl-2"><Href href="/initializr">Initializr</Href></li>
+						<li class="pl-2"><Href href="/steeltoe-local">Steeltoe Local</Href></li>
 					</ul>
 				</div>
 			</div>
