@@ -1,13 +1,13 @@
 ﻿@page "/microservices"
 @page "/microservice"
 
-<Template Name="Microservices" NameIsPlural="true" ShowBottomGetStarted="false" GettingStartedURL="/quickstart" Features="@features">
+<Template Name="Microservices" NameIsPlural="true" ShowBottomGetStarted="false" GettingStartedURL="/get-started" Features="@features">
 	<Description>Microservice architectures are the ‘new normal’. Building small, self-contained, ready to run applications can bring great flexibility and added resilience to your code. Steeltoe’s many purpose-built features make it easy to build and run your microservices in production at scale. And don’t forget, no microservice architecture is complete without <Href href="/cloud">cloud components</Href> ‒ easing administration and boosting your fault-tolerance.</Description>
 	<WhatIs>Microservices are a modern approach to software whereby application code is delivered in small, manageable pieces, independent of others.</WhatIs>
 	<WhyUse>Their small scale and relative isolation can lead to many additional benefits, such as easier maintenance, improved productivity, greater fault tolerance, better business alignment, and more.</WhyUse>
 	<FeatureTemplate Context="Feature">
 		<div class="row component-feature no-gutters">
-			<div class="col-6 text-center"><div class="component-feature-img"><img class="img-fluid" src="@Feature.Img" /></div></div>
+			<div class="col-sm-6 text-center"><div class="component-feature-img"><img class="img-fluid" src="@Feature.Img" /></div></div>
 			<div class="col">
 				<div class="component-feature-title">@Feature.Title</div>
 				<div class="component-feature-desc">@Feature.Description</div>
@@ -16,17 +16,17 @@
 	</FeatureTemplate>
 	<AltFeatureTemplate Context="Feature">
 		<div class="row component-feature no-gutters">
-			<div class="col-6">
+			<div class="col">
 				<div class="component-feature-title">@Feature.Title</div>
 				<div class="component-feature-desc">@Feature.Description</div>
 			</div>
-			<div class="col-6 text-center"><div class="component-feature-img"><img class="img-fluid" src="@Feature.Img" /></div></div>
+			<div class="col-sm-6 text-center"><div class="component-feature-img"><img class="img-fluid" src="@Feature.Img" /></div></div>
 		</div>
 	</AltFeatureTemplate>
 	<OtherArea>
 		<div class="col text-center m-5">
 			<div class="mb-5"><h2>Ready to get started?</h2></div>
-			<div class=""><Href href="/quickstart" AsButton="true">TRY THIS TUTORIAL</Href></div>
+			<div class=""><Href href="/get-started" AsButton="true">TRY THESE TUTORIALs</Href></div>
 		</div>
 	</OtherArea>
 </Template>
@@ -43,7 +43,7 @@
 				b.CloseComponent();
 				b.AddMarkupContent(6," and then package as a container. With Steeltoe’s middleware pipeline model, you’re ready to go in minutes.<br /><br />");
 				b.OpenComponent<Href>(7);
-					b.AddAttribute(8, "href","/quickstart");
+					b.AddAttribute(8, "href","/get-started");
 					b.AddAttribute(9, "AsButton",true);
 					b.AddAttribute(10, "ChildContent", (RenderFragment)((b) => {b.AddContent(11, "TRY OUR QUICKSTART GUIDE");}));
 				b.CloseComponent();
@@ -62,18 +62,18 @@
 			}),
 			Img = "/images/Icon_tool.svg"
 		},
-		new Feature() {
-			Title = (MarkupString)"Build streaming data microservices with Steeltoe Streams",
-			Description = (b => {
-				b.AddMarkupContent(1,"Steeltoe Streams makes it easy to consume and produce events, no matter which messaging platform you choose. Steeltoe Stream connects your microservices with real-time messaging in just a few lines of code, to help you build highly scalable, event-driven systems.<br /><br />");
-				b.OpenComponent<Href>(2);
-					b.AddAttribute(3, "href","/streams/get-started");
-					b.AddAttribute(9, "AsButton",true);
-					b.AddAttribute(4, "ChildContent", (RenderFragment)((b) => {b.AddContent(5, "Get started with Steeltoe Streams");}));
-				b.CloseComponent();
-			}),
-			Img = "/images/Icon_data-transfer.svg"
-		},
+		//new Feature() {
+		//	Title = (MarkupString)"Build streaming data microservices with Steeltoe Streams",
+		//	Description = (b => {
+		//		b.AddMarkupContent(1,"Steeltoe Streams makes it easy to consume and produce events, no matter which messaging platform you choose. Steeltoe Stream connects your microservices with real-time messaging in just a few lines of code, to help you build highly scalable, event-driven systems.<br /><br />");
+		//		b.OpenComponent<Href>(2);
+		//			b.AddAttribute(3, "href","/streams/get-started");
+		//			b.AddAttribute(9, "AsButton",true);
+		//			b.AddAttribute(4, "ChildContent", (RenderFragment)((b) => {b.AddContent(5, "Get started with Steeltoe Streams");}));
+		//		b.CloseComponent();
+		//	}),
+		//	Img = "/images/Icon_data-transfer.svg"
+		//},
 		new Feature() {
 			Title = (MarkupString)"Microservices on Cloud Foundry",
 			Description = (b => {

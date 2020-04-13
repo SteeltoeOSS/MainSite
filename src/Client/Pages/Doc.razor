@@ -19,7 +19,7 @@
 <div class="width-all">
 	<div class="width-90 container">
 		<div class="row docs-row no-gutters">
-			<div class="col-3 docs-nav-col">
+			<div class="col-sm-3 docs-nav-col">
 				<div class="row no-gutters">
 					<div class="col text-center nav-version @(Version == 3 ? "selected":"")">
 						@if(Version == 3) {
@@ -40,7 +40,7 @@
 					<DocsMenu Area="@(Area)" Component="@(Component)" Version="@(Version)" />
 				</div></div>
 			</div>
-			<div class="col-9 docs-content-col">
+			<div class="col docs-content-col">
 				<Docs Area="@(Area)" Component="@(Component)" Version="@(Version)" />
 			</div>
 		</div>

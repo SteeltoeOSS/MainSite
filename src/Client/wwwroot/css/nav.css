@@ -82,11 +82,11 @@
 #why-target {
 }
 #why-items {
-  right: 559px;
+  right: 591px;
   width: 135px
 }
 #scope.why-scope {
-  right: 459px;
+  right: 480px;
   height: 210px;
   opacity: 1
 }
@@ -98,24 +98,24 @@
 #learn-target {
 }
 #learn-items {
-  right: 449px;
+  right: 469px;
   width: 95px
 }
 #scope.learn-scope {
-  right: 309px;
-  height: 130px;
+  right: 324px;
+  height: 99px; /*130px;*/
   opacity: 1
 }
 
 #project-target {
 }
 #project-items {
-  right: 333px;
+  right: 355px;
   width: 100px;
 }
 #scope.project-scope {
-  right: 204px;
-  height: 488px;
+  right: 212px;
+  height: 279px; /*488px;*/
   opacity: 1
 }
 

@@ -1,12 +1,12 @@
 ﻿@page "/why-steeltoe"
 
-<Template Name="Why Steeltoe" ShowBottomGetStarted="false" GettingStartedURL="/quickstart" Features="@features">
+<Template Name="Why Steeltoe" ShowBottomGetStarted="false" GettingStartedURL="/get-started" Features="@features">
 	<Description>Steeltoe makes programming .NET quicker, easier, and safer for everybody. Steeltoe’s focus on speed, simplicity, and productivity has made it one of the world's most popular .NET frameworks.</Description>
 	<FeatureTemplate Context="Feature">
-		<div class="col-6 pr-5">
+		<div class="col-sm-6 pr-sm-5">
 			<div class="component-feature-title">@Feature.Title</div>
 			<div class="row no-gutters">
-				<div class="col-3">
+				<div class="col-sm-3 component-why-img">
 					<img src="@Feature.Img" class="img-fluid" />
 				</div>
 				<div class="col component-feature-desc mb-5">@Feature.Description</div>
@@ -14,10 +14,10 @@
 		</div>
 	</FeatureTemplate>
 	<AltFeatureTemplate Context="Feature">
-		<div class="col-6 pl-5">
+		<div class="col-sm-6 pl-sm-5">
 			<div class="component-feature-title">@Feature.Title</div>
 			<div class="row no-gutters">
-				<div class="col-3">
+				<div class="col-sm-3 component-why-img">
 					<img src="@Feature.Img" class="img-fluid" />
 				</div>
 				<div class="col component-feature-desc mb-5">@Feature.Description</div>
@@ -48,11 +48,11 @@
 					<div class="desc text-white">A framework for fast, secure, and responsive web applications connected to any data store.</div>
 				</Href></div>
 				
-				<div class="col component-dark"><Href href="/event-driven">
+				@*<div class="col component-dark"><Href href="/event-driven">
 					<div class="text-center"><img class="img-fluid" src="/images/icon-streams-white.svg" /></div>
 					<div class="title text-white"><h3>Event Driven</h3></div>
-					<div class="desc text-white">Integrate with your enterprise. React to business events. Act on your streaming data in realtime.</div>
-				</Href></div>
+					<div class="desc text-white">Integrate with your enterprise. React to business events. Act on your streaming data in realtime. *coming in v3.0</div>
+				</Href></div>*@
 			</div>
 		</div>
 	</div>

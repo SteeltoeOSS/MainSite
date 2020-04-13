@@ -100,11 +100,6 @@ app {
 	background-position-x: 50%;
 	min-height: 200px;
 }
-/*@media (min-width: 1400px) {
-	.blue-slant {
-		padding: 9% 0 0 0;
-	}
-}*/
 
 
 /*=====================FONT COLORS===================== */
@@ -295,11 +290,6 @@ a {
 		color: #00376e;
 	}
 
-@media (max-width: 768px) {
-	.banner {
-		display: none;
-	}
-}
 .banner {
 	background-color: #001f3f;
 	font-size: 95%;
@@ -554,6 +544,7 @@ font-size: 90%;
 	font-weight: bold;
 	color: #00376e;
 	font-weight: bold;
+	font-size: 2.375rem;
 }
 
 .component-whatis-desc, .component-whyuse-desc, .tutorial .desc {
@@ -876,16 +867,6 @@ div[role=button] a.active,
 .blazored-sub-menu-header.open .blazored-sub-menu .blazored-sub-menu-header div[role=button] {
 	font-weight: normal;
 }
-
-/*@media (max-height: 800px) {
-	.docs-nav-col {
-		position: unset;
-		top: unset;
-	}
-	nav {
-		/*position: unset;*/
-	}
-	.docs-content-col {
-		min-height: 200px;
-	}
-}*/
+.docs-content-col {
+	min-height: 200px;
+}

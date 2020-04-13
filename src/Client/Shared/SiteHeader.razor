@@ -3,7 +3,7 @@
 <div class="width-all">
 	<div class="width-90 container">
 		<div class="row top-bar">
-			<div class="col-3"><Href href="index"><?xml version="1.0" encoding="utf-8"?>
+			<div class="col-sm-3"><Href href="index"><?xml version="1.0" encoding="utf-8"?>
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="75px" preserveAspectRatio="xMidYMid meet"
 	 viewBox="0 0 812.7 288.5" xml:space="preserve">
 <style type="text/css">
@@ -67,7 +67,7 @@
 
 </svg>
 </Href></div>
-			<div class="col text-center offset-2 mt-4">
+			<div class="col text-center offset-sm-2 mt-4">
 				<div class="has-menu"><span>Why Steeltoe</span><span class="nav-arrow"></span></div>
 			</div>
 			<div class="col text-center mt-4">
@@ -94,8 +94,8 @@
 				<div class="drop-menu" id="learn-items" onmouseleave="unhovAll()">
 					<div class="drop-target" id="learn-target" @onmouseover="@(() => showHover("learn"))"></div>
 					<ul onmouseleave="unhovAll()">
-						<li><Href href="/quickstart" @onclick="hideHover">Quickstart</Href></li>
-						<li><Href href="/get-started" @onclick="hideHover">Guides</Href></li>
+						@*<li><Href href="/quickstart" @onclick="hideHover">Quickstart</Href></li>*@
+						<li><Href href="/get-started" @onclick="hideHover">Get Started</Href></li>
 						<li><Href href="/docs" @onclick="hideHover">Documentation</Href></li>
 					</ul>
 				</div>
