@@ -99,42 +99,6 @@ public class Startup
   }
 }</code></pre>
 							</Tab>
-							<Tab Title="Kubernetes">
-								<pre><code>{
-  "Logging": {
-    "LogLevel": {
-      "Default": "Debug",
-      "System": "Information",
-      "Microsoft": "Information"
-    }
-  },
-  "spring": {
-    "application": {
-      "name": "Grafana_demo_app"
-    }
-  },
-  "management": {
-    "endpoints": {
-      "actuator": {
-        "exposure": {
-          "include": [ "*" ]
-        }
-      },
-      "path": "/actuators",
-      "cloudfoundry": {
-        "validateCertificates": false
-      }
-    },
-    "metrics": {
-      "exporter": {
-        "cloudfoundry": {
-          "validateCertificates": false
-        }
-      }
-    }
-  }
-}</code></pre>
-							</Tab>
 						</TabSet>
 					</li>
 				</ol>
