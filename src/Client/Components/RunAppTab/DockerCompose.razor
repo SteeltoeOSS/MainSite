@@ -1,0 +1,13 @@
+﻿<Tab Title="Local">
+	<ol>
+		<li>Build the image using the provided docker-compose file
+      <code class="inline">docker-compose up -d</code>
+    </li>
+	@AdditionalSteps
+	</ol>
+</Tab>
+
+@code {
+	[Parameter]
+	public RenderFragment AdditionalSteps { get; set; }
+}
