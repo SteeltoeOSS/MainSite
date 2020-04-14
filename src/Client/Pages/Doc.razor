@@ -64,22 +64,14 @@
 	[Parameter]
 	public string Component {
 		get { return (_component ?? defaultComponent); }
-		set {
-			if (string.IsNullOrEmpty(value))
-				NavigationManager.NavigateTo("/docs/" + Version + "/" + Component + "/" + Area);
-			else
-				_component = value;
-		}
+		set { _component = value; }
 	}
 
 	[Parameter]
 	public int Version {
 		get { return _version; }
 		set {
-			_version = (value < 2 || value > currentVersion ? currentVersion : value);
-
-			if(value == 0)//blazor defaults this to 0 if not provided in URL
-				NavigationManager.NavigateTo("/docs/" + Version + "/" + Component + "/" + Area);	
+			_version = (value < 2 || value > currentVersion || value == 0 ? currentVersion : value);
 		}
 	}
 }
