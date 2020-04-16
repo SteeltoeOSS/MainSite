@@ -24,7 +24,7 @@
 					</li>
           <li>
             Have a look at what things are provided
-            <code class="inline">ls</code>
+            <code class="inline-no-ps">PS C:\tmp\observability\grafana> ls</code>
 <pre><code>Name                Description
 ----                ----
 dashboard.json      The Grafana dashboard definition
@@ -45,12 +45,14 @@ telegraf.conf       Telegraf inputs and output configuration
 			<div class="col-12 getting-started-ordered-list">
 				<ol>
 					<li>
-						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="actuators.png" DependencyName="Actuators, DynamicLogging" ProjectName="@ProjectName" />
+						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="actuators-dynamiclogger-dockerfile_net31_st24.png" DependencyName="Actuators, DynamicLogging, Dockerfile" ProjectName="@ProjectName" />
 					</li>
-					<li>Extract the zipped project into <code>./src</code> and open in your IDE of choice (we use Visual Studio)</li>
+					<li>Extract the zipped project and open in your IDE of choice</li>
 					<li>
 						Add the other needed actuators in <b>startup.cs</b>
 <pre><code>using Steeltoe.Management.Endpoint.Metrics;
+using Steeltoe.Management.Tracing;
+using Steeltoe.Management.Exporter.Tracing;
 
 ...
 
@@ -100,7 +102,7 @@ public class Startup
   },
   "spring": {
     "application": {
-      "name": "Grafana_demo_app"
+      "name": "@(ProjectName)"
     }
   },
   "management": {
@@ -137,6 +139,9 @@ public class Startup
 							</Tab>
 						</TabSet>
 					</li>
+          <li>
+            Adjust <b>docker-compose.yml</b> to include the path to the .NET project by replacing <code>&lt;ABSOLUTE_PATH_TO_PROJECT&gt;</code> with the absolute path to the folder holding the .csproj file.
+          </li>
 				</ol>
 			</div>
 		</div>
@@ -146,8 +151,18 @@ public class Startup
 		<div class="row">
 			<div class="col-12 getting-started-ordered-list">
         <TabSet>
-				  <Steeltoe.Client.Components.RunAppTab.DockerCompose>
-            <AdditionalSteps><Note><Message>Confirm everything started successfully by running <code>docker-compose ps</code>. There should be 6 containers running named: steeltoe-app, zipkin, prometheus, influxdb, telegraf, grafana.</Message></Note></AdditionalSteps>
+				  <Steeltoe.Client.Components.RunAppTab.DockerCompose TerminalPromptPrefix="C:\tmp\observability\grafana">
+            <AdditionalSteps>
+            <Note>If you get a permissionerror message about "db.lock" close your IDE. Then run docker-compose command again.</Note>
+            <Note>Confirm everything started successfully by running <code>docker-compose ps</code> and checking the State. Output should look similar to this:
+              <pre><code>    Name                  Command               State                          Ports
+------------------------------------------------------------------------------------------------------------
+grafana        /run.sh                          Up      0.0.0.0:3000->3000/tcp
+influxdb       /entrypoint.sh influxd           Up      0.0.0.0:8086->8086/tcp
+prometheus     /bin/prometheus --config.f ...   Up      0.0.0.0:9090->9090/tcp
+steeltoe-app   dotnet Grafana_Observabili ...   Up      0.0.0.0:80->80/tcp
+telegraf       /entrypoint.sh --config=/e ...   Up      8092/udp, 8094/tcp, 8125/udp, 0.0.0.0:9273->9273/tcp
+zipkin         /busybox/sh run.sh               Up      0.0.0.0:9411->9411/tcp</code></pre></Note></AdditionalSteps>
           </Steeltoe.Client.Components.RunAppTab.DockerCompose>
 			  </TabSet>
 			</div>

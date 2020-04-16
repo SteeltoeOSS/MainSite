@@ -52,7 +52,7 @@ telegraf.conf       Telegraf inputs and output configuration
 			<div class="col-12 getting-started-ordered-list">
 				<ol>
 					<li>
-						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="actuators.png" DependencyName="Actuators, DynamicLogging" ProjectName="@ProjectName" />
+						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="actuators-dynamiclogger-dockerfile_net31_st24.png" DependencyName="Actuators, DynamicLogging, Dockerfile" ProjectName="@ProjectName" />
 					</li>
 					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
 					<li>
@@ -142,6 +142,9 @@ public class Startup
 							</Tab>
 						</TabSet>
 					</li>
+          <li>
+            Adjust <b>docker-compose.yml</b> to include the path to the .NET project by replacing <code>&lt;ABSOLUTE_PATH_TO_PROJECT&gt;</code> with the absolute path to the folder holding the .csproj file.
+          </li>
 				</ol>
 			</div>
 		</div>
@@ -152,7 +155,14 @@ public class Startup
 			<div class="col-12 getting-started-ordered-list">
         <TabSet>
 				  <Steeltoe.Client.Components.RunAppTab.DockerCompose>
-            <AdditionalSteps><Note><Message>Confirm everything started successfully by running <code>docker-compose ps</code>. There should be 3 containers running named: steeltoe-app, wavefront-proxy, telegraf.</Message></Note></AdditionalSteps>
+           <AdditionalSteps>
+            <Note>If you get a permissionerror message about "db.lock", close your IDE. Then run docker-compose command again.</Note>
+            <Note>Confirm everything started successfully by running <code>docker-compose ps</code> and checking the State. Output should look similar to this:
+              <pre><code>     Name                    Command               State                                 Ports
+-----------------------------------------------------------------------------------------------------------------------------
+steeltoe-app      dotnet Grafana_Observabili ...   Up      0.0.0.0:80->80/tcp
+telegraf          /entrypoint.sh --config=/e ...   Up      8092/udp, 8094/tcp, 8125/udp
+wavefront-proxy   /bin/bash /run.sh                Up      0.0.0.0:2878->2878/tcp, 3878/tcp, 4242/tcp, 0.0.0.0:9411->9411/tcp</code></pre></Note></AdditionalSteps>
           </Steeltoe.Client.Components.RunAppTab.DockerCompose>
 			  </TabSet>
 			</div>
