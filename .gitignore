@@ -5,6 +5,7 @@
 !.vscode/extensions.json
 *.code-workspace
 
+src/.vscode/*
 src/Client/wwwroot/site-data/docs/*
 
 ## Ignore Visual Studio temporary files, build results, and

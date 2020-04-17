@@ -1,0 +1,45 @@
+@page "/local/get-started"
+
+<Breadcrumbs NavName="Get Started"
+							 ParentLinkName="Tooling"
+							 ParentLinkUrl="/tooling"
+							 ShowGetStarted=false />
+<Tutorial>
+	<Title>Steeltoe Tooling CLI</Title>
+	<Description>This tutorial takes you through running a .NET Core microservice with 2 other backing services locally, using the CLI.</Description>
+	<TutorialSteps>
+		<div class="row">
+			<div class="col-12 getting-started-header">First, <b>create a .NET Core WebAPI</b></div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+				<ol>
+					<li>
+						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ProjectName="@ProjectName" />
+					</li>
+					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
+					<li>
+						<div>Run the application</div>
+						<div>
+							<TabSet>
+								<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" />
+								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFServices=true />
+								<Steeltoe.Client.Components.RunAppTab.AzureAppService>
+									<AzureDeployHowToUrl>https://docs.microsoft.com/en-us/visualstudio/deployment/quickstart-deploy-to-azure?view=vs-2019</AzureDeployHowToUrl>
+								</Steeltoe.Client.Components.RunAppTab.AzureAppService>
+								<Steeltoe.Client.Components.RunAppTab.Kubernetes ProjectName="@ProjectName" />
+							</TabSet>
+						</div>
+					</li>
+					<li>
+						Thats it! You have generated a .NET Core microservice using all the latest patterns. Go back and try adding a dependency or <Href href="/getstarted">try other tutorials</Href>
+					</li>
+				</ol>
+			</div>
+		</div>
+	</TutorialSteps>
+</Tutorial>
+@code
+{
+	private string ProjectName = "Initializr_Example";
+}

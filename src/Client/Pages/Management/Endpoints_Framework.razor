@@ -1,0 +1,316 @@
+﻿@page "/cloud-management/get-started/endpoints/framework"
+
+<Breadcrumbs NavName="Management Endpoints (.NET Framework)"
+						 ParentLinkName="Cloud Management"
+						 ParentLinkUrl="/cloud-management"
+						 ShowGetStarted=true />
+
+<div class="width-all">
+	<div class="width-60 container">
+		<Tip>
+			<Message>Looking for a .NET Core example? <Href href="cloud-management/get-started/endpoints">Have a look</Href>.</Message>
+		</Tip>
+	</div>
+</div>
+
+<Tutorial>
+	<Title>Using @ServiceName (.NET Framework)</Title>
+	<Description>This tutorial takes you through setting up a ASP.NET 4.x Framework application with cloud management endpoints and dynamic logging levels enabled.</Description>
+	<TutorialSteps>
+		<div class="row">
+			<div class="col-12 getting-started-header"><b>Create a .NET Framework Web API</b> project</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+				<ol>
+					<li>
+						In Visual Studio (2019) choose to create a new project
+						<img src="images/new-vs-proj/create-new-project.png" class="img-fluid" />
+					</li>
+					<li>
+						Configure the new project with the follow values
+						<img src="images/new-vs-proj/configure-new-project.png" class="img-fluid" />
+						<ul>
+							<li><b>Project Name:</b> @ProjectName</li>
+							<li><b>Solution Name:</b> @ProjectName</li>
+							<li><b>Framework:</b> (>= 4.5)</li>
+						</ul>
+					</li>
+					<li>
+						Choose to create a new Web API project type
+						<img src="images/new-vs-proj/create-new-asp_net-web-app.png" class="img-fluid" />
+					</li>
+					<li>
+						Once created, the project should be loaded
+						<img src="images/new-vs-proj/create-successful.png" class="img-fluid" />
+					</li>
+				</ol>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-header">Next, <b>install packages</b> needed</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+				<ol>
+					<li>
+						Open the package manager console
+						<img src="images/initializr/open-package-manager-console.png" class="img-fluid" />
+					</li>
+					<li>
+						Install NuGet distributed packages
+<pre><code>Install-Package -Id Microsoft.Extensions.Configuration -Version @DotNetVersion
+Install-Package -Id Microsoft.Extensions.Logging -Version @DotNetVersion
+Install-Package -Id Microsoft.Extensions.Logging.Console -Version @DotNetVersion
+Install-Package -Id OpenCensus -IncludePrerelease
+Install-Package -Id Steeltoe.Extensions.Logging.DynamicLogger -Version @SteeltoeVersion
+Install-Package -Id Steeltoe.Management.EndpointBase -Version @SteeltoeVersion
+Install-Package -Id Steeltoe.Extensions.Configuration.CloudFoundryBase -Version @SteeltoeVersion
+Install-Package -Id Steeltoe.Management.EndpointWeb -Version @SteeltoeVersion</code></pre>
+					</li>
+				</ol>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-header">Next, <b>add actuators</b> support classes</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+				<ol>
+					<li>
+						Create the <b>appsettings.json</b> file in the root of the project
+<pre><code>{
+	"Logging": {
+		"IncludeScopes": true,
+		"LogLevel": {
+			"Default": "Debug",
+			"System": "Information",
+			"Microsoft": "Information",
+			"Management": "Trace",
+			"Steeltoe": "Trace"
+		}
+	},
+	"management": {
+		"endpoints": {
+			"path": "/cloudfoundryapplication",
+			"cloudfoundry": {
+				"validateCertificates": false
+			}
+		}
+	}
+}</code></pre>
+					</li>
+					<li>
+						Create the <b>ApplicationConfig.cs</b> class in the <code>App_Start</code> folder
+<pre><code>using System;
+using System.IO;
+using Microsoft.Extensions.Configuration;
+using Steeltoe.Extensions.Configuration.CloudFoundry;
+
+...
+
+public class ApplicationConfig {
+	public static CloudFoundryApplicationOptions CloudFoundryApplication {
+
+		get {
+			var opts = new CloudFoundryApplicationOptions();
+			var appSection = Configuration.GetSection(CloudFoundryApplicationOptions.CONFIGURATION_PREFIX);
+			appSection.Bind(opts);
+			return opts;
+		}
+	}
+	public static CloudFoundryServicesOptions CloudFoundryServices {
+		get {
+			var opts = new CloudFoundryServicesOptions();
+			var serviceSection = Configuration.GetSection(CloudFoundryServicesOptions.CONFIGURATION_PREFIX);
+			serviceSection.Bind(opts);
+			return opts;
+		}
+	}
+	public static IConfigurationRoot Configuration { get; set; }
+
+	public static void Configure(string environment) {
+		// Set up configuration sources.
+		var builder = new ConfigurationBuilder()
+				.SetBasePath(GetContentRoot())
+				.AddJsonFile("appsettings.json", optional: false, reloadOnChange: false)
+				.AddJsonFile($"appsettings.{environment}.json", optional: true)
+				.AddEnvironmentVariables()
+				.AddCloudFoundry();
+
+		Configuration = builder.Build();
+	}
+
+	public static string GetContentRoot() {
+		var basePath = (string)AppDomain.CurrentDomain.GetData("APP_CONTEXT_BASE_DIRECTORY") ??
+				AppDomain.CurrentDomain.BaseDirectory;
+		return Path.GetFullPath(basePath);
+	}
+}</code></pre>
+					</li>
+					<li>
+						Create the <b>ManagementConfig.cs</b> class in the <code>App_Start</code> folder
+<pre><code>using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Web.Http.Description;
+using Steeltoe.Common.Diagnostics;
+using Steeltoe.Common.HealthChecks;
+using Steeltoe.Management.Endpoint;
+using Steeltoe.Management.Endpoint.Health.Contributor;
+
+...
+
+public class ManagementConfig{
+	public static void ConfigureManagementActuators(IConfiguration configuration, ILoggerProvider dynamicLogger, IApiExplorer apiExplorer, ILoggerFactory loggerFactory = null){
+		ActuatorConfigurator.UseCloudFoundryActuators(configuration, dynamicLogger, GetHealthContributors(configuration), apiExplorer, loggerFactory);
+	}
+
+	public static void Start(){
+		DiagnosticsManager.Instance.Start();
+	}
+
+	public static void Stop(){
+		DiagnosticsManager.Instance.Stop();
+	}
+
+	private static IEnumerable&lt;IHealthContributor&gt; GetHealthContributors(IConfiguration configuration){
+		var healthContributors = new List&lt;IHealthContributor&gt;{
+				new DiskSpaceContributor()
+		};
+
+		return healthContributors;
+	}
+}</code></pre>
+					</li>
+					<li>
+						Update <b>Web.config</b> handlers
+<pre><code>&lt;configuration&gt;
+	
+	...
+
+	&lt;system.webServer&gt;
+		...
+		&lt;validation validateIntegratedModeConfiguration="false" /&gt;
+		&lt;handlers&gt;
+			&lt;remove name="ExtensionlessUrlHandler-Integrated-4.0" /&gt;
+			&lt;remove name="OPTIONSVerbHandler" /&gt;
+			&lt;remove name="TRACEVerbHandler" /&gt;
+			&lt;add name="ExtensionlessUrlHandler-Integrated-4.0" path="*." verb="*" type="System.Web.Handlers.TransferRequestHandler" preCondition="integratedMode,runtimeVersionv4.0" /&gt;
+		&lt;/handlers&gt;
+		...
+	&lt;/system.webServer&gt;
+	
+	...
+	
+&lt;/configuration&gt;</code></pre>
+					</li>
+				</ol>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-header">Then, <b>add logging</b> support class</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+				<ol>
+					<li>
+						Create the <b>LoggingConfig.cs</b> class in the <code>App_Start</code> folder
+<pre><code>using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
+using Steeltoe.Extensions.Logging;
+
+...
+
+public static class LoggingConfig{
+	public static ILoggerFactory LoggerFactory { get; set; }
+	public static ILoggerProvider LoggerProvider { get; set; }
+
+	public static void Configure(IConfiguration configuration){
+		LoggerProvider = new DynamicLoggerProvider(new ConsoleLoggerSettings().FromConfiguration(configuration));
+		LoggerFactory = new LoggerFactory();
+		LoggerFactory.AddProvider(LoggerProvider);
+	}
+}</code></pre>
+					</li>
+				</ol>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-header">Finally, <b>enable actuators</b> in the app and run</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+				<ol>
+					<li>
+						Modify Application_Start and Application_stop in <b>Global.asax.cs</b>
+<pre><code>using System.Web.Http;
+using System.Web.Mvc;
+using Management_Endpoints_Example.App_Start;
+
+...
+
+protected void Application_Start(){
+
+...
+
+	// Create applications configuration
+	ApplicationConfig.Configure("development");
+
+	// Create logging system using configuration
+	LoggingConfig.Configure(ApplicationConfig.Configuration);
+
+	// Add management endpoints to application
+	ManagementConfig.ConfigureManagementActuators(
+			ApplicationConfig.Configuration,
+			LoggingConfig.LoggerProvider,
+			GlobalConfiguration.Configuration.Services.GetApiExplorer(),
+			LoggingConfig.LoggerFactory);
+
+	// Start the management endpoints
+	ManagementConfig.Start();
+
+...
+
+}
+protected void Application_Stop(){
+	
+...
+
+	ManagementConfig.Stop();
+	
+...
+
+}</code></pre>
+					</li>
+					<li>
+						<div>Run the application</div>
+						<div>
+							<TabSet>
+								@*<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" LocalEndpointAddress="http://localhost/actuators" />*@
+								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFProvider=true NoCFServices=true NoPackageManager=true AsDotNetFramework=true>
+									<AdditionalSteps>
+					<li>
+						With the application successfully pushed, navigate to App Manager to see the new features enabled.
+						<img src="images/initializr/actuators-app-manager.png" class="img-fluid" />
+					</li>
+					</AdditionalSteps>
+					</Steeltoe.Client.Components.RunAppTab.CloudFoundry>
+					</TabSet>
+			</div>
+			</li>
+			</ol>
+		</div>
+		</div>
+	</TutorialSteps>
+</Tutorial>
+@code
+{
+	private string ServiceName = "Management Endpoints";
+	//private string InstanceName = "myEndpointsExample";
+	private string ProjectName = "Management_Endpoints_Example";
+	private string SteeltoeVersion = "2.4";
+	private string DotNetVersion = "2.2";
+}
+}

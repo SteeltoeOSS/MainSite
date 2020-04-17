@@ -1,0 +1,19 @@
+﻿<Tab Title="Local">
+	<ol>
+		<li>Build the image using the provided docker-compose file
+			@if (string.IsNullOrEmpty(TerminalPromptPrefix)) {
+      <code class="inline">docker-compose up -d</code>
+			} else {
+				<code class="inline-no-ps">PS @(TerminalPromptPrefix)&gt; docker-compose up -d</code>
+			}
+    </li>
+	@AdditionalSteps
+	</ol>
+</Tab>
+
+@code {
+	[Parameter]
+	public RenderFragment AdditionalSteps { get; set; }
+	[Parameter]
+	public string TerminalPromptPrefix { get; set; }
+}

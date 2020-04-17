@@ -1,0 +1,60 @@
+﻿@page "/stream"
+@page "/streams"
+
+<Template Name="Stream" GettingStartedURL="/stream/get-started" DocsURL="/docs/stream">
+	<Description>Build highly scalable event-driven microservices connected to shared messaging systems.</Description>
+	<WhatIs>XXXXXXXX</WhatIs>
+	<WhyUse>
+		YYYYYYYY
+	</WhyUse>
+	<FeatureTemplate Context="Feature">
+		<div class="row component-feature no-gutters">
+			<div class="col-6 text-center"><div class="component-feature-img"><img class="img-fluid" src="@Feature.Img" /></div></div>
+			<div class="col">
+				<div class="component-feature-title">@Feature.Title</div>
+				<div class="component-feature-desc">@Feature.Description</div>
+			</div>
+		</div>
+	</FeatureTemplate>
+	<AltFeatureTemplate Context="Feature">
+		<div class="row component-feature no-gutters">
+			<div class="col-6">
+				<div class="component-feature-title">@Feature.Title</div>
+				<div class="component-feature-desc">@Feature.Description</div>
+			</div>
+			<div class="col-6 text-center"><div class="component-feature-img"><img class="img-fluid" src="@Feature.Img" /></div></div>
+		</div>
+	</AltFeatureTemplate>
+</Template>
+@code{
+	private Feature[] features = new[] { 
+		new Feature() {
+			Title = (MarkupString)"Support for Multiple Message Brokers",
+			Description = (b => {
+				b.AddMarkupContent(1,"Steeltoe stream support for both RabbitMQ as well as Kafka, you have flexibility with little to no code change when choosing the right broker.");
+			}),
+			Img = "/images/Icon_computers.svg"
+		},
+		new Feature() {
+			Title = (MarkupString)"Logging & Health Checks Built In",
+			Description = (b => {
+				b.AddMarkupContent(1,"Stream logs are automatically fed to your app’s logging interface, and health contributors are automatically configured and made available to your application.");
+			}),
+			Img = "/images/Icon_cloud.svg"
+		},
+		new Feature() {
+			Title = (MarkupString)"Event Driven Architectures",
+			Description = (b => {
+				b.AddMarkupContent(1,"aaaaaaa");
+			}),
+			Img = "/images/Icon_data-transfer.svg"
+		},
+		new Feature() {
+			Title = (MarkupString)"Messagaing",
+			Description = (b => {
+				b.AddMarkupContent(1,"aaaaaaa");
+			}),
+			Img = "/images/Icon_data-transfer.svg"
+		}
+	};
+}

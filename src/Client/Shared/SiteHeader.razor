@@ -1,8 +1,9 @@
-﻿
+﻿@inject IJSRuntime JSRuntime
+
 <div class="width-all">
 	<div class="width-90 container">
-		<div class="row top-bar align-items-center">
-			<div class="col-3"><a class="nav-link" href="index"><?xml version="1.0" encoding="utf-8"?>
+		<div class="row top-bar">
+			<div class="col-sm-3"><Href href="index"><?xml version="1.0" encoding="utf-8"?>
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="75px" preserveAspectRatio="xMidYMid meet"
 	 viewBox="0 0 812.7 288.5" xml:space="preserve">
 <style type="text/css">
@@ -65,45 +66,68 @@
 	C805.4,115.2,805.3,115.2,805.2,115.2L805.2,115.2z"/>
 
 </svg>
-</a></div>
-			<div class="col-3">&nbsp;</div>
-			@*<div class="col"><span class="oi oi-magnifying-glass"></span></div>
-				<div class="col topbar-item"><a class="nav-link" href="docs">Docs</a></div>*@
-			<div class="col" style="min-width: 14%;">
-				<NavLink class="nav-link" href="/get-started">
-					<div class="rounded-pill get-started-button">
-						<div class=""><div class="nav-link" style="padding: 6px 14px 6px 14px;">get started</div></div>
-					</div>
-				</NavLink>
+</Href></div>
+			<div class="col text-center offset-sm-2 mt-4">
+				<div class="has-menu"><span>Why Steeltoe</span><span class="nav-arrow"></span></div>
 			</div>
-			<div class="col"><NavLink class="nav-link" href="/docs/welcome/overview">Docs</NavLink></div>
-			<div class="col"><NavLink class="nav-link" href="https://github.com/steeltoeoss" target="_blank">GitHub</NavLink></div>
-			<div class="col"><NavLink class="nav-link" href="https://www.nuget.org/profiles/steeltoe" target="_blank">NuGet</NavLink></div>
-			<div class="col"><NavLink class="nav-link" href="https://slack.steeltoe.io" target="_blank">Slack</NavLink></div>
-			@*<div class="col">
-				<NavLink class="nav-link" href="https://pivotal.io" target="_blank" title="Pivotal" >
-					<svg xmlns="http://www.w3.org/2000/svg"
-							 width="100%" height="55px" preserveAspectRatio="xMidYMid meet"
-							 viewBox="0 0 102 102">
-						<path id="Selection"
-									fill="#00376e" d="M 0.00,0.00
-           C 0.00,0.00 0.00,102.00 0.00,102.00
-             0.00,102.00 102.00,102.00 102.00,102.00
-             102.00,102.00 102.00,0.00 102.00,0.00
-             102.00,0.00 0.00,0.00 0.00,0.00 Z
-           M 49.00,57.00
-           C 49.00,57.00 49.00,50.00 49.00,50.00
-             64.03,49.66 65.70,38.65 59.85,33.30
-             55.52,29.33 48.47,30.00 43.00,30.00
-             43.00,30.00 43.00,79.00 43.00,79.00
-             43.00,79.00 33.00,79.00 33.00,79.00
-             33.00,79.00 33.00,22.00 33.00,22.00
-             43.02,22.00 60.11,20.26 67.79,27.39
-             74.60,33.71 73.40,48.02 65.98,53.35
-             60.86,57.03 54.98,57.00 49.00,57.00 Z" />
-					</svg>
-				</NavLink>
-			</div>*@
+			<div class="col text-center mt-4">
+				<div class="has-menu"><span>Learn</span><div class="nav-arrow"></div></div>
+			</div>
+			<div class="col text-center mt-4">
+				<div class="has-menu"><span>Projects</span><div class="nav-arrow"></div></div>
+			</div>
+			<div class="col text-center mt-4"><Href href="/training">Training</Href></div>
+			<div class="col text-center mt-4"><Href href="/support">Support</Href></div>
+			<div class="col text-center mt-4"><Href href="/community">Community</Href></div>
+			<div class="rel" id="dropdown-menus">
+				<div class="abs" id="scope"></div>
+				<div class="drop-menu" id="why-items" onmouseleave="unhovAll()">
+					<div class="drop-target" id="why-target" @onmouseover="@(() => showHover("why"))"></div>
+					<ul onmouseleave="unhovAll()">
+						<li><Href href="/why-steeltoe" @onclick="hideHover">Overview</Href></li>
+						<li><Href href="/microservices" @onclick="hideHover">Microservices</Href></li>
+						<li><Href href="/cloud" @onclick="hideHover">Cloud</Href></li>
+						<li><Href href="/web-applications" @onclick="hideHover">Web Applications</Href></li>
+						@*<li><Href href="/event-driven" @onclick="hideHover">Event Driven</Href></li>*@
+					</ul>
+				</div>
+				<div class="drop-menu" id="learn-items" onmouseleave="unhovAll()">
+					<div class="drop-target" id="learn-target" @onmouseover="@(() => showHover("learn"))"></div>
+					<ul onmouseleave="unhovAll()">
+						@*<li><Href href="/quickstart" @onclick="hideHover">Quickstart</Href></li>*@
+						<li><Href href="/get-started" @onclick="hideHover">Get Started</Href></li>
+						<li><Href href="/docs" @onclick="hideHover">Documentation</Href></li>
+					</ul>
+				</div>
+				<div class="drop-menu" id="project-items" onmouseleave="unhovAll()">
+					<div class="drop-target" id="project-target" @onmouseover="@(() => showHover("project"))"></div>
+					<ul onmouseleave="unhovAll()">
+						<li class=""><Href href="/app-configuration" @onclick="hideHover">Steeltoe Application Configuration</Href></li>
+						<li class=""><Href href="/circuit-breakers" @onclick="hideHover">Steeltoe Circuit Breakers</Href></li>
+						<li class=""><Href href="/cloud-management" @onclick="hideHover">Steeltoe Distributed Tracing</Href></li>
+						<li class=""><Href href="/logging" @onclick="hideHover">Steeltoe Dynamic Logging</Href></li>
+						<li class=""><Href href="/cloud-management" @onclick="hideHover">Steeltoe Management</Href></li>
+						<li class=""><Href href="/file-sharing" @onclick="hideHover">Steeltoe Network File Sharing</Href></li>
+						<li class=""><Href href="/security-providers" @onclick="hideHover">Steeltoe Security</Href></li>
+						<li class=""><Href href="/service-connectors" @onclick="hideHover">Steeltoe Service Connectors</Href></li>
+						<li class=""><Href href="/service-discovery" @onclick="hideHover">Steeltoe Service Discovery</Href></li>
+						@*<li class=""><Href href="/messaging" @onclick="hideHover">Steeltoe Messaging</Href></li>*@
+						@*<li class=""><Href href="/stream" @onclick="hideHover">Steeltoe Stream</Href></li>*@
+						<li class="small pt-4">Developer Tools</li>
+						<li class="pl-2"><Href href="/initializr">Steeltoe Initializr</Href></li>
+						@*<li class="pl-2"><Href href="/steeltoe-local">Steeltoe Local</Href></li>*@
+					</ul>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
+
+@code {
+	private async void showHover(string a) {
+		await JSRuntime.InvokeVoidAsync("hov", a);
+	}
+	private async void hideHover() {
+		await JSRuntime.InvokeVoidAsync("unhovAll");
+	}
+}

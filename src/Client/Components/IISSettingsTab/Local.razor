@@ -1,7 +1,4 @@
-﻿@using System
-@implements IDisposable
-
-<Tab Title="Local">
+﻿<Tab Title="Local">
 <pre><code>"iisSettings": {
 		"windowsAuthentication": false, 
 		"anonymousAuthentication": true, 
@@ -19,12 +16,4 @@
 	public RenderFragment ChildContent { get; set; }
 	[Parameter]
 	public string ApplicationUrl { get; set; } = "http://localhost:8080";
-
-	protected override void OnInitialized()
-	{
-	}
-
-	public void Dispose()
-	{
-	}
 }

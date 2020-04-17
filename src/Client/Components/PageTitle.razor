@@ -4,10 +4,10 @@
 	[Parameter]
 	public string Title {get;set;}
 
-	protected override async Task OnAfterRenderAsync(bool firstRender) {
-		//if (firstRender) {
-			string title = !string.IsNullOrEmpty(Title) ? "Steeltoe - " + Title : "Steeltoe";
-			await JSRuntime.InvokeAsync<string>("setPageTitle", title);
-		//}
+	protected override Task OnAfterRenderAsync(bool firstRender) {
+		string title = !string.IsNullOrEmpty(Title) ? "Steeltoe - " + Title : "Steeltoe";
+		JSRuntime.InvokeVoidAsync("setPageTitle", title);
+
+		return base.OnAfterRenderAsync(firstRender);
 	}
 }

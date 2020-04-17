@@ -1,74 +1,81 @@
-@using System.IO;
-@using System;
-
-@*@page "/docs/0-welcome"
-@page "/docs/1-circuitbreaker"
-@page "/docs/2-configuration"
-@page "/docs/3-connectors"
-@page "/docs/4-discovery"
-@page "/docs/5-fileshares"
-@page "/docs/6-logging"
-@page "/docs/7-management"
-@page "/docs/8-security"
-@page "/docs/9-developer-tools"*@
-
-@page "/configuration"
-@page "/configuration/{Area}"
-
-@page "/circuitbreaker"
-@page "/circuitbreaker/{Area}"
-
-@page "/management"
-@page "/management/{Area}"
-
-@page "/logging"
-@page "/logging/{Area}"
-
-@page "/fileshares"
-@page "/fileshares/{Area}"
-
-@page "/security"
-@page "/security/{Area}"
-
-@page "/connectors"
-@page "/connectors/{Area}"
-
-@page "/discovery"
-@page "/discovery/{Area}"
+@using System.IO
+@using System
+@using System.Diagnostics
+@inject NavigationManager NavigationManager
 
 @page "/doc"
 @page "/docs"
-@page "/docs/{Component}/{Area}"
-@page "/docs/{Component}"
-@page "/{Component}/docs"
 
-	<div class="width-all">
-		<div class="width-90 container">
-			<div class="row docs-row">
-				<div class="col-3 docs-nav-col">
-					<DocsMenu />
+@page "/{Component}"
+@page "/{Component}/{Area}"
+@page "/{Component}/docs"
+@page "/docs/{Component}"
+@page "/docs/{Component}/{Area}"
+
+@page "/docs/{Version:int}"
+@page "/docs/{Version:int}/{Component}"
+@page "/docs/{Version:int}/{Component}/{Area}"
+
+<div class="width-all">
+	<div class="width-90 container">
+		<div class="row docs-row no-gutters">
+			<div class="col-sm-3 docs-nav-col">
+				<div class="row no-gutters">
+					<div class="col text-center nav-version @(Version == 2 ? "selected":"")">
+						@if(Version == 2) {
+							<span>Steeltoe v2</span>
+						} else {
+							<Href href="@("/docs/2/" + Component + "/" + Area)">Steeltoe v2</Href>
+						}
+					</div>
+					<div class="col text-center nav-version @(Version == 3 ? "selected":"")">
+						@if(Version == 3) {
+							<span title="Version 3 Milestone 2">Steeltoe v3-m2</span>
+						} else {
+							<Href href="@("/docs/3/" + Component + "/" + Area)" title="Version 3 Milestone 2">Steeltoe v3-m2</Href>
+						}
+					</div>
 				</div>
-				<div class="col-9 docs-content-col">
-					<Docs Area="@(Area)" Component="@(Component)" />
-				</div>
+				<div class="row no-gutters">
+				<div class="col bg-white">
+					@if(Version == 3) {
+						<div class="text-center small bg-grey midnight-blue py-1">Version 3-m2 is pre-production only</div>
+					}
+					<DocsMenu Area="@(Area)" Component="@(Component)" Version="@(Version)" />
+				</div></div>
+			</div>
+			<div class="col docs-content-col">
+				<Docs Area="@(Area)" Component="@(Component)" Version="@(Version)" />
 			</div>
 		</div>
 	</div>
-
+</div>
 
 @code {
 	private string _area;
 	private string _component;
+	private int _version;
+	private int currentVersion = 2;
+	private string defaultArea = "overview";
+	private string defaultComponent =  "welcome";
 
 	[Parameter]
 	public string Area {
-		get { return _area ?? "overview"; }
+		get { return (_area ?? defaultArea); }
 		set { _area = value; }
 	}
 
 	[Parameter]
 	public string Component {
-		get { return _component ?? "welcome"; }
+		get { return (_component ?? defaultComponent); }
 		set { _component = value; }
+	}
+
+	[Parameter]
+	public int Version {
+		get { return _version; }
+		set {
+			_version = (value < 2 || value > 3 || value == 0 ? currentVersion : value);
+		}
 	}
 }

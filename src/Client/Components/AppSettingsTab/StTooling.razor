@@ -1,7 +1,4 @@
-﻿@using System
-@implements IDisposable
-
-<Tab Title="Steeltoe Tooling">
+﻿<Tab Title="Steeltoe Tooling">
 	@if (string.IsNullOrEmpty(ServiceName))
 	{
 		<span>It's already set, continue to next step.</span>
@@ -110,12 +107,4 @@
 
 	[Parameter]
 	public RenderFragment ChildContent { get; set; }
-
-	protected override void OnInitialized()
-	{
-	}
-
-	public void Dispose()
-	{
-	}
 }

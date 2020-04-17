@@ -1,7 +1,4 @@
-﻿@using System
-@implements IDisposable
-
-<Tab Title="Kubernetes">
+﻿<Tab Title="Kubernetes">
 	Replace <code>localhost</code> with the @InstanceName instance info
 <pre><code>{
 ...
@@ -46,12 +43,4 @@
 
 	[Parameter]
 	public RenderFragment ChildContent { get; set; }
-
-	protected override void OnInitialized()
-	{
-	}
-
-	public void Dispose()
-	{
-	}
 }
