@@ -238,8 +238,6 @@ a {
 /* =====================PAGE ITEMS===================== */
 
 #main {
-	/*display: flex;*/
-	/*padding-bottom: 2%;*/
 }
 #footer {
 	padding-top: 5%;
@@ -253,21 +251,6 @@ a {
 .btn:hover {
 	box-shadow: 2px 2px 7px 0px #eeeeee;
 }
-/*#bottombar div {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	max-width: 1200px;
-	width: 90%;
-	margin: auto;
-	font-size: 80%;
-}
-
-.bottombar-item a {
-	color: white;
-	font-weight: bold;
-	text-decoration: none;
-}*/
 .breadcrumbs {
 	padding: 4% 0 0 0;
 }
@@ -733,31 +716,31 @@ background-color: #f7f7f7;
 	background-color: #dbfaf4;
 	padding: 1.5% 2% 1.5% 2%;
 }
-.docs-row {
-	/*font-size: 16px;*/
-}
 .docs-nav-col {
-	/*margin-top: 3%;*/
 	position: fixed;
 	top: 126px;
-	width: 332px;
+	width: 23%;
+	overflow-y: auto;
+	max-height: 78%;
+}
+@media (min-width: 1400px) {
+	.docs-nav-col {
+		width: 332px;
+	}
 }
 .docs-content-col {
-	/*margin-top: 3%;
-	padding-right: 1.5%;
-	min-height: 400px;*/
+	flex: 0 0 72%;
+	max-width: 72%;
 	position: relative;
-	left: 352px;
+	left: 30%;
 	top: 44px;
+	min-height: 200px;
 }
 .docs-content-col p, .docs-content-col h1, .docs-content-col h2, .docs-content-col h3, .docs-content-col h4 {
 	color: #373737;
 }
 .docs-content-col ul {
 	padding-left: 2%;
-}
-.docs-content-col h2, .docs-content-col h3, .docs-content-col h4 {
-	/*margin-top: 5%;*/
 }
 
 /* =========================DOCS NAVIGATION======================== */
@@ -866,7 +849,4 @@ div[role=button] a.active,
 }
 .blazored-sub-menu-header.open .blazored-sub-menu .blazored-sub-menu-header div[role=button] {
 	font-weight: normal;
-}
-.docs-content-col {
-	min-height: 200px;
 }
