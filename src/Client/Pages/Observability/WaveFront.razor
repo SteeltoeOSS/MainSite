@@ -94,9 +94,7 @@ public class Startup
 					</li>
 					<li>
 						Set the actuator path, exposure, and zipkin server address in <b>appsettings.json</b>
-						<TabSet>
-							<Tab Title="Local">
-								<pre><code>{
+						<pre><code>{
   "Logging": {
     "LogLevel": {
       "Default": "Debug",
@@ -140,8 +138,6 @@ public class Startup
     }
   }
 }</code></pre>
-							</Tab>
-						</TabSet>
 					</li>
           <li>
             Adjust <b>docker-compose.yml</b> to include the path to the .NET project by replacing <code>&lt;ABSOLUTE_PATH_TO_PROJECT&gt;</code> with the absolute path to the folder holding the .csproj file.
@@ -158,14 +154,15 @@ public class Startup
 				  <Steeltoe.Client.Components.RunAppTab.DockerCompose>
            <AdditionalSteps>
             <Note>If you get a permissionerror message about "db.lock", close your IDE. Then run docker-compose command again.</Note>
-            <Note>Confirm everything started successfully by running <code>docker-compose ps</code> and checking the State. Output should look similar to this:
+            </AdditionalSteps>
+          </Steeltoe.Client.Components.RunAppTab.DockerCompose>
+			  </TabSet>
+        <Note>Confirm everything started successfully by running <code>docker-compose ps</code> and checking the State. Output should look similar to this:
               <pre><code>     Name                    Command               State                                 Ports
 -----------------------------------------------------------------------------------------------------------------------------
 steeltoe-app      dotnet Grafana_Observabili ...   Up      0.0.0.0:80->80/tcp
 telegraf          /entrypoint.sh --config=/e ...   Up      8092/udp, 8094/tcp, 8125/udp
-wavefront-proxy   /bin/bash /run.sh                Up      0.0.0.0:2878->2878/tcp, 3878/tcp, 4242/tcp, 0.0.0.0:9411->9411/tcp</code></pre></Note></AdditionalSteps>
-          </Steeltoe.Client.Components.RunAppTab.DockerCompose>
-			  </TabSet>
+wavefront-proxy   /bin/bash /run.sh                Up      0.0.0.0:2878->2878/tcp, 3878/tcp, 4242/tcp, 0.0.0.0:9411->9411/tcp</code></pre></Note>
 			</div>
 		</div>
     <div class="row">
@@ -175,24 +172,25 @@ wavefront-proxy   /bin/bash /run.sh                Up      0.0.0.0:2878->2878/tc
 			<div class="col-12 getting-started-ordered-list">
         <ol>
           <li>Navigate to your Wavefront instance and the "Dashboards" area
-            <div><img src="images/wavefront/dashboards-nav.png" class="img-fluid col-9" /></div>
+            <div><img src="images/wavefront/dashboards-nav.png" class="img-fluid col-8" /></div>
           </li>
           <li>Create a new dashboard by clicking "Create Dashboard" button
-            <div><img src="images/wavefront/create-dashboard.png" class="img-fluid col-9" /></div>
+            <div><img src="images/wavefront/create-dashboard.png" class="img-fluid col-8" /></div>
           </li>
           <li>Now locate the "JSON" link toward the top of the window and click
-            <div><img src="images/wavefront/json-link.png" class="img-fluid col-9" /></div>
+            <div><img src="images/wavefront/json-link.png" class="img-fluid col-4" /></div>
           </li>
           <li>A popup window will be shown. Find the "Tree" drop down in the blue bar and change to "Code" view.
-            <div><img src="images/wavefront/tree-drop-down.png" class="img-fluid col-9" /></div>
+            <div><img src="images/wavefront/tree-drop-down.png" class="img-fluid col-4" /></div>
           </li>
           <li>Clear the pre-loaded JSON in the window and copy the contents of <b>dashboard-template.json</b> to the window.</li>
           <li>Click the "Accept" link to close the window and let Wavefront parse the JSON.</li>
           <li>Save your new dashboard by clicking the "Save" link at the top. A popup window will ask you to name your new dashboard and finish saving.
-            <div><img src="images/wavefront/save-dashboard.png" class="img-fluid col-9" /></div>
+            <div><img src="images/wavefront/save-dashboard.png" class="img-fluid col-4" /></div>
+          <Note>You must save the new dashboard for your application name to show and things start receiving data.</Note>
           </li>
           <li>To make sure the correct traces are being used, in the top bar make sure the "application" is set to "Zipkin" and the "service" is set to the name of your application.
-            <div><img src="images/wavefront/application-and-service.png" class="img-fluid col-9" /></div>
+            <div><img src="images/wavefront/application-and-service.png" class="img-fluid" /></div>
           </li>
           <li>Done! Everything else should be pre-loaded for you. As the application runs in Docker, the metrics are shown.</li>
         </ol>
@@ -204,15 +202,15 @@ wavefront-proxy   /bin/bash /run.sh                Up      0.0.0.0:2878->2878/tc
 		<div class="row">
 			<div class="col-12 getting-started-ordered-list">
         <ul>
-          <li>Notice the chart "Top Requests" in the bottom left corner. Click "httpclient:/api/v1/spans" to view all of the traces coming in for your Steeltoe application. If you had other microservices they would also appear here and you can even configure your traces to deliver logs as well.
-            <div><img src="images/wavefront/top-requests.png" class="img-fluid col-9" /></div>
+          <li>Notice the chart "Top Requests" in the bottom left corner. Click one of the URLs to view all of the traces coming in for your Steeltoe application. If you had other microservices they would also appear here and you can even configure your traces to deliver logs as well.
+            <div><img src="images/wavefront/top-requests.png" class="img-fluid col-4" /></div>
           </li>
           <li>You can see your traces on the left and sort them, on the right you will see other metrics as well.</li>
           <li>To get even deeper, select a trace in the left and then find the "traceid" in the "Critical Path Breakdown" area. Copy that value.
             <div><img src="images/wavefront/get-traceid.png" class="img-fluid col-9" /></div>
             <br /><br />
             Then "Add Filter" from the link at the top and paste that traceid value in the "TraceId" text box. Now click the "Add Trace Id" button. Your view will refresh to show all the essentials of that specific trace!
-            <div><img src="images/wavefront/traceid.png" class="img-fluid col-9" /></div>
+            <div><img src="images/wavefront/traceid.png" class="img-fluid" /></div>
           </li>
           <li>Creating filters gives you all kinds of different ways to view data. In the "Add Filter" window clear the traceid value and click the "&lt;/&gt;" button. This switches your filter view to thre query builder. Here are a few queries to get started:<br /><br />
             <div>Get the last 100 traces: <code>limit(100, traces("Zipkin.wavefront_demo_app.httpclient:/api/v1/spans"))</code></div>
