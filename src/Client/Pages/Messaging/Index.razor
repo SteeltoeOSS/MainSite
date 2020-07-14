@@ -29,9 +29,9 @@
 @code{
 	private Feature[] features = new[] { 
 		new Feature() {
-			Title = (MarkupString)"Support for Multiple Message Brokers",
+			Title = (MarkupString)"Supported Message Brokers",
 			Description = (b => {
-				b.AddMarkupContent(1,"Steeltoe stream support for both RabbitMQ as well as Kafka, you have flexibility with little to no code change when choosing the right broker.");
+				b.AddMarkupContent(1,"Steeltoe stream supports RabbitMQ where you have flexibility with little to no code change when choosing the right broker.");
 			}),
 			Img = "/images/Icon_computers.svg"
 		},
@@ -48,13 +48,6 @@
 				b.AddMarkupContent(1,"xxxxxxx");
 			}),
 			Img = "/images/Icon_data-transfer.svg"
-		},
-		new Feature() {
-			Title = (MarkupString)"Messagaing",
-			Description = (b => {
-				b.AddMarkupContent(1,"xxxxxxxxx");
-			}),
-			Img = "/images/Icon_data-transfer.png"
 		}
 	};
 }

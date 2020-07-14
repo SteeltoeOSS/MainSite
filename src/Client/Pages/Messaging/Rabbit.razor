@@ -1,0 +1,89 @@
+﻿@page "/messaging/get-started/rabbitmq"
+
+	<Breadcrumbs NavName="Messaging with RabbitMQ "
+							 ParentLinkName="Messaging"
+							 ParentLinkUrl="/messaging"
+							 ShowGetStarted=true />
+<Tutorial>
+	<Title>Message Streaming with RabbitMQ</Title>
+	<Description>This tutorial takes you through setting up a .NET Core application that uses Message Streaming through RabbitMQ.</Description>
+	<TutorialSteps>
+
+		<div class="row">
+			<div class="col-12 getting-started-header">First, <b>start a RabbitMQ instance</b>.</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<TabSet>
+					<Steeltoe.Client.Components.StartInstanceTab.Local ServiceName="@ServiceName">
+						<DockerCmd>docker run --publish 5672:5672 steeltoeoss/rabbitmq</DockerCmd>
+					</Steeltoe.Client.Components.StartInstanceTab.Local>
+				</TabSet>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-header">Next, <b>create a .NET Core WebAPI</b> that interacts with RabbitMQ</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+				<ol>
+					<li>
+						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="rabbit-connector.png" DependencyName="RabbitMQ" ProjectName="@ProjectName" />
+					</li>
+					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
+					<li>
+						Validate the correct logging level is set in <b>appsettings.json</b>
+<pre><code>
+"Logging": {
+	"LogLevel": {
+		"Default": "Information",
+		"System": "Information",
+		"Microsoft": "Information"
+	}
+},
+}</code></pre>
+					</li>
+					<li>
+						Set the instance address in <b>appsettings.json</b>
+						<TabSet>
+							<Steeltoe.Client.Components.AppSettingsTab.Local ServiceName="@ServiceName"
+																												ParentSettingsParamName="rabbitmq"
+																												ChildSettingsParamName="client"
+																												ServicePort="5672"
+																												ServiceServer="127.0.0.1"
+																												ServiceUsername="guest"
+																												ServicePassword="guest" />
+						</TabSet>
+					</li>
+					<Note><Message>Make sure the correct logging is set or you'll miss the output. The default logging level should be set to <code>Information</code>.</Message></Note>
+					<li>
+						<div>Run the application</div>
+						<div>
+							<TabSet>
+								<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" />
+								@*<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" InstanceName="@ServiceName" />*@
+								<Steeltoe.Client.Components.RunAppTab.Kubernetes ProjectName="@ProjectName" />
+								@*<Steeltoe.Client.Components.RunAppTab.StTooling ProjectName="@ProjectName" />*@
+							</TabSet>
+						</div>
+					</li>
+					<li>
+						As the app loads in the browser it will create a message queue, listen for new messages on the queue, and write 5 messages. Once finished the output will let you know everything has completed - <samp>Wrote 5 message to the info log. Have a look!</samp>. Looking at the app logs (console) you will see...
+<pre><code>Received message: Message 1
+Received message: Message 2
+Received message: Message 3
+Received message: Message 4
+Received message: Message 5</code></pre>
+						<br />
+					</li>
+				</ol>
+			</div>
+		</div>
+	</TutorialSteps>
+</Tutorial>
+@code
+{
+	private string ServiceName = "RabbitMQ";
+	private string InstanceName = "myrabbitservice";
+	private string ProjectName = "RabbitMQ_Connector";
+}

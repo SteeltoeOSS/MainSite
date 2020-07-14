@@ -30,17 +30,29 @@
 
 @code{
 	private Feature[] features = new[] {
+		//new Feature() {
+		//	Title = (MarkupString)"Steeltoe Stream",
+		//	Description = (b => {
+		//		b.AddMarkupContent(1,"Steeltoe Stream improves your productivity when working with RabbitMQ, providing three key abstractions to simplify your code. “Binders” integrate with external messaging systems. “Bindings” bridge the gap between the messaging systems and your code. “Messages” provide the structure that your code uses to send and receive data.<Br /><br />Steeltoe Stream also provides support for provisioning, content conversion, error handling, configuration management, consumer groups, partitioning, monitoring, and health checks.<Br /><br />");
+		//		b.OpenComponent<Href>(2);
+		//			b.AddAttribute(3, "href","/messaging");
+		//			b.AddAttribute(4, "AsButton",true);
+		//			b.AddAttribute(5, "ChildContent", (RenderFragment)((b) => {b.AddContent(6, "Learn more");}));
+		//		b.CloseComponent();
+		//	}),
+		//	Img = "/images/Icon_data-transfer.svg"
+		//}
 		new Feature() {
-			Title = (MarkupString)"Steeltoe Stream",
+			Title = (MarkupString)"Steeltoe Messaging",
 			Description = (b => {
-				b.AddMarkupContent(1,"Steeltoe Stream improves your productivity when working with Apache Kafka and RabbitMQ, providing three key abstractions to simplify your code. “Binders” integrate with external messaging systems. “Bindings” bridge the gap between the messaging systems and your code. “Messages” provide the structure that your code uses to send and receive data.<Br /><br />Steeltoe Stream also provides support for provisioning, content conversion, error handling, configuration management, consumer groups, partitioning, monitoring, and health checks.<Br /><br />");
+				b.AddMarkupContent(1,"With the Steeltoe Messaging project, you can apply core concepts to the development of Kafka or RabbitMQ based messaging solutions.<br /><br />Both include \"template\" as a high-level message handling abstraction, and support message-driven POCOs with a \"listener container.\"<Br /><br />");
 				b.OpenComponent<Href>(2);
-					b.AddAttribute(3, "href","/stream");
+					b.AddAttribute(3, "href","/messaging");
 					b.AddAttribute(4, "AsButton",true);
 					b.AddAttribute(5, "ChildContent", (RenderFragment)((b) => {b.AddContent(6, "Learn more");}));
 				b.CloseComponent();
 			}),
-			Img = "/images/Icon_data-transfer.svg"
+			Img = "/images/Icon_device-exchange.svg"
 		},
 		new Feature() {
 			Title = (MarkupString)"Steeltoe with Spring Cloud Data Flow",
@@ -53,18 +65,6 @@
 				b.CloseComponent();
 			}),
 			Img = "/images/Icon_network.svg"
-		},
-		new Feature() {
-			Title = (MarkupString)"Steeltoe Messaging",
-			Description = (b => {
-				b.AddMarkupContent(1,"With the Steeltoe Messaging project, you can apply core concepts to the development of Kafka or RabbitMQ based messaging solutions.<br /><br />Both include \"template\" as a high-level message handling abstraction, and support message-driven POCOs with a \"listener container.\"<Br /><br />");
-				b.OpenComponent<Href>(2);
-					b.AddAttribute(3, "href","/messaging");
-					b.AddAttribute(4, "AsButton",true);
-					b.AddAttribute(5, "ChildContent", (RenderFragment)((b) => {b.AddContent(6, "Learn more");}));
-				b.CloseComponent();
-			}),
-			Img = "/images/Icon_device-exchange.svg"
 		}
 	};
 }
