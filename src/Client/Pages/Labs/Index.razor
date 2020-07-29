@@ -1,0 +1,25 @@
+﻿@using System.Diagnostics
+
+@inject IParseFromMarkdown ParseMarkdown
+@page "/labs/{LabName}"
+
+@html
+
+@code {
+	private MarkupString html;
+	private string _labName;
+
+	[Parameter]
+	public string LabName {
+		get { return _labName; }
+		set { _labName = value; }
+	}
+
+	protected override async Task OnParametersSetAsync() {
+		html = await ParseMarkdown.GetHtmlAsync($@"labs/{_labName}.md");
+		StateHasChanged();
+
+		await base.OnParametersSetAsync();
+		return;
+	}
+}

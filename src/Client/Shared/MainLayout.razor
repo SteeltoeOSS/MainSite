@@ -17,7 +17,7 @@
 	protected override async Task OnInitializedAsync() {
 		NavigationManager.LocationChanged += LocationChanged;
 
-		if (NavigationManager.Uri.Contains("docs"))
+		if (NavigationManager.Uri.Contains("docs") || NavigationManager.Uri.Contains("labs"))
 			footerClass = "hide";
 		else
 			footerClass = "";
@@ -25,7 +25,7 @@
 		await base.OnInitializedAsync();
 	}
 	private void LocationChanged(object sender, LocationChangedEventArgs e) {
-		if (e.Location.Contains("docs"))
+		if (e.Location.Contains("docs") || NavigationManager.Uri.Contains("labs"))
 			footerClass = "hide";
 		else
 			footerClass = "";
