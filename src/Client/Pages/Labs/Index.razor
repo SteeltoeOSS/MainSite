@@ -3,7 +3,17 @@
 @inject IParseFromMarkdown ParseMarkdown
 @page "/labs/{LabName}"
 
-@html
+<PageTitle Title="Lab Exercises" />
+
+<div class="width-all">
+	<div class="width-90 container">
+		<div class="row no-gutters">
+			<div class="col mt-5">
+				@html
+			</div>
+		</div>
+	</div>
+</div>
 
 @code {
 	private MarkupString html;
