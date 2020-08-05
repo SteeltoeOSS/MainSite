@@ -1,7 +1,10 @@
 ﻿@using System.Diagnostics
 
+@inject IJSRuntime JSRuntime
 @inject IParseFromMarkdown ParseMarkdown
+
 @page "/labs/{LabName}"
+@page "/labs/{LabName}/{ExerciseName}"
 
 <PageTitle Title="Lab Exercises" />
 
@@ -18,6 +21,7 @@
 @code {
 	private MarkupString html;
 	private string _labName;
+	private string _exerciseName;
 
 	[Parameter]
 	public string LabName {
@@ -25,11 +29,27 @@
 		set { _labName = value; }
 	}
 
+	[Parameter]
+	public string ExerciseName {
+		get { return _exerciseName; }
+		set { _exerciseName = value; }
+	}
+
 	protected override async Task OnParametersSetAsync() {
-		html = await ParseMarkdown.GetHtmlAsync($@"labs/{_labName}.md");
+		//Console.WriteLine($@"labs/{_labName}/{(_exerciseName ?? _labName)}.md");
+		try{
+			html = await ParseMarkdown.GetHtmlAsync($@"labs/{_labName}/{(_exerciseName ?? _labName)}.md");
+		}catch{
+			html = (MarkupString)$@"<div>No lab could be found at 'labs/{_labName}/{(_exerciseName ?? _labName)}.md'</div>";
+		}
+
+		StateHasChanged();
+
+		await JSRuntime.InvokeVoidAsync("highlightCode",true);
 		StateHasChanged();
 
 		await base.OnParametersSetAsync();
 		return;
 	}
+
 }
