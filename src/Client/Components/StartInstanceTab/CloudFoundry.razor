@@ -3,11 +3,11 @@
 	<ol>
 		<li>
 			Start an instance of @ServiceName, named @InstanceName
-			<code class="inline">@CFCreateServiceCmd</code>
+			<pre><code class="powershell">@CFCreateServiceCmd</code></pre>
 		</li>
 		<li class="@(ShowServiceLookup == false ? "hide" : "")">
 			Wait for service to be ready
-			<code class="inline">cf services</code>
+			<pre><code class="powershell">cf services</code></pre>
 		</li>
 		@AdditionalSteps
 	</ol>

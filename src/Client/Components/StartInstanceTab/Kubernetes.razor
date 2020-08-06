@@ -3,12 +3,12 @@
 		<ol>
 			<li>
 				Using Helm Charts, start the <Href href="@HelmGettingStartedUrl" target="_blank">@ServiceName chart</Href> providing connecting values. Learn more about using Helm <a href="https://helm.sh/docs/using_helm/" target="_blank">here</a>.
-				<code class="inline">@HelmCmd</code>
+				<pre><code class="powershell">@HelmCmd</code></pre>
 			</li>
 			@*<AdditionalSteps>
 			<li>
 				Expose the port, for connecting outside the cluster
-				<code class="inline">kubectl port-forward svc/@InstanceName @Portnumber</code>
+				<pre><code class="powershell">kubectl port-forward svc/@InstanceName @Portnumber</code>
 			</li>
 		</AdditionalSteps>*@
 			<li>

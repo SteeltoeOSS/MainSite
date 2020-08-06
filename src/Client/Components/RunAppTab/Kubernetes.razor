@@ -2,7 +2,7 @@
 	<ol>
 		<li>
 			Create a <b>DockerFile</b> in the same folder as @(ProjectName).csproj.
-<pre><code>FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build-env
+<pre><code class="dockerfile">FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build-env
 WORKDIR /app
 
 # Copy csproj and restore as distinct layers
@@ -22,16 +22,16 @@ ENTRYPOINT ["dotnet", "@(ProjectName).dll"]
 		</li>
 		<li>
 			Buld the Docker image
-			<code class="inline">docker build -t &lt;YOUR_DOCKER_NAME&gt;/@(ProjectName.ToLower()) &lt;PATH_TO_PROJECT_FOLDER&gt;</code>
+			<pre><code class="powershell">docker build -t &lt;YOUR_DOCKER_NAME&gt;/@(ProjectName.ToLower()) &lt;PATH_TO_PROJECT_FOLDER&gt;</code></pre>
 		</li>
 		<Tip><Message>With the container image built, you can test locally by running <code>docker run -p 80:80 &lt;YOUR_DOCKER_NAME&gt;/@(ProjectName.ToLower())</code>. Then navigate to <a href="http://localhost:8080/api/values" target="_blank">http://localhost/api/values</a>.</Message></Tip>
 		<li>
 			Push the new docker image to the Docker <a href="http://hub.docker.com" target="_blank">container registry hub</a>
-																							<code class="inline">docker push &lt;YOUR_DOCKER_NAME&gt;/@(ProjectName.ToLower())</code>
+																							<pre><code class="powershell">docker push &lt;YOUR_DOCKER_NAME&gt;/@(ProjectName.ToLower())</code></pre>
 		</li>
 		<li>
 			Create a Kubernetes <b>manifest.yml</b> in the same folder as @(ProjectName).csproj.
-<pre><code>---
+<pre><code class="yaml">---
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -69,20 +69,20 @@ spec:
 		</li>
 		<li>
 			Using the manifest, create the pod deployment.
-			<code class="inline">kubectl apply -f &lt;PATH_TO&gt;\manifest.yml</code>
+			<pre><code class="powershell">kubectl apply -f &lt;PATH_TO&gt;\manifest.yml</code></pre>
 		</li>
 		@*<li>
 			Expose the new app for access.
-			<code class="inline">kubectl expose deployment @(ProjectName.Replace("_","-").ToLower()) --type=NodePort --name=@(ProjectName.Replace("_","-").ToLower()) --port 80</code>
+			<pre><code class="powershell">kubectl expose deployment @(ProjectName.Replace("_","-").ToLower()) --type=NodePort --name=@(ProjectName.Replace("_","-").ToLower()) --port 80</code>
 		</li>*@
 		@if (IncludeNavigateToApp) {
 			<li>
 				Along with deploying the app, the manifest also exposed a port for accessing the app external of the customer. To retrieve the assigned port look up the service info.
-				<code class="inline">kubectl get svc @(ProjectName.Replace("_", "-").ToLower()) -o jsonpath='{.spec.ports[0].nodePort}'</code>
+				<pre><code class="powershell">kubectl get svc @(ProjectName.Replace("_", "-").ToLower()) -o jsonpath='{.spec.ports[0].nodePort}'</code></pre>
 			</li>
 			<li>
 				You'll also need any one of the node IP addresses. To look them up retrieve node details and note the EXTERNAL-IP of the first node.
-				<code class="inline">kubectl get nodes -o wide</code>
+				<pre><code class="powershell">kubectl get nodes -o wide</code></pre>
 			</li>
 			<li>
 				Using the IP address from  <code>https://&lt;EXTERNAL_IP_ADDRESS&gt;:&lt;PORT&gt;/api/values</code> to run the app.

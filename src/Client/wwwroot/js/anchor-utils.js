@@ -59,6 +59,7 @@ function unhov(a) {
 	if (v) { v.classList.remove("active"); }
 }
 function highlightCode(includeCopyBadge) {
+	//console.info('highlighting code');
 	document.querySelectorAll('pre code').forEach((block) => { hljs.highlightBlock(block); });
 
 	if (!includeCopyBadge)

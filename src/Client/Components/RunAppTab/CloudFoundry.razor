@@ -10,7 +10,7 @@
 		</li>
 		<li class="@(NoCFProvider?"hide":"")">
 			Add the Cloud Foundry configuration provider in <b>Program.cs</b>
-<pre><code>using Steeltoe.Extensions.Configuration.CloudFoundry;
+<pre><code class="csharp">using Steeltoe.Extensions.Configuration.CloudFoundry;
 ...
 var builder = WebHost.CreateDefaultBuilder(args)
  ...
@@ -21,11 +21,11 @@ var builder = WebHost.CreateDefaultBuilder(args)
 		</li>
 		<li>
 			Publish the application locally using the .NET cli. The following command will create a publish folder automatically.
-			<code class="inline">dotnet publish -o .\publish &lt;PATH_TO&gt;\@(ProjectName).csproj</code>
+			<pre><code class="powershell">dotnet publish -o .\publish &lt;PATH_TO&gt;\@(ProjectName).csproj</code></pre>
 		</li>
 		<li>
 			Create <b>manifest.yml</b> in the same folder as @(ProjectName).csproj
-			<pre><code>---
+			<pre><code class="yaml">---
 applications:
 - name: @(ProjectName)
   buildpacks:
@@ -46,7 +46,7 @@ applications:
 		<Tip><Message>With yaml files indention and line endings matter. Use an IDE like VS Code to confirm spacing and that line endings are set to <code>LF</code> (not the Windows default <code>CR LF</code>)</Message></Tip>
 		<li>
 			Push the app to Cloud Foundry
-			<code class="inline">cf push -f &lt;PATH_TO&gt;\manifest.yml -p .\publish</code>
+			<pre><code class="powershell">cf push -f &lt;PATH_TO&gt;\manifest.yml -p .\publish</code></pre>
 		</li>
 		@if (IncludeNavigateToApp) {
 			<li>Navigate to the application endpoint <code>https://&lt;APP_ROUTE&gt;/api/values</code></li>

@@ -50,7 +50,6 @@ Value2: another-val
 					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="@ServiceName">
 						<CFCreateServiceCmd>cf create-service p-config-server standard @InstanceName -c '{ \"git\": { \"uri\": \"&lt;NEW_REPO_URL&gt;\" } }'</CFCreateServiceCmd>
 					</Steeltoe.Client.Components.StartInstanceTab.CloudFoundry>
-					@*<Steeltoe.Client.Components.StartInstanceTab.StTooling InstanceName="@InstanceName" ServiceName="@ServiceName" ToolingServiceName="config-server" />*@
 				</TabSet>
 			</div>
 		</div>
@@ -69,7 +68,6 @@ Value2: another-val
 						<TabSet>
 							<Steeltoe.Client.Components.AppSettingsTab.Local ServiceName="@ServiceName" SpringApplicationName="my-values" SpringServerUri="http://localhost:8888" />
 							<Steeltoe.Client.Components.AppSettingsTab.CloudFoundry ServiceName="@ServiceName" SpringApplicationName="my-values" />
-							@*<Steeltoe.Client.Components.AppSettingsTab.StTooling ServiceName="@ServiceName" SpringApplicationName="my-values" SpringServerUri="http://localhost:8888" />*@
 						</TabSet>
 						<Note><Message>For the application to find its values in the git repo, the spring:application:name and the yaml file name <b>must</b> match. In this example <code>my-values</code> matched.</Message></Note>
 					</li>
@@ -79,7 +77,6 @@ Value2: another-val
 							<TabSet>
 								<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" />
 								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" InstanceName="@InstanceName" />
-								@*<Steeltoe.Client.Components.RunAppTab.StTooling ProjectName="@ProjectName" />*@
 							</TabSet>
 						</div>
 					</li>

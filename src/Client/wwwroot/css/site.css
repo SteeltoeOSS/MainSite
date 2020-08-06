@@ -156,12 +156,15 @@ pre {
 code.language-bash:before {
 	content: "$ ";
 }
-code.language-powershell:before {
+code.powershell:before {
 	content: "PS C:\\> ";
 }
 .code-badge {
 	background: none !important;
 	border-radius: 0 !important;
+}
+code {
+	tab-size: 2;
 }
 ol {
 	margin: 0;
@@ -382,7 +385,7 @@ border-right: 0;
  border-bottom: 0;
 }
 .nav-tabs-body {
-min-height: 200px;
+/*min-height: 200px;*/
 box-shadow: 0 0 20px 4px #eeeeee;
 padding: 20px 20px 20px 40px;
 }
@@ -392,9 +395,9 @@ color: #373737;
 .nav-tabs-body ol li:nth-child(even) {
  margin: 15px 0 15px 0;
 }
-.nav-tabs-body div {
+/*.nav-tabs-body div {
 margin: 0 0 15px 0;
-}
+}*/
 .getting-started-ordered-list ol li img {
 box-shadow: 0 0 19px 4px #eeeeee;
 margin: 20px 0 20px 0;
