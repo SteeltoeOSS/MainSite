@@ -41,8 +41,8 @@
 				</li>
 					<li>
 					Add rabbit messaging configurations to <b>Startup.cs</b>
-<pre><code class="csharp">using Steeltoe.Messaging.Rabbit.Config;
-using Steeltoe.Messaging.Rabbit.Extensions;
+<pre><code class="csharp">using Steeltoe.Messaging.RabbitMQ.Config;
+using Steeltoe.Messaging.RabbitMQ.Extensions;
 
 ...
 
@@ -74,9 +74,8 @@ public class Startup {
 				</li>
 				<li>
 					Create a <b>new controller class</b> Controllers\WriteMessageQueueController.cs
-<pre><code class="csharp">using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Steeltoe.Messaging.Rabbit.Core;
+<pre><code class="csharp">using Microsoft.Extensions.Logging;
+using Steeltoe.Messaging.RabbitMQ.Core;
 
 ...
 
@@ -111,7 +110,7 @@ using Steeltoe.Messaging.Rabbit.Core;
 </code></pre>
 				</li>
 				<li>
-					Validate the port number the app will be served on, in <b>launchSettings.json</b>
+					Validate the port number the app will be served on, in <b>Properties\launchSettings.json</b>
 					<TabSet>
 						<Steeltoe.Client.Components.IISSettingsTab.Local ApplicationUrl="http://localhost:8080" />
 					</TabSet>
@@ -120,6 +119,7 @@ using Steeltoe.Messaging.Rabbit.Core;
 					<TabSet>
 						<Steeltoe.Client.Components.RunAppTab.Local IncludeNavigateToApp="false" ProjectName="@AddMessageProjectName" ></Steeltoe.Client.Components.RunAppTab.Local>
 					</TabSet>
+					<Note>Minimize windows and leave the application running as you continue on to the next step.</Note>
 				</li>
 				</ol>
 			</div>
@@ -133,7 +133,8 @@ using Steeltoe.Messaging.Rabbit.Core;
 					<li>
 						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="no-dependencies.png" ProjectName="@MonitorRabbitProjectName" />
 					</li>
-					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
+					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)
+					<Tip>Open the second app in a different Visual Studio instance.</Tip></li>
 					<li>
 					Open the package manager console
 					<img src="images/initializr/open-package-manager-console.png" class="img-fluid" />
@@ -142,10 +143,33 @@ using Steeltoe.Messaging.Rabbit.Core;
 						Install NuGet distributed packages
 	<pre><code class="powershell">Install-Package -Id Steeltoe.Messaging.RabbitMQ</code></pre>
 					</li>
+				<li>
+					Create a <b>new service class</b> RabbitListenerService.cs
+<pre><code class="csharp">using Microsoft.Extensions.Logging;
+using Steeltoe.Messaging.RabbitMQ.Attributes;
+
+...
+
+  public class RabbitListenerService {
+		public const string RECEIVE_AND_CONVERT_QUEUE = "@(QueueName)";
+		private ILogger _logger;
+    
+    public RabbitListenerService(ILogger&lt;RabbitListenerService&gt; logger)
+    {
+      _logger = logger;
+    }
+
+    [RabbitListener(RECEIVE_AND_CONVERT_QUEUE)]
+    public void ListenForAMessage(string msg)
+    {
+      _logger.LogInformation($"Received the message '{msg}' from the queue.");
+    }
+  }
+</code></pre>
+				</li>
 					<li>
 					Add rabbit messaging configurations to <b>Startup.cs</b>
-<pre><code class="csharp">using Steeltoe.Messaging.Rabbit.Config;
-using Steeltoe.Messaging.Rabbit.Extensions;
+<pre><code class="csharp">using Steeltoe.Messaging.RabbitMQ.Extensions;
 
 ...
 
@@ -173,34 +197,7 @@ using Steeltoe.Messaging.Rabbit.Extensions;
 }</code></pre>
 				</li>
 				<li>
-					Create a <b>new service class</b> RabbitListenerService.cs
-<pre><code class="csharp">using Microsoft.Extensions.Logging;
-using Steeltoe.Messaging.Rabbit.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-...
-
-  public class RabbitListenerService {
-		public const string RECEIVE_AND_CONVERT_QUEUE = "@(QueueName)";
-		private ILogger _logger;
-    
-    public RabbitListenerService(ILogger&lt;RabbitListenerService&gt; logger)
-    {
-      _logger = logger;
-    }
-
-    [RabbitListener(RECEIVE_AND_CONVERT_QUEUE)]
-    public void ListenForAMessage(string msg)
-    {
-      _logger.LogInformation($"Received the message '{msg}' from the queue.");
-    }
-  }
-</code></pre>
-				</li>
-				<li>
-					Validate the port number the app will be served on, in <b>launchSettings.json</b>
+					Validate the port number the app will be served on, in <b>Properties\launchSettings.json</b>
 					<TabSet>
 						<Steeltoe.Client.Components.IISSettingsTab.Local ApplicationUrl="http://localhost:8081" />
 					</TabSet>
@@ -209,6 +206,7 @@ using System.Text;
 					<TabSet>
 						<Steeltoe.Client.Components.RunAppTab.Local IncludeNavigateToApp="false" ProjectName="@MonitorRabbitProjectName" ></Steeltoe.Client.Components.RunAppTab.Local>
 					</TabSet>
+					<Note>Minimize windows and leave the application running as you continue on to the next step.</Note>
 				</li>
 				</ol>
 			</div>
@@ -219,8 +217,10 @@ using System.Text;
 		<div class="row">
 			<div class="col-12 getting-started-ordered-list">
 				<ol>
-					<li>View the @AddMessageProjectName project message logs and verify there is a message stating it is "Sending message to queue". If you don't see the message refresh the endpoint <code>https://localhost:8080/WriteMessageQueue</code> to have a new message written.</li>
-					<li>View the @MonitorRabbitProjectName project message logs and verify there is a message stating it "Received the message from the queue".</li>
+					<li>View the @AddMessageProjectName project message logs and verify there is a message stating it is "Sending message to queue". If you don't see the message refresh the endpoint <code>https://localhost:8080/WriteMessageQueue</code> to have a new message written.<br />
+					<img src="images/initializr/visual-studio-output-debug.png" class="img-fluid"/></li>
+					<li>View the @MonitorRabbitProjectName project message logs and verify there is a message stating it "Received the message from the queue".<br />
+					<img src="images/initializr/visual-studio-output-debug-messagereceived.png" class="img-fluid" /></li>
 				</ol>
 			</div>
 		</div>
