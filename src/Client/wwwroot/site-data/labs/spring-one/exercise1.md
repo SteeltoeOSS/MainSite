@@ -29,111 +29,125 @@ Begin building an API that will be enhanced with more components in the next exe
 
 ### Get Started
 
-1. Create a new WebAPI project
+Let's start by creating a brand new .NET Core webapi project. If you're using Visual Studio, choose `File > New > Project`
 
-	|![vs-new-proj] |![vs-name-proj]|![vs-create-proj]|
-	|--|
-	```powershell
-	dotnet new webapi
-	```
-	<br/><br/>
+|![vs-new-proj] Choose ASP.NET Core Web Application from the default templates. |![vs-name-proj] The default project name WebApplication1 will be used throughout, but you can rename.|![vs-create-proj] Choose an application type of API, everything else can keep its default value.|
+|:--|
 
-1. Bring in the dependency for `Steeltoe.Management.Endpointcore`
+Or if you prefer the dotnet cli:
+
+```powershell
+dotnet new webapi -n WebApplication1
+cd WebApplication1
+```
+
+Once created, open the new project in your IDE of choice (we will be using Visual Studio throughout this lab). The first action is to bring in the Steeltoe packages to the app. You can do this by right clicking on the project name in the solution explorer and choose `Manage NuGet packages...`. In the package manger window choose `Browse`, search for `Steeltoe.Management.Endpointcore`, and install.
 	
-	![vs-add-endpointcore]
+![vs-add-endpointcore]
 
-	```powershell
-	dotnet add package Steeltoe.Management.Endpointcore
-	```
-	<br/><br/>
+Then search for the `Steeltoe.Extensions.Logging.DynamicLogger` package and install.
 
-1. Bring in the dependency for `Steeltoe.Extensions.Logging.DynamicLogger`
+![vs-add-dynamiclogger]
 
-	![vs-add-dynamiclogger]
+Finally the `Steeltoe.Management.TracingCore` package and install.
 
-	```powershell
-	dotnet add package Steeltoe.Extensions.Logging.DynamicLogger
-	```
-	<br/><br/>
+![vs-add-tracingcore]
 
-1. Bring in the dependency for `Steeltoe.Management.TracingCore`
+You could have done all this in the cli:
 
-	![vs-add-tracingcore]
+```powershell
+dotnet add package Steeltoe.Management.Endpointcore
+dotnet add package Steeltoe.Extensions.Logging.DynamicLogger
+dotnet add package Steeltoe.Management.TracingCore
+```
 
-	```powershell
-	dotnet add package Steeltoe.Extensions.Management.TracingCore
-	```
-	<br/><br/>
+Steeltoe features are broken up into packages, giving you the option to only bring in and extend the dependencies needed. As we implement each package within the application we'll discuss why these packages were chosen.
 
-1. Add the health, info, and logger actuators to the host builder `Program.cs`
-	```csharp
-	using Steeltoe.Management.Endpoint;
-	...
+Open `Program.cs` and append the adding statements to the host builder. Visual Studio should prompt to add the `using Steeltoe.Management.Endpoint` direction.
 
-	public static IHostBuilder CreateHostBuilder(string[] args) =>
-		Host.CreateDefaultBuilder(args)
-			.ConfigureWebHostDefaults(webBuilder => {
-				webBuilder.UseStartup<Startup>();
-			})
-			.AddHealthActuator()
-			.AddInfoActuator()
-			.AddLoggersActuator()
-			;
-	```
-	<br/><br/>
+```csharp
+public static IHostBuilder CreateHostBuilder(string[] args) =>
+	Host.CreateDefaultBuilder(args)
+		.ConfigureWebHostDefaults(webBuilder => {
+			webBuilder.UseStartup<Startup>();
+		})
 
-1. Add the distributed tracing service in the application `Startup.cs`
-	```csharp
-	using Steeltoe.Management.Tracing;
-	...
+		//Steeltoe actuator packages
+		.AddHealthActuator()
+		.AddInfoActuator()
+		.AddLoggersActuator()
+		;
+```
 
-	public void ConfigureServices(IServiceCollection services) {
-		...
-		services.AddDistributedTracing(Configuration);
-		...
-	}
-	```
-	<br/><br/>
+We've implemented 3 features within the application by adding these actuators.
+- The health actuator will add a new endpoint at `/actuators/health`. Internally this function uses .NET's IHealthContributor to "decide" if everything is reporting good health and responds with HTTP 200 status. Also within the response body there is a json formatted message to accomodate a deeper check that specfic platforms like Cloud Foundry and Kubernetes do.
+- The info actuator adds a new endpoint at `/actuators/info`. This function gathers all kinds of information like versioing information, select package information, and DLL info. Everything is formatted as json and included in the response.
+- The loggers actuator enables enhanced log message details via ILogger.
 
-1. Write a log message in the default controller `Controllers\WeatherForecastController.cs`
-	```csharp
-	[HttpGet]
-	public IEnumerable<WeatherForecast> Get() {
-		...
-		_logger.LogInformation("Hi there");
+Now open `Startup.cs` and add distributed tracing features, Visual Studio should prompt you to add the `using Steeltoe.Management.Tracing` direction.
+
+```csharp
+public void ConfigureServices(IServiceCollection services) {
+	services.AddControllers();
+
+	//Steeltoe distributed tracing
+	services.AddDistributedTracing(Configuration);
+}
+```
+
+With the addition of distributed tracing option, under the covers Steeltoe uses the OpenTelemetry specification to generate spans and traces throughout the application, as requests are recieved. No additional configuration is needed.
+
+Also having the combination of the logging actuator and distributed tracing implemented, Steeltoe will automatically append the application name, span Id, and trace Id on log messages when possible. This can be very handy when debugging a specific happening and error in production.
+
+To see the trace logging in action, lets add a log message in `Controllers\WeatherForecastController.cs` controller. Append the below message as the first line with the 'Get' function.
+
+```csharp
+[HttpGet]
+public IEnumerable<WeatherForecast> Get() {
+	//Testing Steeltoe logging with distributed tracing
+	_logger.LogInformation("Hi there");
 		
-		return ...
-	}
-	```
-	<br/><br/>
+	//...
+}
+```
 
-1. Run the application `Start Debugging`
+With the packages implemented in host builder, distributed tracing activated, and a sample log message being written to console, we are ready to see everything in action. Start the application by clicking the `Debug > Start Debugging` top menu item.
 
-	![vs-run-application]
-	```powershell
-	dotnet run
-	```
-	<br/><br/>
+![vs-run-application]
 
-1. The default weather forecast endpoint will show in your browser `http://localhost/weatherforecast`
+Or use the dotnet cli:
+```powershell
+dotnet run
+```
 
-	![run-weatherforecast]
-	<br/><br/>
+Once started your default browser should open and automatically load the weather forecast endpoint.
 
-1. Navigate to the automatically generated health endpoint and note a reporting a status of "UP" `https://localhost/actuators/health`
+![run-weatherforecast]
 
-	![health-endpoint]
-	<br/><br/>
+Let's look at the health endpoint. Replace `WeatherForecast` with `/actuators/health` in the browser address bar. The health page will load with json formatted info.
 
-1. Navigate to the automatically generated info endpoint and note the vitals it provides `https://localhost/actuators/info`
+![health-endpoint]
 
-	![info-endpoint]
-	<br/><br/>
+As we discussed above, the page loaded with a status of 200 and output information to help application platforms gain a deeper "knowledge" of app health.
 
-1. With the application still running refer to the logs and note the appended trace information `[app name, trace id, span id, trace flags]`
-	![trace-log]
-	<br/><br/>
+Now navigate to the info endpint by replacing `health` with `info` in the address bar.
 
+![info-endpoint]
+
+Relevant app info is output, with json formatting.
+
+Finally lets look at the log message that was written by going back to Visual Studio (keep the app running) and locate the Output window. Choose `Webapplication1 - ASP.NET Core Web Server` in the "from" dropdown and scroll to the bottom of the log. (If you're using the dotnet cli, the logs should be output in the same window you ran the app.)
+
+![trace-log]
+
+Locate the "Hi there" log message. Notice the additional information prepended to the messsage.
+- The first item is the application's name
+- Second is the OpenTelemetry generated span id
+- Third is the OpenTelemetry generated trace id
+
+### Summary
+
+These are the basics of any cloud ready microservice. Logging and debugging are significantly different than a traditional IIS environment. But! A developer shouldn't be spending tons of time coding these buildplate-type things. Heeelllo Steeltoe!
 
 |[<< Back to Introduction][home-page-link]|[Next Exercise >>][exercise-2-link]|
 |:--|--:|
