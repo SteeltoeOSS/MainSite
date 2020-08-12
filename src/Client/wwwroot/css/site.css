@@ -153,9 +153,11 @@ pre {
 	box-shadow: 3px 3px 0px 0px #0066cc;
 	background-color: #001f3f;
 }
-code.language-bash:before {
+code.language-bash:before,
+code.bash:before {
 	content: "$ ";
 }
+code.language-powershell:before,
 code.powershell:before {
 	content: "PS C:\\> ";
 }
@@ -539,10 +541,10 @@ padding: 13%;
 background-color: #e4f1ff;
 margin: 0 25% 0 25%;
 }
-.component-feature-img img, .component-feature-img svg {
+/*.component-feature-img img, .component-feature-img svg {
 	max-height: 108px;
 	max-width: 108px;
-}
+}*/
 .component-resources {
 background-color: #fafafa;
 padding: 35px 0 35px 0;
