@@ -16,41 +16,8 @@
 @page "/docs/{Version:int}/{Component}"
 @page "/docs/{Version:int}/{Component}/{Area}"
 
-<div class="width-all">
-	<div class="width-90 container">
-		<div class="row docs-row no-gutters">
-			<div class="docs-nav-col">
-				<div class="row no-gutters">
-					<div class="col text-center nav-version @(Version == 2 ? "selected":"")">
-						@if(Version == 2) {
-							<span>Steeltoe v2</span>
-						} else {
-							<Href href="@("/docs/2/" + Component + "/" + Area)">Steeltoe v2</Href>
-						}
-					</div>
-					<div class="col text-center nav-version @(Version == 3 ? "selected":"")">
-						@if(Version == 3) {
-							<span title="Version 3 Milestone 2">Steeltoe v3-m2</span>
-						} else {
-							<Href href="@("/docs/3/" + Component + "/" + Area)" title="Version 3 Milestone 2">Steeltoe v3-m2</Href>
-						}
-					</div>
-				</div>
-				<div class="row no-gutters">
-					<div class="col bg-white">
-						@if(Version == 3) {
-							<div class="text-center small bg-grey midnight-blue py-1">Version 3-m2 is pre-production only</div>
-						}
-						<DocsMenu Area="@(Area)" Component="@(Component)" Version="@(Version)" />
-					</div>
-				</div>
-			</div>
-			<div class="docs-content-col">
-				<Docs Area="@(Area)" Component="@(Component)" Version="@(Version)" />
-			</div>
-		</div>
-	</div>
-</div>
+Redirecting to new docs site. Please hold.
+@pageMessage
 
 @code {
 	private string _area;
@@ -59,6 +26,7 @@
 	private int currentVersion = 2;
 	private string defaultArea = "overview";
 	private string defaultComponent =  "welcome";
+	protected string pageMessage = "";
 
 	[Parameter]
 	public string Area {
@@ -78,5 +46,29 @@
 		set {
 			_version = (value < 2 || value > 3 || value == 0 ? currentVersion : value);
 		}
+	}
+
+	protected override async Task OnParametersSetAsync(){
+		var baseUri = NavigationManager.BaseUri;
+
+		if(baseUri.IndexOf("8080") > 0){
+			baseUri = baseUri.Replace("8080", "8081").Replace("https","http");
+		}else if(baseUri.IndexOf("dev.steeltoe.io") > -1){
+			baseUri = baseUri.Replace("dev.steeltoe.io", "docsteeltoe-staging.cfapps.io");
+		}else if(baseUri.IndexOf("www.steeltoe.io") > -1){
+			baseUri = baseUri.Replace("www.steeltoe.io", "blog.steeltoe.io");
+		}else{
+			baseUri = "https://blog.steeltoe.io/";
+		}
+		//Console.WriteLine(baseUri);
+		try{
+			NavigationManager.NavigateTo($"{baseUri}api/v{Version}/{Component}/{Area}.html", true);
+		}catch(Exception){
+			Console.WriteLine($"Could not redirect to '{baseUri}api/v{Version}/{Component}/{Area}.html'");
+			pageMessage = $"Uh oh! Something happened while trying to redirect you to the documents site. Here's the link: {baseUri}";
+		}
+
+		await base.OnParametersSetAsync();
+		return;
 	}
 }

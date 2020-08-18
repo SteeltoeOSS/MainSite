@@ -1,14 +1,6 @@
 ﻿@inject IJSRuntime JSRuntime
 @inject NavigationManager NavigationManager
 
-@*<div class="width-all" style="background-color:"#d8d8d8">
-	<div class="width-70 container">
-		<div class="row no-gutters p-1">
-			<div class="col text-center">This is some text</div>
-		</div>
-	</div>
-</div>*@
-
 <div class="width-all">
 	<div class="width-90 container">
 		<div class="row top-bar">
@@ -76,19 +68,19 @@
 
 </svg>
 </Href></div>
-			<div class="col text-center offset-sm-2 mt-4 @(labHeader?"hide":"")">
+			<div class="col text-center offset-sm-2 mt-4">
 				<div class="has-menu"><span>Why Steeltoe</span><span class="nav-arrow"></span></div>
 			</div>
-			<div class="col text-center mt-4 @(labHeader?"hide":"")">
+			<div class="col text-center mt-4">
 				<div class="has-menu"><span>Learn</span><div class="nav-arrow"></div></div>
 			</div>
-			<div class="col text-center mt-4 @(labHeader?"hide":"")">
+			<div class="col text-center mt-4">
 				<div class="has-menu"><span>Projects</span><div class="nav-arrow"></div></div>
 			</div>
-			<div class="col text-center mt-4  @(labHeader?"hide":"")"><Href href="/training">Training</Href></div>
-			<div class="col text-center mt-4  @(labHeader?"hide":"")"><Href href="/support">Support</Href></div>
-			<div class="col text-center mt-4  @(labHeader?"hide":"")"><Href href="/community">Community</Href></div>
-			<div class="rel  @(labHeader?"hide":"")" id="dropdown-menus">
+			<div class="col text-center mt-4 "><Href href="/training">Training</Href></div>
+			<div class="col text-center mt-4 "><Href href="/support">Support</Href></div>
+			<div class="col text-center mt-4 "><Href href="/community">Community</Href></div>
+			<div class="rel " id="dropdown-menus">
 				<div class="abs" id="scope"></div>
 				<div class="drop-menu" id="why-items" onmouseleave="unhovAll()">
 					<div class="drop-target" id="why-target" @onmouseover="@(() => showHover("why"))"></div>
@@ -105,7 +97,7 @@
 					<ul onmouseleave="unhovAll()">
 						@*<li><Href href="/quickstart" @onclick="hideHover">Quickstart</Href></li>*@
 						<li><Href href="/get-started" @onclick="hideHover">Get Started</Href></li>
-						<li><Href href="/docs" @onclick="hideHover">Documentation</Href></li>
+						<li><Href href="https://docsteeltoe-staging.cfapps.io/api/index.html" @onclick="hideHover">Documentation</Href></li>
 					</ul>
 				</div>
 				<div class="drop-menu" id="project-items" onmouseleave="unhovAll()">
@@ -122,26 +114,15 @@
 						<li class=""><Href href="/service-discovery" @onclick="hideHover">Steeltoe Service Discovery</Href></li>
 						<li class=""><Href href="/messaging" @onclick="hideHover">Steeltoe Messaging</Href></li>
 						<li class="small pt-4">Developer Tools</li>
-						<li class="pl-2"><Href href="/initializr">Steeltoe Initializr</Href></li>
+						<li class="pl-2"><Href href="/initializr" @onclick="hideHover">Steeltoe Initializr</Href></li>
 					</ul>
 				</div>
-			</div>
-			<div class="col text-center offset-sm-2 mt-4 @(labHeader?"":"hide")">
-				<div><h2>Lab Exercises</h2></div>
 			</div>
 		</div>
 	</div>
 </div>
 
 @code {
-	private bool labHeader { get; set; } = false;
-
-	protected override async Task OnInitializedAsync() {
-		if (NavigationManager.Uri.Contains("labs"))
-			labHeader = true;
-
-		await base.OnInitializedAsync();
-	}
 	private async void showHover(string a) {
 		await JSRuntime.InvokeVoidAsync("hov", a);
 	}

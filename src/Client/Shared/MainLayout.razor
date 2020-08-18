@@ -7,32 +7,10 @@
 <div id="main">
 	@Body
 </div>
-<footer class="@footerClass">
+<footer>
 	<SiteFooter />
 </footer>
 
 @code {
-	private string footerClass { get; set; } = "";
 
-	protected override async Task OnInitializedAsync() {
-		NavigationManager.LocationChanged += LocationChanged;
-
-		if (NavigationManager.Uri.Contains("docs") || NavigationManager.Uri.Contains("labs"))
-			footerClass = "hide";
-		else
-			footerClass = "";
-
-		await base.OnInitializedAsync();
-	}
-	private void LocationChanged(object sender, LocationChangedEventArgs e) {
-		if (e.Location.Contains("docs") || NavigationManager.Uri.Contains("labs"))
-			footerClass = "hide";
-		else
-			footerClass = "";
-
-		StateHasChanged();
-	}
-	private void Dispose() {
-		NavigationManager.LocationChanged -= LocationChanged;
-	}
 }
