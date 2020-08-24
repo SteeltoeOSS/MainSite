@@ -15,10 +15,10 @@ Steeltoe makes things like production ready database connections a single line o
 Steeltoe 3.0 is a product of years of learning. Small businesses and large enterprises have all been benefiting and contributing to this new release. It’s a fresh take on cloud opinions that seemingly never get answered. It’s the next evolution for your microservices to go to cloud ninja status.
 
 ---
-##### If you’re moving from Steeltoe 2 and would likea quick comparision with version 3, refer to [this page](https://steeltoe.io/docs/3/welcome/whats-new).
+##### If you’re moving from Steeltoe 2.x and would like a quick comparision with version 3.0, refer to [this page](https://steeltoe.io/docs/3/welcome/whats-new).
 ---
 
-Let's take a look at the new things included in Steeltoe 3. If you’re still wondering how the project fits in your new or existing .NET applications, [learn how here](https://steeltoe.io).
+Let's take a look at the new things included in Steeltoe 3.0. If you’re still wondering how the project fits in your new or existing .NET applications, [learn how here](https://steeltoe.io).
 
 ## RabbitMQ messaging in less than 5 lines of code
 
@@ -259,4 +259,4 @@ Want a complete runtime? Try [Pivotal Web Services](https://run.pivotal.io/) for
 
 Want to get deeper into creating cloud-native .NET apps? Attend the VMware Pivotal Labs’s [4 -day .NET developer course](https://pivotal.io/platform-acceleration-lab/pal-for-developers-net). You’ll get hands-on cloud-native .NET training learn best practices when creating microservices and become a Steeltoe ninja!
 
-We are also offering a hands-on “getting started” workshop this year at the [SpringOne](https://springone.io/2020) conference. [Read more about the workshop and get signed up, space is limited!](https://springone.io/2020/workshops/steeltoe)
+We are also offering a hands-on “getting started” workshop this year at the [SpringOne](https://springone.io) conference. [Read more about the workshop and get signed up, space is limited!](https://springone.io/2020/workshops/steeltoe)
