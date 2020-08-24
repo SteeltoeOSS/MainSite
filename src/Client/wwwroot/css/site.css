@@ -150,37 +150,24 @@ app {
 
 /* =====================HTML ELEMENT OVERRIDE===================== */
 pre {
-	background-color: #242937;
-	border: 0; /*1px solid #373737;*/
-	padding: 15px;
-	margin-left: 0;
-	font-size: 83%;
-	color: white;
-	tab-size: 4;
-	overflow-x: scroll;
-	overflow-x: visible;
+	box-shadow: 3px 3px 0px 0px #0066cc;
+	background-color: #001f3f;
 }
-code.inline, code.inline-no-ps, code.multiline {
-	display: block;
-	margin: 10px 0 10px 0;
-	background-color: #fff0b3;
-	color: black;
-	padding: 5px 15px 5px 15px;
-	font-size: 83%;
-	overflow-x: scroll;
-	overflow-x: visible;
+code.language-bash:before,
+code.bash:before {
+	content: "$ ";
 }
-code.multiline:before, code.inline:before {
+code.language-powershell:before,
+code.powershell:before {
 	content: "PS C:\\> ";
 }
-code.multiline {
-	tab-size: 4;
-	white-space: pre-wrap
+.code-badge {
+	background: none !important;
+	border-radius: 0 !important;
 }
-code.inline {
-	padding-right: 5px;
+code {
+	tab-size: 2;
 }
-
 ol {
 	margin: 0;
 	padding: 0;
@@ -211,7 +198,7 @@ a {
 }
 
 /* =====================FONT STYLING===================== */
-.special-link {
+	.special-link {
   font-style: normal;
   font-weight: bold;
   text-transform: uppercase;
@@ -400,7 +387,7 @@ border-right: 0;
  border-bottom: 0;
 }
 .nav-tabs-body {
-min-height: 200px;
+/*min-height: 200px;*/
 box-shadow: 0 0 20px 4px #eeeeee;
 padding: 20px 20px 20px 40px;
 }
@@ -410,9 +397,9 @@ color: #373737;
 .nav-tabs-body ol li:nth-child(even) {
  margin: 15px 0 15px 0;
 }
-.nav-tabs-body div {
+/*.nav-tabs-body div {
 margin: 0 0 15px 0;
-}
+}*/
 .getting-started-ordered-list ol li img {
 box-shadow: 0 0 19px 4px #eeeeee;
 margin: 20px 0 20px 0;
@@ -554,10 +541,10 @@ padding: 13%;
 background-color: #e4f1ff;
 margin: 0 25% 0 25%;
 }
-.component-feature-img img, .component-feature-img svg {
+/*.component-feature-img img, .component-feature-img svg {
 	max-height: 108px;
 	max-width: 108px;
-}
+}*/
 .component-resources {
 background-color: #fafafa;
 padding: 35px 0 35px 0;

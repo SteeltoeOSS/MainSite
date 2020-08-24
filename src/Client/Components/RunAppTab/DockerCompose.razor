@@ -2,9 +2,9 @@
 	<ol>
 		<li>Build the image using the provided docker-compose file
 			@if (string.IsNullOrEmpty(TerminalPromptPrefix)) {
-      <code class="inline">docker-compose up -d</code>
+      <pre><code class="powershell">docker-compose up -d</code></pre>
 			} else {
-				<code class="inline-no-ps">PS @(TerminalPromptPrefix)&gt; docker-compose up -d</code>
+				<pre><code class="powershell">PS @(TerminalPromptPrefix)&gt; docker-compose up -d</code></pre>
 			}
     </li>
 	@AdditionalSteps

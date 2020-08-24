@@ -11,10 +11,11 @@ namespace Steeltoe.Client
 		public static async Task Main(string[] args) {
 			var builder = WebAssemblyHostBuilder.CreateDefault(args);
 			builder.RootComponents.Add<App>("app");
-
+			
 			builder.Services.AddBaseAddressHttpClient();
 			builder.Services.AddSingleton<INavMenu, NavMenu>();
 			builder.Services.AddSingleton<ICalendarEvents, CalendarEvents>();
+			builder.Services.AddSingleton<IParseFromMarkdown, ParseFromMarkdown>();
 
 			await builder.Build().RunAsync();
 		}

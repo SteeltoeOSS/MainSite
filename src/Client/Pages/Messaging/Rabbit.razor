@@ -1,0 +1,241 @@
+﻿@page "/messaging/get-started/rabbitmq"
+@inject IJSRuntime JSRuntime
+
+	<Breadcrumbs NavName="Messaging with RabbitMQ "
+							 ParentLinkName="Messaging"
+							 ParentLinkUrl="/messaging"
+							 ShowGetStarted=true />
+<Tutorial>
+	<Title>RabbitMQ Messaging</Title>
+	<Description>This tutorial takes you through setting up 2 .NET Core applications that interact through RabbitMQ.</Description>
+	<TutorialSteps>
+
+		<div class="row">
+			<div class="col-12 getting-started-header">First, <b>start a RabbitMQ instance</b>.</div>
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<div class="pl-3 pt-3">
+				Using the <a href="https://github.com/steeltoeoss/dockerfiles" target="_blank">Steeltoe dockerfile</a>, start a local instance of @ServiceName. The dockerfile will choose the correct image based on your OS.
+			<pre><code class="powershell">docker run --publish 5672:5672 steeltoeoss/rabbitmq</code></pre>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-header">Next <b>create a .NET Core WebAPI</b> that will ensure the queue is created and write messages to it.</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+				<ol>
+					<li>
+						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="no-dependencies.png" ProjectName="@AddMessageProjectName" />
+					</li>
+					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
+					<li>
+					Open the package manager console
+					<img src="images/initializr/open-package-manager-console.png" class="img-fluid" />
+					</li>
+					<li>
+						Install NuGet distributed packages
+	<pre><code class="powershell">Install-Package -Id Steeltoe.Messaging.RabbitMQ</code></pre>
+				</li>
+					<li>
+					Add rabbit messaging configurations to <b>Startup.cs</b>
+<pre><code class="csharp">using Steeltoe.Messaging.RabbitMQ.Config;
+using Steeltoe.Messaging.RabbitMQ.Extensions;
+
+...
+
+public class Startup {
+	public const string RECEIVE_AND_CONVERT_QUEUE = "@(QueueName)";
+
+...
+
+	public void ConfigureServices(IServiceCollection services){
+		// Add steeltoe rabbit services
+		services.AddRabbitServices();
+            
+		// Add the steeltoe rabbit admin client... will be used to declare queues below
+		services.AddRabbitAdmin();
+
+		// Add a queue to the message container that the rabbit admin will discover and declare at startup
+		services.AddRabbitQueue(new Queue(RECEIVE_AND_CONVERT_QUEUE));
+
+		// Add the rabbit client template used for send and receiving messages
+		services.AddRabbitTemplate();
+
+		...
+
+	}
+
+...
+
+}</code></pre>
+				</li>
+				<li>
+					Create a <b>new controller class</b> Controllers\WriteMessageQueueController.cs
+<pre><code class="csharp">using Microsoft.Extensions.Logging;
+using Steeltoe.Messaging.RabbitMQ.Core;
+
+...
+
+	[ApiController]
+	[Route("[controller]")]
+	public class WriteMessageQueueController : ControllerBase
+	{
+			public const string RECEIVE_AND_CONVERT_QUEUE = "@(QueueName)";
+			private readonly ILogger&lt;WriteMessageQueueController&gt; _logger;
+			private readonly RabbitTemplate _rabbitTemplate;
+			private readonly RabbitAdmin _rabbitAdmin;
+
+			public WriteMessageQueueController(ILogger&lt;WriteMessageQueueController&gt; logger, RabbitTemplate rabbitTemplate, RabbitAdmin rabbitAdmin)
+			{
+					_logger = logger;
+					_rabbitTemplate = rabbitTemplate;
+					_rabbitAdmin = rabbitAdmin;
+			}
+
+			[HttpGet()]
+			public ActionResult&lt;string&gt; Index()
+			{
+					var msg = "Hi there from over here.";
+
+					_rabbitTemplate.ConvertAndSend(RECEIVE_AND_CONVERT_QUEUE, msg);
+
+					_logger.LogInformation($"Sending message '{msg}' to queue '{RECEIVE_AND_CONVERT_QUEUE}'");
+            
+					return "Message sent to queue.";
+			}
+	}
+</code></pre>
+				</li>
+				<li>
+					Validate the port number the app will be served on, in <b>Properties\launchSettings.json</b>
+					<TabSet>
+						<Steeltoe.Client.Components.IISSettingsTab.Local ApplicationUrl="http://localhost:8080" />
+					</TabSet>
+				</li>
+				<li>Run the application
+					<TabSet>
+						<Steeltoe.Client.Components.RunAppTab.Local IncludeNavigateToApp="false" ProjectName="@AddMessageProjectName" ></Steeltoe.Client.Components.RunAppTab.Local>
+					</TabSet>
+					<Note>Minimize windows and leave the application running as you continue on to the next step.</Note>
+				</li>
+				</ol>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-header">Now <b>create a .NET Core WebAPI</b> that will monitor the queue and output anything received.</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+				<ol>
+					<li>
+						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="no-dependencies.png" ProjectName="@MonitorRabbitProjectName" />
+					</li>
+					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)
+					<Tip>Open the second app in a different Visual Studio instance.</Tip></li>
+					<li>
+					Open the package manager console
+					<img src="images/initializr/open-package-manager-console.png" class="img-fluid" />
+					</li>
+					<li>
+						Install NuGet distributed packages
+	<pre><code class="powershell">Install-Package -Id Steeltoe.Messaging.RabbitMQ</code></pre>
+					</li>
+				<li>
+					Create a <b>new service class</b> RabbitListenerService.cs
+<pre><code class="csharp">using Microsoft.Extensions.Logging;
+using Steeltoe.Messaging.RabbitMQ.Attributes;
+
+...
+
+  public class RabbitListenerService {
+		public const string RECEIVE_AND_CONVERT_QUEUE = "@(QueueName)";
+		private ILogger _logger;
+    
+    public RabbitListenerService(ILogger&lt;RabbitListenerService&gt; logger)
+    {
+      _logger = logger;
+    }
+
+    [RabbitListener(RECEIVE_AND_CONVERT_QUEUE)]
+    public void ListenForAMessage(string msg)
+    {
+      _logger.LogInformation($"Received the message '{msg}' from the queue.");
+    }
+  }
+</code></pre>
+				</li>
+					<li>
+					Add rabbit messaging configurations to <b>Startup.cs</b>
+<pre><code class="csharp">using Steeltoe.Messaging.RabbitMQ.Extensions;
+
+...
+
+  public class Startup {
+		public const string RECEIVE_AND_CONVERT_QUEUE = "@(QueueName)";
+
+		...
+
+		public void ConfigureServices(IServiceCollection services){
+			// Add steeltoe rabbit services
+			services.AddRabbitServices();
+    
+			// Add singleton that will process incoming messages
+			services.AddSingleton&lt;RabbitListenerService&gt;();
+
+			// Tell steeltoe about singleton so it can wire up queues with methods to process queues
+			services.AddRabbitListeners&lt;RabbitListenerService&gt;();
+
+			...
+
+		}
+
+	...
+
+}</code></pre>
+				</li>
+				<li>
+					Validate the port number the app will be served on, in <b>Properties\launchSettings.json</b>
+					<TabSet>
+						<Steeltoe.Client.Components.IISSettingsTab.Local ApplicationUrl="http://localhost:8081" />
+					</TabSet>
+				</li>
+				<li>Run the application
+					<TabSet>
+						<Steeltoe.Client.Components.RunAppTab.Local IncludeNavigateToApp="false" ProjectName="@MonitorRabbitProjectName" ></Steeltoe.Client.Components.RunAppTab.Local>
+					</TabSet>
+					<Note>Minimize windows and leave the application running as you continue on to the next step.</Note>
+				</li>
+				</ol>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-header">Validate the apps are working properly and the message queue is in use.</div>
+		</div>
+		<div class="row">
+			<div class="col-12 getting-started-ordered-list">
+				<ol>
+					<li>View the @AddMessageProjectName project message logs and verify there is a message stating it is "Sending message to queue". If you don't see the message refresh the endpoint <code>https://localhost:8080/WriteMessageQueue</code> to have a new message written.<br />
+					<img src="images/initializr/visual-studio-output-debug.png" class="img-fluid"/></li>
+					<li>View the @MonitorRabbitProjectName project message logs and verify there is a message stating it "Received the message from the queue".<br />
+					<img src="images/initializr/visual-studio-output-debug-messagereceived.png" class="img-fluid" /></li>
+				</ol>
+			</div>
+		</div>
+	</TutorialSteps>
+</Tutorial>
+@code
+{
+	private string ServiceName = "RabbitMQ";
+	private string QueueName = "steeltoe_message_queue";
+	private string MonitorRabbitProjectName = "Monitor_RabbitMQ";
+	private string AddMessageProjectName = "WriteTo_RabbitMQ";
+
+	protected override async Task OnAfterRenderAsync(bool firstRender)
+	{
+    await JSRuntime.InvokeVoidAsync("highlightCode",true);
+		await base.OnAfterRenderAsync(firstRender);
+	}
+}

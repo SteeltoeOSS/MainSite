@@ -1,11 +1,8 @@
 ﻿@page "/messaging"
 
-<Template Name="Messaging" Features="@features" GettingStartedURL="/messaging/get-started" DocsURL="/docs/messaging">
+<Template Name="Messaging" Features="@features" GettingStartedURL="/messaging/get-started/rabbitmq" DocsURL="/docs/messaging">
 	<Description>Build highly scalable event-driven microservices connected to shared messaging systems.</Description>
-	<WhatIs>XXXXXXXX</WhatIs>
-	<WhyUse>
-		YYYYYYYY
-	</WhyUse>
+	<WhatIs>The Steeltoe Messaging project applies core .NET concepts to the development of AMQP-based messaging solutions. It provides a "template" as a high-level abstraction for sending and receiving messages. It also provides support for Message-driven POCOs with a "listener container". These libraries facilitate management of AMQP resources while promoting the use of dependency injection and declarative configuration.</WhatIs>
 	<FeatureTemplate Context="Feature">
 		<div class="row component-feature no-gutters">
 			<div class="col-6 text-center"><div class="component-feature-img"><img class="img-fluid" src="@Feature.Img" /></div></div>
@@ -27,34 +24,27 @@
 </Template>
 
 @code{
-	private Feature[] features = new[] { 
+	private Feature[] features = new[] {
 		new Feature() {
-			Title = (MarkupString)"Support for Multiple Message Brokers",
+			Title = (MarkupString)"RabbitMQ Message Broker",
 			Description = (b => {
-				b.AddMarkupContent(1,"Steeltoe stream support for both RabbitMQ as well as Kafka, you have flexibility with little to no code change when choosing the right broker.");
+				b.AddMarkupContent(1,"Using the native RabbitMQ .NET client within, the Steeltoe Messaging client abstracts the complexity of messaging containers and translates them into simple configuration values.");
 			}),
-			Img = "/images/Icon_computers.svg"
+			Img = "/images/rabbitmq.png"
 		},
+		//new Feature() {
+		//	Title = (MarkupString)"Logging & Health Checks Built In",
+		//	Description = (b => {
+		//		b.AddMarkupContent(1,"With the addition of Steeltoe Logging and the health management endpoint, the application will receive and stream logs from the message broker as well include the message broker as an IHealthcontributor.");
+		//	}),
+		//	Img = "/images/Icon_cloud.svg"
+		//},
 		new Feature() {
-			Title = (MarkupString)"Logging & Health Checks Built In",
+			Title = (MarkupString)"Rabbit Admin",
 			Description = (b => {
-				b.AddMarkupContent(1,"Stream logs are automatically fed to your app’s logging interface, and health contributors are automatically configured and made available to your application.");
+				b.AddMarkupContent(1,"Simple impelmentation of RabbitAdmin to automatically delare queues, exchanges, and bindings.");
 			}),
-			Img = "/images/Icon_cloud.svg"
-		},
-		new Feature() {
-			Title = (MarkupString)"Event Driven Architectures",
-			Description = (b => {
-				b.AddMarkupContent(1,"xxxxxxx");
-			}),
-			Img = "/images/Icon_data-transfer.svg"
-		},
-		new Feature() {
-			Title = (MarkupString)"Messagaing",
-			Description = (b => {
-				b.AddMarkupContent(1,"xxxxxxxxx");
-			}),
-			Img = "/images/Icon_data-transfer.png"
+			Img = "/images/Icon_keys.svg"
 		}
 	};
 }

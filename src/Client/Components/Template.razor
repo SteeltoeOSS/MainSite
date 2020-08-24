@@ -1,4 +1,6 @@
-﻿<PageTitle Title="@(Name)" />
+﻿@inject IJSRuntime JSRuntime
+
+<PageTitle Title="@(Name)" />
 <div class="width-all bg-yellow">
 	<div class="width-90 container">
 		<div class="row no-gutters">
@@ -37,7 +39,7 @@
 						What @(NameIsPlural ? "are" : "is") @Name?
 					</div>
 				</div>
-				<div class="row no-gutters" style="@(WhyUse==null?"margin-bottom:7%;padding-bottom:7%":"")">
+				<div class="row no-gutters">
 					<div class="col component-whatis-desc">
 						@WhatIs
 					</div>
@@ -140,4 +142,14 @@
 
 	[Parameter]
 	public RenderFragment OtherArea { get; set; }
+
+	protected override async Task OnAfterRenderAsync(bool first) {
+		if(first) {
+			await JSRuntime.InvokeVoidAsync("highlightCode",true);
+			StateHasChanged();
+		}
+
+		await base.OnAfterRenderAsync(first);
+		return;
+	}
 }

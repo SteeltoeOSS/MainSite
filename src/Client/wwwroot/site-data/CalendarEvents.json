@@ -1,5 +1,17 @@
 [
 	{
+		"date": "<span>august</span> 24 2020",
+		"title": "Steeltoe 3.0 is officially available",
+		"description": "Version 3.0 is packed with messaging, kubernetes support, new ways to implement endpoints, and so much more.",
+		"url": "https://github.com/SteeltoeOSS/steeltoe/blob/master/roadmaps/3.0.0.md"
+	},
+	{
+		"date": "<span>august</span> 10 2020",
+		"title": "Steeltoe 3.0.0-rc1 is now available.",
+		"description": "This release candidate marks the final developer preview of Steeltoe 3.0. Next stop is the official public release!",
+		"url": "https://github.com/SteeltoeOSS/steeltoe/blob/master/roadmaps/3.0.0.md"
+	},
+	{
 		"date": "<span>july</span> 14 2020",
 		"title": "SpringOne is just around the corner, get your free pass today.",
 		"description": "The conference will be held virtually September 2-3. Don't miss Steeltoe's session about all things 3.0 as well as the .NET hands-on workshops.",
@@ -16,17 +28,5 @@
 		"title": "Steeltoe 3.0.0-m2 is available",
 		"description": "The second milestone of Steeltoe 3.0 has been reached! With a focus on .NET Core, this new major version will offer message streaming, the Initializr project, and more.",
 		"url": "https://github.com/SteeltoeOSS/steeltoe/blob/master/roadmaps/3.0.0.md"
-	},
-	{
-		"date": "<span>february</span> 23 2020",
-		"title": "Steeltoe 3.0.0-m1 is available",
-		"description": "The first milestone of Steeltoe 3.0 has been reached! With a focus on .NET Core, this new major version will offer message streaming, the Initializr project, and more.",
-		"url": "https://github.com/SteeltoeOSS/steeltoe/blob/master/roadmaps/3.0.0.md"
-	},
-	{
-		"date": "<span>november</span> 27 2019",
-		"title": "Steeltoe 2.4 is available",
-		"description": "Steeltoe 2.4 boosts .NET microservices development with a code generator, new getting started guides, and more.",
-		"url": "https://content.pivotal.io/dotnet/steeltoe-2-4-boosts-dotnet-microservices-development"
 	}
 ] 

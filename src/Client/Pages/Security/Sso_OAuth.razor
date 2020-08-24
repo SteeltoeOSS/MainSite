@@ -41,7 +41,7 @@
 				</li>
 				<li>
 					Install NuGet distributed packages
-<pre><code>Install-Package -Id Steeltoe.Security.Authentication.CloudFoundryCore -Version @SteeltoeVersion</code></pre>
+<pre><code class="powershell">Install-Package -Id Steeltoe.Security.Authentication.CloudFoundryCore -Version @SteeltoeVersion</code></pre>
 				</li>
 				<li>
 					Set the instance address in <b>appsettings.json</b>
@@ -59,7 +59,7 @@
 			<ol class="col-12 getting-started-ordered-list">
 				<li>
 					Set the cloud foundry auth middleware in <b>Startup.cs</b>
-<pre><code>using Steeltoe.Security.Authentication.CloudFoundry;
+<pre><code class="csharp">using Steeltoe.Security.Authentication.CloudFoundry;
 
 ...
 
@@ -102,7 +102,7 @@ public class Startup {
 				</li>
 				<li>
 					Open the <b>Controllers\ValuesControllers.cs</b> file and secure endpoints
-<pre><code>using Microsoft.AspNetCore.Mvc;
+<pre><code class="csharp">using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
 ...

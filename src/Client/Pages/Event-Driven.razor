@@ -1,7 +1,9 @@
 ﻿@page "/event-driven"
 
-<Template Name="Event Driven" Features="@features">
+<Template Name="Event Driven" Features="@features" NameIsPlural="false">
 	<Description>Event-driven systems reflect how modern businesses actually work, with thousands of small changes happening all day, every day. Steeltoe’s ability to handle events and enable developers to build applications around them, means your apps will stay in sync with your business. Steeltoe has event-driven options like streaming all the way to cloud functions, and data flows.</Description>
+	<WhatIs>When combined with microservices, event streaming opens up exciting opportunities - like event-driven architectures. Steeltoe simplifies the production, processing, and consumption of events, providing several useful abstractions</WhatIs>
+	<WhyUse>The bedrock of any event-driven system is message handling. Connecting to message platforms, routing messages, transforming messages, processing messages. With Steeltoe you can solve these integration challenges quickly and easily.</WhyUse>
 	<FeatureTemplate Context="Feature">
 		<div class="row component-feature no-gutters">
 			<div class="col-sm-6 text-center"><div class="component-feature-img"><img class="img-fluid" src="@Feature.Img" /></div></div>
@@ -30,34 +32,22 @@
 
 @code{
 	private Feature[] features = new[] {
-		new Feature() {
-			Title = (MarkupString)"Steeltoe Stream",
-			Description = (b => {
-				b.AddMarkupContent(1,"Steeltoe Stream improves your productivity when working with Apache Kafka and RabbitMQ, providing three key abstractions to simplify your code. “Binders” integrate with external messaging systems. “Bindings” bridge the gap between the messaging systems and your code. “Messages” provide the structure that your code uses to send and receive data.<Br /><br />Steeltoe Stream also provides support for provisioning, content conversion, error handling, configuration management, consumer groups, partitioning, monitoring, and health checks.<Br /><br />");
-				b.OpenComponent<Href>(2);
-					b.AddAttribute(3, "href","/stream");
-					b.AddAttribute(4, "AsButton",true);
-					b.AddAttribute(5, "ChildContent", (RenderFragment)((b) => {b.AddContent(6, "Learn more");}));
-				b.CloseComponent();
-			}),
-			Img = "/images/Icon_data-transfer.svg"
-		},
-		new Feature() {
-			Title = (MarkupString)"Steeltoe with Spring Cloud Data Flow",
-			Description = (b => {
-				b.AddMarkupContent(1,"Spring Cloud Data Flow offers developers a range of tools and automation for working with all kinds of data sources and destinations. Steeltoe helps you to develop, deploy, manage, and scale high-throughput streaming data pipelines across multiple cloud-native platforms.<Br /><br />");
-				b.OpenComponent<Href>(2);
-					b.AddAttribute(3, "href","/data-flow");
-					b.AddAttribute(4, "AsButton",true);
-					b.AddAttribute(5, "ChildContent", (RenderFragment)((b) => {b.AddContent(6, "Learn more");}));
-				b.CloseComponent();
-			}),
-			Img = "/images/Icon_network.svg"
-		},
+		//new Feature() {
+		//	Title = (MarkupString)"Steeltoe Stream",
+		//	Description = (b => {
+		//		b.AddMarkupContent(1,"Steeltoe Stream improves your productivity when working with RabbitMQ, providing three key abstractions to simplify your code. “Binders” integrate with external messaging systems. “Bindings” bridge the gap between the messaging systems and your code. “Messages” provide the structure that your code uses to send and receive data.<Br /><br />Steeltoe Stream also provides support for provisioning, content conversion, error handling, configuration management, consumer groups, partitioning, monitoring, and health checks.<Br /><br />");
+		//		b.OpenComponent<Href>(2);
+		//			b.AddAttribute(3, "href","/messaging");
+		//			b.AddAttribute(4, "AsButton",true);
+		//			b.AddAttribute(5, "ChildContent", (RenderFragment)((b) => {b.AddContent(6, "Learn more");}));
+		//		b.CloseComponent();
+		//	}),
+		//	Img = "/images/Icon_data-transfer.svg"
+		//}
 		new Feature() {
 			Title = (MarkupString)"Steeltoe Messaging",
 			Description = (b => {
-				b.AddMarkupContent(1,"With the Steeltoe Messaging project, you can apply core concepts to the development of Kafka or RabbitMQ based messaging solutions.<br /><br />Both include \"template\" as a high-level message handling abstraction, and support message-driven POCOs with a \"listener container.\"<Br /><br />");
+				b.AddMarkupContent(1,"With the Steeltoe Messaging project, you can apply core concepts to the development of RabbitMQ based messaging solutions.<br /><br />In just a few lines, implement high-level message handling abstraction and support message-driven POCOs with a \"listener container.\"<Br /><br />");
 				b.OpenComponent<Href>(2);
 					b.AddAttribute(3, "href","/messaging");
 					b.AddAttribute(4, "AsButton",true);
@@ -65,6 +55,13 @@
 				b.CloseComponent();
 			}),
 			Img = "/images/Icon_device-exchange.svg"
+		},
+		new Feature() {
+			Title = (MarkupString)"Steeltoe with Spring Cloud Data Flow (coming soon)",
+			Description = (b => {
+				b.AddMarkupContent(1,"Spring Cloud Data Flow offers developers a range of tools and automation for working with all kinds of data sources and destinations. Soon, Steeltoe will help you  develop, deploy, manage, and scale high-throughput streaming data pipelines across multiple cloud-native platforms.<Br /><br />");
+			}),
+			Img = "/images/Icon_network.svg"
 		}
 	};
 }
