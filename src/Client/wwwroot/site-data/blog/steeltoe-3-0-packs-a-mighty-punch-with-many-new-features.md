@@ -140,7 +140,7 @@ The Initializr project aims to solve a very common challenge in every organizati
 Not only does this save the developer from writing code to manage config server connections or health endpoints or any other essential of microservices, it also keeps their projects on the latest patched libraries.
 
 ---
-##### Learn more about Initilizr [now](https://steeltoe.io/initializr)
+##### Learn more about Initializr [now](https://steeltoe.io/initializr)
 ---
 
 When you review the available dependencies in Steeltoe’s hosted version of Initializr you are probably going to have the need to add your own custom dependencies or want to bring the whole tool in-house. That is one of Initializr’s super powers!
