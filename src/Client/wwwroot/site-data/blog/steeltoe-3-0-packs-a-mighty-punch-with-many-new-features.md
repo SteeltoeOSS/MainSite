@@ -46,11 +46,11 @@ public void ConfigureServices(IServiceCollection services) {
   services.AddRabbitTemplate(); // Add Rabbit template
   services.AddRabbitQueue(new Queue("myqueue")); // Add queue to be declared
 
-  // Add the rabbit listener which receives from “myqueue”
+  // Add the rabbit listener which receives from "myqueue"
   services.AddSingleton<MyListener>();
   services.AddRabbitListeners<MyListener>();
 
-  // Start a hosted service that sends a message to “myqueue”
+  // Start a hosted service that sends a message to "myqueue"
   services.AddSingleton<IHostedService, MySender>();
 
   ...
@@ -66,14 +66,14 @@ public class MySender : IHostedService {
   }
 }
 ```
-Receive messages from the queue named “myqueue”:
+Receive messages from the queue named "myqueue":
 ```csharp
 public class MyListener {
   ...
 
   [RabbitListener("myqueue")]
   public void Listen(MyCustomObject myObj){
-    logger.LogInformation($“Received something: {myObj.MyThing}”);
+    logger.LogInformation($"Received something: {myObj.MyThing}");
   }
 }
 ```
