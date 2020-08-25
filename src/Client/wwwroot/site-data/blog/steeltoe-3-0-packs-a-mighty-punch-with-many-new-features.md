@@ -38,19 +38,46 @@ To get started using Messaging ([here is a full example](https://github.com/Stee
   }
 }
 ```
-Then using dependency injection, send a message to the queue:
+And implement the Rabbit message container in `Startup.cs`:
 ```csharp
-public MyService(RabbitTemplate amqpTemplate, MyCustomObject myObj) {
-        amqpTemplate.ConvertAndSend("myqueue", myObj);
+public void ConfigureServices(IServiceCollection services) {
+  services.AddRabbitServices(); // Add core services
+  services.AddRabbitAdmin(); // Add Rabbit admin
+  services.AddRabbitTemplate(); // Add Rabbit template
+  services.AddRabbitQueue(new Queue("myqueue")); // Add queue to be declared
+
+  // Add the rabbit listener which receives from “myqueue”
+  services.AddSingleton<MyListener>();
+  services.AddRabbitListeners<MyListener>();
+
+  // Start a hosted service that sends a message to “myqueue”
+  services.AddSingleton<IHostedService, MySender>();
+
+  ...
 }
 ```
-Receive messages in a registered callback, managed by Steeltoe and the Rabbit broker:
+Then using dependency injection, obtain a RabbitTemplate and send a message to the queue:
 ```csharp
-[RabbitListener("myqueue")]
-public void Listen(MyCustomObject myObj){
-   logger.LogInformation($"Received something: {myObj.MyThing}");
+public class MySender : IHostedService {
+  ...
+
+  public MySender(RabbitTemplate amqpTemplate, MyCustomObject myObj) {
+    amqpTemplate.ConvertAndSend("myqueue", myObj);
+  }
 }
 ```
+Receive messages from the queue named “myqueue”:
+```csharp
+public class MyListener {
+  ...
+
+  [RabbitListener("myqueue")]
+  public void Listen(MyCustomObject myObj){
+    logger.LogInformation($“Received something: {myObj.MyThing}”);
+  }
+}
+```
+
 
 Once you’ve got the basics down, it’s time to extend and make the design better with things like custom factories. Steeltoe Messaging will take care of the conversion of a message into a structured type but sometimes you want to intercept that conversion and make decisions. You can create your own `DirectRabbitListenerContainer` and customize to your heart's content. Learn more about custom listener container factories [in the docs](https://dev.steeltoe.io/docs/3/messaging/rabbitmq-intro#basics).
 
