@@ -8,7 +8,7 @@ Running in the cloud means different things to different folks but at its heart,
 
 If you’re not familiar with the Steeltoe project, it is here to help your legacy .NET framework and new .NET Core run extremely well in the cloud. Steeltoe was started in 2015 as a means for .NET Framework applications to enjoy all that Spring Cloud has to offer. Service discovery, external configuration sources, message brokers, service connectors, management endpoints, and more. Over the years Steeltoe has followed Microsoft to .NET Core, but has arranged the project in a way that Framework apps can still be supported.
 
-How does Steeltoe make your .NET microservices better? It takes away the burden of managing all the “stuff” that makes up your service. And seasoned developers will tell you, most of the code in their applications has nothing to do with what the application was meant to do. Most of the code is supporting connections to other services, enhancing logs, abstracting 3rd party package lock-in, and generally conforming to the environment it will run within. It’s a necessary evil - without it the app is buggy and useless, but creating it doubles the time to production.
+How does Steeltoe make your .NET microservices better? It takes away the burden of managing all the "stuff" that makes up your service. And seasoned developers will tell you, most of the code in their applications has nothing to do with what the application was meant to do. Most of the code is supporting connections to other services, enhancing logs, abstracting 3rd party package lock-in, and generally conforming to the environment it will run within. It’s a necessary evil - without it the app is buggy and useless, but creating it doubles the time to production.
 
 Steeltoe makes things like production ready database connections a single line of code and some configuration values. It uses all the powerful abstractions like IConfiguration, ILogging, IHealthProvider, and others to deliver libraries that developers use to spend more time writing business logic and less time with boilerplate-type stuff. Just getting started with ASP.NET? Steeltoe will help you ease into all those possible configuration values. Looking to get in-depth and extend libraries to your needs? Steeltoe is based on common libraries that all .NET uses.
 
@@ -24,7 +24,7 @@ Let's take a look at the new things included in Steeltoe 3.0. If you’re still 
 
 You might know it as a few different things - eventing, event architecture, event message bus, pub/sub, etc. All of these patterns have one thing in common. They have a heavy dependency on a message broker and queue. That dependency adds extra emphasis on how your app handles its connection & communication to the queue. It needs to be resilient to change and not fail if the queue isn’t there, and it needs to conform to how the message container will be built - but still keep the intended data in-tact.
 
-To help developers use message based systems but not have to manage all the debt that typically comes along with such a thing, Steeltoe 3 introduces the new Messaging component. This component does all the work of resiliency, portability, and fault-tolerance. To implement it you provide the location of the message server and start reading & writing messages. Want to include a custom object in the message? Steeltoe Messaging will take care of converting the bytes. Should the queue be “ensured” when the application is starting up? Configure Steeltoe Messaging to create it, if nothing is present. Do you have potentially many instances of an application that all share the same queue? Steeltoe Messaging will handle everything appropriately for you.
+To help developers use message based systems but not have to manage all the debt that typically comes along with such a thing, Steeltoe 3 introduces the new Messaging component. This component does all the work of resiliency, portability, and fault-tolerance. To implement it you provide the location of the message server and start reading & writing messages. Want to include a custom object in the message? Steeltoe Messaging will take care of converting the bytes. Should the queue be "ensured" when the application is starting up? Configure Steeltoe Messaging to create it, if nothing is present. Do you have potentially many instances of an application that all share the same queue? Steeltoe Messaging will handle everything appropriately for you.
 
 To get started using Messaging ([here is a full example](https://github.com/SteeltoeOSS/Samples/tree/master/Messaging)), provide the server address in `appsettings.json`:
 
@@ -48,7 +48,7 @@ Receive messages in a registered callback, managed by Steeltoe and the Rabbit br
 ```csharp
 [RabbitListener("myqueue")]
 public void Listen(MyCustomObject myObj){
-   logger.LogInformation($“Received something: {myObj.MyThing}”);
+   logger.LogInformation($"Received something: {myObj.MyThing}");
 }
 ```
 
@@ -56,7 +56,7 @@ Once you’ve got the basics down, it’s time to extend and make the design bet
 
 ## Legacy and Modern together in the cloud
 
-While all the latest headlines may be around .NET Core, the reality is there is still quite a bit of .NET Framework in production. And the developers of those applications are probably getting pressure to “get that app in a container”. Or at least “reduce the app’s infrastructure”. Steeltoe’s roots are with .NET Framework and every feature in version 2.x fully supports Framework apps.
+While all the latest headlines may be around .NET Core, the reality is there is still quite a bit of .NET Framework in production. And the developers of those applications are probably getting pressure to "get that app in a container". Or at least "reduce the app’s infrastructure". Steeltoe’s roots are with .NET Framework and every feature in version 2.x fully supports Framework apps.
 
 Going forward the team may not bring every feature added in 3.x back to 2.x but they are actively maintaining the branch. Making sure things stay secure and have up to date patches. If the community shows a need for a certain feature to be back-ported, the Steeltoe team is ready and willing to listen.
 
@@ -81,7 +81,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
     .AddDiscoveryClient();
 ```
 
-Let's say the registered service was named “fortuneService”. To discover it in another application, add a new http client factory to the services collection.
+Let's say the registered service was named "fortuneService". To discover it in another application, add a new http client factory to the services collection.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services) {
@@ -96,7 +96,7 @@ public void ConfigureServices(IServiceCollection services) {
 }
 ```
 
-Now when an new request is created using the http client `var result = await _httpClient.GetStringAsync(“random”);` the full url of http://fortuneService/api/fortunes/random will be used and Kubernetes will resolve it for you.
+Now when an new request is created using the http client `var result = await _httpClient.GetStringAsync("random");` the full url of http://fortuneService/api/fortunes/random will be used and Kubernetes will resolve it for you.
 
 Kubernetes also has powerful built in features when it comes to getting configuration settings into an application. Combine that with the power of .NET Core’s configuration provider hierarchy and you have one heck of a cloud-native application.
 
@@ -118,7 +118,7 @@ We want to get the value of `someKey` into the application but don’t want to a
 public static IHostBuilder CreateHostBuilder(string[] args) =>
   Host.CreateDefaultBuilder(args)
     .ConfigureWebHostDefaults(webBuilder => {
-      webBuilder.UseStartup&lt;Startup>();
+      webBuilder.UseStartup<Startup>();
     })
     .AddKubernetesConfiguration();
 ```
@@ -181,7 +181,7 @@ Steeltoe 3.0 continues the management endpoints found in 2.x but takes things to
     public static IHostBuilder CreateHostBuilder(string[] args) =>
       Host.CreateDefaultBuilder(args)
         .ConfigureWebHostDefaults(webBuilder => {
-          webBuilder.UseStartup&lt;Startup>();
+          webBuilder.UseStartup<Startup>();
         })
         .AddDynamicLogging();
   ```
@@ -213,7 +213,7 @@ If you’ve been using Steeltoe for any amount of time you’ll notice a strong 
 
 In this new version, Steeltoe is spreading its cloud wings and showing strong support for all cloud platforms. In fact it doesn’t even need a cloud platform. You could run a .NET app with Steeltoe in IIS, or Visual Studio debugger, or as a container. The point is Steeltoe is a framework to help developers do what they love - coding. Not managing log messages or some database connection.
 
-Steeltoe still has much love for Cloud Foundry but you’re going to see a lot more local and “get it in a container” kind of examples from the team. A statement like ‘UseCloudFoundryActuators’ is going to have a complementing ‘UseAllActuators’, for those not on CF. And while VCAP is a huge help in Cloud Foundry, you may want to provide your own connection information through `appsettings.json`. You’ll see a lot more flexibility in that direction with this new version.
+Steeltoe still has much love for Cloud Foundry but you’re going to see a lot more local and "get it in a container" kind of examples from the team. A statement like ‘UseCloudFoundryActuators’ is going to have a complementing ‘UseAllActuators’, for those not on CF. And while VCAP is a huge help in Cloud Foundry, you may want to provide your own connection information through `appsettings.json`. You’ll see a lot more flexibility in that direction with this new version.
 
 Here are a few examples of new ways to implement things in the `HostBuilder`:
 
@@ -222,7 +222,7 @@ Here are a few examples of new ways to implement things in the `HostBuilder`:
   public static IHostBuilder CreateHostBuilder(string[] args) =>
     Host.CreateDefaultBuilder(args)
     	.ConfigureWebHostDefaults(webBuilder => {
-    		webBuilder.UseStartup&lt;Startup>();
+    		webBuilder.UseStartup<Startup>();
     	})
     	.AddHealthActuator();
     }
@@ -233,7 +233,7 @@ Here are a few examples of new ways to implement things in the `HostBuilder`:
   public static IHostBuilder CreateHostBuilder(string[] args) =>
     Host.CreateDefaultBuilder(args)
     	.ConfigureWebHostDefaults(webBuilder => {
-    		webBuilder.UseStartup&lt;Startup>();
+    		webBuilder.UseStartup<Startup>();
     	})
     	.AddAllActuators(/*endpoints => endpoints.RequireAuthorization("actuators.read")*/);
     }
@@ -244,7 +244,7 @@ Here are a few examples of new ways to implement things in the `HostBuilder`:
   public static IHostBuilder CreateHostBuilder(string[] args) =>
     Host.CreateDefaultBuilder(args)
     	.ConfigureWebHostDefaults(webBuilder => {
-    		webBuilder.UseStartup&lt;Startup>();
+    		webBuilder.UseStartup<Startup>();
     	})
     	.UseCloudHosting(5000)
     	.AddCloudFoundryActuators();
@@ -259,4 +259,4 @@ Want a complete runtime? Try [Pivotal Web Services](https://run.pivotal.io/) for
 
 Want to get deeper into creating cloud-native .NET apps? Attend the VMware Pivotal Labs’s [4 -day .NET developer course](https://pivotal.io/platform-acceleration-lab/pal-for-developers-net). You’ll get hands-on cloud-native .NET training learn best practices when creating microservices and become a Steeltoe ninja!
 
-We are also offering a hands-on “getting started” workshop this year at the [SpringOne](https://springone.io) conference. [Read more about the workshop and get signed up, space is limited!](https://springone.io/2020/workshops/steeltoe)
+We are also offering a hands-on "getting started" workshop this year at the [SpringOne](https://springone.io) conference. [Read more about the workshop and get signed up, space is limited!](https://springone.io/2020/workshops/steeltoe)
