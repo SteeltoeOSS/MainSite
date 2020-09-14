@@ -17,7 +17,6 @@
   </ItemGroup>
   
   <ItemGroup>
-    <ProjectReference Include="..\Blazored.Menu\Blazored.Menu.csproj" />
     <ProjectReference Include="..\Shared\Steeltoe.Shared.csproj" />
   </ItemGroup>
 
