@@ -1,0 +1,115 @@
+﻿@using System.Diagnostics
+@inject HttpClient Http
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+
+<PageTitle Title="@pageTitle" />
+
+@((MarkupString)Content)
+
+@code {
+	[Parameter]
+	public string Component { get; set; }
+	[Parameter]
+	public string Area { get; set; }
+	[Parameter]
+	public int Version { get; set; }
+
+	private string Content { get; set; }
+	public string pageTitle;
+
+	protected override Task OnInitializedAsync() {
+		NavigationManager.LocationChanged += LocationChanged;
+		fixNavChar();
+
+		return base.OnInitializedAsync();
+	}
+	protected override Task OnAfterRenderAsync(bool firstRender) {
+		if (firstRender) {
+			ParseUri();
+			UpdateContent();
+			ScrollToAnchor(forceScroll: true);
+		}
+
+		return base.OnAfterRenderAsync(firstRender);
+	}
+	private void LocationChanged(object sender, LocationChangedEventArgs e) {
+		//string navigationMethod = e.IsNavigationIntercepted ? "HTML" : "code";
+		//Debug.WriteLine($"Notified of navigation via {navigationMethod} to {e.Location}");
+
+		fixNavChar();
+
+		string fragment = NavigationManager.ToAbsoluteUri(e.Location).Fragment;
+		ParseUri();
+
+		if (string.IsNullOrEmpty(fragment)) {
+			UpdateContent();
+			StateHasChanged();
+		}
+
+		ScrollToAnchor(fragment);
+	}
+	private async void UpdateContent() {
+		pageTitle = parseTitleFromFileName(Component) + " Documentation";
+		var filePath = "site-data/docs/" + Version + "/" + Component + "/" + Area + ".html";
+		
+		try {
+			Content = await Http.GetStringAsync(filePath);
+			StateHasChanged();
+
+			await JSRuntime.InvokeVoidAsync("highlightCode", true);
+			StateHasChanged();
+		} catch (HttpRequestException http) {
+			if (http.Message.Contains("404")) {
+				NavigationManager.NavigateTo("/docs/" + Version + "/welcome/overview");
+				return;
+			}
+		}
+	}
+	private void ScrollToAnchor(string anchor = "", bool forceScroll = false) {
+		if (!string.IsNullOrEmpty(anchor) || forceScroll)
+			JSRuntime.InvokeAsync<string>("scrollToAnchor", anchor);
+	}
+	private void Dispose() {
+		NavigationManager.LocationChanged -= LocationChanged;
+	}
+	private void ParseUri() {
+		var path = NavigationManager.ToBaseRelativePath(NavigationManager.Uri);
+		string[] segments = path.Split(Char.Parse("/"));
+
+		if (segments.Length == 0)
+			return; //nothing to see here
+
+		if (segments.Length > 0 && string.IsNullOrEmpty(Component))
+			Component = segments[0];
+
+		if (segments.Length > 1 && string.IsNullOrEmpty(Area))
+			Area = segments[1];
+	}
+	private string parseTitleFromFileName(string fileName)
+		{
+		string str = fileName.Replace("-", " ");
+		string ret = "";
+		int idx = 0;
+		foreach (string s in str.Split(char.Parse(" ")))
+		{
+			int t;
+			if (idx == 0 && int.TryParse(s, out t)) //if the item has a position index, don't add to title
+				continue;
+
+			ret += Char.ToUpperInvariant(s[0]) + s.Substring(1).ToLower() + " ";
+			idx++;
+		}
+
+		return ret.Trim();
+	}
+	private void fixNavChar() {
+		//A fix for the misconfigured docs url
+		if(!string.IsNullOrEmpty(Component) && Component.IndexOf("-") > 0) {
+			int t;
+			if(int.TryParse(Component.Substring(0,Component.IndexOf("-")), out t)){
+				Component = Component.Substring(Component.IndexOf("-") + 1,Component.Length - Component.IndexOf("-")-1);
+			}
+		}
+	}
+}

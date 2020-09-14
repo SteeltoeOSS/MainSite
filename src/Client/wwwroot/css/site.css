@@ -373,7 +373,7 @@ border-left: 0;
 border-top: 0;
 border-radius: 0;
 padding: 15px;
-/*min-width: 150px;*/
+min-width: 150px;
 }
 .nav-item:first-child {
 box-shadow: -9px 0 18px -6px #eeeeee, 0 -9px 18px -6px #eeeeee;
@@ -397,15 +397,9 @@ color: #373737;
 .nav-tabs-body ol li:nth-child(even) {
  margin: 15px 0 15px 0;
 }
-.navbar-collapse {
-	padding-right: 15px;
-	padding-left: 15px;
-}
-.dropdown-item {
-	padding: .25rem 1.5rem !important;
-	display: block !important;
-	color: #0066cc;
-}
+/*.nav-tabs-body div {
+margin: 0 0 15px 0;
+}*/
 .getting-started-ordered-list ol li img {
 box-shadow: 0 0 19px 4px #eeeeee;
 margin: 20px 0 20px 0;

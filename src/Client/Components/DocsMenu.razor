@@ -1,0 +1,79 @@
+﻿@using System.Threading
+@using System.Diagnostics
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JSRuntime
+@inject INavMenu NavMenu
+
+@using Microsoft.AspNetCore.Components.Web
+@using Microsoft.AspNetCore.Components.Routing
+
+@if (menuItemsV2 == null && menuItemsV3 == null) {
+	<p>Loading...</p>
+} else {
+	@if (MenuBuilder == null) {
+		<p>Still Loading...</p>
+	} else {
+		<BlazoredMenu Css="" MenuBuilder="@MenuBuilder" />
+	}
+}
+
+@code {
+	[Parameter]
+	public string Component { get; set; }
+	[Parameter]
+	public string Area { get; set; }
+	[Parameter]
+	public int Version { get; set; }
+
+	private MenuBuilder MenuBuilder;
+	private MenuItem[] menuItemsV2;
+	private MenuItem[] menuItemsV3;
+	private MenuItem[] menuItems {
+		get {
+			switch (Version) {
+				case (2):
+					return menuItemsV2;
+				case (3):
+					return menuItemsV3;
+				default:
+					return null;
+			}
+		}
+	}
+
+	public PageTitle pageTitle;
+
+	protected override async Task OnInitializedAsync() {
+		menuItemsV2 = await NavMenu.GetMenuItemsAsync(2);
+		menuItemsV3 = await NavMenu.GetMenuItemsAsync(3);
+
+		NavigationManager.LocationChanged += LocationChanged;
+		RenderMenu(NavigationManager.Uri);
+
+		await base.OnInitializedAsync();
+	}
+	private void LocationChanged(object sender, LocationChangedEventArgs e) {
+		RenderMenu(e.Location);
+	}
+	private void RenderMenu(string location) {
+		if (menuItems == null) {
+			return;
+		}
+
+		List<MenuItem> finalItems = new List<MenuItem>();
+		foreach (MenuItem menuitem in menuItems) {
+			finalItems.Add(menuitem.Clone());
+
+			if (!location.Contains(menuitem.Link)) {
+				finalItems[finalItems.Count - 1].MenuItems = new List<MenuItem>();
+			}
+		}
+
+		MenuBuilder = new MenuBuilder(finalItems);
+		StateHasChanged();
+		return;
+	}
+	private void Dispose() {
+		NavigationManager.LocationChanged -= LocationChanged;
+	}
+}
