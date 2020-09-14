@@ -15,6 +15,7 @@ namespace Steeltoe.Client
 			builder.Services.AddBaseAddressHttpClient();
 			builder.Services.AddSingleton<ICalendarEvents, CalendarEvents>();
 			builder.Services.AddSingleton<IParseFromMarkdown, ParseFromMarkdown>();
+			builder.Services.AddSingleton<IDocsSite, DocsSite>();
 
 			await builder.Build().RunAsync();
 		}
