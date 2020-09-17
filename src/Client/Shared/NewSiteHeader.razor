@@ -1,0 +1,69 @@
+﻿@inject IDocsSite DocsSite
+
+<nav class="bg-white navbar navbar-expand-xl container py-xl-2">
+	<Href class="navbar-brand" href="/">
+	 <img id="logo" class="svg" src="/images/logo.svg" alt="Steeltoe" >
+	</Href>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbar">
+		<ul class=" navbar-nav text-center">
+			<li class="nav-item dropdown ml-xl-5 mr-xl-2">
+				<a class="nav-link dropdown-toggle open" href="# id="why" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Why Steeltoe
+				</a>
+				<div class="dropdown-menu" aria-labelledby="why">
+					<Href class="dropdown-item" href="/why-steeltoe">Overview</Href>
+					<Href class="dropdown-item" href="/microservices">Microservices</Href>
+					<Href class="dropdown-item" href="/cloud">Cloud</Href>
+					<Href class="dropdown-item" href="/web-application">Web Applications</Href>
+					<Href class="dropdown-item" href="/event-driven">Event Driven</Href>
+				</div>
+			</li>
+			<li class="nav-item dropdown mx-xl-2">
+				<a class="nav-link dropdown-toggle" href="#" id="learn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Learn
+				</a>
+				<div class="dropdown-menu" aria-labelledby="learn">
+					<Href class="dropdown-item" href="/get-started">Get Started</Href>
+					<Href class="dropdown-item" href="@DocsSite.DocsHome">Documentation</Href>
+					<Href class="dropdown-item" href="@DocsSite.BlogHome">Blog</Href>
+				</div>
+			</li>
+			<li class="nav-item dropdown mx-xl-2">
+				<a class="nav-link dropdown-toggle" href="#" id="projects" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Projects
+				</a>
+				<div class="dropdown-menu" aria-labelledby="projects">
+					<Href class="dropdown-item" href="/app-configuration">Steeltoe Application Configuration</Href>
+					<Href class="dropdown-item" href="/circuit-breakers">Steeltoe Circuit Breakers</Href>
+					<Href class="dropdown-item" href="/cloud-management">Steeltoe Distributed Tracing</Href>
+					<Href class="dropdown-item" href="/docs/logging">Steeltoe Dynamic Logging</Href>
+					<Href class="dropdown-item" href="/cloud-management">Steeltoe Management</Href>
+					<Href class="dropdown-item" href="/file-sharing">Steeltoe Network File Sharing</Href>
+					<Href class="dropdown-item" href="/security-providers">Steeltoe Security</Href>
+					<Href class="dropdown-item" href="/service-connectors">Steeltoe Service Connectors</Href>
+					<Href class="dropdown-item" href="/service-discovery">Steeltoe Service Discovery</Href>
+					<Href class="dropdown-item" href="/messaging">Steeltoe Messaging</Href>
+					<div class="small pl-4 pt-3">Developer Tools</div>
+					<Href class="dropdown-item pl-5" href="/initializr">Steeltoe Initializr</Href>
+				</div>
+			</li>
+			<li class="nav-item mx-xl-2">
+				<Href class="nav-link" href="/training">Training</Href>
+			</li>
+			<li class="nav-item mx-xl-2">
+				<Href class="nav-link" href="/support">Support</Href>
+			</li>
+			<li class="nav-item mx-xl-2">
+				<Href class="nav-link" href="/community">Community</Href>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+
+@code {
+
+}
