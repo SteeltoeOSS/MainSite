@@ -16,6 +16,7 @@ namespace Steeltoe.Client
 			builder.Services.AddSingleton<INavMenu, NavMenu>();
 			builder.Services.AddSingleton<ICalendarEvents, CalendarEvents>();
 			builder.Services.AddSingleton<IParseFromMarkdown, ParseFromMarkdown>();
+			builder.Services.AddSingleton<IDocsSite, DocsSite>();
 
 			await builder.Build().RunAsync();
 		}
