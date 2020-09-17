@@ -13,6 +13,7 @@ namespace Steeltoe.Client
 			builder.RootComponents.Add<App>("app");
 			
 			builder.Services.AddBaseAddressHttpClient();
+			builder.Services.AddSingleton<INavMenu, NavMenu>();
 			builder.Services.AddSingleton<ICalendarEvents, CalendarEvents>();
 			builder.Services.AddSingleton<IParseFromMarkdown, ParseFromMarkdown>();
 

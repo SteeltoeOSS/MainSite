@@ -76,10 +76,4 @@
 			_version = (value < 2 || value > 3 || value == 0 ? currentVersion : value);
 		}
 	}
-
-	protected async override Task OnParametersSetAsync(){
-		NavigationManager.NavigateTo($"{DocsSite.BaseAddress}/api/v{Version}/{Component}/{Area}.html",true);
-		await base.OnParametersSetAsync();
-		return;
-	}
 }
