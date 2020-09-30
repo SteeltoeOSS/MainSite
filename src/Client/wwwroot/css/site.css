@@ -365,23 +365,23 @@ margin: 10px 0 0 0;
 	display: unset;
 }
 .nav-item {
-background-color: white;
+/*background-color: white;
 box-shadow: 0 -9px 18px -6px #eeeeee;
 border-right: 1px solid #eeeeee;
 border-bottom: 1px solid #eeeeee;
 border-left: 0;
 border-top: 0;
-border-radius: 0;
+border-radius: 0;*/
 padding: 15px;
 /*min-width: 150px;*/
 }
-.nav-item:first-child {
+/*.nav-item:first-child {
 box-shadow: -9px 0 18px -6px #eeeeee, 0 -9px 18px -6px #eeeeee;
 }
 .nav-item:last-child {
 box-shadow: 9px 0 18px -6px #eeeeee, 0 -9px 18px -6px #eeeeee;
 border-right: 0;
-}
+}*/
 .nav-item.active {
  font-weight: bold;
  border-bottom: 0;

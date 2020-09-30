@@ -12,7 +12,7 @@ public class DocsSite : IDocsSite {
 	public DocsSite(IWebAssemblyHostEnvironment HostEnvironment) {
 		switch (HostEnvironment.Environment) {
 			case ("Development"):
-				_baseAddress = "http://localhost:8081";
+				_baseAddress = "http://localhost:8082";
 				break;
 			case ("Staging"):
 				_baseAddress = "https://docs-dev.steeltoe.io";
