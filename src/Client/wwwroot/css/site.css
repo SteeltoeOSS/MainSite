@@ -62,6 +62,11 @@ app {
 		max-width: 700px;
 	}
 }
+@media (max-width: 768px) {
+	.width-90, .width-80, .width-80, .width-75 , .width-70, .width-60, .width-55, .width-50 {
+		max-width: unset;
+	}
+}
 
 /*===================== BACKGROUND COLORS===================== */
 .bg-midnight-blue {
@@ -192,17 +197,18 @@ h4 {
 	font-style: normal;
 	font-weight: bold;
 }
-a {
+a, .navbar-light .navbar-nav .nav-link, .navbar-light .navbar-nav .show > .nav-link {
 	text-decoration: none;
 	color: #0066cc;
 }
 
 /* =====================FONT STYLING===================== */
-	.special-link {
-  font-style: normal;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #ffd700;
+.special-link {
+	font-style: normal;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #ffd700;
+	font-size: smaller;
 }
 .font-sm {
 	font-size: 90%;
