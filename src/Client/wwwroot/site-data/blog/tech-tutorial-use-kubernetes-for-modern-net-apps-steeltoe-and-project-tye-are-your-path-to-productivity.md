@@ -45,7 +45,9 @@ private readonly IConfiguration config;
 
 public WeatherForecastController(IConfiguration config){
     _config = config;
-    //_config[“my-setting”];
+    
+    //To reference a specific value
+    //_config["my-setting"];
 }
 ```
 
@@ -63,7 +65,7 @@ To implement the Steeltoe discovery client, add the `Steeltoe.Discovery.Kubernet
 
 ```csharp
 using Steeltoe.Discovery.Client;
-//--
+
 public static IHostBuilder CreateHostBuilder(string[] args) =>     Host.CreateDefaultBuilder(args)
     .ConfigureWebHostDefaults(webBuilder => {
         webBuilder.UseStartup<Startup>();
@@ -96,7 +98,9 @@ private readonly HttpClient _httpClient;
 
 public FortuneService(HttpClient httpClient, ILoggerFactory logFactory){
     _httpClient = httpClient;
-    //Fortune[] fortunes = await _httpClient.GetJsonAsync<Fortune>(“random-fortunes”);
+    
+    //To then call the service using provided HTTPclient
+    //Fortune[] fortunes = await _httpClient.GetJsonAsync<Fortune>("random-fortunes");
 }
 ```
 
