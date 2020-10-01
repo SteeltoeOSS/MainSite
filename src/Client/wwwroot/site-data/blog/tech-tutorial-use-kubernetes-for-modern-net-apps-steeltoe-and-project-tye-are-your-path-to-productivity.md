@@ -33,7 +33,7 @@ Further, configuration values come from different sources in different environme
 ```csharp
 public static IHostBuilder CreateHostBuilder(string[] args) =>     Host.CreateDefaultBuilder(args)
     .ConfigureWebHostDefaults(webBuilder => {
-        webBuilder.UseStartup&lt;Startup>();
+        webBuilder.UseStartup<Startup>();
       })
       .AddKubernetesConfiguration()
 ```
@@ -66,7 +66,7 @@ using Steeltoe.Discovery.Client;
 //--
 public static IHostBuilder CreateHostBuilder(string[] args) =>     Host.CreateDefaultBuilder(args)
     .ConfigureWebHostDefaults(webBuilder => {
-        webBuilder.UseStartup&lt;Startup>();
+        webBuilder.UseStartup<Startup>();
       })
       .AddDiscoveryClient()
 ```
@@ -85,7 +85,7 @@ public void ConfigureServices(IServiceCollection services) {
         c.BaseAddress = new Uri("http://fortuneService/api/fortunes/");
     })
     .AddServiceDiscovery()
-    .AddTypedClient&lt;IFortuneService, FortuneService>();
+    .AddTypedClient<IFortuneService, FortuneService>();
 }
 ```
 
@@ -96,7 +96,7 @@ private readonly HttpClient _httpClient;
 
 public FortuneService(HttpClient httpClient, ILoggerFactory logFactory){
     _httpClient = httpClient;
-    //Fortune[] fortunes = await _httpClient.GetJsonAsync&lt;Fortune>(“random-fortunes”);
+    //Fortune[] fortunes = await _httpClient.GetJsonAsync<Fortune>(“random-fortunes”);
 }
 ```
 
@@ -106,7 +106,7 @@ public FortuneService(HttpClient httpClient, ILoggerFactory logFactory){
 
 Any proper platform running containers is going to have a concept of health reporting. An application reports its heartbeat (usually as an HTTP endpoint) and is checked on some interval by its platform. If there are complications then the platform acts accordingly.
 
-In Kubernetes there are 2 deeper probes offered, named readiness and liveness. Readiness is about ensuring the application is ready to start receiving traffic. While liveness is about making sure the application is still healthy over time.
+In Kubernetes, there are two deeper probes offered named `readiness` and `liveness`. Readiness is about ensuring the application is ready to start receiving traffic. While liveness is about making sure the application is still healthy over time.
 
 Fortunately, Steeltoe is here to help set up both of these probes. Using new IHealthContributors and support for grouping, Steeltoe’s [health actuator endpoint](https://steeltoe.io/docs/3/management/health) builds several different views of the app’s dependencies.
 
