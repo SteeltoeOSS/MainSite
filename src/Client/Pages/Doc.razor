@@ -43,8 +43,8 @@ Redirecting to new docs site, please hold.
 			_version = (value < 2 || value > 3 || value == 0 ? currentVersion : value);
 		}
 	}
-
-	protected async override Task OnParametersSetAsync(){
+	
+	protected override void OnParametersSet(){
 		NavigationManager.NavigateTo($"{DocsSite.BaseAddress}/api/v{Version}/{Component}/{Area}.html",true);
 		return;
 	}
