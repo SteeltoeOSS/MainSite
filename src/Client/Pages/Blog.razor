@@ -4,21 +4,30 @@
 @page "/blog"
 @page "/blogs"
 @page "/blog/{ArticleName}"
+@page "/blog/{Area}/{ArticleName}"
 
 Redirecting to new docs site, please hold.
 
 @code {
-	private MarkupString html;
-	private string _articleName;
+	private string _area;
+	private string defaultArea = "";
 
 	[Parameter]
-	public string ArticleName {
-		get { return _articleName ?? "steeltoe-3-0-packs-a-mighty-punch-with-many-new-features"; }
-		set { _articleName = value; }
+	public string ArticleName { get;set; }
+
+	[Parameter]
+	public string Area {
+		get { return (_area ?? defaultArea); }
+		set { _area = value; }
 	}
 
-	protected async override Task OnParametersSetAsync(){
-		NavigationManager.NavigateTo($"{DocsSite.BaseAddress}/articles/{ArticleName}.html",true);
+	protected override void OnParametersSet(){
+		if(!string.IsNullOrEmpty(Area)){
+			NavigationManager.NavigateTo($"{DocsSite.BaseAddress}/articles/{Area}/{ArticleName}.html",false);
+			return;
+		}
+		
+		NavigationManager.NavigateTo($"{DocsSite.BaseAddress}/articles/{ArticleName}.html",false);
 		return;
 	}
 }
