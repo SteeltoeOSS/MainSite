@@ -46,7 +46,6 @@ Redirecting to new docs site, please hold.
 
 	protected async override Task OnParametersSetAsync(){
 		NavigationManager.NavigateTo($"{DocsSite.BaseAddress}/api/v{Version}/{Component}/{Area}.html",true);
-		await base.OnParametersSetAsync();
 		return;
 	}
 }
