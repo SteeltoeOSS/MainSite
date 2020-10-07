@@ -24,6 +24,6 @@ public class DocsSite : IDocsSite {
 		}
 	}
 	public string BaseAddress => _baseAddress;
-	public string DocsHome => $"{_baseAddress}/api/v3/welcome/whats-new.html";
+	public string DocsHome => $"{_baseAddress}/api/v3/welcome/overview.html";
 	public string BlogHome => $"{_baseAddress}/articles/index.html";
 }
