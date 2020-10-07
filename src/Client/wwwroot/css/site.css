@@ -152,6 +152,11 @@ app {
 .container {
 	padding: 0;
 }
+.dropdown-item.active, .dropdown-item:active {
+	color: #0066cc;
+	text-decoration: none;
+	background-color: #eeeeee;
+}
 
 /* =====================HTML ELEMENT OVERRIDE===================== */
 pre {
