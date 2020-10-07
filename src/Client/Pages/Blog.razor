@@ -1,0 +1,24 @@
+﻿@inject NavigationManager NavigationManager
+@inject IDocsSite DocsSite
+
+@page "/blog"
+@page "/blogs"
+@page "/blog/{ArticleName}"
+
+Redirecting to new docs site, please hold.
+
+@code {
+	private MarkupString html;
+	private string _articleName;
+
+	[Parameter]
+	public string ArticleName {
+		get { return _articleName ?? "steeltoe-3-0-packs-a-mighty-punch-with-many-new-features"; }
+		set { _articleName = value; }
+	}
+
+	protected async override Task OnParametersSetAsync(){
+		NavigationManager.NavigateTo($"{DocsSite.BaseAddress}/articles/{ArticleName}.html",true);
+		return;
+	}
+}
