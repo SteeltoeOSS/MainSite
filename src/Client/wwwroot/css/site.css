@@ -62,6 +62,11 @@ app {
 		max-width: 700px;
 	}
 }
+@media (max-width: 768px) {
+	.width-90, .width-80, .width-80, .width-75 , .width-70, .width-60, .width-55, .width-50 {
+		max-width: unset;
+	}
+}
 
 /*===================== BACKGROUND COLORS===================== */
 .bg-midnight-blue {
@@ -147,6 +152,11 @@ app {
 .container {
 	padding: 0;
 }
+.dropdown-item.active, .dropdown-item:active {
+	color: #0066cc;
+	text-decoration: none;
+	background-color: #eeeeee;
+}
 
 /* =====================HTML ELEMENT OVERRIDE===================== */
 pre {
@@ -192,17 +202,18 @@ h4 {
 	font-style: normal;
 	font-weight: bold;
 }
-a {
+a, .navbar-light .navbar-nav .nav-link, .navbar-light .navbar-nav .show > .nav-link {
 	text-decoration: none;
 	color: #0066cc;
 }
 
 /* =====================FONT STYLING===================== */
-	.special-link {
-  font-style: normal;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #ffd700;
+.special-link {
+	font-style: normal;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #ffd700;
+	font-size: smaller;
 }
 .font-sm {
 	font-size: 90%;
@@ -365,23 +376,23 @@ margin: 10px 0 0 0;
 	display: unset;
 }
 .nav-item {
-background-color: white;
+/*background-color: white;
 box-shadow: 0 -9px 18px -6px #eeeeee;
 border-right: 1px solid #eeeeee;
 border-bottom: 1px solid #eeeeee;
 border-left: 0;
 border-top: 0;
-border-radius: 0;
+border-radius: 0;*/
 padding: 15px;
-min-width: 150px;
+/*min-width: 150px;*/
 }
-.nav-item:first-child {
+/*.nav-item:first-child {
 box-shadow: -9px 0 18px -6px #eeeeee, 0 -9px 18px -6px #eeeeee;
 }
 .nav-item:last-child {
 box-shadow: 9px 0 18px -6px #eeeeee, 0 -9px 18px -6px #eeeeee;
 border-right: 0;
-}
+}*/
 .nav-item.active {
  font-weight: bold;
  border-bottom: 0;
@@ -397,9 +408,15 @@ color: #373737;
 .nav-tabs-body ol li:nth-child(even) {
  margin: 15px 0 15px 0;
 }
-/*.nav-tabs-body div {
-margin: 0 0 15px 0;
-}*/
+.navbar-collapse {
+	padding-right: 15px;
+	padding-left: 15px;
+}
+.dropdown-item {
+	padding: .25rem 1.5rem !important;
+	display: block !important;
+	color: #0066cc;
+}
 .getting-started-ordered-list ol li img {
 box-shadow: 0 0 19px 4px #eeeeee;
 margin: 20px 0 20px 0;

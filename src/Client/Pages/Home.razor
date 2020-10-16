@@ -2,6 +2,7 @@
 
 @page "/"
 @page "/index"
+@inject IDocsSite DocsSite
 
 <PageTitle Title="Home" />
 
@@ -18,12 +19,9 @@
 		</div>
 		<div class="row no-gutters mt-5">
 			<div class="col">
-				<Banner Href="/blog/tech-tutorial-use-kubernetes-for-modern-net-apps-steeltoe-and-project-tye-are-your-path-to-productivity" BannerTypeName="feature">
+				<Banner Href="@(DocsSite.BlogHome+"tech-tutorial-use-kubernetes-for-modern-net-apps-steeltoe-and-project-tye-are-your-path-to-productivity.html")" BannerTypeName="feature">
 					Learn more about Steeltoe 3.0 <span class="font-weight-bold">kubernetes features</span> and deploy with Tye &gt;
 				</Banner>
-				@*<Banner Href="https://springone.io" BannerTypeName="new">
-					Learn about Steeltoe 3.0 and get hands-on in the <span class="font-weight-bold">.NET workshops at SpringOne</span> &gt;
-				</Banner>*@
 			</div>
 		</div>
 	</div>

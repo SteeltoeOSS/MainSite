@@ -1,7 +1,5 @@
-@using System.IO
-@using System
-@using System.Diagnostics
 @inject NavigationManager NavigationManager
+@inject IDocsSite DocsSite
 
 @page "/doc"
 @page "/docs"
@@ -16,38 +14,7 @@
 @page "/docs/{Version:int}/{Component}"
 @page "/docs/{Version:int}/{Component}/{Area}"
 
-<div class="width-all">
-	<div class="width-90 container">
-		<div class="row docs-row no-gutters">
-			<div class="docs-nav-col">
-				<div class="row no-gutters">
-					<div class="col text-center nav-version @(Version == 2 ? "selected":"")">
-						@if(Version == 2) {
-							<span>Steeltoe v2</span>
-						} else {
-							<Href href="@("/docs/2/" + Component + "/" + Area)">Steeltoe v2</Href>
-						}
-					</div>
-					<div class="col text-center nav-version @(Version == 3 ? "selected":"")">
-						@if(Version == 3) {
-							<span title="Version 3">Steeltoe v3</span>
-						} else {
-							<Href href="@("/docs/3/" + Component + "/" + Area)">Steeltoe v3</Href>
-						}
-					</div>
-				</div>
-				<div class="row no-gutters">
-					<div class="col bg-white">
-						<DocsMenu Area="@(Area)" Component="@(Component)" Version="@(Version)" />
-					</div>
-				</div>
-			</div>
-			<div class="docs-content-col">
-				<Docs Area="@(Area)" Component="@(Component)" Version="@(Version)" />
-			</div>
-		</div>
-	</div>
-</div>
+Redirecting to new docs site, please hold.
 
 @code {
 	private string _area;
@@ -75,5 +42,10 @@
 		set {
 			_version = (value < 2 || value > 3 || value == 0 ? currentVersion : value);
 		}
+	}
+	
+	protected override void OnParametersSet(){
+		NavigationManager.NavigateTo($"{DocsSite.BaseAddress}/api/v{Version}/{Component}/{Area}.html",true);
+		return;
 	}
 }
