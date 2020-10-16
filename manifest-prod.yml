@@ -3,6 +3,8 @@ applications:
 - name: steeltoe-prod
   memory: 512M
   instances: 1
+  env:
+    ASPNETCORE_ENVIRONMENT: "Production"
   buildpacks:
     - https://github.com/cloudfoundry/dotnet-core-buildpack.git#v2.3.1
   routes:
