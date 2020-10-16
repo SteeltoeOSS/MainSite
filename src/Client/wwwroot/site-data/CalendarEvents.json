@@ -1,9 +1,15 @@
 [
 	{
+		"date": "<span>october</span> 1 2020",
+		"title": "Use Kubernetes for Modern .NET Apps with Steeltoe and Tye",
+		"description": "Learn about new Kubernetes features included in Steeltoe 3.0 and use Tye to help develop for K8s.",
+		"url": "https://docs.steeltoe.io/articles/tech-tutorial-use-kubernetes-for-modern-net-apps-steeltoe-and-project-tye-are-your-path-to-productivity.html"
+	},
+	{
 		"date": "<span>august</span> 24 2020",
 		"title": "Steeltoe 3.0 is officially available",
 		"description": "Version 3.0 is packed with messaging, kubernetes support, new ways to implement endpoints, and so much more.",
-		"url": "https://github.com/SteeltoeOSS/steeltoe/blob/master/roadmaps/3.0.0.md"
+		"url": "https://docs.steeltoe.io/articles/releases/steeltoe-3-0-packs-a-mighty-punch-with-many-new-features.html"
 	},
 	{
 		"date": "<span>august</span> 10 2020",
