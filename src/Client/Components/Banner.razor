@@ -1,5 +1,5 @@
 ﻿<div class="rounded-pill banner">
-	<Href href="@Href" NewWindow="true">
+	<Href href="@Href" NewWindow="@NewWindow">
 		<div class="row no-gutters align-items-center">
 			<div class="col-2" style="margin: .7% 3% .7% 5%;max-width: 11%;">
 				<div class="sign rounded-pill special-link">
@@ -22,4 +22,7 @@
 
 	[Parameter]
 	public string BannerTypeName { get; set; } = "event";
+	
+	[Parameter]
+	public bool NewWindow { get; set; } = true;
 }

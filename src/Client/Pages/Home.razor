@@ -2,6 +2,7 @@
 
 @page "/"
 @page "/index"
+@inject IDocsSite DocsSite
 
 <PageTitle Title="Home" />
 
@@ -18,12 +19,9 @@
 		</div>
 		<div class="row no-gutters mt-5">
 			<div class="col">
-				<Banner Href="/blog/steeltoe-3-0-packs-a-mighty-punch-with-many-new-features" BannerTypeName="version">
-					It's official <span class="font-weight-bold">Steeltoe 3.0 is available.</span> Learn more and get started now &gt;
+				<Banner Href="@(DocsSite.BlogHome+"tech-tutorial-use-kubernetes-for-modern-net-apps-steeltoe-and-project-tye-are-your-path-to-productivity.html")" BannerTypeName="feature">
+					Learn more about Steeltoe 3.0 <span class="font-weight-bold">kubernetes features</span> and deploy with Tye &gt;
 				</Banner>
-				@*<Banner Href="https://springone.io" BannerTypeName="new">
-					Learn about Steeltoe 3.0 and get hands-on in the <span class="font-weight-bold">.NET workshops at SpringOne</span> &gt;
-				</Banner>*@
 			</div>
 		</div>
 	</div>
@@ -64,7 +62,7 @@
 	<div class="width-90 container py-5">
 		<div class="row no-gutters text-center mt-3">
 			<div class="col stat">
-				Steeltoe has been downloaded over <span class="number">12 million</span> times on NuGet!
+				Steeltoe has been downloaded over <span class="number">13 million</span> times on NuGet!
 			</div>
 		</div>
 	</div>
