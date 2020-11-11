@@ -178,10 +178,10 @@ code.powershell:before {
 code {
 	tab-size: 2;
 }
-ol {
+/*ol {
 	margin: 0;
 	padding: 0;
-}
+}*/
 h1 {
 	font-style: normal;
 	font-weight: bold;
