@@ -1,5 +1,11 @@
 [
 	{
+		"date": "<span>november</span> 17 2020",
+		"title": "Writing Event Based Microservices using Steeltoe",
+		"description": "In this session see how to create message based microservices using Steeltoe.",
+		"url": "https://docs.steeltoe.io/articles/writing-event-based-microservices-using-steeltoe.html"
+	},
+	{
 		"date": "<span>october</span> 1 2020",
 		"title": "Use Kubernetes for Modern .NET Apps with Steeltoe and Tye",
 		"description": "Learn about new Kubernetes features included in Steeltoe 3.0 and use Tye to help develop for K8s.",
@@ -27,12 +33,6 @@
 		"date": "<span>july</span> 14 2020",
 		"title": "Steeltoe 3.0.0-m3 is available",
 		"description": "The third milestone of Steeltoe 3.0 has been reached! With a focus on .NET Core, this new major version will offer message streaming, the Initializr project, and more.",
-		"url": "https://github.com/SteeltoeOSS/steeltoe/blob/master/roadmaps/3.0.0.md"
-	},
-	{
-		"date": "<span>april</span> 9 2020",
-		"title": "Steeltoe 3.0.0-m2 is available",
-		"description": "The second milestone of Steeltoe 3.0 has been reached! With a focus on .NET Core, this new major version will offer message streaming, the Initializr project, and more.",
 		"url": "https://github.com/SteeltoeOSS/steeltoe/blob/master/roadmaps/3.0.0.md"
 	}
 ] 
