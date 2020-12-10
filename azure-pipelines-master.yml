@@ -21,15 +21,15 @@ steps:
   inputs:
     SourceFolder: './publish'
     Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/publish'
     CleanTargetFolder: true
 
-- script: cp "manifest-staging.yml" "$(Build.ArtifactStagingDirectory)/manifest-staging.yml"
-  displayName: "Copy staging manifest"
-
-- script: cp "manifest-prod.yml" "$(Build.ArtifactStagingDirectory)/manifest-prod.yml"
-  displayName: "Copy prod manifest"
-
+- powershell: cp "Dockerfile" "$(Build.ArtifactStagingDirectory)/Dockerfile"
+  displayName: "Copy Dockerfile"
+  
+- powershell: cp "deployment-master.yaml" "$(Build.ArtifactStagingDirectory)/deployment.yaml"
+  displayName: "Copy kubernetes manifest"
+  
 - task: PublishBuildArtifacts@1
   displayName: "Upload Artifacts"
   inputs:

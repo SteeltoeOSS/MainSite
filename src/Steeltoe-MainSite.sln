@@ -3,9 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29209.152
 MinimumVisualStudioVersion = 10.0.40219.1
-
-
-
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Client", "Client\Steeltoe.Client.csproj", "{52B7F368-0A7D-44A1-986A-A187B42ED2FA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Shared", "Shared\Steeltoe.Shared.csproj", "{26C7B9E2-A804-409E-9716-FF6AF0B6AE7B}"
@@ -14,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Steeltoe.Server", "Server\S
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{96418E41-4D12-4743-958D-42C677EB9DA8}"
 	ProjectSection(SolutionItems) = preProject
-		..\azure-pipelines.yml = ..\azure-pipelines.yml
-		..\manifest-prod.yml = ..\manifest-prod.yml
-		..\manifest-staging.yml = ..\manifest-staging.yml
+		..\azure-pipelines-dev.yml = ..\azure-pipelines-dev.yml
+		..\azure-pipelines-master.yml = ..\azure-pipelines-master.yml
+		..\deployment-dev.yaml = ..\deployment-dev.yaml
+		..\deployment-master.yaml = ..\deployment-master.yaml
+		..\Dockerfile = ..\Dockerfile
 		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
@@ -52,22 +51,6 @@ Global
 		{DE1BFD0E-403F-4448-B7D9-EE2210473AFB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DE1BFD0E-403F-4448-B7D9-EE2210473AFB}.Release|x64.ActiveCfg = Release|Any CPU
 		{DE1BFD0E-403F-4448-B7D9-EE2210473AFB}.Release|x64.Build.0 = Release|Any CPU
-		{8B70E4FE-6B58-45C0-829A-C8E2467FB817}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8B70E4FE-6B58-45C0-829A-C8E2467FB817}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8B70E4FE-6B58-45C0-829A-C8E2467FB817}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{8B70E4FE-6B58-45C0-829A-C8E2467FB817}.Debug|x64.Build.0 = Debug|Any CPU
-		{8B70E4FE-6B58-45C0-829A-C8E2467FB817}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8B70E4FE-6B58-45C0-829A-C8E2467FB817}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8B70E4FE-6B58-45C0-829A-C8E2467FB817}.Release|x64.ActiveCfg = Release|Any CPU
-		{8B70E4FE-6B58-45C0-829A-C8E2467FB817}.Release|x64.Build.0 = Release|Any CPU
-		{752CBCBC-26ED-4446-B626-893B4BC6152A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{752CBCBC-26ED-4446-B626-893B4BC6152A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{752CBCBC-26ED-4446-B626-893B4BC6152A}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{752CBCBC-26ED-4446-B626-893B4BC6152A}.Debug|x64.Build.0 = Debug|Any CPU
-		{752CBCBC-26ED-4446-B626-893B4BC6152A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{752CBCBC-26ED-4446-B626-893B4BC6152A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{752CBCBC-26ED-4446-B626-893B4BC6152A}.Release|x64.ActiveCfg = Release|Any CPU
-		{752CBCBC-26ED-4446-B626-893B4BC6152A}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
