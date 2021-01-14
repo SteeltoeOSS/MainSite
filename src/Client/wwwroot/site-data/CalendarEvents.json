@@ -22,17 +22,5 @@
 		"title": "Steeltoe 3.0 is officially available",
 		"description": "Version 3.0 is packed with messaging, kubernetes support, new ways to implement endpoints, and so much more.",
 		"url": "https://docs.steeltoe.io/articles/releases/steeltoe-3-0-packs-a-mighty-punch-with-many-new-features.html"
-	},
-	{
-		"date": "<span>august</span> 10 2020",
-		"title": "Steeltoe 3.0.0-rc1 is now available.",
-		"description": "This release candidate marks the final developer preview of Steeltoe 3.0. Next stop is the official public release!",
-		"url": "https://github.com/SteeltoeOSS/steeltoe/blob/master/roadmaps/3.0.0.md"
-	},
-	{
-		"date": "<span>july</span> 14 2020",
-		"title": "SpringOne is just around the corner, get your free pass today.",
-		"description": "The conference will be held virtually September 2-3. Don't miss Steeltoe's session about all things 3.0 as well as the .NET hands-on workshops.",
-		"url": "https://springone.io"
 	}
 ] 
