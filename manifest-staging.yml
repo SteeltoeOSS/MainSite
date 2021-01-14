@@ -1,9 +1,0 @@
----
-applications:
-- name: steeltoe-staging
-  memory: 512M
-  instances: 1
-  env:
-    ASPNETCORE_ENVIRONMENT: "Staging"
-  buildpacks:
-    - https://github.com/cloudfoundry/dotnet-core-buildpack.git#v2.3.1
