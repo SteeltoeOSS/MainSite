@@ -10,11 +10,6 @@ trigger:
     include:
       - master
       - main
-  paths:
-    exclude:
-    - *.yml
-    - *.yaml
-    - *.md
 
 steps:
 # ASP.NET Core

@@ -9,11 +9,6 @@ trigger:
   branches:
     include:
       - dev
-  paths:
-    exclude:
-    - *.yml
-    - *.yaml
-    - *.md
 
 steps:
 # ASP.NET Core
