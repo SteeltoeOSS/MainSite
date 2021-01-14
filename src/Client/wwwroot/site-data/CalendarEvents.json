@@ -1,5 +1,11 @@
 [
 	{
+		"date": "<span>january</span> 14 2021",
+		"title": "Create .NET Microservice Projects Automatically with Steeltoe Initializr",
+		"description": "Get started using Initializr and get to production faster!",
+		"url": "https://docs.steeltoe.io/articles/create-dotnet-microservice-projects-automatically-with-steeltoe-initializr.html"
+	},
+	{
 		"date": "<span>november</span> 17 2020",
 		"title": "Writing Event Based Microservices using Steeltoe",
 		"description": "In this session see how to create message based microservices using Steeltoe.",
@@ -28,11 +34,5 @@
 		"title": "SpringOne is just around the corner, get your free pass today.",
 		"description": "The conference will be held virtually September 2-3. Don't miss Steeltoe's session about all things 3.0 as well as the .NET hands-on workshops.",
 		"url": "https://springone.io"
-	},
-	{
-		"date": "<span>july</span> 14 2020",
-		"title": "Steeltoe 3.0.0-m3 is available",
-		"description": "The third milestone of Steeltoe 3.0 has been reached! With a focus on .NET Core, this new major version will offer message streaming, the Initializr project, and more.",
-		"url": "https://github.com/SteeltoeOSS/steeltoe/blob/master/roadmaps/3.0.0.md"
 	}
 ] 
