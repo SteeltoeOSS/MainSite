@@ -24,7 +24,7 @@ public class DocsSite : IDocsSite {
 				break;
 		}
 	}
-	public string ApiBrowserHome => $"{_baseAddress}/api/browser/v3/discovery/Steeltoe.Discovery.html";
+	public string ApiBrowserHome => $"{_baseAddress}/api/browser/v3/all/Steeltoe.CircuitBreaker.html";
 	public string BaseAddress => _baseAddress;
 	public string BlogHome => $"{_baseAddress}/articles/";
 	public string DocsHome => $"{_baseAddress}/api/v3/welcome/";
