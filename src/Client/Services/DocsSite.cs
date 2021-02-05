@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 public interface IDocsSite {
+	string ApiBrowserHome { get; }
 	string BaseAddress { get; }
 	string BlogHome { get; }
 	string DocsHome { get; }
@@ -23,7 +24,8 @@ public class DocsSite : IDocsSite {
 				break;
 		}
 	}
+	public string ApiBrowserHome => $"{_baseAddress}/api/browser/v3/discovery/Steeltoe.Discovery.html";
 	public string BaseAddress => _baseAddress;
-	public string DocsHome => $"{_baseAddress}/api/v3/welcome/";
 	public string BlogHome => $"{_baseAddress}/articles/";
+	public string DocsHome => $"{_baseAddress}/api/v3/welcome/";
 }
