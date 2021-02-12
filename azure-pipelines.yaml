@@ -31,10 +31,10 @@ steps:
 
 - powershell: cp "Dockerfile" "$(Build.ArtifactStagingDirectory)/Dockerfile"
   displayName: "Copy Dockerfile"
-  
+
 - powershell: cp "deployment-dev.yaml" "$(Build.ArtifactStagingDirectory)/deployment.yaml"
   displayName: "Copy kubernetes manifest"
-  
+
 - task: PublishBuildArtifacts@1
   displayName: "Upload Artifacts"
   inputs:
