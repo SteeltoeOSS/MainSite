@@ -32,7 +32,7 @@ steps:
 - powershell: cp "Dockerfile" "$(Build.ArtifactStagingDirectory)/Dockerfile"
   displayName: "Copy Dockerfile"
 
-- powershell: cp -r "deploy/kubernetes" "$(Build.ArtifactstagingDirectory)"
+- powershell: cp -r "deploy/kubernetes" "$(Build.ArtifactStagingDirectory)"
   displayName: "Copy kubernetes manifests"
 
 - task: PublishBuildArtifacts@1
