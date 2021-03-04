@@ -8,7 +8,7 @@ pool:
 trigger:
   branches:
     include:
-      - dev
+      - main
 
 steps:
 # ASP.NET Core
