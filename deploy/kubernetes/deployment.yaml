@@ -19,9 +19,6 @@ spec:
       containers:
         - name: main-site
           image: steeltoe.azurecr.io/main-site
-          env:
-          - name: ASPNETCORE_ENVIRONMENT
-            value: "Staging"
           resources:
             limits:
               memory: "128Mi"
