@@ -38,7 +38,7 @@ steps:
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)/kubernetes'
     CleanTargetFolder: true
-  displayName: "Stage Kubernetes"
+  displayName: "Stage Kubernetes Manifest"
 
 - task: PublishBuildArtifacts@1
   inputs:
