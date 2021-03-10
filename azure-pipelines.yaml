@@ -22,18 +22,23 @@ steps:
   displayName: 'dotnet publish project'
 
 - task: CopyFiles@2
-  displayName: "Copy publish result to staging"
   inputs:
     SourceFolder: './publish'
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)/publish'
     CleanTargetFolder: true
+  displayName: "Stage Project"
 
 - powershell: cp "Dockerfile" "$(Build.ArtifactStagingDirectory)/Dockerfile"
-  displayName: "Copy Dockerfile"
+  displayName: "Stage Dockerfile"
 
-- powershell: cp -r "deploy/kubernetes" "$(Build.ArtifactStagingDirectory)"
-  displayName: "Copy kubernetes manifests"
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: './deploy/kubernetes'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/kubernetes'
+    CleanTargetFolder: true
+  displayName: "Stage Kubernetes"
 
 - task: PublishBuildArtifacts@1
   displayName: "Upload Artifacts"
