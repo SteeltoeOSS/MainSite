@@ -13,31 +13,44 @@ trigger:
 steps:
 # ASP.NET Core
 - task: UseDotNet@2
-  displayName: "Install .NET Core 3.1.x"
   inputs:
     packageType: 'sdk'
     version: '3.1.x'
+  displayName: "Install .NET SDK 3.1.x"
 
 - script: dotnet publish './src/Server/Steeltoe.Server.csproj' --output './publish' --configuration Release --framework netcoreapp3.1 --runtime linux-x64 --self-contained
-  displayName: 'dotnet publish project'
+  displayName: 'Publish Project'
 
 - task: CopyFiles@2
-  displayName: "Copy publish result to staging"
   inputs:
     SourceFolder: './publish'
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)/publish'
     CleanTargetFolder: true
+  condition:
+          and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')))
+  displayName: "Stage Project"
 
 - powershell: cp "Dockerfile" "$(Build.ArtifactStagingDirectory)/Dockerfile"
-  displayName: "Copy Dockerfile"
+  condition:
+          and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')))
+  displayName: "Stage Dockerfile"
 
-- powershell: cp -r "deploy/kubernetes" "$(Build.ArtifactStagingDirectory)"
-  displayName: "Copy kubernetes manifests"
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: './deploy/kubernetes'
+    Contents: '**'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/kubernetes'
+    CleanTargetFolder: true
+  condition:
+          and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')))
+  displayName: "Stage Kubernetes Manifest"
 
 - task: PublishBuildArtifacts@1
-  displayName: "Upload Artifacts"
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+  condition:
+          and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')))
+  displayName: "Upload Staging Artifacts"
