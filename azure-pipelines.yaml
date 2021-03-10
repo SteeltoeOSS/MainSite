@@ -27,6 +27,8 @@ steps:
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)/publish'
     CleanTargetFolder: true
+  condition:
+          and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')))
   displayName: "Stage Project"
 
 - powershell: cp "Dockerfile" "$(Build.ArtifactStagingDirectory)/Dockerfile"
@@ -38,6 +40,8 @@ steps:
     Contents: '**'
     TargetFolder: '$(Build.ArtifactStagingDirectory)/kubernetes'
     CleanTargetFolder: true
+  condition:
+          and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')))
   displayName: "Stage Kubernetes Manifest"
 
 - task: PublishBuildArtifacts@1
@@ -45,4 +49,6 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+  condition:
+          and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')))
   displayName: "Upload Staging"
