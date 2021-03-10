@@ -13,13 +13,13 @@ trigger:
 steps:
 # ASP.NET Core
 - task: UseDotNet@2
-  displayName: "Install .NET Core 3.1.x"
   inputs:
     packageType: 'sdk'
     version: '3.1.x'
+  displayName: "Install .NET SDK 3.1.x"
 
 - script: dotnet publish './src/Server/Steeltoe.Server.csproj' --output './publish' --configuration Release --framework netcoreapp3.1 --runtime linux-x64 --self-contained
-  displayName: 'dotnet publish project'
+  displayName: 'Publish Project'
 
 - task: CopyFiles@2
   inputs:
@@ -41,8 +41,8 @@ steps:
   displayName: "Stage Kubernetes"
 
 - task: PublishBuildArtifacts@1
-  displayName: "Upload Artifacts"
   inputs:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+  displayName: "Upload Staging"
