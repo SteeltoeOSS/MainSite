@@ -1,56 +1,54 @@
-# ASP.NET Core
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-pool:
-  vmImage: 'ubuntu-latest'
-
 trigger:
   branches:
     include:
       - dev
 
-steps:
-# ASP.NET Core
-- task: UseDotNet@2
-  inputs:
-    packageType: 'sdk'
-    version: '3.1.x'
-  displayName: "Install .NET SDK 3.1.x"
-
-- script: dotnet publish './src/Server/Steeltoe.Server.csproj' --output './publish' --configuration Release --framework netcoreapp3.1 --runtime linux-x64 --self-contained
-  displayName: 'Publish Project'
-
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: './publish'
-    Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)/publish'
-    CleanTargetFolder: true
-  condition:
-          and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')))
-  displayName: "Stage Project"
-
-- powershell: cp "Dockerfile" "$(Build.ArtifactStagingDirectory)/Dockerfile"
-  condition:
-          and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')))
-  displayName: "Stage Dockerfile"
-
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: './deploy/kubernetes'
-    Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)/kubernetes'
-    CleanTargetFolder: true
-  condition:
-          and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')))
-  displayName: "Stage Kubernetes Manifest"
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
-  condition:
-          and(succeeded(), not(eq(variables['build.reason'], 'PullRequest')))
-  displayName: "Upload Staging Artifacts"
+stages:
+  - stage: assemble
+    displayName: Assemble
+    jobs:
+      - job: build
+        displayName: Build
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+          - task: UseDotNet@2
+            inputs:
+              packageType: 'sdk'
+              version: '3.1.x'
+            displayName: "Install .NET SDK 3.1.x"
+          - script: dotnet publish './src/Server/Steeltoe.Server.csproj' --output './publish' --configuration Release --framework netcoreapp3.1 --runtime linux-x64 --self-contained
+            displayName: 'dotnet publish'
+  - stage: deploy
+    displayName: Deploy
+    dependsOn: assemble
+    condition:
+      not(eq(variables['build.reason'], 'PullRequest'))
+    jobs:
+      - job: deployToStaging
+        displayName: Deploy to Staging
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+          - task: CopyFiles@2
+            displayName: "Stage Project"
+            inputs:
+              SourceFolder: './publish'
+              Contents: '**'
+              TargetFolder: '$(Build.ArtifactStagingDirectory)/publish'
+              CleanTargetFolder: true
+          - powershell: cp "Dockerfile" "$(Build.ArtifactStagingDirectory)/Dockerfile"
+            displayName: "Stage Dockerfile"
+          - task: CopyFiles@2
+            displayName: "Stage Kubernetes Manifest"
+            inputs:
+              SourceFolder: './deploy/kubernetes'
+              Contents: '**'
+              TargetFolder: '$(Build.ArtifactStagingDirectory)/kubernetes'
+              CleanTargetFolder: true
+          - task: PublishBuildArtifacts@1
+            displayName: Deploy to Staging Cluster
+            inputs:
+              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+              ArtifactName: 'drop'
+              publishLocation: 'Container'
