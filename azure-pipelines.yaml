@@ -19,6 +19,9 @@ stages:
             displayName: "Install .NET SDK 3.1.x"
           - script: dotnet publish './src/Server/Steeltoe.Server.csproj' --output './publish' --configuration Release --framework netcoreapp3.1 --runtime linux-x64 --self-contained
             displayName: 'dotnet publish'
+          - publish: './publish'
+            displayName: 'Publish Server'
+            artifact: server
   - stage: deploy
     displayName: Deploy
     dependsOn: assemble
@@ -30,10 +33,12 @@ stages:
         pool:
           vmImage: ubuntu-latest
         steps:
+          - downloads: current
+            artifact: server
           - task: CopyFiles@2
             displayName: "Stage Project"
             inputs:
-              SourceFolder: './publish'
+              SourceFolder: './server/publish'
               Contents: '**'
               TargetFolder: '$(Build.ArtifactStagingDirectory)/publish'
               CleanTargetFolder: true
