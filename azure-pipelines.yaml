@@ -38,7 +38,7 @@ stages:
           - task: CopyFiles@2
             displayName: "Stage Project"
             inputs:
-              SourceFolder: './server'
+              SourceFolder: '$(Pipeline.Workspace)/server/publish'
               Contents: '**'
               TargetFolder: '$(Build.ArtifactStagingDirectory)/publish'
               CleanTargetFolder: true
