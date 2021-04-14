@@ -63,7 +63,7 @@ stages:
             displayName: Copy Kubernetes Manifest
             inputs:
               SourceFolder: ./deploy/kubernetes
-              Contents: **
+              Contents: '**'
               TargetFolder: $(Build.ArtifactStagingDirectory)/kubernetes
               CleanTargetFolder: true
           - task: PublishBuildArtifacts@1
