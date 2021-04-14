@@ -60,14 +60,14 @@ stages:
                 $(Build.BuildId)
                 latest
           - task: CopyFiles@2
-            displayName: "Copy Kubernetes Manifest"
+            displayName: Copy Kubernetes Manifest
             inputs:
-              SourceFolder: './deploy/kubernetes'
-              Contents: '**'
-              TargetFolder: '$(Build.ArtifactStagingDirectory)/kubernetes'
+              SourceFolder: ./deploy/kubernetes
+              Contents: **
+              TargetFolder: $(Build.ArtifactStagingDirectory)/kubernetes
               CleanTargetFolder: true
           - task: PublishBuildArtifacts@1
             displayName: Stage for Release
             inputs:
-              PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-              publishLocation: 'Container'
+              PathtoPublish: $(Build.ArtifactStagingDirectory)
+              publishLocation: Container
