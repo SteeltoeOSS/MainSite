@@ -12,48 +12,56 @@ stages:
         pool:
           vmImage: ubuntu-latest
         steps:
-          - task: UseDotNet@2
+          - task: Docker@2
+            displayName: Build Docker Image
             inputs:
-              packageType: 'sdk'
-              version: '3.1.x'
-            displayName: "Install .NET SDK 3.1.x"
-          - script: dotnet publish './src/Server/Steeltoe.Server.csproj' --output './publish' --configuration Release --framework netcoreapp3.1 --runtime linux-x64 --self-contained
-            displayName: 'dotnet publish'
-          - publish: './publish'
-            displayName: 'Publish Server'
-            artifact: server
+              command: build
+              repository: main-site
+              tags: |
+                $(Build.BuildId)
+          - task: Docker@2
+            displayName: Save Docker Image
+            inputs:
+              command: save
+              arguments: main-site:$(Build.BuildId) -o $(Build.ArtifactStagingDirectory)/main-site.$(Build.BuildId).tar
+          - publish: $(Build.ArtifactStagingDirectory)
+            artifact: docker-image
   - stage: deploy
     displayName: Deploy
     dependsOn: assemble
     condition:
       not(eq(variables['build.reason'], 'PullRequest'))
     jobs:
-      - job: deployToStaging
-        displayName: Deploy to Staging
+      - job: deploy
+        displayName: Deploy
         pool:
           vmImage: ubuntu-latest
         steps:
           - download: current
-            artifact: server
-          - task: CopyFiles@2
-            displayName: "Stage Project"
+            artifact: docker-image
+          - task: Docker@2
+            displayName: Load Docker Image
             inputs:
-              SourceFolder: '$(Pipeline.Workspace)/server'
-              Contents: '**'
-              TargetFolder: '$(Build.ArtifactStagingDirectory)/publish'
-              CleanTargetFolder: true
-          - powershell: cp "Dockerfile" "$(Build.ArtifactStagingDirectory)/Dockerfile"
-            displayName: "Stage Dockerfile"
+              command: load
+              arguments: $(Pipeline.Workspace)/docker-image/main-site.$(Build.BuildId).tar
+          - task: Docker@2
+            displayName: Push Docker Image
+            inputs:
+              command: push
+              containerRegistry: SteeltoeContainerRegistry
+              repository: main-site
+              tags: |
+                $(Build.BuildId)
+                latest
           - task: CopyFiles@2
-            displayName: "Stage Kubernetes Manifest"
+            displayName: "Copy Kubernetes Manifest"
             inputs:
               SourceFolder: './deploy/kubernetes'
               Contents: '**'
               TargetFolder: '$(Build.ArtifactStagingDirectory)/kubernetes'
               CleanTargetFolder: true
           - task: PublishBuildArtifacts@1
-            displayName: Deploy to Staging Cluster
+            displayName: Stage for Release
             inputs:
               PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-              ArtifactName: 'drop'
               publishLocation: 'Container'
