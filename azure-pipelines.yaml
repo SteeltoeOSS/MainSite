@@ -43,7 +43,7 @@ stages:
             displayName: Load Docker Image
             inputs:
               command: load
-              arguments: $(Pipeline.Workspace)/docker-image/main-site.$(Build.BuildId).tar
+              arguments: --input $(Pipeline.Workspace)/docker-image/main-site.$(Build.BuildId).tar
           - task: Docker@2
             displayName: Push Docker Image
             inputs:
