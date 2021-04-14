@@ -16,7 +16,6 @@ stages:
             displayName: docker build
             inputs:
               command: build
-              containerRegistry: SteeltoeContainerRegistry
               repository: main-site
           - task: Docker@2
             displayName: docker save
