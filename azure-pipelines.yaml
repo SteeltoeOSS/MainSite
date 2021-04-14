@@ -16,12 +16,13 @@ stages:
             displayName: docker build
             inputs:
               command: build
+              containerRegistry: SteeltoeContainerRegistry
               repository: main-site
           - task: Docker@2
             displayName: docker save
             inputs:
               command: save
-              arguments: main-site -o $(Build.ArtifactStagingDirectory)/main-site.tar
+              arguments: steeltoe.azurecr.io/main-site:$(Build.BuildId) -o $(Build.ArtifactStagingDirectory)/main-site.$(Build.BuildId).tar
           - publish: $(Build.ArtifactStagingDirectory)
             displayName: Publish Docker Image
             artifact: docker-image
@@ -43,12 +44,7 @@ stages:
             displayName: docker load
             inputs:
               command: load
-              arguments: --input $(Pipeline.Workspace)/docker-image/main-site.tar
-          - task: Docker@2
-            displayName: docker tag
-            inputs:
-              command: tag
-              arguments: main-site steeltoe.azurecr.io/main-site:$(Build.BuildId)
+              arguments: --input $(Pipeline.Workspace)/docker-image/main-site.$(Build.BuildId).tar
           - task: Docker@2
             displayName: docker push
             inputs:
