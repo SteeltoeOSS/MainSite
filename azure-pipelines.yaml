@@ -13,18 +13,18 @@ stages:
           vmImage: ubuntu-latest
         steps:
           - task: Docker@2
-            displayName: Build Docker Image
+            displayName: docker build
             inputs:
               command: build
+              containerRegistry: SteeltoeContainerRegistry
               repository: main-site
-              tags: |
-                $(Build.BuildId)
           - task: Docker@2
-            displayName: Save Docker Image
+            displayName: docker save
             inputs:
               command: save
-              arguments: main-site:$(Build.BuildId) -o $(Build.ArtifactStagingDirectory)/main-site.$(Build.BuildId).tar
+              arguments: main-site -o $(Build.ArtifactStagingDirectory)/main-site.tar
           - publish: $(Build.ArtifactStagingDirectory)
+            displayName: Publish Docker Image
             artifact: docker-image
   - stage: deploy
     displayName: Deploy
@@ -38,14 +38,20 @@ stages:
           vmImage: ubuntu-latest
         steps:
           - download: current
+            displayName: Download Docker Image
             artifact: docker-image
           - task: Docker@2
-            displayName: Load Docker Image
+            displayName: docker load
             inputs:
               command: load
-              arguments: --input $(Pipeline.Workspace)/docker-image/main-site.$(Build.BuildId).tar
+              arguments: --input $(Pipeline.Workspace)/docker-image/main-site.tar
           - task: Docker@2
-            displayName: Push Docker Image
+            displayName: docker tag
+            inputs:
+              command: tag
+              arguments: main-site steeltoe.azurecr.io/main-site:$(Build.BuildId)
+          - task: Docker@2
+            displayName: docker push
             inputs:
               command: push
               containerRegistry: SteeltoeContainerRegistry
