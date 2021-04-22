@@ -1,43 +1,73 @@
-# ASP.NET Core
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-pool:
-  vmImage: 'ubuntu-latest'
-
 trigger:
   branches:
     include:
       - main
 
-steps:
-# ASP.NET Core
-- task: UseDotNet@2
-  displayName: "Install .NET Core 3.1.x"
-  inputs:
-    packageType: 'sdk'
-    version: '3.1.x'
-
-- script: dotnet publish './src/Server/Steeltoe.Server.csproj' --output './publish' --configuration Release --framework netcoreapp3.1 --runtime linux-x64 --self-contained
-  displayName: 'dotnet publish project'
-
-- task: CopyFiles@2
-  displayName: "Copy publish result to staging"
-  inputs:
-    SourceFolder: './publish'
-    Contents: '**'
-    TargetFolder: '$(Build.ArtifactStagingDirectory)/publish'
-    CleanTargetFolder: true
-
-- powershell: cp "Dockerfile" "$(Build.ArtifactStagingDirectory)/Dockerfile"
-  displayName: "Copy Dockerfile"
-
-- powershell: cp -r "deploy/kubernetes" "$(Build.ArtifactStagingDirectory)"
-  displayName: "Copy kubernetes manifests"
-
-- task: PublishBuildArtifacts@1
-  displayName: "Upload Artifacts"
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
+stages:
+  - stage: assemble
+    displayName: Assemble
+    jobs:
+      - job: build
+        displayName: Build
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+          - task: Docker@2
+            displayName: docker build
+            inputs:
+              command: build
+              containerRegistry: SteeltoeContainerRegistry
+              repository: main-site
+          - task: Docker@2
+            displayName: docker save
+            inputs:
+              command: save
+              arguments: steeltoe.azurecr.io/main-site:$(Build.BuildId) -o $(Build.ArtifactStagingDirectory)/main-site.$(Build.BuildId).tar
+          - publish: $(Build.ArtifactStagingDirectory)
+            displayName: Publish Docker Image
+            artifact: docker-image
+  - stage: deploy
+    displayName: Deploy
+    dependsOn: assemble
+    condition:
+      not(eq(variables['build.reason'], 'PullRequest'))
+    jobs:
+      - job: deploy
+        displayName: Deploy
+        pool:
+          vmImage: ubuntu-latest
+        steps:
+          - download: current
+            displayName: Download Docker Image
+            artifact: docker-image
+          - task: Docker@2
+            displayName: docker load
+            inputs:
+              command: load
+              arguments: --input $(Pipeline.Workspace)/docker-image/main-site.$(Build.BuildId).tar
+          - task: Docker@2
+            displayName: docker tag
+            inputs:
+              command: tag
+              arguments: steeltoe.azurecr.io/main-site:$(Build.BuildId) steeltoe.azurecr.io/main-site:latest
+          - task: Docker@2
+            displayName: docker push
+            inputs:
+              command: push
+              containerRegistry: SteeltoeContainerRegistry
+              repository: main-site
+              tags: |
+                $(Build.BuildId)
+                latest
+          - task: CopyFiles@2
+            displayName: Copy Kubernetes Manifest
+            inputs:
+              SourceFolder: ./deploy/kubernetes
+              Contents: '**'
+              TargetFolder: $(Build.ArtifactStagingDirectory)/kubernetes
+              CleanTargetFolder: true
+          - task: PublishBuildArtifacts@1
+            displayName: Stage for Release
+            inputs:
+              PathtoPublish: $(Build.ArtifactStagingDirectory)
+              publishLocation: Container
