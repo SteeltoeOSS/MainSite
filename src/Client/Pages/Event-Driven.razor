@@ -57,11 +57,23 @@
 			Img = "/images/Icon_device-exchange.svg"
 		},
 		new Feature() {
-			Title = (MarkupString)"Steeltoe with Spring Cloud Data Flow (coming soon)",
+			Title = (MarkupString)"Steeltoe Stream",
 			Description = (b => {
-				b.AddMarkupContent(1,"Spring Cloud Data Flow offers developers a range of tools and automation for working with all kinds of data sources and destinations. Soon, Steeltoe will help you  develop, deploy, manage, and scale high-throughput streaming data pipelines across multiple cloud-native platforms.<Br /><br />");
+				b.AddMarkupContent(1,"Steeltoe Stream improves your productivity when working with RabbitMQ, providing three key abstractions to simplify your code. “Binders” integrate with external messaging systems. “Bindings” bridge the gap between the messaging systems and your code. “Messages” provide the structure that your code uses to send and receive data.<Br /><br />Steeltoe Stream also provides support for provisioning, content conversion, error handling, configuration management, consumer groups, partitioning, monitoring, and health checks.<Br /><br />");
+				b.OpenComponent<Href>(2);
+					b.AddAttribute(3, "href","/stream");
+					b.AddAttribute(4, "AsButton",true);
+					b.AddAttribute(5, "ChildContent", (RenderFragment)((b) => {b.AddContent(6, "Learn more");}));
+				b.CloseComponent();
 			}),
-			Img = "/images/Icon_network.svg"
+			Img = "/images/Icon_data-transfer.svg"
 		}
+		//new Feature() {
+		//	Title = (MarkupString)"Steeltoe Stream with support for Spring Cloud Data Flow (coming soon)",
+		//	Description = (b => {
+		//		b.AddMarkupContent(1,"Spring Cloud Data Flow offers developers a range of tools and automation for working with all kinds of data sources and destinations. Soon, Steeltoe will help you  develop, deploy, manage, and scale high-throughput streaming data pipelines across multiple cloud-native platforms.<Br /><br />");
+		//	}),
+		//	Img = "/images/Icon_network.svg"
+		//}
 	};
 }
