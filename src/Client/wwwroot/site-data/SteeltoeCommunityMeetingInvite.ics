@@ -1,0 +1,166 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Microsoft Corporation//Outlook for Mac MIMEDIR//EN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:Eastern Time (US & Canada)
+X-ENTOURAGE-CFTIMEZONE:US/Eastern
+X-ENTOURAGE-TZID:4
+BEGIN:STANDARD
+RRULE:FREQ=YEARLY;INTERVAL=1;BYSECOND=0;BYMINUTE=0;BYHOUR=2;BYDAY=1SU;BYMO
+ NTH=11
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+DTSTART:20071104T020000
+END:STANDARD
+BEGIN:DAYLIGHT
+RRULE:FREQ=YEARLY;INTERVAL=1;BYSECOND=0;BYMINUTE=0;BYHOUR=2;BYDAY=2SU;BYMO
+ NTH=3
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+DTSTART:20070311T020000
+END:DAYLIGHT
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:040000008200E00074C5B7101A82E008000000000A8D545D2941D70100000000000000
+ 00100000002731891EF297BE4A8A096120CE9450C6
+X-ENTOURAGE_UUID:566C349E-432D-42A5-8272-EE93307DE093
+X-MICROSOFT-EXCHANGE-ID:AQMkADE3OTYyMTU2LTVmZDgtNGVmMS05NTc1LWQ1MmZkNmM3M2
+ FiZABGAAADx4bgE4wBuk_m9JODAot30AcAvi9vVltAVUCZ2NP6uLzDywAAAgENAAAAvi9vVltA
+ VUCZ2NP6uLzDywABY9UE7QAAAA==
+X-MICROSOFT-EXCHANGE-CHANGEKEY:vi9vVltAVUCZ2NP6uLzDywABZIK59w==
+DTSTAMP:20210507T151523Z
+DTSTART;TZID="Eastern Time (US & Canada)":20210511T123000
+DTEND;TZID="Eastern Time (US & Canada)":20210511T133000
+LAST-MODIFIED:20210507T151523Z
+SUMMARY:Steeltoe Community Meeting (Office Hours)
+DESCRIPTION:Topic: Steeltoe Community Meeting\n\nTime: This is a recurring
+  meeting Meet anytime\n\n \n\nJoin Zoom
+  Meeting\n\nhttps://VMware.zoom.us/j/92687077667?pwd=NXpPWWxlMVlEREZuNHRta
+ 2JlS2dZdz09\n\nMeeting ID: 926 8707 7667\n\nPassword: 224068\n\n \n\n
+  \n\nOr iPhone one-tap :\n\nUS:
+  +13126266799\,\,92687077667#\,\,#\,\,\,224068#\n\nor\n\n+16465588656\,\,9
+ 2687077667#\,\,#\,\,\,224068# \n\n \n\nOr Telephone (for higher quality\,
+  dial a number based on your current location)：\n\nUS: +1 312 626 6799
+   or +1 646 558 8656  or +1 301 715 8592  or +1 346 248 7799  or +1 669
+  900 6833  or +1 253 215 8782 India: 000 800 050 5050 (Toll Free) or 000
+  800 001 4002 (Toll Free)United Kingdom: +44 208 080 6592  or +44 330 088
+  5830  or +44 131 460 1196  or +44 203 481 5237  or +44 203 481 5240  or
+  +44 203 901 7895  or +44 208 080 6591 Ireland: +353 1 536 9320  or +353
+  1 653 3895  or +353 1 653 3897  or +353 1 653 3898  or +353 6 163 9031
+   or +353 1 240 8941 \n\n \n\nMeeting ID: 926 8707 7667\n\nPassword:
+  224068\n\nInternational numbers
+  available:\n\nhttps://VMware.zoom.us/u/ac1nDQpUCz\n\n \n\nOr an
+  H.323/SIP room system:\n\n \n\n162.255.37.11 (US West)\n\n162.255.36.11
+  (US East)\n\n221.122.88.195 (China)\n\n115.114.131.7 (India
+  Mumbai)\n\n115.114.115.7 (India Hyderabad)\n\n213.19.144.110 (Amsterdam
+  Netherlands)\n\n213.244.140.110 (Germany)\n\n103.122.166.55 (Australia
+  Sydney)\n\n103.122.167.55 (Australia Melbourne)\n\n209.9.211.110 (Hong
+  Kong SAR)\n\n149.137.40.110 (Singapore)\n\n64.211.144.160
+  (Brazil)\n\n69.174.57.160 (Canada Toronto)\n\n65.39.152.160 (Canada
+  Vancouver)\n\n207.226.132.110 (Japan Tokyo)\n\n149.137.24.110 (Japan
+  Osaka)\n\nMeeting ID: 926 8707 7667\n\nPassword: 224068\n\n \n\nSIP:
+  92687077667@zoomcrc.com\n\nPassword: 224068\n\n \n\nPlease note that
+  this meeting might be recorded by the Host. When the recording starts a
+  pop-up will appear on your screen and you will be able to consent to the
+  recording or leave the meeting. If you would like to have more
+  information on how VMware handles your personal data\, please review our
+  Privacy Policy at https://www.vmware.com/help/privacy.html.\n\n \n
+LOCATION:https://VMware.zoom.us/j/94052585584?pwd=VnRVYjZRbEFxSVprbmRwTmRU
+ ZEtZdz09
+ORGANIZER:MAILTO:jkonicki@vmware.com
+SEQUENCE:0
+RRULE:FREQ=MONTHLY;INTERVAL=2;BYDAY=TU;BYSETPOS=2;WKST=SU
+ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=FALSE;CN="David
+  Tillman";PARTSTAT=ACCEPTED:MAILTO:dtillman@vmware.com
+ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=FALSE;CN="Hananiel
+  Sarella";PARTSTAT=NEEDS-ACTION:MAILTO:hsarella@vmware.com
+ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=FALSE;CN="Tim
+  Hess";PARTSTAT=ACCEPTED:MAILTO:thess@vmware.com
+ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=FALSE;CN="Chris
+  Cheetham";PARTSTAT=NEEDS-ACTION:MAILTO:ccheetham@vmware.com
+ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=FALSE;CN="Ken
+  Swan";PARTSTAT=ACCEPTED:MAILTO:kswan@vmware.com
+X-MICROSOFT-CDO-BUSYSTATUS:BUSY
+X-MICROSOFT-CDO-ALLDAYEVENT:FALSE
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+X-MICROSOFT-DONOTFORWARDMEETING:FALSE
+X-MICROSOFT-CDO-INSTTYPE:1
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:REMINDER
+TRIGGER;RELATED=START:-PT24H00M00S
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:040000008200E00074C5B7101A82E008000000000A8D545D2941D70100000000000000
+ 00100000002731891EF297BE4A8A096120CE9450C6
+X-ENTOURAGE_UUID:566C349E-432D-42A5-8272-EE93307DE093
+X-MICROSOFT-EXCHANGE-ID:AAMkADE3OTYyMTU2LTVmZDgtNGVmMS05NTc1LWQ1MmZkNmM3M2
+ FiZAFRAAgI2RQPuGAAAEYAAAAAx4bgE4wBuk_m9JODAot30AcAvi9vVltAVUCZ2NP6uLzDywAA
+ AAABDQAAvi9vVltAVUCZ2NP6uLzDywABY9UE7QAAEA==
+X-MICROSOFT-EXCHANGE-CHANGEKEY:vi9vVltAVUCZ2NP6uLzDywABZIK59w==
+RECURRENCE-ID;TZID="Eastern Time (US & Canada)":20210511T123000
+DTSTAMP:20210507T151523Z
+DTSTART;TZID="Eastern Time (US & Canada)":20210511T123000
+DTEND;TZID="Eastern Time (US & Canada)":20210511T133000
+LAST-MODIFIED:20210507T151523Z
+SUMMARY:Steeltoe Community Meeting (Office Hours)
+DESCRIPTION:Topic: Steeltoe Community Meeting\n\nTime: This is a recurring
+  meeting Meet anytime\n\n \n\nJoin Zoom
+  Meeting\n\nhttps://VMware.zoom.us/j/92687077667?pwd=NXpPWWxlMVlEREZuNHRta
+ 2JlS2dZdz09\n\nMeeting ID: 926 8707 7667\n\nPassword: 224068\n\n \n\n
+  \n\nOr iPhone one-tap :\n\nUS:
+  +13126266799\,\,92687077667#\,\,#\,\,\,224068#\n\nor\n\n+16465588656\,\,9
+ 2687077667#\,\,#\,\,\,224068# \n\n \n\nOr Telephone (for higher quality\,
+  dial a number based on your current location)：\n\nUS: +1 312 626 6799
+   or +1 646 558 8656  or +1 301 715 8592  or +1 346 248 7799  or +1 669
+  900 6833  or +1 253 215 8782 India: 000 800 050 5050 (Toll Free) or 000
+  800 001 4002 (Toll Free)United Kingdom: +44 208 080 6592  or +44 330 088
+  5830  or +44 131 460 1196  or +44 203 481 5237  or +44 203 481 5240  or
+  +44 203 901 7895  or +44 208 080 6591 Ireland: +353 1 536 9320  or +353
+  1 653 3895  or +353 1 653 3897  or +353 1 653 3898  or +353 6 163 9031
+   or +353 1 240 8941 \n\n \n\nMeeting ID: 926 8707 7667\n\nPassword:
+  224068\n\nInternational numbers
+  available:\n\nhttps://VMware.zoom.us/u/ac1nDQpUCz\n\n \n\nOr an
+  H.323/SIP room system:\n\n \n\n162.255.37.11 (US West)\n\n162.255.36.11
+  (US East)\n\n221.122.88.195 (China)\n\n115.114.131.7 (India
+  Mumbai)\n\n115.114.115.7 (India Hyderabad)\n\n213.19.144.110 (Amsterdam
+  Netherlands)\n\n213.244.140.110 (Germany)\n\n103.122.166.55 (Australia
+  Sydney)\n\n103.122.167.55 (Australia Melbourne)\n\n209.9.211.110 (Hong
+  Kong SAR)\n\n149.137.40.110 (Singapore)\n\n64.211.144.160
+  (Brazil)\n\n69.174.57.160 (Canada Toronto)\n\n65.39.152.160 (Canada
+  Vancouver)\n\n207.226.132.110 (Japan Tokyo)\n\n149.137.24.110 (Japan
+  Osaka)\n\nMeeting ID: 926 8707 7667\n\nPassword: 224068\n\n \n\nSIP:
+  92687077667@zoomcrc.com\n\nPassword: 224068\n\n \n\nPlease note that
+  this meeting might be recorded by the Host. When the recording starts a
+  pop-up will appear on your screen and you will be able to consent to the
+  recording or leave the meeting. If you would like to have more
+  information on how VMware handles your personal data\, please review our
+  Privacy Policy at https://www.vmware.com/help/privacy.html.\n
+LOCATION:https://VMware.zoom.us/j/92687077667?pwd=NXpPWWxlMVlEREZuNHRta2Jl
+ S2dZdz09
+ORGANIZER:MAILTO:jkonicki@vmware.com
+SEQUENCE:0
+ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=FALSE;CN="David
+  Tillman";PARTSTAT=ACCEPTED:MAILTO:dtillman@vmware.com
+ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=FALSE;CN="Hananiel
+  Sarella";PARTSTAT=ACCEPTED:MAILTO:hsarella@vmware.com
+ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=FALSE;CN="Tim
+  Hess";PARTSTAT=NEEDS-ACTION:MAILTO:thess@vmware.com
+ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=FALSE;CN="Chris
+  Cheetham";PARTSTAT=NEEDS-ACTION:MAILTO:ccheetham@vmware.com
+ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=FALSE;CN="Ken
+  Swan";PARTSTAT=NEEDS-ACTION:MAILTO:kswan@vmware.com
+X-MICROSOFT-CDO-BUSYSTATUS:BUSY
+X-MICROSOFT-CDO-ALLDAYEVENT:FALSE
+X-MICROSOFT-DISALLOW-COUNTER:FALSE
+X-MICROSOFT-DONOTFORWARDMEETING:FALSE
+X-MICROSOFT-CDO-INSTTYPE:3
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:REMINDER
+TRIGGER;RELATED=START:-PT24H00M00S
+END:VALARM
+END:VEVENT
+END:VCALENDAR
