@@ -5,6 +5,7 @@ public interface IDocsSite {
 	string BaseAddress { get; }
 	string BlogHome { get; }
 	string DocsHome { get; }
+	string DocsStreamHome { get; }
 	string GuidesHome { get; }
 }
 
@@ -29,6 +30,6 @@ public class DocsSite : IDocsSite {
 	public string BaseAddress => _baseAddress;
 	public string BlogHome => $"{_baseAddress}/articles/";
 	public string DocsHome => $"{_baseAddress}/api/v3/welcome/";
-	public string DocsStreamHome => $"{_baseAddress}/api/v3/stream";
+	public string DocsStreamHome => $"{_baseAddress}/api/v3/stream/";
 	public string GuidesHome => $"{_baseAddress}/guides/";
 }
