@@ -29,6 +29,6 @@ public class DocsSite : IDocsSite {
 	public string BaseAddress => _baseAddress;
 	public string BlogHome => $"{_baseAddress}/articles/";
 	public string DocsHome => $"{_baseAddress}/api/v3/welcome/";
-	public string DocsV3Base => $"{_baseAddress}/api/v3/";
+	public string DocsStreamHome => $"{_baseAddress}/api/v3/stream";
 	public string GuidesHome => $"{_baseAddress}/guides/";
 }
