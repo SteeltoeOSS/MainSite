@@ -1,5 +1,17 @@
 [
 	{
+		"date": "<span>July</span> 13 2021",
+		"title": "Steeltoe 3.1.0 GA is here!",
+		"description": "Version 3.1 brings some impressive new features including Steeltoe Stream, Steeltoe Messaging, Steeltoe Bootstrap, and support for Spring Cloud Data Flow.",
+		"url": "https://docs.steeltoe.io/articles/releases/steeltoe-3-1-minor-release-major-deal.html"
+	},
+	{
+		"date": "<span>June</span> 14 2021",
+		"title": "Steeltoe 3.1.0 Release Candidate 2 is now available",
+		"description": "This is the second and final release candidate for Steeltoe 3.1.0. Take a look and tell us what you think.",
+		"url": "https://github.com/SteeltoeOSS/Steeltoe/releases/tag/3.1.0-rc2"
+	},
+	{
 		"date": "<span>May</span> 10 2021",
 		"title": "Steeltoe 3.1.0 Release Candidate 1 is now available",
 		"description": "Steeltoe 3.1.0 brings the new Steeltoe Stream feature built on our RabbitMQ messaging components to the .NET community. Take a look and give us your thoughts.",
