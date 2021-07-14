@@ -1,7 +1,7 @@
 ﻿@page "/microservices"
 @page "/microservice"
 
-<Template Name="Microservices" NameIsPlural="true" ShowBottomGetStarted="false" GettingStartedURL="/get-started" Features="@features">
+<Template Name="Microservices" NameIsPlural="true" ShowBottomGetStarted="false" Features="@features">
 	<Description>Microservice architectures are the ‘new normal’. Building small, self-contained, ready to run applications can bring great flexibility and added resilience to your code. Steeltoe’s many purpose-built features make it easy to build and run your microservices in production at scale. And don’t forget, no microservice architecture is complete without <Href href="/cloud">cloud components</Href> ‒ easing administration and boosting your fault-tolerance.</Description>
 	<WhatIs>Microservices are a modern approach to software whereby application code is delivered in small, manageable pieces, independent of others.</WhatIs>
 	<WhyUse>Their small scale and relative isolation can lead to many additional benefits, such as easier maintenance, improved productivity, greater fault tolerance, better business alignment, and more.</WhyUse>
@@ -23,12 +23,12 @@
 			<div class="col-sm-6 text-center"><div class="component-feature-img"><img class="img-fluid" src="@Feature.Img" /></div></div>
 		</div>
 	</AltFeatureTemplate>
-	<OtherArea>
+	<!-- OtherArea>
 		<div class="col text-center m-5">
 			<div class="mb-5"><h2>Ready to get started?</h2></div>
 			<div class=""><Href href="/get-started" AsButton="true">TRY THESE TUTORIALS</Href></div>
 		</div>
-	</OtherArea>
+	</OtherArea -->
 </Template>
 
 @code{
@@ -42,11 +42,11 @@
 					b.AddAttribute(4, "ChildContent", (RenderFragment)((b) => {b.AddContent(5, "Steeltoe Initializr");}));
 				b.CloseComponent();
 				b.AddMarkupContent(6," and then package as a container. With Steeltoe’s middleware pipeline model, you’re ready to go in minutes.<br /><br />");
-				b.OpenComponent<Href>(7);
-					b.AddAttribute(8, "href","/get-started");
-					b.AddAttribute(9, "AsButton",true);
-					b.AddAttribute(10, "ChildContent", (RenderFragment)((b) => {b.AddContent(11, "TRY OUR QUICKSTART GUIDE");}));
-				b.CloseComponent();
+//				b.OpenComponent<Href>(7);
+//					b.AddAttribute(8, "href","/get-started");
+//					b.AddAttribute(9, "AsButton",true);
+//					b.AddAttribute(10, "ChildContent", (RenderFragment)((b) => {b.AddContent(11, "TRY OUR QUICKSTART GUIDE");}));
+//				b.CloseComponent();
 			}),
 			Img = "/images/Icon_down-arrow.svg"
 		},
@@ -83,11 +83,11 @@
 					b.AddAttribute(4, "ChildContent", (RenderFragment)((b) => {b.AddContent(5, "service connectors");}));
 				b.CloseComponent();
 				b.AddMarkupContent(6,", you can also consume multiple backend services with ease.<br /><br />");
-				b.OpenComponent<Href>(7);
-					b.AddAttribute(8, "href","https://run.pivotal.io");
-					b.AddAttribute(9, "NewWindow",true);
-					b.AddAttribute(10, "ChildContent", (RenderFragment)((b) => {b.AddContent(11, "Try Pivotal Web Services for free");}));
-				b.CloseComponent();
+//				b.OpenComponent<Href>(7);
+//					b.AddAttribute(8, "href","https://run.pivotal.io");
+//					b.AddAttribute(9, "NewWindow",true);
+//					b.AddAttribute(10, "ChildContent", (RenderFragment)((b) => {b.AddContent(11, "Try Pivotal Web Services for free");}));
+//				b.CloseComponent();
 			}),
 			Img = "/images/Icon_data-transfer.svg"
 		}

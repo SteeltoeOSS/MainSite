@@ -1,7 +1,7 @@
 ﻿@page "/why-steeltoe"
 
-<Template Name="Why Steeltoe" ShowBottomGetStarted="false" GettingStartedURL="/get-started" Features="@features">
-	<Description>Steeltoe makes programming .NET quicker, easier, and safer for everybody. Steeltoe’s focus on speed, simplicity, and productivity has made it one of the world's most popular .NET frameworks.</Description>
+<Template Name="Why Steeltoe" ShowBottomGetStarted="false" Features="@features">
+	<Description>Steeltoe provides a collection of libraries that helps users build production-grade cloud-native applications using externalized configuration, service discovery, circuit-breakers, distributed tracing, application management, and more.  Steeltoe also provides a seamless way to build, configure, and run event-driven microservice applications and stream-based data processing applications. </Description>
 	<FeatureTemplate Context="Feature">
 		<div class="col-sm-6 pr-sm-5">
 			<div class="component-feature-title">@Feature.Title</div>
@@ -45,13 +45,13 @@
 				<div class="col component-dark"><Href href="/web-applications">
 					<div class="text-center"><img class="img-fluid" src="/images/icon-webapps-white.svg" /></div>
 					<div class="title text-white"><h3>Web Apps</h3></div>
-					<div class="desc text-white">A framework for fast, secure, and responsive web applications connected to any data store.</div>
+					<div class="desc text-white">A collection of libraries for fast, secure, and responsive web applications connected to any data store.</div>
 				</Href></div>
 				
 				@*<div class="col component-dark"><Href href="/event-driven">
 					<div class="text-center"><img class="img-fluid" src="/images/icon-streams-white.svg" /></div>
 					<div class="title text-white"><h3>Event Driven</h3></div>
-					<div class="desc text-white">Integrate with your enterprise. React to business events. Act on your streaming data in realtime. *coming in v3.0</div>
+					<div class="desc text-white">Integrate with your enterprise. React to business events. Act on your streaming data in realtime. </div>
 				</Href></div>*@
 			</div>
 		</div>
@@ -63,21 +63,21 @@
 		new Feature() {
 			Title = (MarkupString)"Steeltoe is proven",
 			Description = (b => {
-				b.AddMarkupContent(1,"Steeltoe’s libraries are trusted by developers all over the world. Steeltoe delivers delightful experiences to millions of end-users every day. Steeltoe also has contributions from development teams at Microsoft, and more.");
+				b.AddMarkupContent(1,"Steeltoe’s libraries are trusted by developers all over the world. Steeltoe delivers delightful experiences to millions of end-users every day. Steeltoe also has contributions from development teams at VMware, Microsoft, and more.");
 			}),
 			Img = "/images/img-everywhere-2573c9d8470aed5621745921ac8733c8.svg"
 		},
 		new Feature() {
 			Title = (MarkupString)"Steeltoe is flexible",
 			Description = (b => {
-				b.AddMarkupContent(1,"Steeltoe’s flexible and comprehensive set of extensions and third-party libraries let developers build almost any web application imaginable. At its core, Steeltoe Framework’s features provide the foundation for a wide-ranging set of features and functionality. Whether you’re building secure, cloud-based microservices for the web, or complex streaming data flows for the enterprise, Steeltoe has the tools to help.");
+				b.AddMarkupContent(1,"Steeltoe’s flexible and comprehensive set of extensions and third-party libraries let developers build almost any web application imaginable. At its core, Steeltoe’s features provide the foundation for a wide-ranging set of features and functionality. Whether you’re building secure, cloud-based microservices for the web, or complex streaming data flows for the enterprise, Steeltoe provides the tools to help.");
 			}),
 			Img = "/images/img-flexible-a5992de389ba231fc0dd93479df70b62.svg"
 		},
 		new Feature() {
 			Title = (MarkupString)"Steeltoe is productive",
 			Description = (b => {
-				b.AddMarkupContent(1,"Steeltoe transforms how you approach .NET programming tasks, radically streamlining your experience. To go even faster, you can use Steeltoe with Spring Cloud’s rich set of supporting libraries, servers, patterns, and templates, to safely deploy entire microservices-based architectures into the cloud, in record time.");
+				b.AddMarkupContent(1,"Steeltoe transforms how you approach .NET programming tasks.  Steeltoe builds on the .NET runtime libraries and streamlines your experience by providing much of the necessary glue code for you application. Steeltoe also provide a polyglot experience to you.  Steeltoe supports many of Spring Cloud’s rich set of libraries, config servers, patterns, and templates, to safely deploy entire microservices-based architectures into the cloud.");
 			}),
 			Img = "/images/img-innovative-16683bc64538d1462c6b77930f8b71ee.svg"
 		},
@@ -86,8 +86,8 @@
 			Description = (b => {
 				b.AddMarkupContent(1,"Developer productivity is one of Steeltoe’s superpowers. Steeltoe helps developers build applications with ease and with far less toil than other competing paradigms. You can even start a new Steeltoe project in seconds, with the Steeltoe Initializr at ");
 				b.OpenComponent<Href>(2);
-					b.AddAttribute(3, "href","https://start.Steeltoe.io");
-					b.AddAttribute(4, "ChildContent", (RenderFragment)((b) => {b.AddContent(5, "start.Steeltoe.io");}));
+					b.AddAttribute(3, "href","https://start.steeltoe.io");
+					b.AddAttribute(4, "ChildContent", (RenderFragment)((b) => {b.AddContent(5, "start.steeltoe.io");}));
 				b.CloseComponent();
 			}),
 			Img = "/images/img-fast-f8bdb07b7bf02133827ec6bd3069eb29.svg"
@@ -102,7 +102,7 @@
 		new Feature() {
 			Title = (MarkupString)"Steeltoe is supportive",
 			Description = (b => {
-				b.AddMarkupContent(1,"The Steeltoe community is global, diverse, and spans folks of all ages and capabilities, from complete beginners to seasoned pros. No matter where you are on your journey, you can find the support and resources you need to get you to the next level: quickstarts, guides & tutorials, videos, support, or even formal training and certification.");
+				b.AddMarkupContent(1,"The Steeltoe community is global, diverse, and spans folks of all ages and capabilities, from complete beginners to seasoned pros. No matter where you are on your journey, you can find the support and resources you need to get you to the next level: guides & tutorials, videos, support, and even access to the development team on Slack.");
 			}),
 			Img = "/images/img-indemand-3f63d4a71b8af531028c46842a45cf49.svg"
 		}
