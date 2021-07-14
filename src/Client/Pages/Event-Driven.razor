@@ -22,12 +22,12 @@
 			<div class="col-sm-6 text-center"><div class="component-feature-img"><img class="img-fluid" src="@Feature.Img" /></div></div>
 		</div>
 	</AltFeatureTemplate>
-	<OtherArea>
+	<!-- OtherArea>
 		<div class="col text-center m-5">
 			<div class="mb-5"><h2>Ready to get started?</h2></div>
 			<div class=""><Href href="/get-started" AsButton="true">TRY THESE TUTORIALS</Href></div>
 		</div>
-	</OtherArea>
+	</OtherArea -->
 </Template>
 
 @code{
@@ -61,7 +61,7 @@
 			Description = (b => {
 				b.AddMarkupContent(1,"Steeltoe Stream improves your productivity when working with RabbitMQ, providing three key abstractions to simplify your code. “Binders” integrate with external messaging systems. “Bindings” bridge the gap between the messaging systems and your code. “Messages” provide the structure that your code uses to send and receive data.<Br /><br />Steeltoe Stream also provides support for provisioning, content conversion, error handling, configuration management, consumer groups, partitioning, monitoring, and health checks.<Br /><br />");
 				b.OpenComponent<Href>(2);
-					b.AddAttribute(3, "href","https://docs-dev.steeltoe.io/api/v3/stream/");
+					b.AddAttribute(3, "href","https://docs.steeltoe.io/api/v3/stream/");
 					b.AddAttribute(4, "AsButton",true);
 					b.AddAttribute(5, "ChildContent", (RenderFragment)((b) => {b.AddContent(6, "Learn more");}));
 				b.CloseComponent();

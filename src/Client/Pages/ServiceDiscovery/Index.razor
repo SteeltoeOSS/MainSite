@@ -1,7 +1,7 @@
 ﻿@page "/service-discovery"
 @page "/steeltoe-discovery"
 
-<Template Name="Service Discovery" DocsURL="/docs/discovery" GettingStartedURL="/service-discovery/get-started" Features="@features">
+<Template Name="Service Discovery" DocsURL="/docs/discovery" Features="@features">
 	<Description>A service registry provides a database that applications can use to implement the Service Discovery pattern, one of the key tenets of a microservices-based architecture. Trying to hand-configure each client of a service or adopt some form of access convention can be difficult and prove to be brittle in production. Instead, applications can use a service registry to dynamically discover and call registered services.</Description>
 	<WhatIs>Think of it as a phone book of services. Instead of needing to configure a service's exact URI, your app “asks” the service registry to look up the URI of a named service. The name is what your app remembers, the URI is what's discovered. Your app could also register itself for discovery. Then you could distribute the name used during registration for others to discover.</WhatIs>
 	<WhyUse>

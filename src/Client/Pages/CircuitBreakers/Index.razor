@@ -1,7 +1,7 @@
 ﻿@page "/circuit-breakers"
 @page "/steeltoe-circuitbreaker"
 
-<Template Name="Circuit Breakers" Features="@features" GettingStartedURL="/circuit-breakers/get-started/breaker" DocsURL="/docs/circuitbreaker">
+<Template Name="Circuit Breakers" Features="@features" DocsURL="/docs/circuitbreaker">
 	<Description>What do you do when a service you depend on stops responding? Circuit breakers enable you to bypass a failing service, allowing it time to recover, and preventing your users from seeing nasty error messages. Steeltoe includes a .NET implementation of Netflix Hystrix, a proven circuit breaker implementation with rich metrics and monitoring features.</Description>
 	<WhatIs>When applied to a service, a circuit breaker watches for failing calls to the service. If failures reach a certain threshold, it “opens” (or breaks) the circuit and automatically redirects calls to the specified fallback mechanism. This gives the failing service time to recover. By using Circuit Breaker frameworks, you can prevent failures from cascading and provide fallback behavior until a failing service is restored to normal operation.</WhatIs>
 	<WhyUse>Based on Netflix Hystrix circuit breaker pattern, Steeltoe Circuit Breakers provides applications with an implementation of the same pattern. No external dependencies are introduced by this package, your application can manage circuits completely internal.</WhyUse>
