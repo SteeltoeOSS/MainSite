@@ -1,33 +1,45 @@
-﻿@inject NavigationManager NavigationManager
-@inject IDocsSite DocsSite
+@using Microsoft.Extensions.Options
+
+@inject NavigationManager NavigationManager
+@inject IOptions<DocsSiteOptions> docsSiteOptions
 
 @page "/blog"
 @page "/blogs"
 @page "/blog/{ArticleName}"
 @page "/blog/{Area}/{ArticleName}"
-
 Redirecting to new docs site, please hold.
 
 @code {
-	private string _area;
-	private string defaultArea = "index";
 
-	[Parameter]
-	public string ArticleName { get;set; }
+    private string _area;
+    private string defaultArea = "index";
+    private DocsSiteOptions docsSite;
 
-	[Parameter]
-	public string Area {
-		get { return (_area ?? defaultArea); }
-		set { _area = value; }
-	}
+    [Parameter]
+    public string ArticleName { get; set; }
 
-	protected override void OnParametersSet(){
-		if(!string.IsNullOrEmpty(Area)){
-			NavigationManager.NavigateTo($"{DocsSite.BaseAddress}/articles/{Area}/{ArticleName}.html",false);
-			return;
-		}
-		
-		NavigationManager.NavigateTo($"{DocsSite.BaseAddress}/articles/{ArticleName}.html",false);
-		return;
-	}
+    [Parameter]
+    public string Area
+    {
+        get { return (_area ?? defaultArea); }
+        set { _area = value; }
+    }
+
+    protected override void OnInitialized()
+    {
+
+        docsSite = docsSiteOptions?.Value ?? throw new ArgumentNullException(nameof(docsSite));
+    }
+
+    protected override void OnParametersSet()
+    {
+        if (!string.IsNullOrEmpty(Area))
+        {
+            NavigationManager.NavigateTo($"{docsSite.BaseAddress}/articles/{Area}/{ArticleName}.html", false);
+            return;
+        }
+
+        NavigationManager.NavigateTo($"{docsSite.BaseAddress}/articles/{ArticleName}.html", false);
+        return;
+    }
 }

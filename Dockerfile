@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/sdk:3.1-alpine AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0-alpine AS build
 ENV SRC_DIR=/usr/src/MainSite
 COPY src $SRC_DIR
 RUN dotnet restore $SRC_DIR \
@@ -10,9 +10,9 @@ RUN dotnet publish $SRC_DIR/Server \
     --configuration Release \
     --output /build
 
-FROM mcr.microsoft.com/dotnet/aspnet:3.1
+FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
 COPY --from=build /build .
 EXPOSE 80
 ENV ASPNETCORE_ENVIRONMENT=Staging
-ENTRYPOINT ["dotnet", "Steeltoe.Server.dll"]
+ENTRYPOINT ["dotnet", "Steeltoe.Client.dll"]

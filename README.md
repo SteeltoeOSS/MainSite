@@ -3,7 +3,7 @@
 	The site was built using [Blazor](https://docs.microsoft.com/en-us/aspnet/core/blazor/) in Visual Studio 2019. 
 
 ## Install Dependencies
-Requires .NET Core SDK 3.1
+Requires .NET Core SDK 5.0
 
 ```powershell
 PS> dotnet new -i Microsoft.AspNetCore.Blazor.Templates
@@ -22,7 +22,7 @@ PS> dotnet watch run
 
 watch : Started
 info: Microsoft.Hosting.Lifetime[0]
-			Now listening on: http://localhost:8080
+			Now listening on: https://localhost:8080
 info: Microsoft.Hosting.Lifetime[0]
 			Application started. Press Ctrl+C to shut down.
 info: Microsoft.Hosting.Lifetime[0]
@@ -31,4 +31,4 @@ info: Microsoft.Hosting.Lifetime[0]
 			Content root path: C:\source\Steeltoe\MainSite\src\Client
 ```
 
-Visit site locally at [http://localhost:8080](http://localhost:8080)
+Visit site locally at [https://localhost:8080](https://localhost:8080)
