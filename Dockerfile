@@ -5,7 +5,7 @@ RUN dotnet restore $SRC_DIR \
     --runtime linux-x64
 RUN dotnet publish $SRC_DIR/Server \
     --runtime linux-x64 \
-    --framework netcoreapp3.1 \
+    --framework net5.0 \
     --self-contained \
     --configuration Release \
     --output /build
