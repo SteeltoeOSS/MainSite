@@ -3,7 +3,7 @@ ENV SRC_DIR=/usr/src/MainSite
 COPY src $SRC_DIR
 RUN dotnet restore $SRC_DIR \
     --runtime linux-x64
-RUN dotnet publish $SRC_DIR/Server \
+RUN dotnet publish $SRC_DIR/Client \
     --runtime linux-x64 \
     --framework net5.0 \
     --self-contained \
