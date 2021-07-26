@@ -2,8 +2,8 @@
 
 namespace Steeltoe.Client.UIInterfaces
 {
- public interface ITab
- {
-	RenderFragment ChildContent { get; }
- }
+    public interface ITab
+    {
+        RenderFragment ChildContent { get; }
+    }
 }
