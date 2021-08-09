@@ -23,9 +23,10 @@ namespace Steeltoe.Client
 
             services.Configure<CalendarEventOptions>(Configuration.GetSection("CalendarEvents"));
 
-            services
-                .Configure<DocsSiteOptions>(Configuration.GetSection("DocsSite"))
-                .PostConfigure<DocsSiteOptions>(docsSiteOptions =>
+            services.AddOptions<DocsSiteOptions>()
+                .Bind(Configuration.GetSection("DocsSite"))
+                .ValidateDataAnnotations()
+                .PostConfigure(docsSiteOptions =>
                 {
                     docsSiteOptions.SetUrls();
                 });
