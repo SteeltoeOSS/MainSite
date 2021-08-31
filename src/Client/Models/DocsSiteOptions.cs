@@ -1,9 +1,13 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Steeltoe.Client.Models
 {
     public class DocsSiteOptions
     {
-        public string ApiBrowserHome { get; set; }
+        [Required]
         public string BaseAddress { get; set; }
+
+        public string ApiBrowserHome { get; set; }
         public string BlogHome { get; set; }
         public string DocsHome { get; set; }
         public string DocsStreamHome { get; set; }
