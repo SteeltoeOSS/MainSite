@@ -54,6 +54,9 @@ spec:
     tls:
       secretName: website-tls
   routes:
-  - services:
-    - name: main-site
-      port: 80
+    - conditions:
+        - prefix: /
+      enableWebsockets: true
+      services:
+        - name: main-site
+          port: 80
