@@ -43,29 +43,17 @@ spec:
   selector:
     app: main-site
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
 metadata:
   name: main-site
   namespace: website
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    ingress.kubernetes.io/force-ssl-redirect: "true"
-    kubernetes.io/ingress.class: contour
-    kubernetes.io/tls-acme: "true"
 spec:
-  tls:
-    - secretName: website-tls
-      hosts:
-        - dev.steeltoe.io
-  rules:
-    - host: dev.steeltoe.io
-      http:
-        paths:
-          - pathType: Prefix
-            path: /
-            backend:
-              service:
-                name: main-site
-                port:
-                  number: 80
+  virtualhost:
+    fqdn: dev.steeltoe.io
+    tls:
+      secretName: website-tls
+  routes:
+  - services:
+    - name: main-site
+      port: 80
