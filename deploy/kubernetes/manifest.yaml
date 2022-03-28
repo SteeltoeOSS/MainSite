@@ -49,17 +49,21 @@ metadata:
   name: main-site
   namespace: website
   annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
-    nginx.ingress.kubernetes.io/use-regex: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    ingress.kubernetes.io/force-ssl-redirect: "true"
+    kubernetes.io/ingress.class: contour
+    kubernetes.io/tls-acme: "true"
 spec:
+  tls:
+    - secretName: website-tls
+      hosts:
+        - dev.steeltoe.io
   rules:
     - host: dev.steeltoe.io
       http:
         paths:
-          - path: /(.*)
-            pathType: ImplementationSpecific
+          - pathType: Prefix
+            path: /
             backend:
               service:
                 name: main-site
