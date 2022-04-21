@@ -12,20 +12,33 @@ stages:
         pool:
           vmImage: ubuntu-latest
         steps:
-          - task: Docker@2
-            displayName: docker build
+          - task: ShellScript@2
+            displayName: Generate Staging Manifest
             inputs:
-              command: build
-              containerRegistry: SteeltoeContainerRegistry
-              repository: main-site
-          - task: Docker@2
-            displayName: docker save
+              scriptPath: ./yttw.sh
+              args: >
+                -f kubernetes
+                -v image_tag=$(Build.BuildId)
+                -v hostname=dev.steeltoe.io
+                -v tls_secret=website-tls
+                --output-files manifests/staging
+          - task: ShellScript@2
+            displayName: Generate Production Manifest
             inputs:
-              command: save
-              arguments: steeltoe.azurecr.io/main-site:$(Build.BuildId) -o $(Build.ArtifactStagingDirectory)/main-site.$(Build.BuildId).tar
-          - publish: $(Build.ArtifactStagingDirectory)
-            displayName: Publish Docker Image
-            artifact: docker-image
+              scriptPath: ./yttw.sh
+              args: >
+                -f kubernetes
+                -v image_tag=$(Build.BuildId)
+                -v replica_count=2
+                -v hostname=steeltoe.io
+                -v tls_secret=website-tls
+                --output-files manifests/production
+          - task: PublishPipelineArtifact@1
+            displayName: Publish Manifests
+            inputs:
+              targetPath: manifests
+              artifactName: manifests
+
   - stage: deploy
     displayName: Deploy
     dependsOn: assemble
@@ -37,37 +50,12 @@ stages:
         pool:
           vmImage: ubuntu-latest
         steps:
-          - download: current
-            displayName: Download Docker Image
-            artifact: docker-image
           - task: Docker@2
-            displayName: docker load
+            displayName: Docker Build and Push
             inputs:
-              command: load
-              arguments: --input $(Pipeline.Workspace)/docker-image/main-site.$(Build.BuildId).tar
-          - task: Docker@2
-            displayName: docker tag
-            inputs:
-              command: tag
-              arguments: steeltoe.azurecr.io/main-site:$(Build.BuildId) steeltoe.azurecr.io/main-site:latest
-          - task: Docker@2
-            displayName: docker push
-            inputs:
-              command: push
+              command: buildAndPush
               containerRegistry: SteeltoeContainerRegistry
               repository: main-site
               tags: |
                 $(Build.BuildId)
                 latest
-          - task: CopyFiles@2
-            displayName: Copy Kubernetes Manifest
-            inputs:
-              SourceFolder: ./deploy/kubernetes
-              Contents: '**'
-              TargetFolder: $(Build.ArtifactStagingDirectory)/kubernetes
-              CleanTargetFolder: true
-          - task: PublishBuildArtifacts@1
-            displayName: Stage for Release
-            inputs:
-              PathtoPublish: $(Build.ArtifactStagingDirectory)
-              publishLocation: Container
