@@ -64,4 +64,23 @@ spec:
     enableWebsockets: true
     services:
     - name: #@ data.values.name
+
+#@ if/end data.values.www_hostname:
+---
+apiVersion: projectcontour.io/v1
+kind: HTTPProxy
+metadata:
+  name: #@ "{}-www".format(data.values.name)
+  namespace: #@ data.values.namespace
+spec:
+  virtualhost:
+    fqdn: #@ data.values.www_hostname
+    tls:
+      secretName: #@ data.values.www_tls_secret
+  routes:
+  - conditions:
+    - prefix: /
+    enableWebsockets: true
+    services:
+    - name: #@ data.values.name
       port: #@ int(data.values.service_port)
