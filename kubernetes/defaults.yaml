@@ -12,4 +12,6 @@ service_port: 80
 replica_count: 1
 dotnet_environment: Development
 hostname: ""
-tls_secret: ""
+tls_secret: main-site-tls
+www_hostname: ""
+www_tls_secret: main-site-www-tls
