@@ -64,6 +64,7 @@ spec:
     enableWebsockets: true
     services:
     - name: #@ data.values.name
+      port: #@ int(data.values.service_port)
 
 #@ if/end data.values.www_hostname:
 ---
