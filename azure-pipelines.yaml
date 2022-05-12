@@ -6,7 +6,6 @@ trigger:
 stages:
 - stage: deploy
   displayName: Deploy
-  dependsOn: assemble
   condition:
     not(eq(variables['build.reason'], 'PullRequest'))
   jobs:
