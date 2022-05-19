@@ -1,0 +1,8 @@
+version: "3"
+services:
+  main-site:
+    build: .
+    ports:
+      - "8081:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
