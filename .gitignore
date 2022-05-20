@@ -71,6 +71,9 @@ project.lock.json
 project.fragment.lock.json
 artifacts/
 
+# Kubernetes
+manifests/
+
 # StyleCop
 StyleCopReport.xml
 
@@ -362,3 +365,6 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 src/Client/wwwroot/site-data/docs/toc.json
+
+# local tools
+tools/
