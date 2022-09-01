@@ -1,12 +1,12 @@
-﻿@page "/app-configuration/get-started/cloudfoundry"
+@page "/app-configuration/get-started/cloudfoundry"
 
 	<Breadcrumbs NavName="Cloud Foundry Provider"
 							 ParentLinkName="App Configuration"
 							 ParentLinkUrl="/app-configuration"
-							 ShowGetStarted=true />
+							 ShowGetStarted="true" />
 <Tutorial>
 	<Title>App Configuration with @ServiceName</Title>
-	<Description>This tutorial takes you through setting up a .NET Core application that retrieves environment variable values from @ServiceName.</Description>
+	<Description>This tutorial takes you through setting up a .NET Core application that retrieves environment variable values from @(ServiceName).</Description>
 	<TutorialSteps>
 
 		<div class="row">
@@ -22,7 +22,7 @@
 						<div>Run the application</div>
 						<div>
 							<TabSet>
-								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFServices=true NoCFProvider=true />
+								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFServices="true" NoCFProvider="true" />
 							</TabSet>
 						</div>
 					</li>
@@ -36,7 +36,7 @@
 </Tutorial>
 @code
 {
-	private string ServiceName = "Cloud Foundry";
-	//private string InstanceName = "myCFExample";
-	private string ProjectName = "Cloud_Foundry_Example";
+    private const string ServiceName = "Cloud Foundry";
+    //private string InstanceName = "myCFExample";
+    private const string ProjectName = "Cloud_Foundry_Example";
 }

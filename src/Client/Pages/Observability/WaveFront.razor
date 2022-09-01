@@ -1,15 +1,15 @@
-﻿@page "/observability/wavefront"
+@page "/observability/wavefront"
 
 	<Breadcrumbs NavName="Wavefront"
 							 ParentLinkName="Observability"
 							 ParentLinkUrl="/observability"
-							 ShowGetStarted=false />
+							 ShowGetStarted="false" />
 <Tutorial>
 	<Title>Using Wavefront for app container metrics, distributed tracing, and observability</Title>
 	<Description>This tutorial takes you creating a simple Steeltoe app with actuators, logging, and distributed tracing. With that app running you then export the data to a Wavefront account.</Description>
 	<TutorialSteps>
 		<div class="row">
-			<div class="col-12 getting-started-header bold">Prereq's</div>
+			<div class="col-12 getting-started-header bold">Prerequisites</div>
 		</div>
 		<div class="row">
 			<div class="col-12">
@@ -228,5 +228,5 @@ wavefront-proxy   /bin/bash /run.sh                Up      0.0.0.0:2878->2878/tc
 {
 	//private string ServiceName = "wavefront";
 	//private string InstanceName = "mywavefrontapp";
-	private string ProjectName = "Wavefront_Observability";
+	private const string ProjectName = "Wavefront_Observability";
 }

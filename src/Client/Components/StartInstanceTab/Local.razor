@@ -1,4 +1,4 @@
-﻿
+
 <Tab Title="Local">
 	<ol>
 		<li>
@@ -16,8 +16,6 @@
 	public string ServiceName { get; set; } = "";
 	[Parameter]
 	public RenderFragment DockerCmd { get; set; }
-
-  [Parameter]
-  public RenderFragment AdditionalSteps { get; set; }
-
+    [Parameter]
+    public RenderFragment AdditionalSteps { get; set; }
 }

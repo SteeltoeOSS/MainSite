@@ -1,9 +1,9 @@
-﻿@page "/cloud-management/get-started/logging"
+@page "/cloud-management/get-started/logging"
 
 <Breadcrumbs NavName="Dynamic Logging"
 						 ParentLinkName="Cloud Management"
 						 ParentLinkUrl="/cloud-management"
-						 ShowGetStarted=true />
+						 ShowGetStarted="true" />
 <Tutorial>
 	<Title>Using @ServiceName for debugging with Zipkin</Title>
 	<Description>This tutorial takes you through setting up a .NET Core application with the Redis service connector.</Description>
@@ -22,7 +22,7 @@
 						<div>Run the application</div>
 						<div>
 							<TabSet>
-								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFServices=true >
+								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFServices="true">
 									<AdditionalSteps>
 									<li>With the application successfully pushed, navigate to App Manager&gt;Logs tab to see the new option to configure logging levels.
 									<img src="images/initializr/dynamic-logger-appmanager.png" class="img-fluid" /></li>
@@ -38,6 +38,6 @@
 </Tutorial>
 @code
 {
-	private string ServiceName = "Dynamic Logging";
-	private string ProjectName = "Dynamic_Logging_Example";
+    private const string ServiceName = "Dynamic Logging";
+    private const string ProjectName = "Dynamic_Logging_Example";
 }

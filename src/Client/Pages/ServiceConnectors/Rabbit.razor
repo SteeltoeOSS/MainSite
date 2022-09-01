@@ -1,9 +1,9 @@
-﻿@page "/service-connectors/get-started/rabbit"
+@page "/service-connectors/get-started/rabbit"
 
 	<Breadcrumbs NavName="RabbitMQ Messaging"
 							 ParentLinkName="Service connectors"
 							 ParentLinkUrl="/service-connectors"
-							 ShowGetStarted=true />
+							 ShowGetStarted="true" />
 <Tutorial>
 	<Title>Using Service Connectors with RabbitMQ</Title>
 	<Description>This tutorial takes you through setting up a .NET Core application with the RabbitMQ service connector.</Description>
@@ -19,7 +19,7 @@
 						<DockerCmd>docker run --publish 5672:5672 steeltoeoss/rabbitmq</DockerCmd>
 					</Steeltoe.Client.Components.StartInstanceTab.Local>
 					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<CFCreateServiceCmd>cf create-service p.rabbitmq single-node-3.7 @InstanceName</CFCreateServiceCmd>
+						<CfCreateServiceCmd>cf create-service p.rabbitmq single-node-3.7 @InstanceName</CfCreateServiceCmd>
 						<AdditionalSteps>
 							<Note><Message>In the above example we are choosing the p.rabbitmq service with a single-node-3.7 plan. Naming can vary in each foundation. Find your plan naming with the <code>cf marketplace</code> command</Message></Note>
 						</AdditionalSteps>
@@ -104,7 +104,7 @@ Received message: Message 5</code></pre>
 </Tutorial>
 @code
 {
-	private string ServiceName = "RabbitMQ";
-	private string InstanceName = "myrabbitservice";
-	private string ProjectName = "RabbitMQ_Connector";
+	private const string ServiceName = "RabbitMQ";
+	private const string InstanceName = "myrabbitservice";
+	private const string ProjectName = "RabbitMQ_Connector";
 }

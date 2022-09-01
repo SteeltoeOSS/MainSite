@@ -1,11 +1,11 @@
-﻿
+
 <Tab Title="Azure">
 	<ol>
 		<li>
 			Follow the Azure <a href="@AzureGettingStartedUrl" target="_blank">getting started guide</a> to get a @ServiceName instance started
 		</li>
 		<li>Name the instance @InstanceName </li>
-		<li>As you set up the instance, note the creds and connection string created. You'll need this in the following steps.</li>
+		<li>As you set up the instance, note the credentials and connection string created. You'll need this in the following steps.</li>
 		@AdditionalSteps
 	</ol>
 </Tab>
@@ -17,7 +17,6 @@
 	public string ServiceName { get; set; } = "";
 	[Parameter]
 	public RenderFragment AzureGettingStartedUrl { get; set; }
-
 	[Parameter]
 	public RenderFragment AdditionalSteps { get; set; }
 }

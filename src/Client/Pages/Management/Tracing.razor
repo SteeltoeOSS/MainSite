@@ -1,9 +1,9 @@
-﻿@page "/cloud-management/get-started/distributed-tracing"
+@page "/cloud-management/get-started/distributed-tracing"
 
 <Breadcrumbs NavName="Distributed Tracing"
 						 ParentLinkName="Cloud Management"
 						 ParentLinkUrl="/cloud-management"
-						 ShowGetStarted=true />
+						 ShowGetStarted="true" />
 <Tutorial>
 	<Title>Using @ServiceName for debugging with Zipkin</Title>
 	<Description>This tutorial takes you through setting up a .NET Core application that sends tracing data to a Zipkin server.</Description>
@@ -23,8 +23,8 @@
 							<li>You can view the Zipkin dashboard by navigating to <a href="http://localhost:9411" target="_blank">http://localhost:9411</a></li>
 						</AdditionalSteps>
 					</Steeltoe.Client.Components.StartInstanceTab.Local>
-					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="Zipkin" ShowServiceLookup=false>
-						<CFCreateServiceCmd>cf push @InstanceName --docker-image steeltoeoss/zipkin</CFCreateServiceCmd>
+					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="Zipkin" ShowServiceLookup="false">
+						<CfCreateServiceCmd>cf push @InstanceName --docker-image steeltoeoss/zipkin</CfCreateServiceCmd>
 						<AdditionalSteps>
 							<li>Once the app is deployed and the Zipkin server is started, the cf cli will print out the public route. An example route would be <code>mytracingexample.cfapps.io</code>. You will need this value below.</li>
 						</AdditionalSteps>
@@ -78,7 +78,7 @@ public void ConfigureServices(IServiceCollection services)
 						<div>
 							<TabSet>
 								<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" />
-								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" InstanceName="@InstanceName" NoCFServices=true />
+								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" InstanceName="@InstanceName" NoCFServices="true" />
 								@*<Steeltoe.Client.Components.RunAppTab.StTooling ProjectName="@ProjectName" />*@
 							</TabSet>
 						</div>
@@ -98,7 +98,7 @@ public void ConfigureServices(IServiceCollection services)
 </Tutorial>
 @code
 {
-	private string ServiceName = "Distributed Tracing";
-	private string InstanceName = "myTracingExample";
-	private string ProjectName = "Distributed_Tracing_Example";
+	private const string ServiceName = "Distributed Tracing";
+	private const string InstanceName = "myTracingExample";
+	private const string ProjectName = "Distributed_Tracing_Example";
 }

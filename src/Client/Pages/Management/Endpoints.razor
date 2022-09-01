@@ -1,9 +1,9 @@
-﻿@page "/cloud-management/get-started/endpoints"
+@page "/cloud-management/get-started/endpoints"
 
 <Breadcrumbs NavName="Management Endpoints"
 						 ParentLinkName="Cloud Management"
 						 ParentLinkUrl="/cloud-management"
-						 ShowGetStarted=true />
+						 ShowGetStarted="true" />
 <div class="width-all">
  <div class="width-60 container">
 <Tip>
@@ -37,7 +37,7 @@
 						<div>
 							<TabSet>
 								@*<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" LocalEndpointAddress="http://localhost/actuators" />*@
-								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFServices=true NoPackageManager=true>
+								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFServices="true" NoPackageManager="true">
 									<AdditionalSteps>
 										<li>
 											With the application successfully pushed, navigate to App Manager to see the new features enabled.
@@ -55,7 +55,7 @@
 </Tutorial>
 @code
 {
-	private string ServiceName = "Management Endpoints";
+	private const string ServiceName = "Management Endpoints";
 	//private string InstanceName = "myEndpointsExample";
-	private string ProjectName = "Management_Endpoints_Example";
+	private const string ProjectName = "Management_Endpoints_Example";
 }

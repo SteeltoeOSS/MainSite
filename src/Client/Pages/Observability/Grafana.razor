@@ -1,9 +1,9 @@
-﻿@page "/observability/grafana"
+@page "/observability/grafana"
 
 	<Breadcrumbs NavName="Grafana"
 							 ParentLinkName="Observability"
 							 ParentLinkUrl="/observability"
-							 ShowGetStarted=false />
+							 ShowGetStarted="false" />
 <Tutorial>
 	<Title>Using Grafana for app container metrics, distributed tracing, and observability</Title>
 	<Description>This tutorial takes you creating a simple Steeltoe app with actuators, logging, and distributed tracing. With that app running you then export the data to an instance of Prometheus and visualize things in a Grafana dashboard.</Description>
@@ -153,7 +153,7 @@ public class Startup
         <TabSet>
 				  <Steeltoe.Client.Components.RunAppTab.DockerCompose TerminalPromptPrefix="C:\tmp\observability\grafana">
             <AdditionalSteps>
-            <Note>If you get a permissionerror message about "db.lock" close your IDE. Then run docker-compose command again.</Note>
+            <Note>If you get a permission error message about "db.lock" close your IDE. Then run docker-compose command again.</Note>
             <Note>Confirm everything started successfully by running <code>docker-compose ps</code> and checking the State. Output should look similar to this:
               <pre><code>    Name                  Command               State                          Ports
 ------------------------------------------------------------------------------------------------------------
@@ -187,5 +187,5 @@ zipkin         /busybox/sh run.sh               Up      0.0.0.0:9411->9411/tcp</
 {
 	//private string ServiceName = "grafana";
 	//private string InstanceName = "mygrafanaservice";
-	private string ProjectName = "Grafana_Observability";
+	private const string ProjectName = "Grafana_Observability";
 }

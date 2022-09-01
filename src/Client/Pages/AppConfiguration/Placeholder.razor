@@ -1,9 +1,9 @@
-﻿@page "/app-configuration/get-started/placeholder"
+@page "/app-configuration/get-started/placeholder"
 
 <Breadcrumbs NavName="Placeholder Provider"
 							 ParentLinkName="App Configuration"
 							 ParentLinkUrl="/app-configuration"
-							 ShowGetStarted=true />
+							 ShowGetStarted="true" />
 <Tutorial>
 	<Title>Application Configuration Placeholders</Title>
 	<Description>This tutorial takes you through setting up a .NET Core application that uses placeholders for config values.</Description>
@@ -23,7 +23,7 @@
 						<div>
 							<TabSet>
 								<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" />
-								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFServices=true />
+								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFServices="true" />
 								<Steeltoe.Client.Components.RunAppTab.AzureAppService>
 									<AzureDeployHowToUrl>https://docs.microsoft.com/en-us/visualstudio/deployment/quickstart-deploy-to-azure?view=vs-2019</AzureDeployHowToUrl>
 								</Steeltoe.Client.Components.RunAppTab.AzureAppService>
@@ -43,5 +43,5 @@
 @code
 {
 	//private string ServiceName = "Place Holder";
-	private string ProjectName = "Placeholder_Example";
+    private const string ProjectName = "Placeholder_Example";
 }

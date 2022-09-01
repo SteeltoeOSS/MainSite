@@ -1,9 +1,9 @@
-﻿@page "/service-connectors/get-started/mongo"
+@page "/service-connectors/get-started/mongo"
 
 	<Breadcrumbs NavName="Mongo Database"
 							 ParentLinkName="Service connectors"
 							 ParentLinkUrl="/service-connectors"
-							 ShowGetStarted=true />
+							 ShowGetStarted="true" />
 <Tutorial>
 	<Title>Using Service Connectors with Mongo DB</Title>
 	<Description>This tutorial takes you through setting up a .NET Core application with the Mongo DB service connector.</Description>
@@ -92,7 +92,7 @@
 
 @code
 {
-	private string ServiceName = "Mongo";
-	private string InstanceName = "mymongoservice";
-	private string ProjectName = "Mongo_Connector";
+	private const string ServiceName = "Mongo";
+	private const string InstanceName = "mymongoservice";
+	private const string ProjectName = "Mongo_Connector";
 }

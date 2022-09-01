@@ -1,8 +1,8 @@
-﻿@page "/service-connectors/get-started/mssql"
+@page "/service-connectors/get-started/mssql"
 	<Breadcrumbs NavName="Microsoft SQL Database"
 							 ParentLinkName="Service connectors"
 							 ParentLinkUrl="/service-connectors"
-							 ShowGetStarted=true />
+							 ShowGetStarted="true" />
 <Tutorial>
  <Title>Using Service Connectors with Microsoft SQL</Title>
  <Description>This tutorial takes you through setting up a .NET Core application with the Microsoft SQL service connector.</Description>
@@ -94,7 +94,7 @@
 
 @code
 {
-	private string ServiceName = "MS SQL";
-	private string InstanceName = "mysqlservice";
-	private string ProjectName = "MsSql_Connector";
+	private const string ServiceName = "MS SQL";
+	private const string InstanceName = "mysqlservice";
+	private const string ProjectName = "MsSql_Connector";
 }

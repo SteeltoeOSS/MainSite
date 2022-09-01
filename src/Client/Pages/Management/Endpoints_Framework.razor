@@ -1,9 +1,9 @@
-﻿@page "/cloud-management/get-started/endpoints/framework"
+@page "/cloud-management/get-started/endpoints/framework"
 
 <Breadcrumbs NavName="Management Endpoints (.NET Framework)"
 						 ParentLinkName="Cloud Management"
 						 ParentLinkUrl="/cloud-management"
-						 ShowGetStarted=true />
+						 ShowGetStarted="true" />
 
 <div class="width-all">
 	<div class="width-60 container">
@@ -59,9 +59,9 @@
 					</li>
 					<li>
 						Install NuGet distributed packages
-<pre><code>Install-Package -Id Microsoft.Extensions.Configuration -Version @DotNetVersion
-Install-Package -Id Microsoft.Extensions.Logging -Version @DotNetVersion
-Install-Package -Id Microsoft.Extensions.Logging.Console -Version @DotNetVersion
+<pre><code>Install-Package -Id Microsoft.Extensions.Configuration
+Install-Package -Id Microsoft.Extensions.Logging
+Install-Package -Id Microsoft.Extensions.Logging.Console
 Install-Package -Id OpenCensus -IncludePrerelease
 Install-Package -Id Steeltoe.Extensions.Logging.DynamicLogger -Version @SteeltoeVersion
 Install-Package -Id Steeltoe.Management.EndpointBase -Version @SteeltoeVersion
@@ -289,7 +289,7 @@ protected void Application_Stop(){
 						<div>
 							<TabSet>
 								@*<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" LocalEndpointAddress="http://localhost/actuators" />*@
-								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFProvider=true NoCFServices=true NoPackageManager=true AsDotNetFramework=true>
+								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFProvider="true" NoCFServices="true" NoPackageManager="true" AsDotNetFramework="true">
 									<AdditionalSteps>
 					<li>
 						With the application successfully pushed, navigate to App Manager to see the new features enabled.
@@ -307,10 +307,9 @@ protected void Application_Stop(){
 </Tutorial>
 @code
 {
-	private string ServiceName = "Management Endpoints";
+	private const string ServiceName = "Management Endpoints";
 	//private string InstanceName = "myEndpointsExample";
-	private string ProjectName = "Management_Endpoints_Example";
-	private string SteeltoeVersion = "2.4";
-	private string DotNetVersion = "2.2";
+	private const string ProjectName = "Management_Endpoints_Example";
+	private const string SteeltoeVersion = "2.5";
 }
 }

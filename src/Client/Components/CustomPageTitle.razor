@@ -1,4 +1,4 @@
-﻿@inject IJSRuntime JSRuntime
+@inject IJSRuntime JsRuntime
 
 @code {
 	[Parameter]
@@ -6,7 +6,7 @@
 
 	protected override Task OnAfterRenderAsync(bool firstRender) {
 		string title = !string.IsNullOrEmpty(Title) ? "Steeltoe - " + Title : "Steeltoe";
-		JSRuntime.InvokeVoidAsync("setPageTitle", title);
+		JsRuntime.InvokeVoidAsync("setPageTitle", title);
 
 		return base.OnAfterRenderAsync(firstRender);
 	}

@@ -1,9 +1,9 @@
-﻿@page "/security-providers/get-started/redisstore"
+@page "/security-providers/get-started/redisstore"
 
 <Breadcrumbs NavName="Key Ring with Redis"
 							 ParentLinkName="Security Providers"
 							 ParentLinkUrl="/security-providers"
-							 ShowGetStarted=true />
+							 ShowGetStarted="true" />
 <Tutorial>
 	<Title>Using Cloud Security with a Redis Cache for key ring store</Title>
 	<Description>This tutorial takes you through setting up a .NET Core application that stores its master keys used to protect payloads in an external Redis cache. Learn more about ASP.NET data protection <Href href="https://docs.microsoft.com/en-us/aspnet/core/security/data-protection" target="_blank"></Href>. </Description>
@@ -19,7 +19,7 @@
 						<DockerCmd>docker run --publish 6379:6379 steeltoeoss/redis</DockerCmd>
 					</Steeltoe.Client.Components.StartInstanceTab.Local>
 					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<CFCreateServiceCmd>cf create-service p.redis cache-small @InstanceName</CFCreateServiceCmd>
+						<CfCreateServiceCmd>cf create-service p.redis cache-small @InstanceName</CfCreateServiceCmd>
 						<AdditionalSteps>
 							<Note><Message>In the above example we are choosing p.redis service with a cache-small plan. Naming can vary in each foundation. Find your plan naming with the <code>cf marketplace</code> command</Message></Note>
 						</AdditionalSteps>
@@ -109,7 +109,7 @@ public class Startup {
 						</TabSet>
 					</li>
 					<li>
-						Thats it! Now you can run multiple instances of your application and they will all share the same master key for encrypting its payloads.
+						That's it! Now you can run multiple instances of your application and they will all share the same master key for encrypting its payloads.
 					</li>
 				</ol>
 			</div>
@@ -118,7 +118,7 @@ public class Startup {
 </Tutorial>
 @code
 {
-	private string ServiceName = "RedisStore";
-	private string InstanceName = "myRedisKeyRing";
-	private string ProjectName = "Redis_KeyRing_Example";
+	private const string ServiceName = "RedisStore";
+	private const string InstanceName = "myRedisKeyRing";
+	private const string ProjectName = "Redis_KeyRing_Example";
 }

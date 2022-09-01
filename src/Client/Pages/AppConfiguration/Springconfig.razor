@@ -1,9 +1,9 @@
-﻿@page "/app-configuration/get-started/springconfig"
+@page "/app-configuration/get-started/springconfig"
 
 <Breadcrumbs NavName="Spring Config Provider"
 							 ParentLinkName="App Configuration"
 							 ParentLinkUrl="/app-configuration"
-							 ShowGetStarted=true />
+							 ShowGetStarted="true" />
 <Tutorial>
 	<Title>App Configuration with a Spring Config Server</Title>
 	<Description>This tutorial takes you through setting up a .NET Core application that gets configuration values from a Spring Config Server.</Description>
@@ -48,7 +48,7 @@ Value2: another-val
 						<DockerCmd>docker run --publish 8888:8888 steeltoeoss/config-server --spring.cloud.config.server.git.uri=&lt;NEW_REPO_URL&gt;</DockerCmd>
 					</Steeltoe.Client.Components.StartInstanceTab.Local>
 					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<CFCreateServiceCmd>cf create-service p-config-server standard @InstanceName -c '{ \"git\": { \"uri\": \"&lt;NEW_REPO_URL&gt;\" } }'</CFCreateServiceCmd>
+						<CfCreateServiceCmd>cf create-service p-config-server standard @InstanceName -c '{ \"git\": { \"uri\": \"&lt;NEW_REPO_URL&gt;\" } }'</CfCreateServiceCmd>
 					</Steeltoe.Client.Components.StartInstanceTab.CloudFoundry>
 				</TabSet>
 			</div>
@@ -91,7 +91,7 @@ Value2: another-val
 </Tutorial>
 @code
 {
-	private string ServiceName = "Spring Config Server";
-	private string InstanceName = "myConfigService";
-	private string ProjectName = "Spring_Config_Example";
+	private const string ServiceName = "Spring Config Server";
+	private const string InstanceName = "myConfigService";
+	private const string ProjectName = "Spring_Config_Example";
 }

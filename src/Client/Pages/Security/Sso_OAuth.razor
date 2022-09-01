@@ -1,9 +1,9 @@
-﻿@page "/security-providers/get-started/sso/oauth"
+@page "/security-providers/get-started/sso/oauth"
 
 <Breadcrumbs NavName="Cloud Foundry Single Sign-on with OAuth2"
 						 ParentLinkName="Security Providers"
 						 ParentLinkUrl="/security-providers"
-						 ShowGetStarted=true />
+						 ShowGetStarted="true" />
 
 <Tutorial>
 	<Title>Using Cloud Foundry SSO with OAuth2 provider</Title>
@@ -18,7 +18,7 @@
 			<div class="col-12">
 				<TabSet>
 					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<CFCreateServiceCmd>cf create-service p-identity my-sso-plan @InstanceName</CFCreateServiceCmd>
+						<CfCreateServiceCmd>cf create-service p-identity my-sso-plan @InstanceName</CfCreateServiceCmd>
 						<AdditionalSteps>
 							Use the <Href href="https://docs.pivotal.io/p-identity" target="_blank">Pivotal Single Sign-On guide</Href> to deploying the SSO tile. Choose from the list of supported identity providers.
 						</AdditionalSteps>
@@ -165,8 +165,8 @@ public class ValuesController : ControllerBase{
 </Tutorial>
 @code
 {
-	private string ServiceName = "SSO";
-	private string InstanceName = "myoAuthSSOExample";
-	private string ProjectName = "OAuth_SSO_Example";
-	private string SteeltoeVersion = "2.4";
+	private const string ServiceName = "SSO";
+	private const string InstanceName = "myoAuthSSOExample";
+	private const string ProjectName = "OAuth_SSO_Example";
+	private const string SteeltoeVersion = "2.5";
 }

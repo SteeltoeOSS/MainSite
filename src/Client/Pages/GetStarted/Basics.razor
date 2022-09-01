@@ -1,9 +1,9 @@
-﻿@page "/get-started/basics"
+@page "/get-started/basics"
 
 <Breadcrumbs NavName="Steeltoe Basics"
 							 ParentLinkName="Get Started"
 							 ParentLinkUrl="/get-started"
-							 ShowGetStarted=false />
+							 ShowGetStarted="false" />
 <Tutorial>
 	<Title>Building a basic ASP.NET Core app with Steeltoe</Title>
 	<Description>This tutorial takes you through setting up a .NET Core application that uses the essential Steeltoe packages, every microservice should have.</Description>
@@ -124,7 +124,7 @@ public IEnumerable&lt;WeatherForecast&gt; Get() {
 					<div>Run the application</div>
 					<div>
 						<TabSet>
-							<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" IncludeNavigateToApp=true />
+							<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" IncludeNavigateToApp="true" />
 						</TabSet>
 					</div>
 				</li>
@@ -147,6 +147,6 @@ public IEnumerable&lt;WeatherForecast&gt; Get() {
 @code
 {
 	//private string ServiceName = "Place Holder";
-	private string ProjectName = "Steeltoe_Basics";
-	private string SteeltoeVersion = "3.0";
+	private const string ProjectName = "Steeltoe_Basics";
+	private const string SteeltoeVersion = "3.0";
 }

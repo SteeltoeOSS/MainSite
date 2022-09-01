@@ -1,12 +1,12 @@
-﻿@page "/service-discovery/get-started/eureka"
+@page "/service-discovery/get-started/eureka"
 
 <Breadcrumbs NavName="Eureka Service Discovery"
 						 ParentLinkName="Service Discovery"
 						 ParentLinkUrl="/service-discovery"
-						 ShowGetStarted=true />
+						 ShowGetStarted="true" />
 <Tutorial>
 	<Title>Using Service Discovery with Eureka Server</Title>
-	<Description>This tutorital takes you through setting up two .NET Core applications using services discovery. The first will register it's endpoints for discovery, and the second will discover the first's services.</Description>
+	<Description>This tutorial takes you through setting up two .NET Core applications using services discovery. The first will register it's endpoints for discovery, and the second will discover the first's services.</Description>
 	<TutorialSteps>
 
 		<div class="row">
@@ -19,7 +19,7 @@
 						<DockerCmd>docker run --publish 8761:8761 steeltoeoss/eureka-server</DockerCmd>
 					</Steeltoe.Client.Components.StartInstanceTab.Local>
 					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<CFCreateServiceCmd>cf create-service p-service-registry standard @InstanceName</CFCreateServiceCmd>
+						<CfCreateServiceCmd>cf create-service p-service-registry standard @InstanceName</CfCreateServiceCmd>
 					</Steeltoe.Client.Components.StartInstanceTab.CloudFoundry>
 					@*<Steeltoe.Client.Components.StartInstanceTab.StTooling InstanceName="@InstanceName" ServiceName="@ServiceName" ToolingServiceName="eureka-server" />*@
 				</TabSet>
@@ -161,8 +161,8 @@ namespace Eureka_Discover_Example.Controllers
 </Tutorial>
 @code
 {
-	private string ServiceName = "Eureka";
-	private string InstanceName = "myEurekaExample";
-	private string RegisterProjectName = "Eureka_Register_Example";
-	private string DiscoverProjectName = "Eureka_Discover_Example";
+	private const string ServiceName = "Eureka";
+	private const string InstanceName = "myEurekaExample";
+	private const string RegisterProjectName = "Eureka_Register_Example";
+	private const string DiscoverProjectName = "Eureka_Discover_Example";
 }

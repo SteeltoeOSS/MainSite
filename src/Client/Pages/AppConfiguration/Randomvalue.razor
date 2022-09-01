@@ -1,9 +1,9 @@
-﻿@page "/app-configuration/get-started/randomvalue"
+@page "/app-configuration/get-started/randomvalue"
 
 <Breadcrumbs NavName="Random Value Provider"
 							 ParentLinkName="App Configuration"
 							 ParentLinkUrl="/app-configuration"
-							 ShowGetStarted=true />
+							 ShowGetStarted="true" />
 <Tutorial>
 	<Title>Application Configuration Random Values</Title>
 	<Description>This tutorial takes you through setting up a .NET Core application that gets a random value for a config setting.</Description>
@@ -23,7 +23,7 @@
 						<div>
 							<TabSet>
 								<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" />
-								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFServices=true />
+								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFServices="true" />
 								<Steeltoe.Client.Components.RunAppTab.AzureAppService>
 									<AzureDeployHowToUrl>https://docs.microsoft.com/en-us/visualstudio/deployment/quickstart-deploy-to-azure?view=vs-2019</AzureDeployHowToUrl>
 								</Steeltoe.Client.Components.RunAppTab.AzureAppService>
@@ -43,5 +43,5 @@
 @code
 {
 	//private string ServiceName = "Random Value";
-	private string ProjectName = "RandomValue_Example";
+    private const string ProjectName = "RandomValue_Example";
 }

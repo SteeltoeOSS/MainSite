@@ -1,10 +1,10 @@
-﻿@page "/messaging/get-started/rabbitmq"
-@inject IJSRuntime JSRuntime
+@page "/messaging/get-started/rabbitmq"
+@inject IJSRuntime JsRuntime
 
 	<Breadcrumbs NavName="Messaging with RabbitMQ "
 							 ParentLinkName="Messaging"
 							 ParentLinkUrl="/messaging"
-							 ShowGetStarted=true />
+							 ShowGetStarted="true" />
 <Tutorial>
 	<Title>RabbitMQ Messaging</Title>
 	<Description>This tutorial takes you through setting up 2 .NET Core applications that interact through RabbitMQ.</Description>
@@ -228,14 +228,14 @@ using Steeltoe.Messaging.RabbitMQ.Attributes;
 </Tutorial>
 @code
 {
-	private string ServiceName = "RabbitMQ";
-	private string QueueName = "steeltoe_message_queue";
-	private string MonitorRabbitProjectName = "Monitor_RabbitMQ";
-	private string AddMessageProjectName = "WriteTo_RabbitMQ";
+	private const string ServiceName = "RabbitMQ";
+	private const string QueueName = "steeltoe_message_queue";
+	private const string MonitorRabbitProjectName = "Monitor_RabbitMQ";
+	private const string AddMessageProjectName = "WriteTo_RabbitMQ";
 
 	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
-    await JSRuntime.InvokeVoidAsync("highlightCode",true);
+    await JsRuntime.InvokeVoidAsync("highlightCode",true);
 		await base.OnAfterRenderAsync(firstRender);
 	}
 }

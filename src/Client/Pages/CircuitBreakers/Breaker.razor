@@ -1,10 +1,10 @@
-﻿@page "/circuit-breakers/get-started/breaker"
+@page "/circuit-breakers/get-started/breaker"
 @page "/circuit-breakers/get-started"
 
 <Breadcrumbs NavName="Circuit Breakers"
 						 ParentLinkName="Circuit Breakers"
 						 ParentLinkUrl="/circuit-breakers"
-						 ShowGetStarted=true />
+						 ShowGetStarted="true" />
 <Tutorial>
 	<Title>Implementing Circuit Breakers</Title>
 	<Description>This tutorial takes you through setting up a .NET Core application that implements a circuit breaker pattern.</Description>
@@ -24,7 +24,7 @@
 						</AdditionalSteps>
 					</Steeltoe.Client.Components.StartInstanceTab.Local>
 					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<CFCreateServiceCmd>cf create-service p-circuit-breaker-dashboard standard @InstanceName</CFCreateServiceCmd>
+						<CfCreateServiceCmd>cf create-service p-circuit-breaker-dashboard standard @InstanceName</CfCreateServiceCmd>
 						<AdditionalSteps>
 							<li>
 								Confirm the service is running by viewing the dashboard. Learn how <a href="https://docs.pivotal.io/spring-cloud-services/2-0/common/circuit-breaker/using-the-dashboard.html" target="_blank">here</a>.
@@ -80,7 +80,7 @@
 </Tutorial>
 @code
 {
-	private string ServiceName = "Circuit Breaker";
-	private string InstanceName = "myCircuitBreaker";
-	private string ProjectName = "Circuit_Breaker_Example";
+	private const string ServiceName = "Circuit Breaker";
+	private const string InstanceName = "myCircuitBreaker";
+	private const string ProjectName = "Circuit_Breaker_Example";
 }

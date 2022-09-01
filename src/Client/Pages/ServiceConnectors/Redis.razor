@@ -1,11 +1,11 @@
-﻿
+
 @page "/service-connectors/get-started/redis"
 
 
 	<Breadcrumbs NavName="Redis Cache"
 							 ParentLinkName="Service connectors"
 							 ParentLinkUrl="/service-connectors"
-							 ShowGetStarted=true />
+							 ShowGetStarted="true" />
 <Tutorial>
 	<Title>Using Service Connectors with Redis Cache</Title>
 	<Description>This tutorial takes you through setting up a .NET Core application with the Redis service connector.</Description>
@@ -21,7 +21,7 @@
 						<DockerCmd>docker run --publish 6379:6379 steeltoeoss/redis</DockerCmd>
 					</Steeltoe.Client.Components.StartInstanceTab.Local>
 					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<CFCreateServiceCmd>cf create-service p.redis cache-small @InstanceName</CFCreateServiceCmd>
+						<CfCreateServiceCmd>cf create-service p.redis cache-small @InstanceName</CfCreateServiceCmd>
 						<AdditionalSteps>
 							<Note><Message>In the above example we are choosing p.redis service with a cache-small plan. Naming can vary in each foundation. Find your plan naming with the <code>cf marketplace</code> command</Message></Note>
 						</AdditionalSteps>
@@ -97,7 +97,7 @@
 </Tutorial>
 @code
 {
-	private string ServiceName = "Redis";
-	private string InstanceName = "myredisservice";
-	private string ProjectName = "Redis_Connector";
+	private const string ServiceName = "Redis";
+	private const string InstanceName = "myredisservice";
+	private const string ProjectName = "Redis_Connector";
 }

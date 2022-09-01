@@ -1,19 +1,19 @@
-﻿@page "/observability/tanzu"
+@page "/observability/tanzu"
 
 	<Breadcrumbs NavName="Tanzu App Manager"
 							 ParentLinkName="Observability"
 							 ParentLinkUrl="/observability"
-							 ShowGetStarted=false />
+							 ShowGetStarted="false" />
 <Tutorial>
 	<Title>Using Tanzu App Manager for app container metrics, distributed tracing, and observability</Title>
 	<Description>This tutorial takes you creating a simple Steeltoe app with actuators, logging, and distributed tracing. With that app running you then export the data to a Tanzu Application Services foundation.</Description>
 	<TutorialSteps>
 		<div class="row">
-			<div class="col-12 getting-started-header bold">Prereq's.</div>
+			<div class="col-12 getting-started-header bold">Prerequisites.</div>
 		</div>
 		<div class="row">
 			<div class="col-12">
-				You'll need acces to Tanzu Application Services to complete this guide. If you don't already have creds and the URL to app manager, create a free account <Href href="https://run.pivotal.io/" target="_blank">here</Href>.
+				You'll need access to Tanzu Application Services to complete this guide. If you don't already have credentials and the URL to app manager, create a free account <Href href="https://run.pivotal.io/" target="_blank">here</Href>.
 			</div>
 		</div>
 		<div class="row">
@@ -22,8 +22,8 @@
 		<div class="row">
 			<div class="col-12">
 				<TabSet>
-					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="Zipkin" ShowServiceLookup=false>
-						<CFCreateServiceCmd>cf push @InstanceName --docker-image steeltoeoss/zipkin</CFCreateServiceCmd>
+					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="Zipkin" ShowServiceLookup="false">
+						<CfCreateServiceCmd>cf push @InstanceName --docker-image steeltoeoss/zipkin</CfCreateServiceCmd>
 						<AdditionalSteps>
 							<li>Once the app is deployed and the Zipkin server is started, the cf cli will print out the public route. An example route would be <code>mytracingexample.cfapps.io</code>. You will need this value below.</li>
 						</AdditionalSteps>
@@ -137,7 +137,7 @@ public class Startup
 						<div>Run the application</div>
 						<div>
 							<TabSet>
-								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" InstanceName="@InstanceName" NoCFServices=true NoPackageManager=true>
+								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" InstanceName="@InstanceName" NoCFServices="true" NoPackageManager="true">
 									<AdditionalSteps>
 										<li>
 											With the application successfully pushed, navigate to App Manager to see the new features enabled.
@@ -165,6 +165,6 @@ public class Startup
 @code
 {
 	//private string ServiceName = "appmanager";
-	private string InstanceName = "myappmanagerservice";
-	private string ProjectName = "TAS_Observability";
+	private const string InstanceName = "myappmanagerservice";
+	private const string ProjectName = "TAS_Observability";
 }

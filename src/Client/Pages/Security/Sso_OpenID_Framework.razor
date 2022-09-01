@@ -1,9 +1,9 @@
-﻿@page "/security-providers/get-started/sso/openid/framework"
+@page "/security-providers/get-started/sso/openid/framework"
 
 <Breadcrumbs NavName="Cloud Foundry Single Sign-on with OpenID Connect (.NET Framework)"
 						 ParentLinkName="Security Providers"
 						 ParentLinkUrl="/security-providers"
-						 ShowGetStarted=true />
+						 ShowGetStarted="true" />
 
 <div class="width-all">
 	<div class="width-60 container">
@@ -34,7 +34,7 @@
 						</AdditionalSteps>
 					</Steeltoe.Client.Components.StartInstanceTab.Local>*@
 					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<CFCreateServiceCmd>cf create-service p-identity my-sso-plan @InstanceName</CFCreateServiceCmd>
+						<CfCreateServiceCmd>cf create-service p-identity my-sso-plan @InstanceName</CfCreateServiceCmd>
 						<AdditionalSteps>
 							Use the <Href href="https://docs.pivotal.io/p-identity" target="_blank">Pivotal Single Sign-On guide</Href> to deploying the SSO tile. Choose from the list of supported identity providers.
 						</AdditionalSteps>
@@ -388,9 +388,9 @@ public class ValuesController : ApiController{
 </Tutorial>
 @code
 {
-	private string ServiceName = "SSO";
-	private string InstanceName = "myOidSSOExample";
-	private string ProjectName = "OpenID_SSO_Example";
-	private string SteeltoeVersion = "2.4";
+	private const string ServiceName = "SSO";
+	private const string InstanceName = "myOidSSOExample";
+	private const string ProjectName = "OpenID_SSO_Example";
+	private const string SteeltoeVersion = "2.5";
 }
 }

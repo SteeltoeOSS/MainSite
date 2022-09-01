@@ -1,9 +1,9 @@
-﻿
+
 <Tab Title="Cloud Foundry">
 	<ol>
 		<li>
 			Start an instance of @ServiceName, named @InstanceName
-			<pre><code class="powershell">@CFCreateServiceCmd</code></pre>
+			<pre><code class="powershell">@CfCreateServiceCmd</code></pre>
 		</li>
 		<li class="@(ShowServiceLookup == false ? "hide" : "")">
 			Wait for service to be ready
@@ -19,11 +19,9 @@
 	[Parameter]
 	public string ServiceName { get; set; } = "";
 	[Parameter]
-	public RenderFragment CFCreateServiceCmd { get; set; }
+	public RenderFragment CfCreateServiceCmd { get; set; }
 	[Parameter]
 	public bool ShowServiceLookup { get; set; } = true;
-
-	[Parameter]
+    [Parameter]
 	public RenderFragment AdditionalSteps { get; set; }
-
 }
