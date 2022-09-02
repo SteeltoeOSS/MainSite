@@ -1,4 +1,4 @@
-@inject IJSRuntime JsRuntime
+@inject IJSRuntime JSRuntime
 
 <CustomPageTitle Title="@(Name)" />
 <div class="width-all bg-yellow">
@@ -145,7 +145,7 @@
 
 	protected override async Task OnAfterRenderAsync(bool first) {
 		if(first) {
-			await JsRuntime.InvokeVoidAsync("highlightCode",true);
+			await JSRuntime.InvokeVoidAsync("highlightCode",true);
 			StateHasChanged();
 		}
 

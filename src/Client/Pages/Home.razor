@@ -1,10 +1,8 @@
 @page "/"
 @page "/index"
 
-@using Microsoft.Extensions.Options
-
-@inject IOptions<CalendarEventOptions> calendarEventOptions
-@inject IOptions<DocsSiteOptions> docsSiteOptions
+@inject IOptions<CalendarEventOptions> CalendarEventOptions
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 
 <CustomPageTitle Title="Home" />
 
@@ -21,12 +19,12 @@
         <div class="row no-gutters mt-5">
             <div class="col text-center">
                 <Href class="text-white border-white mr-4" href="/why-steeltoe" AsButton="true">WHY STEELTOE</Href>
-                <Href class="text-white border-white" href="@(docsSite.GuidesHome)" AsButton="true">GET STARTED</Href>
+                <Href class="text-white border-white" href="@(_docsSite.GuidesHome)" AsButton="true">GET STARTED</Href>
             </div>
         </div>
         <div class="row no-gutters mt-5">
             <div class="col">
-                <Banner Href="@(docsSite.BlogHome+"releases/steeltoe-3-2-whats-new.html")" BannerTypeName="Blog">
+                <Banner Href="@(_docsSite.BlogHome+"releases/steeltoe-3-2-whats-new.html")" BannerTypeName="Blog">
                     <span class="font-weight-bold">Steeltoe 3.2.0 is now available!</span> Take a look at the new features we have added <span class="font-weight-bold">&gt;</span>
                 </Banner>
             </div>
@@ -111,14 +109,14 @@
 <div class="left-yellow-slant bg-midnight-blue text-white width-all pb-4">
     <div class="width-70 container">
         <div class="text-center width-all pb-3"><h2>News</h2></div>
-        @if (events == null)
+        @if (_events == null)
         {
             <span>&nbsp;</span>
         }
         else
         {
             int i = 1;
-            @foreach (var calendarEvent in events)
+            @foreach (var calendarEvent in _events)
             {
                 <div class="row no-gutters">
                     <div class="col news">
@@ -128,7 +126,7 @@
                         <div class=""><a class="special-link" href="@calendarEvent.URL" target="_blank">read more &gt;</a></div>
                     </div>
                 </div>
-                @if (i++ < events.Count())
+                @if (i++ < _events.Count())
                 {
                     <div class="row no-gutters">
                         <div class="col"><hr class="border-steeltoe-blue" /></div>
@@ -152,14 +150,14 @@
     </div>*@
 @code {
 
-    private DocsSiteOptions docsSite;
-    private List<CalendarEvent> events;
+    private DocsSiteOptions _docsSite;
+    private List<CalendarEvent> _events;
 
     protected override void OnInitialized()
     {
 
-        docsSite = docsSiteOptions?.Value ?? throw new ArgumentNullException(nameof(docsSite));
+        _docsSite = DocsSiteOptions?.Value ?? throw new ArgumentNullException(nameof(_docsSite));
 
-        events = calendarEventOptions?.Value.Events ?? new();
+        _events = CalendarEventOptions?.Value.Events ?? new();
     }
 }

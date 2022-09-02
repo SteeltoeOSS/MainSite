@@ -1,6 +1,6 @@
 @using Steeltoe.Client.UIInterfaces
 @implements ITab
-@inject IJSRuntime JsRuntime
+@inject IJSRuntime JSRuntime
 
 <li class="nav-item @TitleCssClass">
  <a @onclick="Activate" role="tab">
@@ -29,7 +29,7 @@
 
 	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
-    await JsRuntime.InvokeVoidAsync("highlightCode",true);
+    await JSRuntime.InvokeVoidAsync("highlightCode",true);
 		await base.OnAfterRenderAsync(firstRender);
 	}
 

@@ -111,11 +111,11 @@
 		{<text>
       "port": "@EurekaAppPort",</text>
 		}
-		if (!string.IsNullOrEmpty(EurekaAppIp))
+		if (!string.IsNullOrEmpty(EurekaAppIP))
 		{<text>
-      "ipAddress": "@EurekaAppIp",</text>
+      "ipAddress": "@EurekaAppIP",</text>
 		}
-		if (!string.IsNullOrEmpty(EurekaAppIp))
+		if (!string.IsNullOrEmpty(EurekaAppIP))
 		{<text>
       "preferIpAddress": true</text>
 		}<text>
@@ -134,11 +134,11 @@
 		{<text>
       "port": "@ConsulAppPort",</text>
 		}
-		if (!string.IsNullOrEmpty(ConsulAppIp))
+		if (!string.IsNullOrEmpty(ConsulAppIP))
 		{<text>
-      "ipAddress": "@ConsulAppIp",</text>
+      "ipAddress": "@ConsulAppIP",</text>
 		}
-		if (!string.IsNullOrEmpty(ConsulAppIp))
+		if (!string.IsNullOrEmpty(ConsulAppIP))
 		{<text>
       "preferIpAddress": true</text>
 	  }<text>
@@ -194,7 +194,7 @@
 	[Parameter]
 	public string ConsulAppPort { get; set; } = null;
 	[Parameter]
-	public string ConsulAppIp { get; set; } = null;
+	public string ConsulAppIP { get; set; } = null;
 	[Parameter]
 	public string ProjectName { get; set; } = "";
 	[Parameter]
@@ -220,7 +220,7 @@
 	[Parameter]
 	public string ShouldFetchEurekaRegistry { get; set; } = null;
 	[Parameter]
-	public string EurekaAppIp { get; set; } = null;
+	public string EurekaAppIP { get; set; } = null;
 	[Parameter]
 	public string OAuthClient { get; set; } = null;
 	[Parameter]

@@ -1,6 +1,6 @@
 @using Microsoft.Extensions.Options
 
-@inject IOptions<DocsSiteOptions> docsSiteOptions
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 
 <nav class="bg-white navbar navbar-expand-xl container py-xl-2 navbar-light">
     <Href class="navbar-brand" href="/">
@@ -29,10 +29,10 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="learn">
                     <Href class="dropdown-item" href="https://start.steeltoe.io/" NewWindow>Steeltoe Initializr</Href>
-                    <Href class="dropdown-item" href="@(docsSite.GuidesHome)">Guides</Href>
-                    <Href class="dropdown-item" href="@(docsSite.DocsHome)">Documentation</Href>
-                    <Href class="dropdown-item" href="@(docsSite.ApiBrowserHome)">API Browser</Href>
-                    <Href class="dropdown-item" href="@(docsSite.BlogHome)">Blog</Href>
+                    <Href class="dropdown-item" href="@(_docsSite.GuidesHome)">Guides</Href>
+                    <Href class="dropdown-item" href="@(_docsSite.DocsHome)">Documentation</Href>
+                    <Href class="dropdown-item" href="@(_docsSite.ApiBrowserHome)">API Browser</Href>
+                    <Href class="dropdown-item" href="@(_docsSite.BlogHome)">Blog</Href>
                 </div>
             </li>
             <li class="nav-item dropdown mx-xl-2">
@@ -50,7 +50,7 @@
                     <Href class="dropdown-item" href="/security-providers">Steeltoe Security</Href>
                     <Href class="dropdown-item" href="/service-connectors">Steeltoe Service Connectors</Href>
                     <Href class="dropdown-item" href="/service-discovery">Steeltoe Service Discovery</Href>
-                    <Href class="dropdown-item" href="@(docsSite.DocsStreamHome)">Steeltoe Stream</Href>
+                    <Href class="dropdown-item" href="@(_docsSite.DocsStreamHome)">Steeltoe Stream</Href>
                 </div>
             </li>
             @*<li class="nav-item mx-xl-2">
@@ -67,11 +67,10 @@
 </nav>
 
 @code {
-
-    private DocsSiteOptions docsSite;
+    private DocsSiteOptions _docsSite;
 
     protected override void OnInitialized()
     {
-        docsSite = docsSiteOptions?.Value ?? throw new ArgumentNullException(nameof(docsSite));
+        _docsSite = DocsSiteOptions?.Value ?? throw new ArgumentNullException(nameof(_docsSite));
     }
 }

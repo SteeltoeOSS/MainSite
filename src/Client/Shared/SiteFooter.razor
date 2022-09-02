@@ -1,6 +1,6 @@
 @using Microsoft.Extensions.Options
 
-@inject IOptions<DocsSiteOptions> docsSiteOptions
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 
 <div class="width-all bg-midnight-blue">
     <div class="width-90 container" id="footer">
@@ -163,6 +163,6 @@
 
     protected override void OnInitialized()
     {
-        docsSite = docsSiteOptions?.Value ?? throw new ArgumentNullException(nameof(docsSite));
+        docsSite = DocsSiteOptions?.Value ?? throw new ArgumentNullException(nameof(docsSite));
     }
 }
