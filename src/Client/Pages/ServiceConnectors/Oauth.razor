@@ -1,15 +1,24 @@
-﻿@page "/service-connectors/get-started/oauth"
-
-	<Breadcrumbs NavName="OAuth2 Client"
+@page "/service-connectors/get-started/oauth"
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
+<Breadcrumbs NavName="OAuth2 Client"
 							 ParentLinkName="Service connectors"
 							 ParentLinkUrl="/service-connectors"
 							 ShowGetStarted="true" />
  <Tutorial>
-	<Title>Using Service Connectors with an OAuth2 service</Title>
-	<Description>Please refer to our <a href="https://github.com/SteeltoeOSS/Samples/tree/main/Security/src/CloudFoundrySingleSignon" target="_blank">OAuth2 </a> sample app on GitHub for detailed directions on using OAuth and Cloud Foundry.</Description>
-  <TutorialSteps></TutorialSteps>
+     <Title>
+         This page has moved, use the new <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/guides/service-connectors/oauth.html")">OAuth Connector Guide</NavLink>
+     </Title>
  </Tutorial>
 
 @code
 {
+    protected override void OnInitialized()
+    {
+        if (HttpContextAccessor.HttpContext != null)
+        {
+            var uri = new Uri(DocsSiteOptions.Value.BaseAddress + "/guides/service-connectors/oauth.html").ToString();
+            HttpContextAccessor.HttpContext.Response.Redirect(uri, true);
+        }
+    }
 }

@@ -1,112 +1,17 @@
 @page "/getstarted"
 @page "/get-started"
-<div class="width-all">
-	<div class="width-80 container mb-5">
-		<div class="row no-gutters">
-			<div class="col get-started-title">Get Started with Steeltoe</div>
-		</div>
-		<div class="row no-gutters">
-			<div class="col overall-get-started-item">
-				<div class="title">Application Configuration</div>
-				<ul>
-					<li><Href href="/app-configuration/get-started/springconfig">Spring Config Server</Href></li>
-					<li><Href href="/app-configuration/get-started/cloudfoundry">Cloud Foundry Provider</Href></li>
-					<li><Href href="/app-configuration/get-started/placeholder">Placeholder Provider</Href></li>
-					<li><Href href="/app-configuration/get-started/randomvalue">Random Value Provider</Href></li>
-				</ul>
-				<hr />
-			</div>
-			<div class="col-12 overall-get-started-item">
-				<div class="title">Circuit Breakers</div>
-				<ul>
-					<li><Href href="/circuit-breakers/get-started/breaker">Get Started</Href></li>
-				</ul>
-				<hr />
-			</div>
-			<div class="col-12 overall-get-started-item">
-				<div class="title">Distributed Tracing</div>
-				<ul>
-					<li><Href href="/cloud-management/get-started/distributed-tracing">Get Started</Href></li>
-				</ul>
-				<hr />
-			</div>
-			<div class="col-12 overall-get-started-item">
-				<div class="title">Dynamic Logging</div>
-				<ul>
-					<li><Href href="/cloud-management/get-started/logging">Get Started</Href></li>
-				</ul>
-				<hr />
-			</div>
-			<div class="col-12 overall-get-started-item">
-				<div class="title">Management</div>
-				<ul>
-					<li><Href href="/cloud-management/get-started/endpoints">Endpoints (Actuators)</Href></li>
-				</ul>
-				<hr />
-			</div>
-			<div class="col-12 overall-get-started-item">
-				<div class="title">Messaging</div>
-				<ul>
-					<li><Href href="/messaging/get-started/rabbitmq">RabbitMQ</Href></li>
-				</ul>
-				<hr />
-			</div>
-			<div class="col-12 overall-get-started-item">
-				<div class="title">Network File Sharing</div>
-				<ul>
-					<li><Href href="/docs/fileshares">Get Started</Href></li>
-				</ul>
-				<hr />
-			</div>
-			<div class="col-12 overall-get-started-item">
-				<div class="title">Observability</div>
-				<ul>
-					<li><Href href="/observability">Get Started</Href></li>
-				</ul>
-				<hr />
-			</div>
-			<div class="col-12 overall-get-started-item">
-				<div class="title">Security</div>
-				<ul>
-					<li><Href href="/security-providers/get-started/redisstore">Store key ring in Redis</Href></li>
-					<li><Href href="/security-providers/get-started/jwt">Resource Protection using JSON Web Tokens (JWT)</Href></li>
-					<li><Href href="/security-providers/get-started/credhub">CredHub Client</Href></li>
-					<li><Href href="/security-providers/get-started/sso/oauth">Cloud Foundry SSO with OAuth2 provider</Href></li>
-					<li><Href href="/security-providers/get-started/sso/openid">Cloud Foundry SSO with OpenID Connect provider</Href></li>
-				</ul>
-				<hr />
-			</div>
-			<div class="col-12 overall-get-started-item">
-				<div class="title">Service Connectors</div>
-				<ul>
-					<li><Href href="/service-connectors/get-started/mysql">MySQL Database</Href></li>
-					<li><Href href="/service-connectors/get-started/mssql">Microsoft SQL Database</Href></li>
-					<li><Href href="/service-connectors/get-started/postgresql">PostgreSQL Database</Href></li>
-					<li><Href href="/service-connectors/get-started/mongo">Mongo Database</Href></li>
-					<li><Href href="/service-connectors/get-started/redis">Redis Cache</Href></li>
-					<li><Href href="/service-connectors/get-started/gemfire">Apache Geode/GemFire Cache</Href></li>
-					<li><Href href="/service-connectors/get-started/rabbit">RabbitMQ Messaging</Href></li>
-					<li><Href href="/service-connectors/get-started/oauth">OAuth2 Client</Href></li>
-				</ul>
-				<hr />
-			</div>
-			<div class="col-12 overall-get-started-item">
-				<div class="title">Service Discovery</div>
-				<ul>
-					<li><Href href="/service-discovery/get-started/consul">HashiCorp Consul Registry</Href></li>
-					<li><Href href="/service-discovery/get-started/eureka">Eureka Registry</Href></li>
-				</ul>
-				<hr />
-			</div>
-			<div class="col-12 overall-get-started-item">
-				<div class="title">Developer Tools</div>
-				<ul>
-					<li><Href href="/initializr">Steeltoe Initializr Guide</Href></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-</div>
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
+
+<h1>This page has moved, find the new location <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/guides/")">here</NavLink></h1>
 
 @code {
+    protected override void OnInitialized()
+    {
+        if (HttpContextAccessor.HttpContext != null)
+        {
+            var uri = new Uri(DocsSiteOptions.Value.BaseAddress + "/guides/").ToString();
+            HttpContextAccessor.HttpContext.Response.Redirect(uri, true);
+        }
+    }
 }

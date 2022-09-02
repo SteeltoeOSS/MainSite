@@ -1,112 +1,23 @@
 @page "/service-connectors/get-started/mysql"
-
-	<Breadcrumbs NavName="MySQL Database"
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
+<Breadcrumbs NavName="MySQL Database"
 							 ParentLinkName="Service connectors"
 							 ParentLinkUrl="/service-connectors"
 							 ShowGetStarted="true" />
 <Tutorial>
-	<Title>Using Service Connectors with @ServiceName</Title>
-	<Description>This tutorial takes you through setting up a .NET Core application with the @ServiceName service connector.</Description>
-	<TutorialSteps>
-		<div class="row">
-			<div class="col-12 getting-started-header">First, <b>start a @ServiceName instance</b>. Depending on your hosting platform this is done in several ways.</div>
-		</div>
-		<div class="row">
-			<div class="col-12">
-				<TabSet>
-					<Steeltoe.Client.Components.StartInstanceTab.Local ServiceName="@ServiceName">
-						<DockerCmd>docker run --env MYSQL_ROOT_PASSWORD=@InstancePassword --publish @Port:@Port steeltoeoss/mysql</DockerCmd>
-					</Steeltoe.Client.Components.StartInstanceTab.Local>
-					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<CfCreateServiceCmd>cf create-service p.mysql db-small @InstanceName</CfCreateServiceCmd>
-						<AdditionalSteps>
-							<Note><Message>In the above example we are choosing the p.mysql service with a db-small plan. Naming can vary in each foundation. Find your plan naming with the <code>cf marketplace</code> command</Message></Note>
-						</AdditionalSteps>
-					</Steeltoe.Client.Components.StartInstanceTab.CloudFoundry>
-					<Steeltoe.Client.Components.StartInstanceTab.Azure InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<AdditionalSteps>
-							<li>Get the instance <a href="https://docs.microsoft.com/en-us/azure/mysql/quickstart-create-mysql-server-database-using-azure-portal#get-the-connection-information" target="_blank">FQDN</a></li>
-						</AdditionalSteps>
-						<AzureGettingStartedUrl>https://docs.microsoft.com/en-us/azure/mysql/quickstart-create-mysql-server-database-using-azure-portal</AzureGettingStartedUrl>
-					</Steeltoe.Client.Components.StartInstanceTab.Azure>
-					<Steeltoe.Client.Components.StartInstanceTab.Kubernetes InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<HelmGettingStartedUrl>https://hub.helm.sh/charts/stable/mysql</HelmGettingStartedUrl>
-						<HelmCmd>helm install --name @InstanceName --set mysqlRootPassword=@InstancePassword,persistence.enabled=false,service.type=NodePort stable/mysql</HelmCmd>
-					</Steeltoe.Client.Components.StartInstanceTab.Kubernetes>
-					@*<Steeltoe.Client.Components.StartInstanceTab.StTooling InstanceName="@InstanceName" ServiceName="@ServiceName" ToolingServiceName="mysql" />*@
-				</TabSet>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-header">Next, <b>create a .NET Core WebAPI</b> that interacts with @ServiceName</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-ordered-list">
-				<ol>
-					<li>
-						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="mysql-connector.png" DependencyName="MySQL" ProjectName="@ProjectName" />
-					</li>
-					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
-					<li>
-						Set the instance address in <b>appsettings.json</b>
-						<TabSet>
-							<Steeltoe.Client.Components.AppSettingsTab.Local ServiceName="@ServiceName"
-																												ParentSettingsParamName="mysql"
-																												ChildSettingsParamName="client"
-																												ServicePort="@Port"
-																												ServiceServer="127.0.0.1"
-																												ServiceUsername="root"
-																												ServicePassword="@InstancePassword" />
-							<Steeltoe.Client.Components.AppSettingsTab.CloudFoundry />
-							<Steeltoe.Client.Components.AppSettingsTab.Azure InstanceName="@InstanceName"
-																												ServiceName="@ServiceName"
-																												ParentSettingsParamName="mysql"
-																												ChildSettingsParamName="client"
-																												ServicePort="AZURE_PROVIDED"
-																												ServiceServer="AZURE_PROVIDED"
-																												ServiceUsername="AZURE_PROVIDED"
-																												ServicePassword="AZURE_PROVIDED" />
-							<Steeltoe.Client.Components.AppSettingsTab.Kubernetes InstanceName="@InstanceName"
-																														 ServiceName="@ServiceName"
-																														 ServicePort="HELM_PROVIDED_PORT_NUMBER"
-																														 ParentSettingsParamName="mysql"
-																														 ChildSettingsParamName="client"
-																														 ServiceServer="HELM_PROVIDED_HOST_ADDRESS"
-																														 ServiceUsername="root"
-																														 ServicePassword="@InstancePassword" />
-							@*<Steeltoe.Client.Components.AppSettingsTab.StTooling />*@
-						</TabSet>
-					</li>
-					<Tip><Message>Looking for additional params to use when connecting? Have a look at the <Href href="/service-connectors/docs" target="_blank">docs</Href></Message></Tip>
-					<li>
-						<div>Run the application</div>
-						<div>
-							<TabSet>
-								<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" />
-								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" InstanceName="@InstanceName" />
-								<Steeltoe.Client.Components.RunAppTab.AzureAppService>
-									<AzureDeployHowToUrl>https://docs.microsoft.com/en-us/visualstudio/deployment/quickstart-deploy-to-azure?view=vs-2019</AzureDeployHowToUrl>
-								</Steeltoe.Client.Components.RunAppTab.AzureAppService>
-								<Steeltoe.Client.Components.RunAppTab.Kubernetes ProjectName="@ProjectName" />
-								@*<Steeltoe.Client.Components.RunAppTab.StTooling ProjectName="@ProjectName" />*@
-							</TabSet>
-						</div>
-					</li>
-					<li>
-						Once the app loads in the browser you will see a list of the default schema info installed with @ServiceName.
-						<br /><samp>["CHARACTER_SETS","COLLATIONS","COLLATION_CHARACTER_SET_APPLICABILITY", "COLUMNS","COLUMN_PRIVILEGES" ...</samp>
-						<div class="text-muted">*In cloud foundry this information is cleared. The app will return an empty collection "[]".</div>
-					</li>
-				</ol>
-			</div>
-		</div>
-	</TutorialSteps>
+	<Title>
+        This page has moved, use the new <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/guides/service-connectors/mysql.html")">MySQL Connector Guide</NavLink>
+	</Title>
 </Tutorial>
 @code
 {
-	private const string ServiceName = "MySQL";
-	private const string InstanceName = "mysqlservice";
-	private const string ProjectName = "MySql_Connector";
-	private const string Port = "3306";
-	private const string InstancePassword = "Steeltoe456";
+    protected override void OnInitialized()
+    {
+        if (HttpContextAccessor.HttpContext != null)
+        {
+            var uri = new Uri(DocsSiteOptions.Value.BaseAddress + "/guides/service-connectors/mysql.html").ToString();
+            HttpContextAccessor.HttpContext.Response.Redirect(uri, true);
+        }
+    }
 }

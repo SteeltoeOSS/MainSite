@@ -1,98 +1,24 @@
 @page "/service-connectors/get-started/mongo"
-
-	<Breadcrumbs NavName="Mongo Database"
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
+<Breadcrumbs NavName="Mongo Database"
 							 ParentLinkName="Service connectors"
 							 ParentLinkUrl="/service-connectors"
 							 ShowGetStarted="true" />
 <Tutorial>
-	<Title>Using Service Connectors with Mongo DB</Title>
-	<Description>This tutorial takes you through setting up a .NET Core application with the Mongo DB service connector.</Description>
-	<TutorialSteps>
-
-		<div class="row">
-			<div class="col-12 getting-started-header bold">First, <b>start a Mongo DB instance</b>. Depending on your hosting platform this is done in several ways.</div>
-		</div>
-		<div class="row">
-			<div class="col-12">
-				<TabSet>
-					<Steeltoe.Client.Components.StartInstanceTab.Local ServiceName="@ServiceName">
-						<DockerCmd>docker run --env MONGO_INITDB_ROOT_USERNAME=steeltoe --env MONGO_INITDB_ROOT_PASSWORD=Steeltoe234 --publish 27017:27017 mongo</DockerCmd>
-					</Steeltoe.Client.Components.StartInstanceTab.Local>
-					<Steeltoe.Client.Components.StartInstanceTab.Azure InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<AzureGettingStartedUrl>https://www.mongodb.com/cloud/atlas/azure-mongodb</AzureGettingStartedUrl>
-					</Steeltoe.Client.Components.StartInstanceTab.Azure>
-					<Steeltoe.Client.Components.StartInstanceTab.Kubernetes InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<HelmGettingStartedUrl>https://hub.helm.sh/charts/stable/mongodb</HelmGettingStartedUrl>
-						<HelmCmd>helm install --name @InstanceName -set mongodbRootPassword=Steeltoe234,service.type=NodePort,persistence.enabled=false stable/mongodb</HelmCmd>
-					</Steeltoe.Client.Components.StartInstanceTab.Kubernetes>
-				</TabSet>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-header">Next, <b>create a .NET Core WebAPI</b> that interacts with Mongo DB</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-ordered-list">
-				<ol>
-					<li>
-						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="mongo-connector.png" DependencyName="MongoDB" ProjectName="@ProjectName" />
-					</li>
-					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
-					<li>
-						Set the instance address in <b>appsettings.json</b>
-						<TabSet>
-							<Steeltoe.Client.Components.AppSettingsTab.Local ServiceName="@ServiceName"
-																												ServicePort="27017"
-																												ParentSettingsParamName="mongodb"
-																												ChildSettingsParamName="client"
-																												ServiceServer="127.0.0.1"
-																												ServiceUsername="steeltoe"
-																												ServicePassword="Steeltoe234" />
-							<Steeltoe.Client.Components.AppSettingsTab.Azure InstanceName="@InstanceName"
-																												ServiceName="@ServiceName"
-																												ParentSettingsParamName="mongodb"
-																												ChildSettingsParamName="client"
-																												ServicePort="AZURE_PROVIDED"
-																												ServiceServer="AZURE_PROVIDED"
-																												ServiceUsername="AZURE_PROVIDED"
-																												ServicePassword="AZURE_PROVIDED"
-																												ServiceDatabase="AZURE_PROVIDED" />
-							<Steeltoe.Client.Components.AppSettingsTab.Kubernetes InstanceName="@InstanceName"
-																														 ServiceName="@ServiceName"
-																														 ServicePort="HELM_PROVIDED_PORT_NUMBER"
-																														 ParentSettingsParamName="mongodb"
-																														 ChildSettingsParamName="client"
-																														 ServiceServer="HELM_PROVIDED_HOST_ADDRESS"
-																														 ServiceUsername="root"
-																														 ServicePassword="Steeltoe234" />
-						</TabSet>
-					</li>
-					<Tip><Message>Looking for additional params to use when connecting? Have a look at the <Href href="/service-connectors/docs" target="_blank">docs</Href></Message></Tip>
-					<li>
-						<div>Run the application</div>
-						<div>
-							<TabSet>
-								<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" />
-								<Steeltoe.Client.Components.RunAppTab.AzureAppService>
-									<AzureDeployHowToUrl>https://docs.microsoft.com/en-us/visualstudio/deployment/quickstart-deploy-to-azure?view=vs-2019</AzureDeployHowToUrl>
-								</Steeltoe.Client.Components.RunAppTab.AzureAppService>
-								<Steeltoe.Client.Components.RunAppTab.Kubernetes ProjectName="@ProjectName" />
-							</TabSet>
-						</div>
-					</li>
-					<li>
-						Once the app loads in the browser you will see a list of the default databases installed with @ServiceName.
-						<br /><samp>["admin","config","local"]</samp>
-					</li>
-				</ol>
-			</div>
-		</div>
-	</TutorialSteps>
+	<Title>
+        This page has moved, use the new <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/guides/service-connectors/mongo.html")">MongoDB connector guide</NavLink>
+	</Title>
 </Tutorial>
 
 @code
 {
-	private const string ServiceName = "Mongo";
-	private const string InstanceName = "mymongoservice";
-	private const string ProjectName = "Mongo_Connector";
+    protected override void OnInitialized()
+    {
+        if (HttpContextAccessor.HttpContext != null)
+        {
+            var uri = new Uri(DocsSiteOptions.Value.BaseAddress + "/guides/service-connectors/mongo.html").ToString();
+            HttpContextAccessor.HttpContext.Response.Redirect(uri, true);
+        }
+    }
 }

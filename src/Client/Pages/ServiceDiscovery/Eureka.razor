@@ -1,168 +1,23 @@
 @page "/service-discovery/get-started/eureka"
-
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 <Breadcrumbs NavName="Eureka Service Discovery"
 						 ParentLinkName="Service Discovery"
 						 ParentLinkUrl="/service-discovery"
 						 ShowGetStarted="true" />
 <Tutorial>
-	<Title>Using Service Discovery with Eureka Server</Title>
-	<Description>This tutorial takes you through setting up two .NET Core applications using services discovery. The first will register it's endpoints for discovery, and the second will discover the first's services.</Description>
-	<TutorialSteps>
-
-		<div class="row">
-			<div class="col-12 getting-started-header">First, <b>start a Eureka Server</b>. Depending on your hosting platform this is done in several ways.</div>
-		</div>
-		<div class="row">
-			<div class="col-12">
-				<TabSet>
-					<Steeltoe.Client.Components.StartInstanceTab.Local ServiceName="@ServiceName">
-						<DockerCmd>docker run --publish 8761:8761 steeltoeoss/eureka-server</DockerCmd>
-					</Steeltoe.Client.Components.StartInstanceTab.Local>
-					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<CfCreateServiceCmd>cf create-service p-service-registry standard @InstanceName</CfCreateServiceCmd>
-					</Steeltoe.Client.Components.StartInstanceTab.CloudFoundry>
-					@*<Steeltoe.Client.Components.StartInstanceTab.StTooling InstanceName="@InstanceName" ServiceName="@ServiceName" ToolingServiceName="eureka-server" />*@
-				</TabSet>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-header">Next, <b>create a .NET Core WebAPI</b> that registers itself as a service.</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-ordered-list">
-				<ol>
-					<li>
-						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="service-discovery.png" DependencyName="Discovery" ProjectName="@RegisterProjectName" />
-					</li>
-					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
-					<li>
-						Set the instance address in <b>appsettings.json</b>
-						<TabSet>
-							<Steeltoe.Client.Components.AppSettingsTab.Local ServiceName="@ServiceName"
-																												SpringApplicationName="@RegisterProjectName"
-																												EurekaServerUrl="http://localhost:8761/eureka/"
-																												ShouldRegisterWithEureka="true"
-																												ShouldFetchEurekaRegistry="false"
-																												EurekaAppPort="8080"
-																												EurekaAppIP="localhost" />
-							<Steeltoe.Client.Components.AppSettingsTab.Azure InstanceName="@InstanceName" ServiceName="@ServiceName" />
-								@*<Steeltoe.Client.Components.AppSettingsTab.StTooling />*@
-						</TabSet>
-					</li>
-					<Tip><Message>Looking for additional params to use when connecting? Have a look at the <Href href="/service-discovery/docs" target="_blank">docs</Href></Message></Tip>
-					<li>
-						Validate the port number the app will be served on, in <b>launchSettings.json</b>
-						<TabSet>
-							<Steeltoe.Client.Components.IISSettingsTab.Local ApplicationUrl="http://localhost:8080" />
-						</TabSet>
-					</li>
-					<li>
-						Run the application and confirm it has registered with Eureka
-						<TabSet>
-							<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@RegisterProjectName" LocalEndpointAddress="http://localhost:5000/api/values" VSEndpointAddress="http://localhost:8080/api/values">
-								<AdditionalSteps>
-									<li>
-										Navigate to the Eureka dashboard at <a href="http://localhost:8761/" target="_blank">http://localhost:8761/</a> to see the service listed.
-									</li>
-									<li>Leave the application running while you continue to the next steps, you'll be connecting to it.</li>
-								</AdditionalSteps>
-							</Steeltoe.Client.Components.RunAppTab.Local>
-							<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@RegisterProjectName" ServiceName="@ServiceName">
-								<AdditionalSteps>
-									<li>
-										Confirm the services have registered by navigating to the Eureka dashboard. <a href="https://docs.pivotal.io/spring-cloud-services/2-0/common/service-registry/using-the-dashboard.html" target="_blank">Learn more</a> about finding the URL to Eureka.
-									</li>
-								</AdditionalSteps>
-							</Steeltoe.Client.Components.RunAppTab.CloudFoundry>
-						@*<Steeltoe.Client.Components.RunAppTab.StTooling ProjectName="@RegisterProjectName" />*@
-						</TabSet>
-						@*<img src="images/initializr/eureka-dash.png" class="img-fluid" />*@
-					</li>
-				</ol>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-header">Then, <b>create another .NET Core WebAPI</b> that will discover the registered service.</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-ordered-list">
-				<ol>
-					<li>
-						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="service-discovery.png" DependencyName="Discovery" ProjectName="@DiscoverProjectName" />
-					</li>
-					<li>
-						Update the discovery values to not register in <b>appsettings.json</b>
-						<TabSet>
-							<Steeltoe.Client.Components.AppSettingsTab.Local ServiceName="@ServiceName"
-																												SpringApplicationName="@DiscoverProjectName"
-																												EurekaServerUrl="http://localhost:8761/eureka/"
-																												ShouldRegisterWithEureka="false"
-																												ShouldFetchEurekaRegistry="true" />
-							<Steeltoe.Client.Components.AppSettingsTab.CloudFoundry ShouldRegisterWithEureka="false" ServiceName="@ServiceName" />
-								@*<Steeltoe.Client.Components.AppSettingsTab.StTooling ShouldRegisterWithEureka="false" ServiceName="@ServiceName" />*@
-						</TabSet>
-					</li>
-					<li>
-						Validate the port number the app will be served on, in <b>launchSettings.json</b>
-						<TabSet>
-							<Steeltoe.Client.Components.IISSettingsTab.Local ApplicationUrl="http://localhost:8081" />
-						</TabSet>
-					</li>
-					<li>
-						Change the values controller to make a request to the discovery service and return the result in <b>contollers\ValuesController.cs</b>
-<pre><code>using System.Threading.Tasks;
-using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Mvc;
-using Steeltoe.Common.Discovery;
-using System.Net.Http;
-
-namespace Eureka_Discover_Example.Controllers
-{
-    [Route("api/[controller]")]
-    [ApiController]
-    public class ValuesController : ControllerBase
-    {
-        private readonly ILogger _logger;
-        DiscoveryHttpClientHandler _handler;
-        public ValuesController(ILogger&lt;ValuesController&gt; logger, IDiscoveryClient client)
-        {
-            _logger = logger;
-            _handler = new DiscoveryHttpClientHandler(client);
-        }
-
-        // GET api/values
-        [HttpGet]
-        public async Task&lt;string&gt; Get()
-        {
-            var client = new HttpClient(_handler, false);
-            return await client.GetStringAsync("http://@(RegisterProjectName)/api/values");
-        }
-    }
-}</code></pre>
-						<Note><Message>Notice the use of <code>@(RegisterProjectName)</code> as the URI. Because Discovery has been enabled, the negotiation with the discovery Server happens automatically.</Message></Note>
-					</li>
-					<li>
-						Run the app to see discovery in action
-						<TabSet>
-							<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@DiscoverProjectName" VSEndpointAddress="http://localhost:8081/api/values" />
-							<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@DiscoverProjectName" InstanceName="@ServiceName" />
-							@*<Steeltoe.Client.Components.RunAppTab.StTooling ProjectName="@DiscoverProjectName" />*@
-						</TabSet>
-					</li>
-					<li>
-						Once the discovery app loads in the browser you will see the 2 values that were retrieved from the registered app.
-						<br /><samp>["value1","value2"]</samp>
-					</li>
-				</ol>
-			</div>
-		</div>
-
-	</TutorialSteps>
+	<Title>
+        This page has moved, use the new <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/guides/service-discovery/eureka.html")">Eureka guide</NavLink>
+	</Title>
 </Tutorial>
 @code
 {
-	private const string ServiceName = "Eureka";
-	private const string InstanceName = "myEurekaExample";
-	private const string RegisterProjectName = "Eureka_Register_Example";
-	private const string DiscoverProjectName = "Eureka_Discover_Example";
+    protected override void OnInitialized()
+    {
+        if (HttpContextAccessor.HttpContext != null)
+        {
+            var uri = new Uri(DocsSiteOptions.Value.BaseAddress + "/guides/service-discovery/eureka.html").ToString();
+            HttpContextAccessor.HttpContext.Response.Redirect(uri, true);
+        }
+    }
 }

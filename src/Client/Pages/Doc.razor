@@ -1,7 +1,5 @@
-@using Microsoft.Extensions.Options
-
 @inject NavigationManager NavigationManager
-@inject IOptions<DocsSiteOptions> docsSiteOptions
+@inject IOptions<DocsSiteOptions> DocsSiteOptions
 
 @page "/doc"
 @page "/docs"
@@ -21,43 +19,39 @@ Redirecting to new docs site, please hold.
     private string _area;
     private string _component;
     private int _version;
-    private int currentVersion = 3;
-    private string defaultArea = "index";
-    private string defaultComponent = "welcome";
-    private DocsSiteOptions docsSite;
+    private const int CurrentVersion = 3;
+    private const string DefaultArea = "index";
+    private const string DefaultComponent = "welcome";
+    private DocsSiteOptions _docsSite;
 
     [Parameter]
     public string Area
     {
-        get { return (_area ?? defaultArea); }
-        set { _area = value; }
+        get => _area ?? DefaultArea;
+        set => _area = value;
     }
 
     [Parameter]
     public string Component
     {
-        get { return (_component ?? defaultComponent); }
-        set { _component = value; }
+        get => _component ?? DefaultComponent;
+        set => _component = value;
     }
 
     [Parameter]
     public int Version
     {
-        get { return _version; }
-        set
-        {
-            _version = (value < 2 || value > 3 || value == 0 ? currentVersion : value);
-        }
+        get => _version;
+        set => _version = (value is < 2 or > 3 or 0 ? CurrentVersion : value);
     }
 
     protected override void OnInitialized()
     {
-        docsSite = docsSiteOptions?.Value ?? throw new ArgumentNullException(nameof(docsSite));
+        _docsSite = DocsSiteOptions?.Value ?? throw new ArgumentNullException(nameof(_docsSite));
     }
 
     protected override void OnParametersSet()
     {
-        NavigationManager.NavigateTo($"{docsSite.BaseAddress}/api/v{Version}/{Component}/{Area}.html", true);
-        return;
+        NavigationManager.NavigateTo($"{_docsSite.BaseAddress}/api/v{Version}/{Component}/{Area}.html", true);
     }
 }

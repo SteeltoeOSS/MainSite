@@ -1,25 +1,24 @@
-﻿@page "/logging/get-started"
-
-	<Breadcrumbs NavName="Getting Started"
+@page "/logging/get-started"
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
+<Breadcrumbs NavName="Getting Started"
 						 ParentLinkName="Logging"
 						 ParentLinkUrl="/logging" />
 <GetStarted>
- <ComponentName>Logging</ComponentName>
- <Tutorials>
-	 <div class="col">
-	 	<div class="get-started-tutorial">
-	 		<div class="title"><Href class="nav-link p-0" href="/logging/get-started/dynamic-logging">Dynamic Logging</Href></div>
-	 		<div class="desc">xxxxxx.</div>
-	 	</div>
-		 </div>
-	 	<div class="col-1">&nbsp;</div>
-			<div class="col">
-				<div class="get-started-tutorial">
-					<div class="title"><Href class="nav-link p-0" href="/logging/get-started/serilog-dynamic-logging">Serilog Dynamic Logging</Href></div>
-					<div class="desc">xxxxxx.</div>
-				</div>
-			</div>
-</Tutorials>
+    <ComponentName>Logging</ComponentName>
+    <Tutorials>
+        <h1>This page has moved, find the new location <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/guides/")">here</NavLink></h1>
+    </Tutorials>
 </GetStarted>
 
-
+@code
+{
+    protected override void OnInitialized()
+    {
+        if (HttpContextAccessor.HttpContext != null)
+        {
+            var uri = new Uri(DocsSiteOptions.Value.BaseAddress + "/guides/").ToString();
+            HttpContextAccessor.HttpContext.Response.Redirect(uri, true);
+        }
+    }
+}

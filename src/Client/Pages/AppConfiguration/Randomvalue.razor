@@ -1,47 +1,23 @@
 @page "/app-configuration/get-started/randomvalue"
-
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 <Breadcrumbs NavName="Random Value Provider"
 							 ParentLinkName="App Configuration"
 							 ParentLinkUrl="/app-configuration"
 							 ShowGetStarted="true" />
 <Tutorial>
-	<Title>Application Configuration Random Values</Title>
-	<Description>This tutorial takes you through setting up a .NET Core application that gets a random value for a config setting.</Description>
-	<TutorialSteps>
-		<div class="row">
-			<div class="col-12 getting-started-header">First, <b>create a .NET Core WebAPI</b> that has a placeholder implemented</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-ordered-list">
-				<ol>
-					<li>
-						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="randomvalue.png" DependencyName="RandomValue Configuration Source" ProjectName="@ProjectName" />
-					</li>
-					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
-					<li>
-						<div>Run the application</div>
-						<div>
-							<TabSet>
-								<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" />
-								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFServices="true" />
-								<Steeltoe.Client.Components.RunAppTab.AzureAppService>
-									<AzureDeployHowToUrl>https://docs.microsoft.com/en-us/visualstudio/deployment/quickstart-deploy-to-azure?view=vs-2019</AzureDeployHowToUrl>
-								</Steeltoe.Client.Components.RunAppTab.AzureAppService>
-								<Steeltoe.Client.Components.RunAppTab.Kubernetes ProjectName="@ProjectName" />
-							</TabSet>
-						</div>
-					</li>
-					<li>
-						Once the app loads in the browser you will see three random values output.
-						<br /><samp>["&lt;INTEGER&gt;","&lt;UUID&gt;","&lt;STRING&gt;"]</samp>
-					</li>
-				</ol>
-			</div>
-		</div>
-	</TutorialSteps>
+    <Title>
+        This page has moved, use the new <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/guides/application-configuration/random-value.html")">random value configuration provider guide</NavLink>
+    </Title>
 </Tutorial>
 @code
 {
-	//private string ServiceName = "Random Value";
-    private const string ProjectName = "RandomValue_Example";
+    protected override void OnInitialized()
+    {
+        if (HttpContextAccessor.HttpContext != null)
+        {
+            var uri = new Uri(DocsSiteOptions.Value.BaseAddress + "/guides/application-configuration/random-value.html").ToString();
+            HttpContextAccessor.HttpContext.Response.Redirect(uri, true);
+        }
+    }
 }

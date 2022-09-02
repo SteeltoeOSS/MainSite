@@ -1,15 +1,24 @@
 @page "/security-providers/get-started/jwt"
-
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 <Breadcrumbs NavName="JWT Web Tokens"
 						 ParentLinkName="Security Providers"
 						 ParentLinkUrl="/security-providers"
 						 ShowGetStarted="true" />
 <Tutorial>
-	<Title>Using JWT Bearer Tokens</Title>
-	<Description>Please refer to our <a href="https://github.com/SteeltoeOSS/Samples/tree/main/Security/src/AspDotNetCore/CloudFoundryJwtAuthentication" target="_blank">sample app on Github</a> for detailed directions on using JWT and Cloud Foundry.</Description>
-	<TutorialSteps></TutorialSteps>
+    <Title>
+        This page has moved, use the new <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/guides/security/jwt.html")">JWT security guide</NavLink>
+    </Title>
 </Tutorial>
 
 @code
 {
+    protected override void OnInitialized()
+    {
+        if (HttpContextAccessor.HttpContext != null)
+        {
+            var uri = new Uri(DocsSiteOptions.Value.BaseAddress + "/guides/security/jwt.html").ToString();
+            HttpContextAccessor.HttpContext.Response.Redirect(uri, true);
+        }
+    }
 }

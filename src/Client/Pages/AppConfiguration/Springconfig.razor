@@ -1,97 +1,23 @@
 @page "/app-configuration/get-started/springconfig"
-
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 <Breadcrumbs NavName="Spring Config Provider"
 							 ParentLinkName="App Configuration"
 							 ParentLinkUrl="/app-configuration"
 							 ShowGetStarted="true" />
 <Tutorial>
-	<Title>App Configuration with a Spring Config Server</Title>
-	<Description>This tutorial takes you through setting up a .NET Core application that gets configuration values from a Spring Config Server.</Description>
-	<TutorialSteps>
-
-		<div class="row">
-			<div class="col-12 getting-started-header">First, <b>create a Github repository to hold config values</b>.</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-ordered-list">
-				<ol>
-					<li>Navigate to <a href="https://github.com" target="_blank">Github</a> and either login or create a new account</li>
-					<li>Create and initialize a new repository, named <code>Spring-Config-Demo</code></li>
-					<li>Once created note the url of the new repo</li>
-				</ol>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-header">Next, <b>add a config file to the repository</b>.</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-ordered-list">
-				<ol>
-					<li>Create a new file in the repo named <code>my-values.yml</code></li>
-					<li>
-						Add the following to the file
-<pre><code>Value1: some-val
-Value2: another-val
-</code></pre>
-					</li>
-					<li>Commit the new file to the repo</li>
-				</ol>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-header">Then, <b>start a config server instance</b>. Depending on your hosting platform this is done in several ways.</div>
-		</div>
-		<div class="row">
-			<div class="col-12">
-				<TabSet>
-					<Steeltoe.Client.Components.StartInstanceTab.Local ServiceName="@ServiceName">
-						<DockerCmd>docker run --publish 8888:8888 steeltoeoss/config-server --spring.cloud.config.server.git.uri=&lt;NEW_REPO_URL&gt;</DockerCmd>
-					</Steeltoe.Client.Components.StartInstanceTab.Local>
-					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<CfCreateServiceCmd>cf create-service p-config-server standard @InstanceName -c '{ \"git\": { \"uri\": \"&lt;NEW_REPO_URL&gt;\" } }'</CfCreateServiceCmd>
-					</Steeltoe.Client.Components.StartInstanceTab.CloudFoundry>
-				</TabSet>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-header">Next, <b>create a .NET Core WebAPI</b> that retrieves values from the Spring Config instance</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-ordered-list">
-				<ol>
-					<li>
-						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="config-server.png" DependencyName="Config Server" ProjectName="@ProjectName" />
-					</li>
-					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
-					<li>
-						Set the instance address and name in <b>appsettings.json</b>
-						<TabSet>
-							<Steeltoe.Client.Components.AppSettingsTab.Local ServiceName="@ServiceName" SpringApplicationName="my-values" SpringServerUri="http://localhost:8888" />
-							<Steeltoe.Client.Components.AppSettingsTab.CloudFoundry ServiceName="@ServiceName" SpringApplicationName="my-values" />
-						</TabSet>
-						<Note><Message>For the application to find its values in the git repo, the spring:application:name and the yaml file name <b>must</b> match. In this example <code>my-values</code> matched.</Message></Note>
-					</li>
-					<li>
-						<div>Run the application</div>
-						<div>
-							<TabSet>
-								<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" />
-								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" InstanceName="@InstanceName" />
-							</TabSet>
-						</div>
-					</li>
-					<li>
-						Once the app loads in the browser you will see the two values output.
-						<br /><samp>["some-val","another-val"]</samp>
-					</li>
-				</ol>
-			</div>
-		</div>
-	</TutorialSteps>
+    <Title>
+        This page has moved, use the new <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/guides/application-configuration/spring-config.html")">Spring Cloud Config Server guide</NavLink>
+    </Title>
 </Tutorial>
 @code
 {
-	private const string ServiceName = "Spring Config Server";
-	private const string InstanceName = "myConfigService";
-	private const string ProjectName = "Spring_Config_Example";
+    protected override void OnInitialized()
+    {
+        if (HttpContextAccessor.HttpContext != null)
+        {
+            var uri = new Uri(DocsSiteOptions.Value.BaseAddress + "/guides/application-configuration/spring-config.html").ToString();
+            HttpContextAccessor.HttpContext.Response.Redirect(uri, true);
+        }
+    }
 }

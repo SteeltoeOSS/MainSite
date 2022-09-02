@@ -1,93 +1,24 @@
-﻿@page "/service-connectors/get-started"
-
-	<Breadcrumbs NavName="Getting Started"
-							 ParentLinkName="Service connectors"
-							 ParentLinkUrl="/service-connectors" />
+@page "/service-connectors/get-started"
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
+<Breadcrumbs NavName="Getting Started"
+					     ParentLinkName="Service connectors"
+					     ParentLinkUrl="/service-connectors" />
 <GetStarted>
- <ComponentName>Service Connectors</ComponentName>
- <Tutorials>
- 	<div class="col-2">
- 		<div class="get-started-tutorial">
- 			<div class="title"><a class="nav-link p-0" href="service-connectors/get-started/mysql">MySQL Database</a></div>
- 			<div class="desc">Use the ADO.NET MySql provider to manage the database connection.</div>
- 		</div>
- 	</div>
- 	<div class="col">&nbsp;</div>
- 	<div class="col-2">
- 		<div class="get-started-tutorial">
- 			<div class="title"><a class="nav-link p-0" href="service-connectors/get-started/mssql">Microsoft SQL Database</a></div>
- 			<div class="desc">Use the System.Data.SqlClient library to manage the database connection.</div>
- 		</div>
- 	</div>
- 	<div class="col">&nbsp;</div>
- 	<div class="col-2">
- 		<div class="get-started-tutorial">
- 			<div class="title"><a class="nav-link p-0" href="service-connectors/get-started/postgresql">PostgreSQL Database</a></div>
- 			<div class="desc">Use the Npgsql provider to manage the database connection.</div>
- 		</div>
- 	</div>
- 	<div class="col">&nbsp;</div>
- 	<div class="col-2">
- 		<div class="get-started-tutorial">
- 			<div class="title"><a class="nav-link p-0" href="service-connectors/get-started/mongo">Mongo Database</a></div>
- 			<div class="desc">Use the MongoDB.Driver NuGet package to manage the database connection.</div>
- 		</div>
- 	</div>
-
-
-
- 	<div class="col-2">
- 		<div class="get-started-tutorial">
- 			<div class="title"><a class="nav-link p-0" href="service-connectors/get-started/redis">Redis Cache</a></div>
- 			<div class="desc">Use the Microsoft RedisCache library to manage the cache connection.</div>
- 		</div>
- 	</div>
- 	<div class="col">&nbsp;</div>
- 	<div class="col-2">
- 		<div class="get-started-tutorial">
- 			<div class="title"><a class="nav-link p-0" href="service-connectors/get-started/gemfire">Apache Geode/GemFire Cache</a></div>
- 			<div class="desc">Use the GemFire Native Client to manage the cache connection.</div>
- 		</div>
- 	</div>
- 	<div class="col">&nbsp;</div>
- 	<div class="col-2">
- 		<div class="get-started-tutorial">
- 			<div class="title"><a class="nav-link p-0" href="service-connectors/get-started/rabbit">RabbitMQ Messaging</a></div>
- 			<div class="desc">Use the RabbitMQ Client to manage connection to the message queue.</div>
- 		</div>
- 	</div>
- 	<div class="col">&nbsp;</div>
- 	<div class="col-2">
- 		<div class="get-started-tutorial">
- 			<div class="title"><a class="nav-link p-0" href="service-connectors/get-started/oauth">OAuth2 Client</a></div>
- 			<div class="desc">Making oAuth2 information injectable as options pattern.</div>
- 		</div>
- 	</div>
- </Tutorials>
+    <ComponentName>Service Connectors</ComponentName>
+    <Tutorials>
+        <h1>This page has moved, find the new location <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/guides/")">here</NavLink></h1>
+    </Tutorials>
 </GetStarted>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+@code
+{
+    protected override void OnInitialized()
+    {
+        if (HttpContextAccessor.HttpContext != null)
+        {
+            var uri = new Uri(DocsSiteOptions.Value.BaseAddress + "/guides/").ToString();
+            HttpContextAccessor.HttpContext.Response.Redirect(uri, true);
+        }
+    }
+}
