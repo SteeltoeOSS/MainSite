@@ -1,32 +1,34 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,800&display=swap');
 
-@font-face {
-  font-family: 'Metropolis';
-  font-weight: normal;
-  font-weight: 300;
-  font-weight: 200;
-  font-weight: 100;
-  font-style: normal;
-  src: url('../fonts/metropolis-regular-webfont.woff2') format('woff2'),
-  url('../fonts/metropolis-regular-webfont.woff') format('woff'),
+@font-face{
+	font-family:'Metropolis';
+	font-style:normal;
+	font-weight:300;
+	font-weight:200;
+	font-weight:100;
+	src:url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/WOFF2/Metropolis-Light.woff2") format("woff2"),url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/WOFF/Metropolis-Light.woff") format("woff"),url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/Truetype/Metropolis-Light.ttf") format("truetype")
 }
-@font-face {
-  font-family: 'Metropolis';
-  font-weight: 500;
-  font-style: normal;
-  src: url('../fonts/metropolis-semibold-webfont.woff2') format('woff2'),
-  url('../fonts/metropolis-semibold-webfont.woff') format('woff'),
+@font-face{
+	font-family:'Metropolis';
+	font-weight:normal;
+	font-weight:400;
+	font-style:normal;
+	src:url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/WOFF2/Metropolis-Regular.woff2") format("woff2"),url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/WOFF/Metropolis-Regular.woff") format("woff"),url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/Truetype/Metropolis-Regular.ttf") format("truetype")
 }
-@font-face {
-  font-family: 'Metropolis';
-  font-weight: 600;
-  font-weight: 700;
-  font-weight: bold;
-  font-style: normal;
-  src: url('../fonts/metropolis-bold-webfont.woff2') format('woff2'),
-  url('../fonts/metropolis-semibold-webfont.woff') format('woff'),
+@font-face{
+	font-family:'Metropolis';
+	font-weight:450;
+	font-style:normal;
+	src:url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/WOFF2/Metropolis-Medium.woff2") format("woff2"),url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/WOFF/Metropolis-Medium.woff") format("woff"),url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/Truetype/Metropolis-Medium.ttf") format("truetype")
 }
+@font-face{
+	font-family:'Metropolis';
+	font-weight:500;
+	font-weight: bold;
+	font-style:normal;
+	src:url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/WOFF2/Metropolis-Bold.woff2") format("woff2"),url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/WOFF/Metropolis-Bold.woff") format("woff"),url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/Truetype/Metropolis-Bold.ttf") format("truetype")
+}
+
 
 /* DEVELOP WIDTH = 1400px */
 html, body {
@@ -659,7 +661,6 @@ font-display: auto;
 font-size: 180%;
 font-style: normal;
 font-weight: bold;
-font-family: 'Raleway', sans-serif;
 }
 
 .docs h2 {
@@ -667,7 +668,6 @@ font-display: auto;
 font-size: 120%;
 font-style: normal;
 font-weight: bold;
-font-family: 'Raleway', sans-serif;
 }
 
 .docs h3 {
@@ -675,7 +675,6 @@ font-display: auto;
 font-size: 100%;
 font-style: normal;
 font-weight: bold;
-font-family: 'Raleway', sans-serif;
 }
 
 .docs h4 {
@@ -683,7 +682,6 @@ font-display: auto;
 font-size: 100%;
 font-style: normal;
 font-weight: bold;
-font-family: 'Raleway', sans-serif;
 }
 
 #iframe {
