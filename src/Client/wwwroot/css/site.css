@@ -1,32 +1,32 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
-@font-face{
-	font-family:'Metropolis';
+@font-face {
+  font-family:'Metropolis';
 	font-style:normal;
+	font-weight:400;
 	font-weight:300;
 	font-weight:200;
 	font-weight:100;
-	src:url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/WOFF2/Metropolis-Light.woff2") format("woff2"),url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/WOFF/Metropolis-Light.woff") format("woff"),url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/Truetype/Metropolis-Light.ttf") format("truetype")
+	src:url("../fonts/Metropolis-Regular.woff2") format("woff2"),
+			url("../fonts/Metropolis-Regular.woff") format("woff");
+
 }
-@font-face{
-	font-family:'Metropolis';
-	font-weight:normal;
-	font-weight:400;
-	font-style:normal;
-	src:url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/WOFF2/Metropolis-Regular.woff2") format("woff2"),url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/WOFF/Metropolis-Regular.woff") format("woff"),url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/Truetype/Metropolis-Regular.ttf") format("truetype")
-}
-@font-face{
-	font-family:'Metropolis';
+@font-face {
+  font-family: 'Metropolis';
 	font-weight:450;
-	font-style:normal;
-	src:url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/WOFF2/Metropolis-Medium.woff2") format("woff2"),url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/WOFF/Metropolis-Medium.woff") format("woff"),url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/Truetype/Metropolis-Medium.ttf") format("truetype")
+  font-style: normal;
+	src:url("../fonts/Metropolis-Medium.woff2") format("woff2"),
+			url("../fonts/Metropolis-Medium.woff") format("woff");
 }
-@font-face{
-	font-family:'Metropolis';
+@font-face {
+  font-family: 'Metropolis';
+  font-family:'Metropolis';
 	font-weight:500;
 	font-weight: bold;
-	font-style:normal;
-	src:url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/WOFF2/Metropolis-Bold.woff2") format("woff2"),url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/WOFF/Metropolis-Bold.woff") format("woff"),url("https://d1fto35gcfffzn.cloudfront.net/tanzu/fonts/Truetype/Metropolis-Bold.ttf") format("truetype")
+	font-style: normal;
+	src:url("../fonts/Metropolis-Bold.woff2") format("woff2"),
+			url("../fonts/Metropolis-Bold.woff") format("woff");
+
 }
 
 
