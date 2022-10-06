@@ -368,3 +368,6 @@ src/Client/wwwroot/site-data/docs/toc.json
 
 # local tools
 tools/
+
+# OS X state
+.DS_Store
