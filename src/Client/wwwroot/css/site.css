@@ -904,3 +904,11 @@ div[role=button] a.active,
 .blazored-sub-menu-header.open .blazored-sub-menu .blazored-sub-menu-header div[role=button] {
 	font-weight: normal;
 }
+#dotnet-promo {
+	background: #001F3F;
+	transition: .2s ease-out;
+}
+#dotnet-promo:focus,
+#dotnet-promo:hover {
+	color: rgba(255,255,255, 0.7) !important;
+}
