@@ -1,4 +1,4 @@
-﻿<Tab Title="Local">
+<Tab Title="Local">
 	@if (string.IsNullOrEmpty(ServiceName))
 	{
 		<span>It's already set, continue to next step.</span>
@@ -130,15 +130,15 @@
     "discovery": {
       "enabled": true,
       "register": @ConsulShouldRegister,</text>
-		if (!string.IsNullOrEmpty(ConsolAppPort))
+		if (!string.IsNullOrEmpty(ConsulAppPort))
 		{<text>
-      "port": "@ConsolAppPort",</text>
+      "port": "@ConsulAppPort",</text>
 		}
-		if (!string.IsNullOrEmpty(ConsolAppIP))
+		if (!string.IsNullOrEmpty(ConsulAppIP))
 		{<text>
-      "ipAddress": "@ConsolAppIP",</text>
+      "ipAddress": "@ConsulAppIP",</text>
 		}
-		if (!string.IsNullOrEmpty(ConsolAppIP))
+		if (!string.IsNullOrEmpty(ConsulAppIP))
 		{<text>
       "preferIpAddress": true</text>
 	  }<text>
@@ -154,14 +154,14 @@
     }
   }</text>
 }
-@if(!string.IsNullOrEmpty(OpenIDClient)){
+@if(!string.IsNullOrEmpty(OpenIdClient)){
 <text>	"security": {
 		"oauth2": {
 			"client": {
 				"validateCertificates": false,
-			@(string.IsNullOrEmpty(OpenIDAuthDomain) ? "" : "\"authDomain\": \"" + OpenIDAuthDomain + "\",")
-			@(string.IsNullOrEmpty(OpenIDClientId) ? "" : "\"clientId\": \"" + OpenIDClientId + "\",")
-			@(string.IsNullOrEmpty(OpenIDClientSecret) ? "" : "\"clientSecret\": \"" + OpenIDClientSecret + "\",")
+			@(string.IsNullOrEmpty(OpenIdAuthDomain) ? "" : "\"authDomain\": \"" + OpenIdAuthDomain + "\",")
+			@(string.IsNullOrEmpty(OpenIdClientId) ? "" : "\"clientId\": \"" + OpenIdClientId + "\",")
+			@(string.IsNullOrEmpty(OpenIdClientSecret) ? "" : "\"clientSecret\": \"" + OpenIdClientSecret + "\",")
 			}
 		}
 	}</text>
@@ -192,9 +192,9 @@
 	[Parameter]
 	public string ConsulShouldRegister { get; set; } = null;
 	[Parameter]
-	public string ConsolAppPort { get; set; } = null;
+	public string ConsulAppPort { get; set; } = null;
 	[Parameter]
-	public string ConsolAppIP { get; set; } = null;
+	public string ConsulAppIP { get; set; } = null;
 	[Parameter]
 	public string ProjectName { get; set; } = "";
 	[Parameter]
@@ -224,13 +224,13 @@
 	[Parameter]
 	public string OAuthClient { get; set; } = null;
 	[Parameter]
-	public string OpenIDClient { get; set; } = null;
+	public string OpenIdClient { get; set; } = null;
 	[Parameter]
-	public string OpenIDAuthDomain { get; set; } = null;
+	public string OpenIdAuthDomain { get; set; } = null;
 	[Parameter]
-	public string OpenIDClientId { get; set; } = null;
+	public string OpenIdClientId { get; set; } = null;
 	[Parameter]
-	public string OpenIDClientSecret { get; set; } = null;
+	public string OpenIdClientSecret { get; set; } = null;
 
 	[Parameter]
 	public RenderFragment ChildContent { get; set; }

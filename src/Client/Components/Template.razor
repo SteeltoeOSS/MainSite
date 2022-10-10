@@ -1,6 +1,6 @@
-﻿@inject IJSRuntime JSRuntime
+@inject IJSRuntime JSRuntime
 
-<PageTitle Title="@(Name)" />
+<CustomPageTitle Title="@(Name)" />
 <div class="width-all bg-yellow">
 	<div class="width-90 container">
 		<div class="row no-gutters">
@@ -84,8 +84,8 @@
 					<Href Class="component-button" href="@(GettingStartedURL)">GET STARTED</Href>
 				</div>
 			}
-			@if (DocsURL != null && ShowBottomDocsURL) {
-				<div class="col @(GettingStartedURL==null&&ShowBottomDocsURL?"offset-4":"")">
+			@if (DocsURL != null && ShowBottomDocsUrl) {
+				<div class="col @(GettingStartedURL==null&&ShowBottomDocsUrl?"offset-4":"")">
 					<Href Class="component-button" href="@DocsURL">READ THE DOCS</Href>
 				</div>
 			}
@@ -114,7 +114,7 @@
 	public bool ShowBottomGetStarted { get; set; } = true;
 
 	[Parameter]
-	public bool ShowBottomDocsURL { get; set; } = true;
+	public bool ShowBottomDocsUrl { get; set; } = true;
 
 	[Parameter]
 	public RenderFragment Description { get; set; }

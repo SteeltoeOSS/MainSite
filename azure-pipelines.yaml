@@ -4,6 +4,27 @@ trigger:
       - main
 
 stages:
+- stage: pr
+  displayName: PR Sanity Check
+  condition:
+    eq(variables['build.reason'], 'PullRequest')
+  jobs:
+  - job:
+    displayName: Build Solution
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: DotNetCoreCLI@2
+      displayName: dotnet restore
+      inputs:
+        command: restore
+        projects: src/Steeltoe-MainSite.sln
+    - task: DotNetCoreCLI@2
+      displayName: dotnet build
+      inputs:
+        command: build
+        projects: src/Steeltoe-MainSite.sln
+        arguments: --no-restore -c Release -v n
 - stage: deploy
   displayName: Deploy
   condition:

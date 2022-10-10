@@ -1,11 +1,15 @@
-@page "/getstarted"
-@page "/get-started"
+@page "/cloud-management/get-started/logging"
 @inject IHttpContextAccessor HttpContextAccessor
 @inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
-
-<h1>This page has moved, find the new location <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/guides/")">here</NavLink></h1>
-
-@code {
+<Breadcrumbs NavName="Dynamic Logging"
+						 ParentLinkName="Cloud Management"
+						 ParentLinkUrl="/cloud-management"
+						 ShowGetStarted="true" />
+<Tutorial>
+	<Title>This page has moved, find the new location <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/guides/")">here</NavLink></Title>
+</Tutorial>
+@code
+{
     protected override void OnInitialized()
     {
         if (HttpContextAccessor.HttpContext != null)

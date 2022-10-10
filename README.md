@@ -1,9 +1,9 @@
 # Steeltoe Main Site
 
-	The site was built using [Blazor](https://docs.microsoft.com/en-us/aspnet/core/blazor/) in Visual Studio 2019. 
+	The site was built using [Blazor](https://docs.microsoft.com/en-us/aspnet/core/blazor/) in Visual Studio. 
 
 ## Install Dependencies
-Requires .NET Core SDK 5.0
+Requires .NET Core SDK 6.0
 
 ```powershell
 PS> dotnet new -i Microsoft.AspNetCore.Blazor.Templates

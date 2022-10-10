@@ -1,61 +1,24 @@
-﻿@page "/cloud-management/get-started/endpoints"
-
+@page "/cloud-management/get-started/endpoints"
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 <Breadcrumbs NavName="Management Endpoints"
 						 ParentLinkName="Cloud Management"
 						 ParentLinkUrl="/cloud-management"
-						 ShowGetStarted=true />
-<div class="width-all">
- <div class="width-60 container">
-<Tip>
-	<Message>Looking for a .NET Framework example? <Href href="cloud-management/get-started/endpoints/framework">Have a look</Href>.</Message>
-</Tip>
-	 </div></div>
+						 ShowGetStarted="true" />
 
 <Tutorial>
-	<Title>Using @ServiceName</Title>
-	<Description>This tutorial takes you through setting up a .NET Core application with cloud management endpoints automatically added in.</Description>
-	<TutorialSteps>
-		<div class="row">
-			<div class="col-12 getting-started-header"><b>Create a .NET Core WebAPI</b> with Actuators enabled</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-ordered-list">
-				<ol>
-					<li>
-						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="actuators.png" ProjectName="@ProjectName" DependencyName="Actuators, DynamicLogging" />
-					</li>
-					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
-					<li>
-						Set the instance address in <b>appsettings.json</b>
-						<TabSet>
-							@*<Steeltoe.Client.Components.AppSettingsTab.Local ServiceName="@ServiceName" ManagementEndpointPath="/actuators" />*@
-							<Steeltoe.Client.Components.AppSettingsTab.CloudFoundry ServiceName="@ServiceName" ManagementEndpointPath="/cloudfoundryapplication" />
-						</TabSet>
-					</li>
-					<li>
-						<div>Run the application</div>
-						<div>
-							<TabSet>
-								@*<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" LocalEndpointAddress="http://localhost/actuators" />*@
-								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFServices=true NoPackageManager=true>
-									<AdditionalSteps>
-										<li>
-											With the application successfully pushed, navigate to App Manager to see the new features enabled.
-											<img src="images/initializr/actuators-app-manager.png" class="img-fluid" />
-										</li>
-									</AdditionalSteps>
-								</Steeltoe.Client.Components.RunAppTab.CloudFoundry>
-							</TabSet>
-			</div>
-			</li>
-			</ol>
-		</div>
-		</div>
-	</TutorialSteps>
+    <Title>
+        This page has moved, use the new <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/guides/cloud-management/endpoints-netcore.html")">management endpoint guide</NavLink>
+    </Title>
 </Tutorial>
 @code
 {
-	private string ServiceName = "Management Endpoints";
-	//private string InstanceName = "myEndpointsExample";
-	private string ProjectName = "Management_Endpoints_Example";
+    protected override void OnInitialized()
+    {
+        if (HttpContextAccessor.HttpContext != null)
+        {
+            var uri = new Uri(DocsSiteOptions.Value.BaseAddress + "/guides/cloud-management/endpoints-netcore.html").ToString();
+            HttpContextAccessor.HttpContext.Response.Redirect(uri, true);
+        }
+    }
 }

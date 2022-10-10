@@ -1,24 +1,24 @@
-﻿@page "/messaging/get-started"
-
+@page "/messaging/get-started"
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 <Breadcrumbs NavName="Getting Started"
 						 ParentLinkName="Messaging"
 						 ParentLinkUrl="/messaging" />
 <GetStarted>
 	<ComponentName>Messaging</ComponentName>
-	<Tutorials>
-		<div class="col">
-			<div class="get-started-tutorial">
-				<div class="title"><a class="nav-link p-0" href="messaging/get-started/rabbitmq">RabbitMQ</a></div>
-				<div class="desc">Use RabbitMQ as the message broker.</div>
-			</div>
-		</div>
-		@*<div class="col-1">&nbsp;</div>
-		<div class="col">
-			<div class="get-started-tutorial">
-				<div class="title"><a class="nav-link p-0" href="stream/get-started/kafka">Kafka</a></div>
-				<div class="desc">Use Kafka as the message broker.</div>
-			</div>
-		</div>*@
-	</Tutorials>
+    <Tutorials>
+        <h1>This page has moved, find the new location <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/guides/")">here</NavLink></h1>
+    </Tutorials>
 </GetStarted>
 
+@code
+{
+    protected override void OnInitialized()
+    {
+        if (HttpContextAccessor.HttpContext != null)
+        {
+            var uri = new Uri(DocsSiteOptions.Value.BaseAddress + "/guides/").ToString();
+            HttpContextAccessor.HttpContext.Response.Redirect(uri, true);
+        }
+    }
+}

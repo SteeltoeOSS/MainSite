@@ -1,42 +1,23 @@
-﻿@page "/app-configuration/get-started/cloudfoundry"
-
-	<Breadcrumbs NavName="Cloud Foundry Provider"
+@page "/app-configuration/get-started/cloudfoundry"
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
+<Breadcrumbs NavName="Cloud Foundry Provider"
 							 ParentLinkName="App Configuration"
 							 ParentLinkUrl="/app-configuration"
-							 ShowGetStarted=true />
+							 ShowGetStarted="true" />
 <Tutorial>
-	<Title>App Configuration with @ServiceName</Title>
-	<Description>This tutorial takes you through setting up a .NET Core application that retrieves environment variable values from @ServiceName.</Description>
-	<TutorialSteps>
-
-		<div class="row">
-			<div class="col-12 getting-started-header">First, <b>create a .NET Core WebAPI</b> that retrieves (configuration) environment variables from @ServiceName</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-ordered-list">
-				<ol>
-					<li>
-						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="cloud-foundry.png" DependencyName="Cloud Foundry" ProjectName="@ProjectName" />
-					</li>
-					<li>
-						<div>Run the application</div>
-						<div>
-							<TabSet>
-								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFServices=true NoCFProvider=true />
-							</TabSet>
-						</div>
-					</li>
-					<li>
-						If all things go well you should see an output of configuration values provided by the @ServiceName platform.
-					</li>
-				</ol>
-			</div>
-		</div>
-	</TutorialSteps>
+    <Title>
+        This page has moved, use the new <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/guides/application-configuration/cloud-foundry.html")">Cloud Foundry configuration guide</NavLink>
+    </Title>
 </Tutorial>
 @code
 {
-	private string ServiceName = "Cloud Foundry";
-	//private string InstanceName = "myCFExample";
-	private string ProjectName = "Cloud_Foundry_Example";
+    protected override void OnInitialized()
+    {
+        if (HttpContextAccessor.HttpContext != null)
+        {
+            var uri = new Uri(DocsSiteOptions.Value.BaseAddress + "/guides/application-configuration/cloud-foundry.html").ToString();
+            HttpContextAccessor.HttpContext.Response.Redirect(uri, true);
+        }
+    }
 }

@@ -22,7 +22,7 @@ namespace Steeltoe.Client
             services.AddServerSideBlazor();
 
             services.Configure<CalendarEventOptions>(Configuration.GetSection("CalendarEvents"));
-
+            services.AddHttpContextAccessor();
             services.AddOptions<DocsSiteOptions>()
                 .Bind(Configuration.GetSection("DocsSite"))
                 .ValidateDataAnnotations()

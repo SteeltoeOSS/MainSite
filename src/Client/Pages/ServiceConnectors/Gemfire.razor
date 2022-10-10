@@ -1,18 +1,23 @@
-﻿@page "/service-connectors/get-started/gemfire"
-
-	<Breadcrumbs NavName="Apache Geode/GemFire Cache"
+@page "/service-connectors/get-started/gemfire"
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
+<Breadcrumbs NavName="Apache Geode/GemFire Cache"
 							 ParentLinkName="Service connectors"
 							 ParentLinkUrl="/service-connectors"
-							 ShowGetStarted=true />
+							 ShowGetStarted="true" />
 <Tutorial>
-	<Title>Using the Gemfire service connector</Title>
-	<Description>Soon there will be a tutorial here takes you through setting up a .NET application that interacts with a Gemfire cluster, via the Gemfire connector.</Description>
-	<TutorialSteps>
-	</TutorialSteps>
+    <Title>
+        This page has moved, use the new <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/guides/service-connectors/")">connector guides</NavLink>
+    </Title>
 </Tutorial>
 @code
 {
-	//private string ServiceName = "Gemfire";
-	//private string InstanceName = "myGemfireExample";
-	//private string ProjectName = "Gemfire-Connector";
+    protected override void OnInitialized()
+    {
+        if (HttpContextAccessor.HttpContext != null)
+        {
+            var uri = new Uri(DocsSiteOptions.Value.BaseAddress + "/guides/service-connectors/").ToString();
+            HttpContextAccessor.HttpContext.Response.Redirect(uri, true);
+        }
+    }
 }

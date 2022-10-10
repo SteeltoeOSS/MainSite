@@ -1,104 +1,23 @@
-﻿@page "/cloud-management/get-started/distributed-tracing"
-
+@page "/cloud-management/get-started/distributed-tracing"
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 <Breadcrumbs NavName="Distributed Tracing"
 						 ParentLinkName="Cloud Management"
 						 ParentLinkUrl="/cloud-management"
-						 ShowGetStarted=true />
+						 ShowGetStarted="true" />
 <Tutorial>
-	<Title>Using @ServiceName for debugging with Zipkin</Title>
-	<Description>This tutorial takes you through setting up a .NET Core application that sends tracing data to a Zipkin server.</Description>
-	<TutorialSteps>
-
-		<div class="row">
-			<div class="col-12 getting-started-header">First, <b>start a Zipkin instance</b>. Depending on your hosting platform this is done in several ways.</div>
-		</div>
-		<div class="row">
-			<div class="col-12">
-				<TabSet>
-					<Steeltoe.Client.Components.StartInstanceTab.Local ServiceName="Zipkin">
-						<DockerCmd>docker run --publish 9411:9411 steeltoeoss/zipkin</DockerCmd>
-						<AdditionalSteps>
-							<li>Once everything is finished initializing, you will see a message confirming startup.
-								<div><code>Started ZipkinServer in xx seconds</code></div></li>
-							<li>You can view the Zipkin dashboard by navigating to <a href="http://localhost:9411" target="_blank">http://localhost:9411</a></li>
-						</AdditionalSteps>
-					</Steeltoe.Client.Components.StartInstanceTab.Local>
-					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="Zipkin" ShowServiceLookup=false>
-						<CFCreateServiceCmd>cf push @InstanceName --docker-image steeltoeoss/zipkin</CFCreateServiceCmd>
-						<AdditionalSteps>
-							<li>Once the app is deployed and the Zipkin server is started, the cf cli will print out the public route. An example route would be <code>mytracingexample.cfapps.io</code>. You will need this value below.</li>
-						</AdditionalSteps>
-					</Steeltoe.Client.Components.StartInstanceTab.CloudFoundry>
-				</TabSet>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-header">Next, <b>create a .NET Core WebAPI</b> that interacts with @ServiceName</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-ordered-list">
-				<ol>
-					<li>
-						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="no-dependencies.png" ProjectName="@ProjectName" />
-					</li>
-					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
-					@*<li>Open the package manager console
-						<img src="images/initializr/open-package-manager-console.png" class="img-fluid" />
-					</li>
-					<li>
-						Add the Steeltoe Tracing package to the project
-						<code class="inline-no-ps">PM&gt; Install-Package Steeltoe.Management.TracingCore -Version @SteeltoeVersion</code>
-					</li>*@
-					<li>
-						Set the instance address in <b>appsettings.json</b>
-						<TabSet>
-							<Steeltoe.Client.Components.AppSettingsTab.Local ServiceName="@ServiceName" SpringApplicationName="@ProjectName" ZipkinEndpoint="http://localhost:9411/api/v2/spans" />
-							<Steeltoe.Client.Components.AppSettingsTab.CloudFoundry ServiceName="Zipkin Server"  SpringApplicationName="@ProjectName" ZipkinEndpoint="https://&lt;ZIPKIN_SERVER_ROUTE&gt;/api/v2/spans" />
-							@*<Steeltoe.Client.Components.AppSettingsTab.StTooling ServiceName="@ServiceName" SpringApplicationName="@ProjectName" ZipkinEndpoint="http://localhost:9411/api/v2/spans" />*@
-						</TabSet>
-					</li>
-					@*<li>
-						Add the distributed tracing service middleware to the project in <b>Startup.cs</b>
-<pre><code>using Steeltoe.Management.Tracing;
-...
-
-public void ConfigureServices(IServiceCollection services)
-{
-    ...
-
-    // Add Distributed tracing
-    services.AddDistributedTracing(Configuration);
-
-    ...
-}
-</code></pre>
-					</li>*@
-					<li>
-						<div>Run the application</div>
-						<div>
-							<TabSet>
-								<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" />
-								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" InstanceName="@InstanceName" NoCFServices=true />
-								@*<Steeltoe.Client.Components.RunAppTab.StTooling ProjectName="@ProjectName" />*@
-							</TabSet>
-						</div>
-					</li>
-					<li>
-						Now that you have successfully run a request through the app, navigate back to the zipkin dashboard and click the "Find Traces" button. This will search for recent traces. The result should show the trace for your request.
-						<img src="images/initializr/zipkin-search.png" class="img-fluid" />
-					</li>
-					<li>
-						Clicking on that trace will drill into the details. Then clicking on a specific action within the trace will give you even more detail.
-						<img src="images/initializr/zipkin-detail.png" class="img-fluid" />
-					</li>
-				</ol>
-			</div>
-		</div>
-	</TutorialSteps>
+    <Title>
+        This page has moved, use the new <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/guides/cloud-management/distributed-tracing.html")">distributed tracing guide</NavLink>
+    </Title>
 </Tutorial>
 @code
 {
-	private string ServiceName = "Distributed Tracing";
-	private string InstanceName = "myTracingExample";
-	private string ProjectName = "Distributed_Tracing_Example";
+    protected override void OnInitialized()
+    {
+        if (HttpContextAccessor.HttpContext != null)
+        {
+            var uri = new Uri(DocsSiteOptions.Value.BaseAddress + "/guides/cloud-management/distributed-tracing.html").ToString();
+            HttpContextAccessor.HttpContext.Response.Redirect(uri, true);
+        }
+    }
 }

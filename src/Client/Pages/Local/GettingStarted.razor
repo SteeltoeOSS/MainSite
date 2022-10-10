@@ -3,7 +3,7 @@
 <Breadcrumbs NavName="Get Started"
 							 ParentLinkName="Tooling"
 							 ParentLinkUrl="/tooling"
-							 ShowGetStarted=false />
+							 ShowGetStarted="false" />
 <Tutorial>
 	<Title>Steeltoe Tooling CLI</Title>
 	<Description>This tutorial takes you through running a .NET Core microservice with 2 other backing services locally, using the CLI.</Description>
@@ -23,7 +23,7 @@
 						<div>
 							<TabSet>
 								<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" />
-								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFServices=true />
+								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" NoCFServices="true" />
 								<Steeltoe.Client.Components.RunAppTab.AzureAppService>
 									<AzureDeployHowToUrl>https://docs.microsoft.com/en-us/visualstudio/deployment/quickstart-deploy-to-azure?view=vs-2019</AzureDeployHowToUrl>
 								</Steeltoe.Client.Components.RunAppTab.AzureAppService>
@@ -32,7 +32,7 @@
 						</div>
 					</li>
 					<li>
-						Thats it! You have generated a .NET Core microservice using all the latest patterns. Go back and try adding a dependency or <Href href="/getstarted">try other tutorials</Href>
+						That's it! You have generated a .NET Core microservice using all the latest patterns. Go back and try adding a dependency or <Href href="/getstarted">try other tutorials</Href>
 					</li>
 				</ol>
 			</div>
@@ -41,5 +41,5 @@
 </Tutorial>
 @code
 {
-	private string ProjectName = "Initializr_Example";
+	private const string ProjectName = "Initializr_Example";
 }

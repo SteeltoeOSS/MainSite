@@ -1,32 +1,24 @@
-﻿@page "/cloud-management/get-started"
-
+@page "/cloud-management/get-started"
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 <Breadcrumbs NavName="Getting Started"
 						ParentLinkName="Cloud Management"
 						ParentLinkUrl="/cloud-management" />
 <GetStarted>
- <ComponentName>Cloud Management</ComponentName>
- <Tutorials>
- 	<div class="col">
- 		<div class="get-started-tutorial">
- 			<div class="title"><a class="nav-link p-0" href="cloud-management/get-started/endpoints">Management Endpoints (Actuators)</a></div>
- 			<div class="desc">Aid in monitoring and managing apps in the cloud.</div>
- 		</div>
- 	</div>
- 	<div class="col-1">&nbsp;</div>
- 	<div class="col">
- 		<div class="get-started-tutorial">
- 			<div class="title"><a class="nav-link p-0" href="cloud-management/get-started/distributed-tracing">Distributed Tracing</a></div>
- 			<div class="desc">Distributed tracing implements a solution for .NET applications based on the OpenCensus project.</div>
- 		</div>
- 	</div>
- 	<div class="col-1">&nbsp;</div>
- 	<div class="col">
- 		<div class="get-started-tutorial">
- 			<div class="title"><a class="nav-link p-0" href="cloud-management/get-started/logging">Dynamic Logging</a></div>
- 			<div class="desc">Used with the Steeltoe Logger Management endpoint, this package enables dynamically changing logging levels.</div>
- 		</div>
-		</div>
- </Tutorials>
+    <ComponentName>Cloud Management</ComponentName>
+    <Tutorials>
+        <h1>This page has moved, find the new location <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/guides/")">here</NavLink></h1>
+    </Tutorials>
 </GetStarted>
 
-
+@code
+{
+    protected override void OnInitialized()
+    {
+        if (HttpContextAccessor.HttpContext != null)
+        {
+            var uri = new Uri(DocsSiteOptions.Value.BaseAddress + "/guides/").ToString();
+            HttpContextAccessor.HttpContext.Response.Redirect(uri, true);
+        }
+    }
+}

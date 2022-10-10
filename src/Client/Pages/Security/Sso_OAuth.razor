@@ -1,172 +1,23 @@
-﻿@page "/security-providers/get-started/sso/oauth"
-
+@page "/security-providers/get-started/sso/oauth"
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 <Breadcrumbs NavName="Cloud Foundry Single Sign-on with OAuth2"
 						 ParentLinkName="Security Providers"
 						 ParentLinkUrl="/security-providers"
-						 ShowGetStarted=true />
-
+						 ShowGetStarted="true" />
 <Tutorial>
-	<Title>Using Cloud Foundry SSO with OAuth2 provider</Title>
-	<Description>
-		This is a guide to integrate a .Net Core API with the Cloud Foundry SSO identity provider service. The sample provides authentication to select entry points of an application. It is meant to provide authentication simiar to how IIS would when Windows authentication is enabled.
-	</Description>
-	<TutorialSteps>
-		<div class="row">
-			<div class="col-12 getting-started-header">First, <b>establish an identity provider</b>.</div>
-		</div>
-		<div class="row">
-			<div class="col-12">
-				<TabSet>
-					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<CFCreateServiceCmd>cf create-service p-identity my-sso-plan @InstanceName</CFCreateServiceCmd>
-						<AdditionalSteps>
-							Use the <Href href="https://docs.pivotal.io/p-identity" target="_blank">Pivotal Single Sign-On guide</Href> to deploying the SSO tile. Choose from the list of supported identity providers.
-						</AdditionalSteps>
-					</Steeltoe.Client.Components.StartInstanceTab.CloudFoundry>
-				</TabSet>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-header">Next, <b>create a .NET Core WebAPI</b> that interacts with @ServiceName</div>
-		</div>
-		<div class="row">
-			<ol class="col-12 getting-started-ordered-list">
-				<li>
-					<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="no-dependencies.png" ProjectName="@ProjectName" />
-				</li>
-				<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
-				<li>
-					Open the package manager console
-					<img src="images/initializr/open-package-manager-console.png" class="img-fluid" />
-				</li>
-				<li>
-					Install NuGet distributed packages
-<pre><code class="powershell">Install-Package -Id Steeltoe.Security.Authentication.CloudFoundryCore -Version @SteeltoeVersion</code></pre>
-				</li>
-				<li>
-					Set the instance address in <b>appsettings.json</b>
-					<TabSet>
-						<Steeltoe.Client.Components.AppSettingsTab.Local ServiceName="@ServiceName" OAuthClient="true" />
-						<Steeltoe.Client.Components.AppSettingsTab.CloudFoundry ServiceName="@ServiceName" OAuthClient="true" />
-					</TabSet>
-				</li>
-			</ol>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-header">Then, <b>add</b> Cloud Foundry OAuth, secure endpoints, and run the app</div>
-		</div>
-		<div class="row">
-			<ol class="col-12 getting-started-ordered-list">
-				<li>
-					Set the cloud foundry auth middleware in <b>Startup.cs</b>
-<pre><code class="csharp">using Steeltoe.Security.Authentication.CloudFoundry;
-
-...
-
-public class Startup {
-
-...
-
-	public void ConfigureServices(IServiceCollection services){
-		services.AddAuthentication(options => {
-				options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-				options.DefaultChallengeScheme = CloudFoundryDefaults.AuthenticationScheme;
-		})
-		.AddCookie((options) =>{
-					// set values like login url, access denied path, etc here
-					options.AccessDeniedPath = new PathString("/Home/AccessDenied");
-			})
-		.AddCloudFoundryOAuth(Configuration); // Add Cloud Foundry authentication service
-
-		...
-
-	}
-
-	public void Configure(IApplicationBuilder app){
-		
-		...
-	
-		// Use the protocol from the original request when generating redirect uris
-		// (eg: when TLS termination is handled by an appliance in front of the app)
-		app.UseForwardedHeaders(new ForwardedHeadersOptions {
-				ForwardedHeaders = ForwardedHeaders.XForwardedProto
-		});
-
-		// Add authentication middleware to pipeline
-		app.UseAuthentication();
-
-		...
-	
-	}
-}</code></pre>
-				</li>
-				<li>
-					Open the <b>Controllers\ValuesControllers.cs</b> file and secure endpoints
-<pre><code class="csharp">using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-
-...
-
-[Route("api/[controller]")]
-[ApiController]
-public class ValuesController : ControllerBase{
-	[HttpGet]
-	[AllowAnonymous]
-	public ActionResult&lt;string&gt; Get(){
-			return "Hi There";
-	}
-	// GET api/values/5
-	[HttpGet("{id}")]
-	[Authorize]
-	public ActionResult&lt;string&gt; Get(int id){
-		return "value: " + id.ToString();
-	}
-
-	// POST api/values
-	[HttpPost]
-	[Authorize]
-	public void Post([FromBody] string value){
-
-	}
-
-	// PUT api/values/5
-	[HttpPut("{id}")]
-	[Authorize]
-	public void Put(int id, [FromBody] string value){
-
-	}
-
-	// DELETE api/values/5
-	[HttpDelete("{id}")]
-	[Authorize]
-	public void Delete(int id){
-
-	}
-}</code></pre>
-					<Note><Message>Notice the default GET endpoint with no params is open to anonymous connections but the other endpoints all require authorization. With the combination of SSO functions, the user will be prompted for login and returned.</Message></Note>
-				</li>
-				<li>
-					<div>Run the application</div>
-					<div>
-						<TabSet>
-							<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" InstanceName="@InstanceName">
-								<AdditionalSteps>
-									<li>
-		 								The endpoint should load with no issue. Then try going to the <code>/api/values/5</code> endpoint. This will redirect you to the identity providers login page. Login with valid credentials. You will be redirected back to the app's page where the output of <samp>value: 5</samp> is shown.
-									</li>
-								</AdditionalSteps>
-							</Steeltoe.Client.Components.RunAppTab.CloudFoundry>
-						</TabSet>
-					</div>
-				</li>
-			</ol>
-		</div>
-	</TutorialSteps>
+    <Title>
+        This page has moved, use the new <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/guides/security/sso-oauth.html")">SSO with OAuth guide</NavLink>
+    </Title>
 </Tutorial>
 @code
 {
-	private string ServiceName = "SSO";
-	private string InstanceName = "myoAuthSSOExample";
-	private string ProjectName = "OAuth_SSO_Example";
-	private string SteeltoeVersion = "2.4";
+    protected override void OnInitialized()
+    {
+        if (HttpContextAccessor.HttpContext != null)
+        {
+            var uri = new Uri(DocsSiteOptions.Value.BaseAddress + "/guides/security/sso-oauth.html").ToString();
+            HttpContextAccessor.HttpContext.Response.Redirect(uri, true);
+        }
+    }
 }

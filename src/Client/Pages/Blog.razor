@@ -1,7 +1,5 @@
-@using Microsoft.Extensions.Options
-
 @inject NavigationManager NavigationManager
-@inject IOptions<DocsSiteOptions> docsSiteOptions
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 
 @page "/blog"
 @page "/blogs"
@@ -12,8 +10,8 @@ Redirecting to new docs site, please hold.
 @code {
 
     private string _area;
-    private string defaultArea = "index";
-    private DocsSiteOptions docsSite;
+    private const string DefaultArea = "index";
+    private DocsSiteOptions _docsSite;
 
     [Parameter]
     public string ArticleName { get; set; }
@@ -21,25 +19,25 @@ Redirecting to new docs site, please hold.
     [Parameter]
     public string Area
     {
-        get { return (_area ?? defaultArea); }
-        set { _area = value; }
+        get => _area ?? DefaultArea;
+        set => _area = value;
     }
 
     protected override void OnInitialized()
     {
 
-        docsSite = docsSiteOptions?.Value ?? throw new ArgumentNullException(nameof(docsSite));
+        _docsSite = DocsSiteOptions?.Value ?? throw new ArgumentNullException(nameof(_docsSite));
     }
 
     protected override void OnParametersSet()
     {
         if (!string.IsNullOrEmpty(Area))
         {
-            NavigationManager.NavigateTo($"{docsSite.BaseAddress}/articles/{Area}/{ArticleName}.html", false);
+            NavigationManager.NavigateTo($"{_docsSite.BaseAddress}/articles/{Area}/{ArticleName}.html", false);
             return;
         }
 
-        NavigationManager.NavigateTo($"{docsSite.BaseAddress}/articles/{ArticleName}.html", false);
+        NavigationManager.NavigateTo($"{_docsSite.BaseAddress}/articles/{ArticleName}.html", false);
         return;
     }
 }

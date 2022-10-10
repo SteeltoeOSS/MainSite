@@ -400,7 +400,7 @@
       }
     },
     "ConsulConfig": {
-      "description": "Settings for service discovery and registration with Hashicorp Consul",
+      "description": "Settings for service discovery and registration with HashiCorp Consul",
       "type": "object",
       "properties": {
         "Discovery": {

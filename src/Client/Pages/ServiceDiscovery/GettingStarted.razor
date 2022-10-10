@@ -1,24 +1,24 @@
-﻿@page "/service-discovery/get-started"
-
+@page "/service-discovery/get-started"
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 <Breadcrumbs NavName="Getting Started"
 						 ParentLinkName="Service Discovery"
 						 ParentLinkUrl="/service-discovery" />
 <GetStarted>
 	<ComponentName>Service Discovery</ComponentName>
 	<Tutorials>
-		<div class="col">
-			<div class="get-started-tutorial">
-				<div class="title"><a class="nav-link p-0" href="service-discovery/get-started/eureka">Eureka Registry</a></div>
-				<div class="desc">Use a Eureka service instance as the registry.</div>
-			</div>
-		</div>
-		<div class="col-1">&nbsp;</div>
-		<div class="col">
-			<div class="get-started-tutorial">
-				<div class="title"><a class="nav-link p-0" href="service-discovery/get-started/consul">Hashicorp Consul Registry</a></div>
-				<div class="desc">Use a Hashicorp Consul service instance as the registry.</div>
-			</div>
-		</div>
+        <h1>This page has moved, find the new location <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/guides/")">here</NavLink></h1>
 	</Tutorials>
 </GetStarted>
 
+@code
+{
+    protected override void OnInitialized()
+    {
+        if (HttpContextAccessor.HttpContext != null)
+        {
+            var uri = new Uri(DocsSiteOptions.Value.BaseAddress + "/guides/").ToString();
+            HttpContextAccessor.HttpContext.Response.Redirect(uri, true);
+        }
+    }
+}

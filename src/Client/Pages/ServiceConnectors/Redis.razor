@@ -1,103 +1,23 @@
-﻿
 @page "/service-connectors/get-started/redis"
-
-
-	<Breadcrumbs NavName="Redis Cache"
+@inject IHttpContextAccessor HttpContextAccessor
+@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
+<Breadcrumbs NavName="Redis Cache"
 							 ParentLinkName="Service connectors"
 							 ParentLinkUrl="/service-connectors"
-							 ShowGetStarted=true />
+							 ShowGetStarted="true" />
 <Tutorial>
-	<Title>Using Service Connectors with Redis Cache</Title>
-	<Description>This tutorial takes you through setting up a .NET Core application with the Redis service connector.</Description>
-	<TutorialSteps>
-
-		<div class="row">
-			<div class="col-12 getting-started-header">First, <b>start a Redis instance</b>. Depending on your hosting platform this is done in several ways.</div>
-		</div>
-		<div class="row">
-			<div class="col-12">
-				<TabSet>
-					<Steeltoe.Client.Components.StartInstanceTab.Local ServiceName="@ServiceName">
-						<DockerCmd>docker run --publish 6379:6379 steeltoeoss/redis</DockerCmd>
-					</Steeltoe.Client.Components.StartInstanceTab.Local>
-					<Steeltoe.Client.Components.StartInstanceTab.CloudFoundry InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<CFCreateServiceCmd>cf create-service p.redis cache-small @InstanceName</CFCreateServiceCmd>
-						<AdditionalSteps>
-							<Note><Message>In the above example we are choosing p.redis service with a cache-small plan. Naming can vary in each foundation. Find your plan naming with the <code>cf marketplace</code> command</Message></Note>
-						</AdditionalSteps>
-					</Steeltoe.Client.Components.StartInstanceTab.CloudFoundry>
-					<Steeltoe.Client.Components.StartInstanceTab.Azure InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<AzureGettingStartedUrl>https://docs.microsoft.com/en-us/azure/azure-cache-for-redis/scripts/create-cache</AzureGettingStartedUrl>
-					</Steeltoe.Client.Components.StartInstanceTab.Azure>
-					<Steeltoe.Client.Components.StartInstanceTab.Kubernetes InstanceName="@InstanceName" ServiceName="@ServiceName">
-						<HelmGettingStartedUrl>https://hub.helm.sh/charts/stable/redis</HelmGettingStartedUrl>
-						<HelmCmd>helm install --name @InstanceName --set master.service.type=NodePort,master.persistence.enabled=false stable/redis</HelmCmd>
-					</Steeltoe.Client.Components.StartInstanceTab.Kubernetes>
-					@*<Steeltoe.Client.Components.StartInstanceTab.StTooling InstanceName="@InstanceName" ServiceName="@ServiceName" ToolingServiceName="redis" />*@
-				</TabSet>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-header">Next, <b>create a .NET Core WebAPI</b> that interacts with Redis</div>
-		</div>
-		<div class="row">
-			<div class="col-12 getting-started-ordered-list">
-				<ol>
-					<li>
-						<Steeltoe.Client.Components.AppSettingsTab.Initiallizr ImageName="redis-connector.png" DependencyName="Redis" ProjectName="@ProjectName" />
-					</li>
-					<li>Extract the zipped project and open in your IDE of choice (we use Visual Studio)</li>
-					<li>
-						Set the instance address in <b>appsettings.json</b>
-						<TabSet>
-							<Steeltoe.Client.Components.AppSettingsTab.Local
-														ServiceName="@ServiceName"
-														ParentSettingsParamName="redis"
-														ChildSettingsParamName="client"
-														ServicePort="6379"
-														ServiceHost="127.0.0.1" />
-							<Steeltoe.Client.Components.AppSettingsTab.CloudFoundry />
-							<Steeltoe.Client.Components.AppSettingsTab.Azure InstanceName="@InstanceName"
-																												ServiceName="@ServiceName"
-																												ParentSettingsParamName="redis"
-																												ChildSettingsParamName="client"
-																												ServicePort="AZURE_PROVIDED"
-																												ServiceHost="AZURE_PROVIDED" />
-							<Steeltoe.Client.Components.AppSettingsTab.Kubernetes InstanceName="@InstanceName"
-																														 ServiceName="@ServiceName"
-																														 ServicePort="HELM_PROVIDED_PORT_NUMBER"
-																														 ParentSettingsParamName="redis"
-																														 ChildSettingsParamName="client"
-																														 ServiceHost="HELM_PROVIDED_HOST_ADDRESS" />
-							@*<Steeltoe.Client.Components.AppSettingsTab.StTooling />*@
-						</TabSet>
-					</li>
-					<li>
-						<div>Run the application</div>
-						<div>
-							<TabSet>
-								<Steeltoe.Client.Components.RunAppTab.Local ProjectName="@ProjectName" />
-								<Steeltoe.Client.Components.RunAppTab.CloudFoundry ProjectName="@ProjectName" InstanceName="@ServiceName" />
-								<Steeltoe.Client.Components.RunAppTab.AzureAppService>
-									<AzureDeployHowToUrl>https://docs.microsoft.com/en-us/visualstudio/deployment/quickstart-deploy-to-azure?view=vs-2019</AzureDeployHowToUrl>
-								</Steeltoe.Client.Components.RunAppTab.AzureAppService>
-								<Steeltoe.Client.Components.RunAppTab.Kubernetes ProjectName="@ProjectName" />
-								@*<Steeltoe.Client.Components.RunAppTab.StTooling ProjectName="@ProjectName" />*@
-							</TabSet>
-						</div>
-					</li>
-					<li>
-						Once the app loads in the browser you will see the 2 values that were written and retrieved from @ServiceName.
-						<br /><samp>[123,456]</samp>
-					</li>
-				</ol>
-			</div>
-		</div>
-	</TutorialSteps>
+    <Title>
+        This page has moved, use the new <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/guides/service-connectors/redis.html")">Redis Connector Guide</NavLink>
+	</Title>
 </Tutorial>
 @code
 {
-	private string ServiceName = "Redis";
-	private string InstanceName = "myredisservice";
-	private string ProjectName = "Redis_Connector";
+    protected override void OnInitialized()
+    {
+        if (HttpContextAccessor.HttpContext != null)
+        {
+            var uri = new Uri(DocsSiteOptions.Value.BaseAddress + "/guides/service-connectors/redis.html").ToString();
+            HttpContextAccessor.HttpContext.Response.Redirect(uri, true);
+        }
+    }
 }
