@@ -1,9 +1,34 @@
 @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,800&display=swap');
+
+@font-face {
+  font-family:'Metropolis';
+	font-style:normal;
+	font-weight:400;
+	font-weight:300;
+	font-weight:200;
+	font-weight:100;
+	src:url("../fonts/Metropolis-Regular.woff2") format("woff2"), url("../fonts/Metropolis-Regular.woff") format("woff");
+
+}
+@font-face {
+  font-family: 'Metropolis';
+	font-weight:450;
+  font-style: normal;
+	src:url("../fonts/Metropolis-Medium.woff2") format("woff2"), url("../fonts/Metropolis-Medium.woff") format("woff");
+}
+@font-face {
+  font-family: 'Metropolis';
+  font-family:'Metropolis';
+	font-weight:500;
+	font-weight: bold;
+	font-style: normal;
+	src:url("../fonts/Metropolis-Bold.woff2") format("woff2"), url("../fonts/Metropolis-Bold.woff") format("woff");
+}
+
 
 /* DEVELOP WIDTH = 1400px */
 html, body {
-	font-family: 'Raleway', sans-serif;
+	font-family: 'Metropolis', sans-serif;
 	font-size: 100%;
 	font-style: normal;
 	font-weight: normal;
@@ -632,7 +657,6 @@ font-display: auto;
 font-size: 180%;
 font-style: normal;
 font-weight: bold;
-font-family: 'Raleway', sans-serif;
 }
 
 .docs h2 {
@@ -640,7 +664,6 @@ font-display: auto;
 font-size: 120%;
 font-style: normal;
 font-weight: bold;
-font-family: 'Raleway', sans-serif;
 }
 
 .docs h3 {
@@ -648,7 +671,6 @@ font-display: auto;
 font-size: 100%;
 font-style: normal;
 font-weight: bold;
-font-family: 'Raleway', sans-serif;
 }
 
 .docs h4 {
@@ -656,7 +678,6 @@ font-display: auto;
 font-size: 100%;
 font-style: normal;
 font-weight: bold;
-font-family: 'Raleway', sans-serif;
 }
 
 #iframe {
@@ -873,4 +894,12 @@ div[role=button] a.active,
 }
 .blazored-sub-menu-header.open .blazored-sub-menu .blazored-sub-menu-header div[role=button] {
 	font-weight: normal;
+}
+#dotnet-promo {
+	background: #001F3F;
+	transition: .2s ease-out;
+}
+#dotnet-promo:focus,
+#dotnet-promo:hover {
+	color: rgba(255,255,255, 0.7) !important;
 }
