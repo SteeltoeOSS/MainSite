@@ -1,4 +1,4 @@
-@inject NavigationManager NavigationManager
+@inject IHttpContextAccessor HttpContextAccessor
 @inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 
 @page "/blog"
@@ -8,36 +8,23 @@
 Redirecting to new docs site, please hold.
 
 @code {
-
-    private string _area;
-    private const string DefaultArea = "index";
-    private DocsSiteOptions _docsSite;
-
     [Parameter]
     public string ArticleName { get; set; }
 
     [Parameter]
-    public string Area
-    {
-        get => _area ?? DefaultArea;
-        set => _area = value;
-    }
+    public string Area { get;set; }
 
     protected override void OnInitialized()
     {
+        ArticleName ??= "index";
 
-        _docsSite = DocsSiteOptions?.Value ?? throw new ArgumentNullException(nameof(_docsSite));
-    }
+        var uri = Area != null
+            ? new Uri(DocsSiteOptions.Value.BaseAddress + $"/articles/{Area}/{ArticleName}.html")
+            : new Uri(DocsSiteOptions.Value.BaseAddress + $"/articles/{ArticleName}.html");
 
-    protected override void OnParametersSet()
-    {
-        if (!string.IsNullOrEmpty(Area))
+        if (HttpContextAccessor.HttpContext != null)
         {
-            NavigationManager.NavigateTo($"{_docsSite.BaseAddress}/articles/{Area}/{ArticleName}.html", false);
-            return;
+            HttpContextAccessor.HttpContext.Response.Redirect(uri.ToString(), true);
         }
-
-        NavigationManager.NavigateTo($"{_docsSite.BaseAddress}/articles/{ArticleName}.html", false);
-        return;
     }
 }
