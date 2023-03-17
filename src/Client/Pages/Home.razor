@@ -24,8 +24,8 @@
         </div>
         <div class="row no-gutters mt-5">
             <div class="col">
-                <Banner Href="@(_docsSite.BlogHome+"releases/steeltoe-3-2-whats-new.html")" BannerTypeName="Blog">
-                    <span class="font-weight-bold">Steeltoe 3.2.0 is now available!</span> Take a look at the new features we have added <span class="font-weight-bold">&gt;</span>
+                <Banner Href="https://springone.io?utm_source=steeltoe-io-home" BannerTypeName="NEWS">
+                    Call for papers is open. Submit your talk for SpringOne@Explore by March 31 <span class="font-weight-bold">&gt;</span>
                 </Banner>
             </div>
         </div>
@@ -36,7 +36,6 @@
         <div class="width-all text-center"><h2>What Steeltoe can do</h2></div>
         <div class="">
             <div class="row no-gutters">
-
                 <div class="col component">
                     <Href href="/microservices">
                         <div class="text-center"><img class="img-fluid" src="/images/icon-microservices-dfc414fd79f67718216adaffb5d99947.svg" /></div>
@@ -75,7 +74,7 @@
     <div class="width-90 container py-5">
         <div class="row no-gutters text-center mt-3">
             <div class="col stat">
-                Steeltoe has been downloaded over <span class="number">44 million</span> times on NuGet!
+                Steeltoe has been downloaded over <span class="number">50 million</span> times on <a href="https://www.nuget.org/profiles/SteeltoeOSS">NuGet</a>!
             </div>
         </div>
     </div>
@@ -149,15 +148,12 @@
      </div>
     </div>*@
 @code {
-
     private DocsSiteOptions _docsSite;
     private List<CalendarEvent> _events;
 
     protected override void OnInitialized()
     {
-
         _docsSite = DocsSiteOptions?.Value ?? throw new ArgumentNullException(nameof(_docsSite));
-
         _events = CalendarEventOptions?.Value.Events ?? new();
     }
 }
