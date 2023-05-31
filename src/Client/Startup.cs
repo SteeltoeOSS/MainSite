@@ -20,7 +20,16 @@ namespace Steeltoe.Client
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "DocumentationPolicy",
+                       policy =>
+                       {
+                           policy.WithOrigins("https://docs.steeltoe.io", "http://localhost:8082")
+                                   .AllowAnyHeader()
+                                   .AllowAnyMethod();
+                       });
+            });
             services.Configure<CalendarEventOptions>(Configuration.GetSection("CalendarEvents"));
             services.AddHttpContextAccessor();
             services.AddOptions<DocsSiteOptions>()
@@ -48,6 +57,7 @@ namespace Steeltoe.Client
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseCors("DocumentationPolicy");
 
             app.UseEndpoints(endpoints =>
             {
