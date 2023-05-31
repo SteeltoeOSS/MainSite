@@ -25,9 +25,9 @@ namespace Steeltoe.Client
                 options.AddPolicy(name: "DocumentationPolicy",
                        policy =>
                        {
-                           policy.WithOrigins("https://docs.steeltoe.io", "http://localhost:8082")
+                           policy.WithOrigins("https://docs.steeltoe.io")
                                    .AllowAnyHeader()
-                                   .AllowAnyMethod();
+                                   .WithMethods("GET");
                        });
             });
             services.Configure<CalendarEventOptions>(Configuration.GetSection("CalendarEvents"));
