@@ -15,9 +15,10 @@
 
 @code{
     [CascadingParameter]
+#nullable enable
     private HttpContext? HttpContext { get; set; }
-
     private string? RequestId { get; set; }
+#nullable disable
     private bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
 
     protected override void OnInitialized() =>
