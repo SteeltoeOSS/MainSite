@@ -3,7 +3,7 @@
 	The site was built using [Blazor](https://docs.microsoft.com/en-us/aspnet/core/blazor/) in Visual Studio. 
 
 ## Install Dependencies
-Requires .NET Core SDK 6.0
+Requires .NET Core SDK 8.0
 
 ```powershell
 PS> dotnet new -i Microsoft.AspNetCore.Blazor.Templates
