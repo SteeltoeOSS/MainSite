@@ -1,9 +1,10 @@
+using Steeltoe.Client.Components;
 using Steeltoe.Client.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor();
+builder.Services.AddRazorComponents();
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: "DocumentationPolicy",
@@ -42,10 +43,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAntiforgery();
 app.UseCors("DocumentationPolicy");
-
-app.MapBlazorHub();
-app.MapFallbackToPage("/_Host");
+app.MapRazorComponents<App>();
 
 app.Run();
