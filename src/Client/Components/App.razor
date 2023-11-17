@@ -1,3 +1,5 @@
+@inject IHostEnvironment HostEnvironment
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -52,7 +54,18 @@
     <HeadOutlet />
 </head>
 <body>
-
+    <div id="blazor-error-ui">
+        @if (HostEnvironment.IsProduction())
+        {
+            <span>An error has occurred.</span>
+        }
+        else
+        {
+            <span>An unhandled exception occurred. See browser dev tools for details.</span>
+        }
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
     <Routes />
     <script src="js/functions.js" type="text/javascript"></script>
     <script src="_framework/blazor.web.js"></script>
