@@ -61,12 +61,9 @@ spec:
   routes:
   - conditions:
     - prefix: /
-    enableWebsockets: true
     services:
     - name: #@ data.values.name
       port: #@ int(data.values.service_port)
-    loadBalancerPolicy:
-      strategy: Cookie
 
 #@ if/end data.values.www_hostname:
 ---
@@ -83,9 +80,6 @@ spec:
   routes:
   - conditions:
     - prefix: /
-    enableWebsockets: true
     services:
     - name: #@ data.values.name
       port: #@ int(data.values.service_port)
-    loadBalancerPolicy:
-      strategy: Cookie
