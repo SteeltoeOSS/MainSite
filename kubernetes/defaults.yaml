@@ -5,7 +5,7 @@ name: main-site
 namespace: website
 image_name: steeltoe.azurecr.io/main-site
 image_tag: latest
-container_port: 80
+container_port: 8080
 container_memory: 128Mi
 container_cpu: 500m
 service_port: 80
