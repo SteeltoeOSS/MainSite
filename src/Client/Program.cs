@@ -1,20 +1,50 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+using Steeltoe.Client.Components;
+using Steeltoe.Client.Models;
 
-namespace Steeltoe.Client
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddRazorComponents();
+
+builder.Services.AddCors(options =>
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+    options.AddPolicy(name: "DocumentationPolicy",
+           policy =>
+           {
+               policy.WithOrigins("https://docs.steeltoe.io")
+                       .AllowAnyHeader()
+                       .WithMethods("GET");
+           });
+});
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+builder.Services.Configure<CalendarEventOptions>(builder.Configuration.GetSection("CalendarEvents"));
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddOptions<DocsSiteOptions>()
+    .Bind(builder.Configuration.GetSection("DocsSite"))
+    .ValidateDataAnnotations()
+    .PostConfigure(docsSiteOptions =>
+    {
+        docsSiteOptions.SetUrls();
+    });
+
+var app = builder.Build();
+
+if (builder.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
 }
+else
+{
+    app.UseExceptionHandler("/Error", createScopeForErrors: true);
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+
+app.UseStaticFiles();
+
+app.UseRouting();
+app.UseAntiforgery();
+app.UseCors("DocumentationPolicy");
+app.MapRazorComponents<App>();
+
+app.Run();

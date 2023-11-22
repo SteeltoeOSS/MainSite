@@ -24,6 +24,7 @@ Redirecting to new docs site, please hold.
     private const string DefaultComponent = "welcome";
     private DocsSiteOptions _docsSite;
 
+#pragma warning disable BL0007
     [Parameter]
     public string Area
     {
@@ -44,6 +45,7 @@ Redirecting to new docs site, please hold.
         get => _version;
         set => _version = (value is < 2 or > 3 or 0 ? CurrentVersion : value);
     }
+#pragma warning restore BL0007
 
     protected override void OnInitialized()
     {

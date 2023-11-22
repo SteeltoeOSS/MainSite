@@ -1,4 +1,4 @@
-@using Steeltoe.Client.UIInterfaces
+@using Steeltoe.Client.Components.UIInterfaces
 @implements ITab
 @inject IJSRuntime JSRuntime
 
@@ -29,7 +29,7 @@
 
 	protected override async Task OnAfterRenderAsync(bool firstRender)
 	{
-    await JSRuntime.InvokeVoidAsync("highlightCode",true);
+        await JSRuntime.InvokeVoidAsync("highlightCode",true);
 		await base.OnAfterRenderAsync(firstRender);
 	}
 
