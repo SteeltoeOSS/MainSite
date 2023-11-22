@@ -13,5 +13,5 @@ RUN dotnet publish $SRC_DIR/Client \
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /build .
-EXPOSE 80
+EXPOSE 8080
 ENTRYPOINT ["dotnet", "Steeltoe.Client.dll"]
