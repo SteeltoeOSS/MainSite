@@ -10,7 +10,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: "DocumentationPolicy",
            policy =>
            {
-               policy.WithOrigins("https://docs.steeltoe.io")
+               policy.AllowAnyOrigin()
                        .AllowAnyHeader()
                        .WithMethods("GET");
            });
