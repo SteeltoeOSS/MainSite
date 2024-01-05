@@ -401,7 +401,7 @@ a,
     margin-right: 0 !important;
 }
 
-..component-dark .title {
+.component-dark .title {
     color: white;
 }
 
@@ -409,7 +409,7 @@ a,
     color: #00376e;
 }
 
-..component-dark .desc {
+.component-dark .desc {
     color: white;
     margin: 3% 0 3% 0;
     min-height: 90px;
