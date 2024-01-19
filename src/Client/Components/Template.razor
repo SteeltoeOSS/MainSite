@@ -142,14 +142,4 @@
 
 	[Parameter]
 	public RenderFragment OtherArea { get; set; }
-
-	protected override async Task OnAfterRenderAsync(bool first) {
-		if(first) {
-			await JSRuntime.InvokeVoidAsync("highlightCode",true);
-			StateHasChanged();
-		}
-
-		await base.OnAfterRenderAsync(first);
-		return;
-	}
 }
