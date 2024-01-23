@@ -1,4 +1,4 @@
-﻿@page "/event-driven"
+@page "/event-driven"
 
 <Template Name="Event Driven" Features="@features" NameIsPlural="false">
 	<Description>Event-driven systems reflect how modern businesses actually work, with thousands of small changes happening all day, every day. Steeltoe’s ability to handle events and enable developers to build applications around them, means your apps will stay in sync with your business. Steeltoe has event-driven options like streaming all the way to cloud functions, and data flows.</Description>
@@ -61,7 +61,7 @@
 			Description = (b => {
 				b.AddMarkupContent(1,"Steeltoe Stream improves your productivity when working with RabbitMQ, providing three key abstractions to simplify your code. “Binders” integrate with external messaging systems. “Bindings” bridge the gap between the messaging systems and your code. “Messages” provide the structure that your code uses to send and receive data.<Br /><br />Steeltoe Stream also provides support for provisioning, content conversion, error handling, configuration management, consumer groups, partitioning, monitoring, and health checks.<Br /><br />");
 				b.OpenComponent<Href>(2);
-					b.AddAttribute(3, "href","https://docs.steeltoe.io/api/v3/stream/");
+					b.AddAttribute(3, "href","/docs/stream");
 					b.AddAttribute(4, "AsButton",true);
 					b.AddAttribute(5, "ChildContent", (RenderFragment)((b) => {b.AddContent(6, "Learn more");}));
 				b.CloseComponent();

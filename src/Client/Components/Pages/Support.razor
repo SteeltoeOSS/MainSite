@@ -1,4 +1,4 @@
-﻿@page "/support"
+@page "/support"
 
 <Template Name="Support" Features="@features">
 	<Description>Contact the team directly to get answers about how to best implement every component and feature within Steeltoe, as well as the best cloud-native .NET practices.</Description>
@@ -42,7 +42,7 @@
 			Description = (b => {
 				b.AddMarkupContent(1,"Search past issues and community questions, request a new feature, or donate your custom features to a project.<br /><br />");
 				b.OpenComponent<Href>(2);
-					b.AddAttribute(3, "href","https://github.com/steeltoeoss");
+					b.AddAttribute(3, "href","https://github.com/SteeltoeOSS");
 					b.AddAttribute(4, "NewWindow",true);
 					b.AddAttribute(5, "AsButton",true);
 					b.AddAttribute(6, "ChildContent", (RenderFragment)((b) => {b.AddContent(7, "GO NOW");}));
@@ -55,7 +55,7 @@
 			Description = (b => {
 				b.AddMarkupContent(1,"Search and learn more about each Steeltoe package, its version history, statistics, and installation options.<br /><br />");
 				b.OpenComponent<Href>(2);
-					b.AddAttribute(3, "href","https://www.nuget.org/profiles/steeltoe");
+					b.AddAttribute(3, "href","https://www.nuget.org/profiles/SteeltoeOSS");
 					b.AddAttribute(4, "NewWindow",true);
 					b.AddAttribute(5, "AsButton",true);
 					b.AddAttribute(6, "ChildContent", (RenderFragment)((b) => {b.AddContent(7, "GO NOW");}));
