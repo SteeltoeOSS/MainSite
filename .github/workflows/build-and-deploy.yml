@@ -4,8 +4,8 @@ env:
   AZURE_WEBAPP_NAME: steeltoe-mainsite
   AZURE_WEBAPP_PACKAGE_PATH: '.'
   DOTNET_VERSION: '8.0'
-  SLOT_NAME: staging
   RESOURCE_GROUP: Steeltoe
+  SLOT_NAME: staging
 
 on:
   push:
@@ -63,24 +63,24 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           slot-name: ${{ env.SLOT_NAME }}
   
-  # promote-to-production:
-  #   name: Promote to production
-  #   needs: deploy-to-staging
-  #   runs-on: ubuntu-latest
-  #   environment:
-  #     name: 'Production'
-  #     url: 'https://${{ env.AZURE_WEBAPP_NAME }}.azurewebsites.net/'
+  promote-to-production:
+    name: Promote to production
+    needs: deploy-to-staging
+    runs-on: ubuntu-latest
+    environment:
+      name: 'Production'
+      url: 'https://${{ env.AZURE_WEBAPP_NAME }}.azurewebsites.net/'
 
-  #   steps:
-  #   - name: Log into Azure CLI with service principal
-  #     uses: azure/login@v1.1
-  #     with:
-  #       creds: ${{ secrets.AZURE_CREDENTIALS }}
+    steps:
+    - name: Log into Azure CLI with service principal
+      uses: azure/login@v1.1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-  #   - name: Swap slots
-  #     run: az webapp deployment slot swap -s ${{ env.SLOT_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} -g ${{ env.RESOURCE_GROUP }}
+    - name: Swap slots
+      run: az webapp deployment slot swap -s ${{ env.SLOT_NAME }} -n ${{ env.AZURE_WEBAPP_NAME }} -g ${{ env.RESOURCE_GROUP }}
 
