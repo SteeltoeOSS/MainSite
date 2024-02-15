@@ -75,6 +75,8 @@ jobs:
     - name: If PR, create a new staging slot
       if: ${{ github.event_name == 'pull_request' }}
       run: az webapp deployment slot create --resource-group ${{ vars.AZURE_RESOURCE_GROUP }} --name ${{ vars.AZURE_WEBAPP_NAME}} --slot ${{ env.SLOT_NAME }}
+      # Need to pair a PR slot with a custom docs site address?
+      # az webapp config appsettings set -g steeltoe --name www-steeltoe --slot pr-141 --settings DocsSite__BaseAddress=https://docs-steeltoe-pr-310.azurewebsites.net
 
     - name: Deploy to Azure Web App
       id: deploy-to-webapp
