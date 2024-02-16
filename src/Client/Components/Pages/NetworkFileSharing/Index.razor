@@ -7,7 +7,7 @@
 <GetStarted>
     <ComponentName>Network File Sharing</ComponentName>
     <Tutorials>
-        <h1>This page has moved, find the new location <NavLink href="@(DocsSiteOptions.Value.BaseAddress + "/api/v3/fileshares")">here</NavLink></h1>
+        <h1>This page has moved, find the new location <NavLink href="@(DocsSiteOptions.Value.FileShareHome)">here</NavLink></h1>
     </Tutorials>
 </GetStarted>
 
@@ -17,7 +17,7 @@
     {
         if (HttpContextAccessor.HttpContext != null)
         {
-            var uri = new Uri(DocsSiteOptions.Value.BaseAddress + "/api/v3/fileshares").ToString();
+            var uri = new Uri(DocsSiteOptions.Value.FileShareHome).ToString();
             HttpContextAccessor.HttpContext.Response.Redirect(uri, true);
         }
     }
