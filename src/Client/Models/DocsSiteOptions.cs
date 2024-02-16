@@ -13,6 +13,7 @@ namespace Steeltoe.Client.Models
         public string DocsStreamHome { get; set; }
         public string GuidesHome { get; set; }
         public string FileShareHome { get; set; }
+        public string DynamicLoggingHome { get; set; }
 
         public void SetUrls()
         {
@@ -22,6 +23,7 @@ namespace Steeltoe.Client.Models
             DocsStreamHome = ConfigureIfMissing(DocsStreamHome, $"{BaseAddress}/api/v3/stream/");
             GuidesHome = ConfigureIfMissing(GuidesHome, $"{BaseAddress}/guides/");
             FileShareHome = ConfigureIfMissing(FileShareHome, $"{BaseAddress}/api/v3/fileshares/");
+            DynamicLoggingHome = ConfigureIfMissing(DynamicLoggingHome, $"{BaseAddress}/api/v3/logging/");
         }
 
         private static string ConfigureIfMissing(string value, string defaultValue)
