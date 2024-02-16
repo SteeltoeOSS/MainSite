@@ -85,24 +85,23 @@
             <div class="col" id="footer-learn-col">
                 <div class="pb-2 font-weight-bold">Learn</div>
                 <div><Href href="https://start.steeltoe.io/" NewWindow="true">Steeltoe Initializr</Href></div>
-                <div><Href href="@(docsSite.GuidesHome)">Guides</Href></div>
-                <div><Href href="@(docsSite.DocsHome)">Documentation</Href></div>
-                <div><Href href="@(docsSite.ApiBrowserHome)">API Browser</Href></div>
-                <div><Href href="@(docsSite.BlogHome)">Blog</Href></div>
+                <div><Href href="@(_docsSite.GuidesHome)">Guides</Href></div>
+                <div><Href href="@(_docsSite.DocsHome)">Documentation</Href></div>
+                <div><Href href="@(_docsSite.ApiBrowserHome)">API Browser</Href></div>
+                <div><Href href="@(_docsSite.BlogHome)">Blog</Href></div>
             </div>
             <div class="col" id="footer-projects-col">
                 <div class="pb-2 font-weight-bold">Projects</div>
                 <div><Href href="/app-configuration">Application Configuration</Href></div>
                 <div><Href href="/circuit-breakers">Circuit Breakers</Href></div>
-                @*<div><Href href="/cloud-management">Distributed Tracing</Href></div>*@
                 <div><Href href="/logging">Dynamic Logging</Href></div>
                 <div><Href href="/cloud-management">Management</Href></div>
                 <div><Href href="/messaging">Messaging</Href></div>
-                <div><Href href="/fileshares">Network File Sharing</Href></div>
+                <div><Href href="@(_docsSite.FileShareHome)">Network File Sharing</Href></div>
                 <div><Href href="/security-providers">Security</Href></div>
                 <div><Href href="/service-connectors">Service Connectors</Href></div>
                 <div><Href href="/service-discovery">Service Discovery</Href></div>
-                <div><Href href="@(docsSite.DocsStreamHome)">Stream</Href></div>
+                <div><Href href="@(_docsSite.DocsStreamHome)">Stream</Href></div>
             </div>
             <div class="col" id="footer-others-col">
                 @*<div class="pb-2 font-weight-bold"><Href href="/training">Training</Href></div>*@
@@ -112,7 +111,7 @@
         </div>
         <div class="row py-sm-0 py-4">
             <div class="col text-right">
-                <Href href="https://github.com/steeltoeoss" title="Steeltoe on GitHub" NewWindow="true">
+                <Href href="https://github.com/SteeltoeOSS" title="Steeltoe on GitHub" NewWindow="true">
                     <svg id="github-icon" width="100px" height="50px" viewBox="0 0 1 75" xmlns="http://www.w3.org/2000/svg">
                         <defs>
                             <style>
@@ -166,10 +165,10 @@
 
 @code {
 
-    private DocsSiteOptions docsSite;
+    private DocsSiteOptions _docsSite;
 
     protected override void OnInitialized()
     {
-        docsSite = DocsSiteOptions?.Value ?? throw new ArgumentNullException(nameof(docsSite));
+        _docsSite = DocsSiteOptions?.Value ?? throw new ArgumentNullException(nameof(_docsSite));
     }
 }
