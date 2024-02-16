@@ -17,6 +17,15 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+    - name: Change docs link to prod and restart
+      run: |
+        az webapp config appsettings set --resource-group steeltoe --name www-steeltoe --slot Staging --settings DocsSite__BaseAddress=https://docs.steeltoe.io
+        az webapp restart --resource-group steeltoe --name www-steeltoe --slot Staging
+
     - name: Swap slots
       run: az webapp deployment slot swap -s ${{ vars.STAGING_SLOT_NAME }} -n ${{ vars.AZURE_WEBAPP_NAME }} -g ${{ vars.AZURE_RESOURCE_GROUP }}
-    
+
+    - name: Change docs link to staging and restart
+      run: |
+        az webapp config appsettings set --resource-group steeltoe --name www-steeltoe --slot Staging --settings DocsSite__BaseAddress=https://docs-staging.steeltoe.io
+        az webapp restart --resource-group steeltoe --name www-steeltoe --slot Staging
