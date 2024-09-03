@@ -15,45 +15,25 @@
 @page "/docs/{Version:int}/{Component}/{Area}"
 Redirecting to new docs site, please hold.
 
-@code {
-    private string _area;
-    private string _component;
+@code
+{
     private int _version;
     private const int CurrentVersion = 3;
-    private const string DefaultArea = "index";
     private const string DefaultComponent = "welcome";
-    private DocsSiteOptions _docsSite;
 
-#pragma warning disable BL0007
-    [Parameter]
-    public string Area
-    {
-        get => _area ?? DefaultArea;
-        set => _area = value;
-    }
+    [Parameter] public string Area { get; set; } = "index";
 
-    [Parameter]
-    public string Component
-    {
-        get => _component ?? DefaultComponent;
-        set => _component = value;
-    }
+    [Parameter] public string Component { get; set; } = DefaultComponent;
 
     [Parameter]
     public int Version
     {
         get => _version;
-        set => _version = (value is < 2 or > 3 or 0 ? CurrentVersion : value);
-    }
-#pragma warning restore BL0007
-
-    protected override void OnInitialized()
-    {
-        _docsSite = DocsSiteOptions?.Value ?? throw new ArgumentNullException(nameof(_docsSite));
+        set => _version = value is < 2 or > 3 ? CurrentVersion : value;
     }
 
     protected override void OnParametersSet()
     {
-        NavigationManager.NavigateTo($"{_docsSite.BaseAddress}/api/v{Version}/{Component}/{Area}.html", true);
+        NavigationManager.NavigateTo($"{DocsSiteOptions.Value.BaseAddress}/api/v{Version}/{Component}/{Area}.html", true);
     }
 }

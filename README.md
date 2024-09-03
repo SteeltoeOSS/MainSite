@@ -1,13 +1,10 @@
 # Steeltoe Main Site
 
-	The site was built using [Blazor](https://docs.microsoft.com/en-us/aspnet/core/blazor/) in Visual Studio. 
+	The site was built using [Blazor](https://docs.microsoft.com/aspnet/core/blazor/) in Visual Studio. 
 
 ## Install Dependencies
-Requires .NET Core SDK 8.0
 
-```powershell
-PS> dotnet new -i Microsoft.AspNetCore.Blazor.Templates
-```
+Requires .NET 8.0+ SDK
 
 ## Local testing of Steeltoe site
 
@@ -16,7 +13,8 @@ PS> dotnet new -i Microsoft.AspNetCore.Blazor.Templates
 PS> cd src/Client
 ```
 
-2. Run the application with the `watch` command. So as changes are made in Visual Studio, the site will refresh.
+1. Run the application with the `watch` command. So as changes are made, the site will refresh.
+
 ```powershell
 PS> dotnet watch run
 

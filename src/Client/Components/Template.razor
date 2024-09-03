@@ -1,27 +1,25 @@
-@inject IJSRuntime JSRuntime
+<PageTitle>Steeltoe | @Name</PageTitle>
+<HeadContent>
+    <meta name="description" content="@MetaDescription">
+</HeadContent>
 
-<CustomPageTitle Title="@(Name)" />
 <div class="width-all bg-yellow">
 	<div class="width-90 container">
-		<div class="row no-gutters">
-			<div class="col component-title">@Name</div>
-		</div>
-		<div class="row no-gutters">
-			<div class="col component-desc">@Description</div>
-		</div>
+		<div class="row no-gutters"><div class="col component-title">@Name</div></div>
+		<div class="row no-gutters"><div class="col component-desc">@Description</div></div>
 	</div>
 </div>
 <div class="width-all yellow-slant">
 	<div class="width-90 container">
 		<div class="row no-gutters">
-			@if (GettingStartedURL != null) {
-			<div class="col offset-@(DocsURL==null?"4":"2")">
-				<Href Class="component-button" href="@(GettingStartedURL)">GET STARTED</Href>
+			@if (GettingStartedUrl != null) {
+			<div class="col offset-@(DocsUrl==null?"4":"2")">
+				<Href Class="component-button" href="@(GettingStartedUrl)">GET STARTED</Href>
 			</div>
 			}
-			@if (DocsURL != null) {
-			<div class="col @(GettingStartedURL==null?"offset-4":"")">
-				<Href Class="component-button" href="@(DocsURL)">READ THE DOCS</Href>
+			@if (DocsUrl != null) {
+			<div class="col @(GettingStartedUrl==null?"offset-4":"")">
+				<Href Class="component-button" href="@(DocsUrl)">READ THE DOCS</Href>
 			</div>
 			}
 		</div>
@@ -29,7 +27,7 @@
 </div>
 <div class="width-all">
 	<div class="width-90 container">
-		<div class="@((WhatIs != null || WhyUse != null ? "border-bottom-steeltoe-blue":"") + " row no-gutters")" style="@((WhatIs != null || WhyUse != null ? "margin-bottom:7%;padding-bottom:7%":""))">
+		<div class="@((WhatIs != null || WhyUse != null ? "border-bottom-steeltoe-blue":"") + " row no-gutters")" style="@(WhatIs != null || WhyUse != null ? "margin-bottom:7%;padding-bottom:7%":"")">
 			@if (WhatIs != null) {
 			<div class="col-sm mr-sm-2">
 				<div class="row no-gutters">
@@ -59,11 +57,11 @@
 			</div>
 			}
 		</div>
-		@if(Features != null) {
+		@if (Features != null) {
 			<div class="row no-gutters">
 				@foreach (var feature in Features) {
 					if(AltFeatureTemplate != null) {
-						if((i % 2) == 0){
+						if(_i % 2 == 0){
 							@FeatureTemplate(feature)
 						}else{
 							@AltFeatureTemplate(feature);
@@ -72,25 +70,25 @@
 						@FeatureTemplate(feature)
 					}
 
-					i++;
+					_i++;
 				}
 			</div>
 		}
-		<div class="row no-gutters" style="@((GettingStartedURL == null && DocsURL == null) || (DocsURL == null && !ShowBottomGetStarted) ? "":"margin: 7% 0 7% 0;")">
-			@if (GettingStartedURL != null && ShowBottomGetStarted) {
-				<div class="col offset-@(DocsURL==null&&ShowBottomGetStarted?"4":"2")">
-					<Href Class="component-button" href="@(GettingStartedURL)">GET STARTED</Href>
+		<div class="row no-gutters" style="@((GettingStartedUrl == null && DocsUrl == null) || (DocsUrl == null && !ShowBottomGetStarted) ? "":"margin: 7% 0 7% 0;")">
+			@if (GettingStartedUrl != null && ShowBottomGetStarted) {
+				<div class="col offset-@(DocsUrl==null&&ShowBottomGetStarted?"4":"2")">
+					<Href Class="component-button" href="@(GettingStartedUrl)">GET STARTED</Href>
 				</div>
 			}
-			@if (DocsURL != null && ShowBottomDocsUrl) {
-				<div class="col @(GettingStartedURL==null&&ShowBottomDocsUrl?"offset-4":"")">
-					<Href Class="component-button" href="@DocsURL">READ THE DOCS</Href>
+			@if (DocsUrl != null && ShowBottomDocsUrl) {
+				<div class="col @(GettingStartedUrl==null&&ShowBottomDocsUrl?"offset-4":"")">
+					<Href Class="component-button" href="@DocsUrl">READ THE DOCS</Href>
 				</div>
 			}
 		</div>
 	</div>
 </div>
-@if(OtherArea != null) {
+@if (OtherArea != null) {
 	<div class="width-all">
 		<div class="width-90 container">
 			<div class="row no-gutters">
@@ -100,44 +98,29 @@
 	</div>
 }
 
-@code {
-	private int i = 0;
-	[Parameter]
-	public String Name { get; set; }
+@code
+{
+	private int _i = 0;
 
-	[Parameter]
-	public bool NameIsPlural { get; set; } = false;
+	[Parameter] public string Name { get; set; }
+    [Parameter] public string MetaDescription { get; set; }
+	[Parameter] public bool NameIsPlural { get; set; } = false;
+	[Parameter] public bool ShowBottomGetStarted { get; set; } = true;
+	[Parameter] public bool ShowBottomDocsUrl { get; set; } = true;
+	[Parameter] public RenderFragment Description { get; set; }
+	[Parameter] public RenderFragment WhatIs { get; set; }
+	[Parameter] public RenderFragment WhyUse { get; set; }
+	[Parameter] public RenderFragment<Feature> FeatureTemplate { get; set; }
+	[Parameter] public RenderFragment<Feature> AltFeatureTemplate { get; set; } = null;
+	[Parameter] public IReadOnlyList<Feature> Features { get; set; } = null;
+	[Parameter] public string GettingStartedUrl { get; set; }
+	[Parameter] public string DocsUrl { get; set; }
+	[Parameter] public RenderFragment OtherArea { get; set; }
 
-	[Parameter]
-	public bool ShowBottomGetStarted { get; set; } = true;
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        Name = !string.IsNullOrEmpty(Name) ? "Steeltoe | " + Name : "Steeltoe";
 
-	[Parameter]
-	public bool ShowBottomDocsUrl { get; set; } = true;
-
-	[Parameter]
-	public RenderFragment Description { get; set; }
-
-	[Parameter]
-	public RenderFragment WhatIs { get; set; }
-
-	[Parameter]
-	public RenderFragment WhyUse { get; set; }
-
-	[Parameter]
-	public RenderFragment<Feature> FeatureTemplate { get; set; }
-
-	[Parameter]
-	public RenderFragment<Feature> AltFeatureTemplate { get; set; } = null;
-
-	[Parameter]
-	public IReadOnlyList<Feature> Features { get; set; } = null;
-
-	[Parameter]
-	public string GettingStartedURL { get; set; }
-
-	[Parameter]
-	public string DocsURL { get; set; }
-
-	[Parameter]
-	public RenderFragment OtherArea { get; set; }
+        return base.SetParametersAsync(parameters);
+    }
 }

@@ -1,10 +1,10 @@
-﻿<div class="rounded-pill banner">
+<div class="banner">
 	<Href href="@Href" NewWindow="@NewWindow">
 		<div class="row no-gutters align-items-center">
 			<div class="col-2" style="margin: .7% 3% .7% 5%;max-width: 11%;">
 				<div class="sign rounded-pill special-link">
-				<div style="padding: 2px 0px 2px 0px;">@BannerTypeName</div>
-				</div>
+				<div style="padding: 2px;">@BannerTypeName</div>
+			</div>
 			</div>
 			<div class="col desc">
 				@ChildContent
@@ -13,16 +13,10 @@
 	</Href>
 </div>
 
-@code {
-	[Parameter]
-	public RenderFragment ChildContent { get; set; }
-
-	[Parameter]
-	public string Href {get;set;}
-
-	[Parameter]
-	public string BannerTypeName { get; set; } = "event";
-	
-	[Parameter]
-	public bool NewWindow { get; set; } = true;
+@code
+{
+	[Parameter] public RenderFragment ChildContent { get; set; }
+	[Parameter] public string Href {get;set;}
+	[Parameter] public string BannerTypeName { get; set; } = "event";
+	[Parameter] public bool NewWindow { get; set; } = true;
 }
