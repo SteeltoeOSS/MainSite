@@ -67,16 +67,41 @@
 		</div>
 		@if (Features != null) {
 			<div class="row no-gutters">
-				@foreach (var feature in Features) {
-					if(AltFeatureTemplate != null) {
-						if(_i % 2 == 0){
-							@FeatureTemplate(feature)
-						}else{
-							@AltFeatureTemplate(feature);
-						}
-					} else {
-						@FeatureTemplate(feature)
-					}
+				@foreach (var feature in Features)
+                {
+                    if (FeatureTemplate == null && AltFeatureTemplate == null)
+                    {
+                        if (_i % 2 == 0)
+                        {
+                            <DefaultFeature Feature="feature"></DefaultFeature>
+                        }
+                        else
+                        {
+                            <DefaultAltFeature Feature="feature"></DefaultAltFeature>
+                        }
+                    }
+                    else
+                    {
+                        if (FeatureTemplate == null)
+                        {
+                            throw new NotImplementedException("This is unexpected");
+                        }
+                        if (AltFeatureTemplate != null)
+                        {
+                            if (_i % 2 == 0)
+                            {
+                                @FeatureTemplate(feature)
+                            }
+                            else
+                            {
+                                @AltFeatureTemplate(feature);
+                            }
+                        }
+                        else
+                        {
+                            @FeatureTemplate(feature)
+                        }
+                    }
 
 					_i++;
 				}
