@@ -1,6 +1,13 @@
+@inject NavigationManager Navigation
+
 <PageTitle>Steeltoe | @Name</PageTitle>
 <HeadContent>
-    <meta name="description" content="@MetaDescription">
+    <meta name="description" content="@MetaDescription" />
+    <meta name="DC.Title" content="@(SocialShareTitle ?? Name)" xml:lang="EN" />
+    <meta property="og:title" content="@(SocialShareTitle ?? Name)" />
+    <meta property="og:description" content="@(SocialShareDescription ?? MetaDescription)" />
+    <meta property="og:url" content="@_canonicalUrl" />
+    <link rel="canonical" href="@_canonicalUrl" />
 </HeadContent>
 
 <div class="width-all bg-yellow">
@@ -27,7 +34,8 @@
 </div>
 <div class="width-all">
 	<div class="width-90 container">
-		<div class="@((WhatIs != null || WhyUse != null ? "border-bottom-steeltoe-blue":"") + " row no-gutters")" style="@(WhatIs != null || WhyUse != null ? "margin-bottom:7%;padding-bottom:7%":"")">
+		<div class="@(WhatIs != null || WhyUse != null ? "border-bottom-steeltoe-blue" : "") row no-gutters"
+             style="@(WhatIs != null || WhyUse != null ? "margin-bottom:7%;padding-bottom:7%" : "")">
 			@if (WhatIs != null) {
 			<div class="col-sm mr-sm-2">
 				<div class="row no-gutters">
@@ -101,10 +109,13 @@
 @code
 {
 	private int _i = 0;
+    private string _canonicalUrl;
 
 	[Parameter] public string Name { get; set; }
     [Parameter] public string MetaDescription { get; set; }
-	[Parameter] public bool NameIsPlural { get; set; } = false;
+    [Parameter] public string SocialShareTitle { get; set; }
+    [Parameter] public string SocialShareDescription { get; set; }
+    [Parameter] public bool NameIsPlural { get; set; } = false;
 	[Parameter] public bool ShowBottomGetStarted { get; set; } = true;
 	[Parameter] public bool ShowBottomDocsUrl { get; set; } = true;
 	[Parameter] public RenderFragment Description { get; set; }
@@ -120,6 +131,9 @@
     public override Task SetParametersAsync(ParameterView parameters)
     {
         Name = !string.IsNullOrEmpty(Name) ? "Steeltoe | " + Name : "Steeltoe";
+
+        var requestUri = new Uri(Navigation.Uri);
+        _canonicalUrl = "https://steeltoe.io" + requestUri.PathAndQuery;
 
         return base.SetParametersAsync(parameters);
     }

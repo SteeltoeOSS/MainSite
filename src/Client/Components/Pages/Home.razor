@@ -3,10 +3,16 @@
 
 @inject IOptions<CalendarEventOptions> CalendarEventOptions
 @inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
+@inject NavigationManager Navigation
 
 <PageTitle>Steeltoe | Home</PageTitle>
 <HeadContent>
     <meta name="description" content="Steeltoe is an open-source project providing a library collection that helps users build production-grade cloud-native applications using externalized configuration, database connectors, service discovery, logging and distributed tracing, application management, security, and more.">
+    <meta name="DC.Title" content="Create cloud-native .NET microservices with Steeltoe." xml:lang="EN" />
+    <meta property="og:title" content="Create cloud-native .NET microservices with Steeltoe." />
+    <meta property="og:description" content="Create .NET microservices for modern platforms with Steeltoe. It's a friend of Spring Cloud and can be used anywhere." />
+    <meta property="og:url" content="@_canonicalUrl" />
+    <link rel="canonical" href="@_canonicalUrl" />
 </HeadContent>
 
 <div class="bg-midnight-blue text-white width-all">
@@ -112,3 +118,15 @@ else
 }
     </div>
 </div>
+@code
+{
+    private string _canonicalUrl;
+
+    public override Task SetParametersAsync(ParameterView parameters)
+    {
+        var requestUri = new Uri(Navigation.Uri);
+        _canonicalUrl = "https://steeltoe.io" + requestUri.PathAndQuery;
+
+        return base.SetParametersAsync(parameters);
+    }
+}
