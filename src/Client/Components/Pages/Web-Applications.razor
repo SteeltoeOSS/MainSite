@@ -1,96 +1,57 @@
 @page "/web-application"
 @page "/web-applications"
 
-<Template Name="Web Applications" Features="@features">
-	<Description>Steeltoe makes building web applications fast and hassle-free. By removing much of the boilerplate code and configuration associated with web development, you get a modern web programming model that streamlines the development of server-side HTML applications, REST APIs, and bidirectional, event-based systems.</Description>
-	<FeatureTemplate Context="Feature">
-		<div class="row component-feature no-gutters">
-			<div class="col-sm-6 text-center"><div class="component-feature-img"><img class="img-fluid" src="@Feature.Img" /></div></div>
-			<div class="col">
-				<div class="component-feature-title">@Feature.Title</div>
-				<div class="component-feature-desc">@Feature.Description</div>
-			</div>
-		</div>
-	</FeatureTemplate>
-	<AltFeatureTemplate Context="Feature">
-		<div class="row component-feature no-gutters">
-			<div class="col">
-				<div class="component-feature-title">@Feature.Title</div>
-				<div class="component-feature-desc">@Feature.Description</div>
-			</div>
-			<div class="col-sm-6 text-center"><div class="component-feature-img"><img class="img-fluid" src="@Feature.Img" /></div></div>
-		</div>
-	</AltFeatureTemplate>
-	<!-- OtherArea>
-		<div class="col text-center m-5">
-			<div class="mb-5"><h2>Ready to get started?</h2></div>
-			<div class=""><Href href="/get-started" AsButton="true">TRY THESE TUTORIALs</Href></div>
-		</div>
-	</OtherArea -->
+<Template Name="Web Applications" Features="@_features" MetaDescription="Level up your .NET code and explore what Spring can do for you.">
+    <Description>
+        Steeltoe makes building web applications fast and hassle-free. By removing much of the boilerplate code and configuration associated with web development,
+        you get a modern web programming model that streamlines the development of server-side HTML applications, REST APIs, and bidirectional, event-based systems.
+    </Description>
 </Template>
-@code{
-	private Feature[] features = new[] {
-		new Feature() {
+@code
+{
+	private readonly Feature[] _features =
+    [
+        new Feature
+        {
 			Title = (MarkupString)"Developer productivity",
-			Description = (b => {
-				b.AddMarkupContent(1,"Steeltoe is the starting point of your developer experience, whatever you’re building. Steeltoe is designed to get you up and running as quickly as possible, with minimal upfront configuration. Using .NET's  embedded application servers, you can be serving in seconds.<br /><br />Steeltoe’s out-of-the-box, production-ready features (like tracing, metrics, and health status) provide developers with deep insight into their applications.");
-			}),
+			Description = b => {
+                b.AddMarkupContent(1,"Steeltoe is the starting point of your developer experience, whatever you&apos;re building. Steeltoe is designed to get you up and running as quickly as possible, with minimal upfront configuration. Using .NET's  embedded application servers, you can be serving in seconds.<br /><br />Steeltoe&apos;s out-of-the-box, production-ready features (like tracing, metrics, and health status) provide developers with deep insight into their applications.");
+            },
 			Img = "/images/Icon_down-arrow.svg"
 		},
-		new Feature() {
+		new Feature
+        {
 			Title = (MarkupString)"Battle-tested security",
-			Description = (b => {
-				b.AddMarkupContent(1,"When it’s time to secure your web application, ");
-				b.OpenComponent<Href>(2);
-					b.AddAttribute(3, "href","/security-providers");
-					b.AddAttribute(4, "ChildContent", (RenderFragment)((b) => {b.AddContent(5, "Steeltoe Security Providers");}));
-				b.CloseComponent();
-				b.AddMarkupContent(6," supports industry-standard authentication protocols, including OAuth and OpenID Connect. <br /><br />Get protection from top OWASP attacks, such as session fixation, clickjacking, cross-site request forgery, and more.<br /><br />");
-//				b.OpenComponent<Href>(7);
-//					b.AddAttribute(8, "href","/security-providers/get-started");
-//					b.AddAttribute(9, "AsButton",true);
-//					b.AddAttribute(10, "ChildContent", (RenderFragment)((b) => {b.AddContent(11, "Get started with Security Providers");}));
-//				b.CloseComponent();
-			}),
+			Description = b => {
+                b.AddMarkupContent(1,"When it&apos;s time to secure your web application, ");
+                b.OpenComponent<Href>(2);
+                b.AddAttribute(3, "href","/security-providers");
+                b.AddAttribute(4, "ChildContent", (RenderFragment)(child => { child.AddContent(5, "Steeltoe Security Providers"); }));
+                b.CloseComponent();
+                b.AddMarkupContent(6," supports industry-standard authentication protocols, including OAuth and OpenID Connect. <br /><br />Get protection from top OWASP attacks, such as session fixation, click-jacking, cross-site request forgery, and more.<br /><br />");
+            },
 			Img = "/images/Icon_security.svg"
 		},
-		new Feature() {
+		new Feature
+        {
 			Title = (MarkupString)"App configuration in the cloud",
-			Description = (b => {
-				b.AddMarkupContent(1,"In the cloud, configuration can’t simply be embedded inside the application. The configuration has to be flexible enough to cope with multiple applications, environments, and service instances, as well as deal with dynamic changes without downtime. Steeltoe's ");
-				b.OpenComponent<Href>(2);
-					b.AddAttribute(3, "href","/app-config");
-					b.AddAttribute(4, "ChildContent", (RenderFragment)((b) => {b.AddContent(5, "Spring Config Provider");}));
-				b.CloseComponent();
-				b.AddMarkupContent(6," is designed to ease these burdens and offers integration with version control systems like Git to help you keep your configuration safe.<br /><br />");
-//				b.OpenComponent<Href>(7);
-//					b.AddAttribute(8, "href","/app-configuration/get-started/springconfig");
-//					b.AddAttribute(9, "AsButton",true);
-//					b.AddAttribute(10, "ChildContent", (RenderFragment)((b) => {b.AddContent(11, "Get started with App Configuration");}));
-//				b.CloseComponent();
-			}),
+			Description = b => {
+                b.AddMarkupContent(1,"In the cloud, configuration can&apos;t simply be embedded inside the application. The configuration has to be flexible enough to cope with multiple applications, environments, and service instances, as well as deal with dynamic changes without downtime. Steeltoe's ");
+                b.OpenComponent<Href>(2);
+                b.AddAttribute(3, "href","/app-config");
+                b.AddAttribute(4, "ChildContent", (RenderFragment)(child => { child.AddContent(5, "Spring Config Provider"); }));
+                b.CloseComponent();
+                b.AddMarkupContent(6," is designed to ease these burdens and offers integration with version control systems like Git to help you keep your configuration safe.<br /><br />");
+            },
 			Img = "/images/Icon_tool.svg"
 		},
-		new Feature() {
+		new Feature
+        {
 			Title = (MarkupString)"Data access made easy",
-			Description = (b => {
-				b.AddMarkupContent(1,"Steeltoe helps developers connect their web applications to a number of data stores. It supports relational, non-relational databases, and cloud-based data services.<br /> ");
-//				b.OpenComponent<Href>(2);
-//					b.AddAttribute(3, "href","/service-connectors/get-started/mssql");
-//					b.AddAttribute(4, "ChildContent", (RenderFragment)((b) => {b.AddContent(5, "MS SQL");}));
-//				b.CloseComponent();
-//				b.AddMarkupContent(6,", ");
-//				b.OpenComponent<Href>(7);
-//					b.AddAttribute(8, "href","/service-connectors/get-started/postgres");
-//					b.AddAttribute(9, "ChildContent", (RenderFragment)((b) => {b.AddContent(10, "Postgres");}));
-//				b.CloseComponent();
-//				b.AddMarkupContent(11,", or ");
-//				b.OpenComponent<Href>(12);
-//					b.AddAttribute(13, "href","/service-connectors/get-started/mysql");
-//					b.AddAttribute(14, "ChildContent", (RenderFragment)((b) => {b.AddContent(15, "MySQL");}));
-//				b.CloseComponent();
-			}),
+			Description = b => {
+                b.AddMarkupContent(1,"Steeltoe helps developers connect their web applications to a number of data stores. It supports relational, non-relational databases, and cloud-based data services.<br /> ");
+            },
 			Img = "/images/Icon_box.svg"
 		}
-	};
+    ];
 }

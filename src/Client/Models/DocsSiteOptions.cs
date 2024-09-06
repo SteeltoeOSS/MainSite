@@ -1,35 +1,22 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace Steeltoe.Client.Models
+namespace Steeltoe.Client.Models;
+
+public class DocsSiteOptions
 {
-    public class DocsSiteOptions
-    {
-        [Required]
-        public string BaseAddress { get; set; }
+    [Required] public string BaseAddress { get; set; } = "https://docs.steeltoe.io";
 
-        public string ApiBrowserHome { get; set; }
-        public string BlogHome { get; set; }
-        public string DocsHome { get; set; }
-        public string DocsStreamHome { get; set; }
-        public string GuidesHome { get; set; }
-        public string FileShareHome { get; set; }
-        public string DynamicLoggingHome { get; set; }
+    public string ApiBrowserHome => $"{BaseAddress}/api/browser/v3/all";
 
-        public void SetUrls()
-        {
-            ApiBrowserHome = ConfigureIfMissing(ApiBrowserHome, $"{BaseAddress}/api/browser/v3/all");
-            BlogHome = ConfigureIfMissing(BlogHome, $"{BaseAddress}/articles/");
-            DocsHome = ConfigureIfMissing(DocsHome, $"{BaseAddress}/api/v3/welcome/");
-            DocsStreamHome = ConfigureIfMissing(DocsStreamHome, $"{BaseAddress}/api/v3/stream/");
-            GuidesHome = ConfigureIfMissing(GuidesHome, $"{BaseAddress}/guides/");
-            FileShareHome = ConfigureIfMissing(FileShareHome, $"{BaseAddress}/api/v3/fileshares/");
-            DynamicLoggingHome = ConfigureIfMissing(DynamicLoggingHome, $"{BaseAddress}/api/v3/logging/");
-        }
+    public string BlogHome => $"{BaseAddress}/articles/";
 
-        private static string ConfigureIfMissing(string value, string defaultValue)
-        {
-            return !string.IsNullOrWhiteSpace(value) ?
-                value : defaultValue;
-        }
-    }
+    public string DocsHome => $"{BaseAddress}/api/v3/welcome/";
+
+    public string DocsStreamHome => $"{BaseAddress}/api/v3/stream/";
+
+    public string GuidesHome => $"{BaseAddress}/guides/";
+
+    public string FileShareHome => $"{BaseAddress}/api/v3/fileshares/";
+
+    public string DynamicLoggingHome => $"{BaseAddress}/api/v3/logging/";
 }

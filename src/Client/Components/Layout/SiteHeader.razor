@@ -1,75 +1,66 @@
-@using Microsoft.Extensions.Options
-
 @inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 
-<nav class="bg-white navbar navbar-expand-xl container py-xl-2 navbar-light">
-    <Href class="navbar-brand" href="/">
-        <img id="logo" class="svg" src="/images/logo.svg" alt="Steeltoe" style="width:211px">
-    </Href>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbar">
-        <ul class="navbar-nav text-center">
-            <li class="nav-item dropdown ml-xl-5 mr-xl-2">
-                <a class="nav-link dropdown-toggle" href="#" id="why" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="return false;">
-                    Why Steeltoe
-                </a>
-                <div class="dropdown-menu" aria-labelledby="why">
-                    <Href class="dropdown-item" href="/why-steeltoe">Overview</Href>
-                    <Href class="dropdown-item" href="/microservices">Microservices</Href>
-                    <Href class="dropdown-item" href="/cloud">Cloud</Href>
-                    <Href class="dropdown-item" href="/web-application">Web Applications</Href>
-                    <Href class="dropdown-item" href="/event-driven">Event Driven</Href>
-                </div>
-            </li>
-            <li class="nav-item dropdown mx-xl-2">
-                <a class="nav-link dropdown-toggle" href="#" id="learn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="return false;">
-                    Get Started
-                </a>
-                <div class="dropdown-menu" aria-labelledby="learn">
-                    <Href class="dropdown-item" href="https://start.steeltoe.io/" NewWindow>Steeltoe Initializr</Href>
-                    <Href class="dropdown-item" href="@(_docsSite.GuidesHome)">Guides</Href>
-                    <Href class="dropdown-item" href="@(_docsSite.DocsHome)">Documentation</Href>
-                    <Href class="dropdown-item" href="@(_docsSite.ApiBrowserHome)">API Browser</Href>
-                    <Href class="dropdown-item" href="@(_docsSite.BlogHome)">Blog</Href>
-                </div>
-            </li>
-            <li class="nav-item dropdown mx-xl-2">
-                <a class="nav-link dropdown-toggle" href="#" id="projects" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="return false;">
-                    Projects
-                </a>
-                <div class="dropdown-menu" aria-labelledby="projects">
-                    <Href class="dropdown-item" href="/app-configuration">Steeltoe Application Configuration</Href>
-                    <Href class="dropdown-item" href="/circuit-breakers">Steeltoe Circuit Breakers</Href>
-                    <Href class="dropdown-item" href="/docs/logging">Steeltoe Dynamic Logging</Href>
-                    <Href class="dropdown-item" href="/cloud-management">Steeltoe Management</Href>
-                    <Href class="dropdown-item" href="/messaging">Steeltoe Messaging</Href>
-                    <Href class="dropdown-item" href="@(_docsSite.FileShareHome)">Steeltoe Network File Sharing</Href>
-                    <Href class="dropdown-item" href="/security-providers">Steeltoe Security</Href>
-                    <Href class="dropdown-item" href="/service-connectors">Steeltoe Service Connectors</Href>
-                    <Href class="dropdown-item" href="/service-discovery">Steeltoe Service Discovery</Href>
-                    <Href class="dropdown-item" href="@(_docsSite.DocsStreamHome)">Steeltoe Stream</Href>
-                </div>
-            </li>
-            @*<li class="nav-item mx-xl-2">
-                    <Href class="nav-link" href="/training">Training</Href>
+<header class="sticky-top bg-white" style="box-shadow: 0 0 20px -4px #eeeeee;">
+    <nav class="bg-white navbar navbar-expand-xl container py-xl-2 navbar-light">
+        <Href class="navbar-brand" href="/">
+            <img id="logo" class="svg" src="/images/logo.svg" alt="Steeltoe" style="width:211px">
+        </Href>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav text-center">
+                <li class="nav-item dropdown ml-xl-5 mr-xl-2">
+                    <a class="nav-link dropdown-toggle" href="#" id="why" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="return false;">
+                        Why Steeltoe
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="why">
+                        <Href class="dropdown-item" href="/why-steeltoe">Overview</Href>
+                        <Href class="dropdown-item" href="/microservices">Microservices</Href>
+                        <Href class="dropdown-item" href="/cloud">Cloud</Href>
+                        <Href class="dropdown-item" href="/web-application">Web Applications</Href>
+                        <Href class="dropdown-item" href="/event-driven">Event Driven</Href>
+                    </div>
+                </li>
+                <li class="nav-item dropdown mx-xl-2">
+                    <a class="nav-link dropdown-toggle" href="#" id="learn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="return false;">
+                        Get Started
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="learn">
+                        <Href class="dropdown-item" href="/initializr" NewWindow>Steeltoe Initializr</Href>
+                        <Href class="dropdown-item" href="@(DocsSiteOptions.Value.GuidesHome)">Guides</Href>
+                        <Href class="dropdown-item" href="@(DocsSiteOptions.Value.DocsHome)">Documentation</Href>
+                        <Href class="dropdown-item" href="@(DocsSiteOptions.Value.ApiBrowserHome)">API Browser</Href>
+                        <Href class="dropdown-item" href="@(DocsSiteOptions.Value.BlogHome)">Blog</Href>
+                    </div>
+                </li>
+                <li class="nav-item dropdown mx-xl-2">
+                    <a class="nav-link dropdown-toggle" href="#" id="projects" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="return false;">
+                        Projects
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="projects">
+                        <Href class="dropdown-item" href="/app-configuration">Steeltoe Application Configuration</Href>
+                        <Href class="dropdown-item" href="/circuit-breakers">Steeltoe Circuit Breakers</Href>
+                        <Href class="dropdown-item" href="/docs/logging">Steeltoe Dynamic Logging</Href>
+                        <Href class="dropdown-item" href="/cloud-management">Steeltoe Management</Href>
+                        <Href class="dropdown-item" href="/messaging">Steeltoe Messaging</Href>
+                        <Href class="dropdown-item" href="@(DocsSiteOptions.Value.FileShareHome)">Steeltoe Network File Sharing</Href>
+                        <Href class="dropdown-item" href="/security-providers">Steeltoe Security</Href>
+                        <Href class="dropdown-item" href="/service-connectors">Steeltoe Service Connectors</Href>
+                        <Href class="dropdown-item" href="/service-discovery">Steeltoe Service Discovery</Href>
+                        <Href class="dropdown-item" href="@(DocsSiteOptions.Value.DocsStreamHome)">Steeltoe Stream</Href>
+                    </div>
+                </li>
+                @*<li class="nav-item mx-xl-2">
+                <Href class="nav-link" href="/training">Training</Href>
                 </li>*@
-            <li class="nav-item mx-xl-2">
-                <Href class="nav-link" href="/support">Support</Href>
-            </li>
-            <li class="nav-item mx-xl-2">
-                <Href class="nav-link" href="/community">Community</Href>
-            </li>
-        </ul>
-    </div>
-</nav>
-
-@code {
-    private DocsSiteOptions _docsSite;
-
-    protected override void OnInitialized()
-    {
-        _docsSite = DocsSiteOptions?.Value ?? throw new ArgumentNullException(nameof(_docsSite));
-    }
-}
+                <li class="nav-item mx-xl-2">
+                    <Href class="nav-link" href="/support">Support</Href>
+                </li>
+                <li class="nav-item mx-xl-2">
+                    <Href class="nav-link" href="/community">Community</Href>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

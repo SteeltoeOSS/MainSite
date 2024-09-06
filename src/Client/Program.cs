@@ -10,21 +10,12 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: "DocumentationPolicy",
            policy =>
            {
-               policy.AllowAnyOrigin()
-                       .AllowAnyHeader()
-                       .WithMethods("GET");
+               policy.AllowAnyOrigin().AllowAnyHeader().WithMethods("GET");
            });
 });
 
 builder.Services.Configure<CalendarEventOptions>(builder.Configuration.GetSection("CalendarEvents"));
-builder.Services.AddHttpContextAccessor();
-builder.Services.AddOptions<DocsSiteOptions>()
-    .Bind(builder.Configuration.GetSection("DocsSite"))
-    .ValidateDataAnnotations()
-    .PostConfigure(docsSiteOptions =>
-    {
-        docsSiteOptions.SetUrls();
-    });
+builder.Services.Configure<DocsSiteOptions>(builder.Configuration.GetSection("DocsSite"));
 
 var app = builder.Build();
 

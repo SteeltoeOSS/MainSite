@@ -1,4 +1,4 @@
-﻿@media (max-width: 576px) {
+@media (max-width: 576px) {
     .width-90 {
         max-width: 97%;
     }
@@ -98,10 +98,6 @@
     #footer-others-col div {
         display: inline-block;
         padding-right: 15px;
-    }
-
-    .banner {
-        display: none;
     }
 
     .docs-nav-col {
