@@ -5,6 +5,28 @@
         Steeltoe provides a collection of libraries that helps users build production-grade cloud-native applications using externalized configuration, service discovery, circuit-breakers, distributed tracing, application management, and more.
         Steeltoe also provides a seamless way to build, configure, and run event-driven microservice applications and stream-based data processing applications.
     </Description>
+    <FeatureTemplate Context="Feature">
+        <div class="col-sm-6 pr-sm-5">
+            <div class="component-feature-title">@Feature.Title</div>
+            <div class="row no-gutters">
+                <div class="col-sm-3 component-why-img">
+                    <img src="@Feature.Img" class="img-fluid" alt="@Feature.Title" />
+                </div>
+                <div class="col component-feature-desc mb-5">@Feature.Description</div>
+            </div>
+        </div>
+    </FeatureTemplate>
+    <AltFeatureTemplate Context="Feature">
+        <div class="col-sm-6 pl-sm-5">
+            <div class="component-feature-title">@Feature.Title</div>
+            <div class="row no-gutters">
+                <div class="col-sm-3 component-why-img">
+                    <img src="@Feature.Img" class="img-fluid" alt="@Feature.Title" />
+                </div>
+                <div class="col component-feature-desc mb-5">@Feature.Description</div>
+            </div>
+        </div>
+    </AltFeatureTemplate>
 </Template>
 <div class="width-all bg-dk-midnight-blue pt-5">
 	<div class="width-70 container text-white">
