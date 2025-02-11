@@ -17,7 +17,7 @@
 
 <div class="bg-midnight-blue text-white width-all">
     <div class="width-70 container">
-        <div class="row no-gutters pt-5">
+        <div class="row g-0 pt-5">
             <div class="col text-center">
                 <h1>
                     Creating .NET microservices? <br />Modernizing existing applications?<br />
@@ -25,7 +25,7 @@
                 </h1>
             </div>
         </div>
-        <div class="row no-gutters mt-5">
+        <div class="row g-0 mt-5">
             <div class="col text-center">
                 <Href class="text-white border-white mr-4" href="/why-steeltoe" AsButton="true">WHY STEELTOE</Href>
                 <Href class="text-white border-white" href="@(DocsSiteOptions.Value.GuidesHome)" AsButton="true">GET STARTED</Href>
@@ -37,7 +37,7 @@
     <div class="width-70 container">
         <div class="width-all text-center"><h2>What Steeltoe can do</h2></div>
         <div class="">
-            <div class="row no-gutters">
+            <div class="row g-0">
                 <div class="col component">
                     <Href href="/microservices">
                         <div class="text-center"><img class="img-fluid" src="/images/icon-microservices-dfc414fd79f67718216adaffb5d99947.svg" alt="Steeltoe helps you build .NET microservices." /></div>
@@ -76,7 +76,7 @@
 </div>
 <div class="width-all">
     <div class="width-90 container py-5">
-        <div class="row no-gutters text-center mt-3">
+        <div class="row g-0 text-center mt-3">
             <div class="col stat">
                 Steeltoe has been downloaded over <span class="number">98 million</span> times on <a href="https://www.nuget.org/profiles/SteeltoeOSS">NuGet</a>!
             </div>
@@ -100,7 +100,7 @@ else
     var i = 1;
     @foreach (var calendarEvent in CalendarEventOptions?.Value.Events ?? [])
     {
-            <div class="row no-gutters">
+            <div class="row g-0">
                 <div class="col news">
                     <div class="date">@((MarkupString)calendarEvent.Date)</div>
                     <div class="title">@((MarkupString)calendarEvent.Title)</div>
@@ -110,7 +110,7 @@ else
             </div>
         @if (i++ < CalendarEventOptions?.Value.Events.Count)
         {
-            <div class="row no-gutters">
+            <div class="row g-0">
                 <div class="col"><hr class="border-steeltoe-blue" /></div>
             </div>
         }

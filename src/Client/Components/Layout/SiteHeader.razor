@@ -1,8 +1,8 @@
 @inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 
-<header class="sticky-top bg-white" style="box-shadow: 0 0 20px -4px #eeeeee;">
-    <nav class="bg-white navbar navbar-expand-xl container py-xl-2 navbar-light">
-        <Href class="navbar-brand" href="/">
+<header class="sticky-top bg-light" style="box-shadow: 0 0 20px -4px #eeeeee;">
+    <nav class="bg-light navbar navbar-expand-xl container py-xl-2">
+        <Href Class="navbar-brand" href="/">
             <img id="logo" class="svg" src="/images/logo.svg" alt="Steeltoe" style="width:211px">
         </Href>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,19 +11,19 @@
         <div class="collapse navbar-collapse" id="navbar">
             <ul class="navbar-nav text-center">
                 <li class="nav-item dropdown ml-xl-5 mr-xl-2">
-                    <a class="nav-link dropdown-toggle" href="#" id="why" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="return false;">
+                    <a class="nav-link dropdown-toggle link-primary" href="#" id="why" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="return false;">
                         Why Steeltoe
                     </a>
                     <div class="dropdown-menu" aria-labelledby="why">
-                        <Href class="dropdown-item" href="/why-steeltoe">Overview</Href>
-                        <Href class="dropdown-item" href="/microservices">Microservices</Href>
-                        <Href class="dropdown-item" href="/cloud">Cloud</Href>
-                        <Href class="dropdown-item" href="/web-application">Web Applications</Href>
-                        <Href class="dropdown-item" href="/event-driven">Event Driven</Href>
+                        <Href Class="dropdown-item" href="/why-steeltoe">Overview</Href>
+                        <Href Class="dropdown-item" href="/microservices">Microservices</Href>
+                        <Href Class="dropdown-item" href="/cloud">Cloud</Href>
+                        <Href Class="dropdown-item" href="/web-application">Web Applications</Href>
+                        <Href Class="dropdown-item" href="/event-driven">Event Driven</Href>
                     </div>
                 </li>
                 <li class="nav-item dropdown mx-xl-2">
-                    <a class="nav-link dropdown-toggle" href="#" id="learn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="return false;">
+                    <a class="nav-link dropdown-toggle link-primary" href="#" id="learn" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="return false;">
                         Get Started
                     </a>
                     <div class="dropdown-menu" aria-labelledby="learn">
@@ -35,7 +35,7 @@
                     </div>
                 </li>
                 <li class="nav-item dropdown mx-xl-2">
-                    <a class="nav-link dropdown-toggle" href="#" id="projects" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="return false;">
+                    <a class="nav-link dropdown-toggle link-primary" href="#" id="projects" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="return false;">
                         Projects
                     </a>
                     <div class="dropdown-menu" aria-labelledby="projects">
@@ -55,10 +55,10 @@
                 <Href class="nav-link" href="/training">Training</Href>
                 </li>*@
                 <li class="nav-item mx-xl-2">
-                    <Href class="nav-link" href="/support">Support</Href>
+                    <Href Class="nav-link link-primary" href="/support">Support</Href>
                 </li>
                 <li class="nav-item mx-xl-2">
-                    <Href class="nav-link" href="/community">Community</Href>
+                    <Href Class="nav-link link-primary" href="/community">Community</Href>
                 </li>
             </ul>
         </div>
