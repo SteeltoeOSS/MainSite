@@ -2,7 +2,8 @@ name: Delete a preview environment
 
 on:
   pull_request:
-    types: [closed]
+    types:
+    - closed
 
 concurrency:
   group: ci-${{ github.event.number }}
@@ -14,10 +15,11 @@ env:
 jobs:
   delete-slot:
     runs-on: ubuntu-latest
+    permissions: write-all
 
     steps:
     - name: Log into Azure CLI with service principal
-      uses: azure/login@v1
+      uses: azure/login@v2
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
@@ -29,8 +31,7 @@ jobs:
 
     steps:
       - name: Delete Deployment Environment
-        uses: strumwolf/delete-deployment-environment@v2
+        uses: strumwolf/delete-deployment-environment@v3
         with:
-          environment: "PR #${{ github.event.number }}"
+          environment: "pr-${{ github.event.number }}"
           token: ${{ secrets.GITHUB_TOKEN }}
-          onlyRemoveDeployments: true
