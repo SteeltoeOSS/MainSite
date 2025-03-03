@@ -15,7 +15,6 @@ env:
 jobs:
   delete-slot:
     runs-on: ubuntu-latest
-    permissions: write-all
 
     steps:
     - name: Log into Azure CLI with service principal
@@ -35,3 +34,4 @@ jobs:
         with:
           environment: "pr-${{ github.event.number }}"
           token: ${{ secrets.GITHUB_TOKEN }}
+          onlyRemoveDeployments: true
