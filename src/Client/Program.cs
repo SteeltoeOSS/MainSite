@@ -1,7 +1,11 @@
+using Docfx.Dotnet;
 using Steeltoe.Client.Components;
 using Steeltoe.Client.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+await DotnetApiCatalog.GenerateManagedReferenceYamlFiles("docfx.json");
+await Docfx.Docset.Build("docfx.json");
 
 builder.Services.AddRazorComponents();
 
@@ -31,6 +35,7 @@ else
 
 app.UseHttpsRedirection();
 
+app.UseDefaultFiles();
 app.UseStaticFiles();
 
 app.UseRouting();

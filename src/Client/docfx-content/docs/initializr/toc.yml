@@ -1,0 +1,4 @@
+- href: initializr-service.md
+  name: InitializrService
+- href: initializr-web.md
+  name: InitializrWeb

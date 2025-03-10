@@ -374,3 +374,13 @@ tools/
 
 # Visual Studio Code state
 /.vscode/
+
+# Items produced or moved by docfx
+src/Client/wwwroot/docs
+src/Client/wwwroot/api/
+src/Client/wwwroot/public/
+src/Client/wwwroot/manifest.json
+src/Client/wwwroot/guides/
+src/Client/wwwroot/articles/
+src/Client/wwwroot/xrefmap.yml
+src/Client/wwwroot/index.json

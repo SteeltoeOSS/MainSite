@@ -1,0 +1,57 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dotnet/docfx/main/schemas/docfx.schema.json",
+  "build": {
+    "content": [
+      {
+        "files": "**.{md|yml}",
+        "src": "docfx-content/docs/",
+        "dest": "api/"
+      },
+      {
+        "files": "**.{md|yml}",
+        "src": "docfx-content/articles/",
+        "dest": "articles/"
+      },
+      {
+        "files": "**.{md|yml}",
+        "src": "docfx-content/guides/",
+        "dest": "guides/"
+      }
+    ],
+    "resource": [
+      {
+        "files": "**.{png|jpg}",
+        "src": "docfx-content/docs/",
+        "dest": "api/"
+      },
+      {
+        "files": "**.{png|jpg}",
+        "src": "docfx-content/articles/",
+        "dest": "articles/"
+      },
+      {
+        "files": "**.{png|jpg}",
+        "src": "docfx-content/guides/",
+        "dest": "guides/"
+      }
+    ],
+    //"template": [
+    //  "default",
+    //  "template/steeltoe"
+    //],
+    "template": [
+      "default",
+      "modern",
+      "docfx-content/steeltoe-template"
+    ],
+    "xref": [
+      "wwwroot/xrefmap.yml"
+    ],
+    "dest": "wwwroot",
+    "globalMetadataFiles": [ "metadata.json" ],
+    "fileMetadataFiles": [],
+    "postProcessors": ["ExtractSearchIndex"],
+    //"markdownEngineName": "markdig",
+    "disableGitFeatures": false
+  }
+}

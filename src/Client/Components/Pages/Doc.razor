@@ -1,26 +1,25 @@
 @inject NavigationManager NavigationManager
 @inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
-
+@*
 @page "/doc"
 @page "/docs"
 
-@page "/{Component}"
+ @page "/{Component}"
 @page "/{Component}/{Area}"
-@page "/{Component}/docs"
-@page "/docs/{Component}"
+@page "/{Component}/docs"*@
+@* @page "/docs/{Component}"
 @page "/docs/{Component}/{Area}"
-
-@page "/docs/{Version:int}"
+ *@
+@* @page "/docs/{Version:int}"
 @page "/docs/{Version:int}/{Component}"
 @page "/docs/{Version:int}/{Component}/{Area}"
-Redirecting to new docs site, please hold.
-
+ *@
 @code
 {
     private const int CurrentVersion = 4;
 
-    [Parameter] public string Area { get; set; } = "index";
-    [Parameter] public string Component { get; set; } = "welcome";
+    [Parameter] public string Area { get; set; }
+    [Parameter] public string Component { get; set; }
     [Parameter] public int? Version { get; set; }
 
     protected override void OnParametersSet()
@@ -30,12 +29,12 @@ Redirecting to new docs site, please hold.
             Version = CurrentVersion;
         }
 
-        var uri = $"{DocsSiteOptions.Value.BaseAddress}/api/v{Version}/{Component}/";
-        if (Area != null)
-        {
-            uri += $"{Area}.html";
-        }
+        Component ??= "welcome";
+        var uri = $"/docs/v{Version}/{Component}/";
 
-        NavigationManager.NavigateTo(uri, true);
+        Area ??= "index";
+        uri += $"{Area}.html";
+
+        NavigationManager.NavigateTo(uri);
     }
 }
