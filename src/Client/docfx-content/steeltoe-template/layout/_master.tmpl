@@ -46,19 +46,22 @@
       </script>
 
       {{#_googleAnalyticsTagId}}
-      <script async src="https://www.googletagmanager.com/gtag/js?id={{_googleAnalyticsTagId}}"></script>
+      <script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js" data-domain-script="018ee7f5-70e6-7787-8d98-05c8f935c75d"></script>
+      <script>function OptanonWrapper() { }</script>
       <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', '{{_googleAnalyticsTagId}}');
+        function setGTM(w,d,s,l,i){ w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);}
+        if(document.cookie.indexOf('OptanonConsent')>-1&&document.cookie.indexOf('groups=')>-1){setGTM(window,document,'script','dataLayer','{{_googleAnalyticsTagId}}');}else{waitForOnetrustActiveGroups();}var timer;function waitForOnetrustActiveGroups(){if(document.cookie.indexOf('OptanonConsent')>-1&&document.cookie.indexOf('groups=')>-1){clearTimeout(timer);setGTM(window,document,'script','dataLayer','{{_googleAnalyticsTagId}}');}else{timer=setTimeout(waitForOnetrustActiveGroups,250);}}
       </script>
+
       {{/_googleAnalyticsTagId}}
     {{/redirect_url}}
   </head>
 
   {{^redirect_url}}
   <body class="tex2jax_ignore" data-layout="{{_layout}}{{layout}}" data-yaml-mime="{{yamlmime}}">
+    {{#_googleAnalyticsTagId}}
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{_googleAnalyticsTagId}}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    {{/_googleAnalyticsTagId}}
     <header class="bg-body border-bottom">
       {{^_disableNavbar}}
       <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
