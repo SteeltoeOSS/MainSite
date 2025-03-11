@@ -1,19 +1,19 @@
 {
     "$schema": "https://dotnet.github.io/docfx/schemas/v1.0/schema.json#",
     "version": "1.0",
-    "_appName": "Steeltoe Documentation",
-    "_disableFooter": false,
+    "_appName": "Documentation",
+    "_appLogoUrl": "/",
     "_disableToc": false,
     "_appTitle": "Steeltoe",
-    "_appFooter": "",
     "__global.improveThisDoc": "Edit this page",
 
     "_gitContribute": {
-        "repo": "https://github.com/SteeltoeOSS/Documentation",
+        "repo": "https://github.com/SteeltoeOSS/MainSite",
         "branch": "main",
         "apiSpecFolder": "docs-ref-overwrite"
     },
     "_googleAnalyticsTagId": "GTM-MMDFJKF",
+    "_copyrightEndYear": "2025",
     "_enableSearch": true,
     "_noindex": false,
 
@@ -25,8 +25,8 @@
     "_disableNavbar": false,
     "_disableAffix": false,
 
-    "_appLogoPath": "/images/logo.svg",
-    "_appFaviconPath": "/images/favicon.png",
+    "_appLogoPath": "images/logo.svg",
+    "_appFaviconPath": "images/favicon.png",
 
     "_gitUrlPattern": "github"
 }
