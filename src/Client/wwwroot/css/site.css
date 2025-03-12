@@ -617,6 +617,10 @@ a,
     margin: 0 25% 0 25%;
 }
 
+.link-light:hover {
+    color: lightsteelblue !important;
+}
+
 /*====================== logo ========================= */
 .st0,
 .logo-text {
