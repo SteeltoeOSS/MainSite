@@ -35,6 +35,7 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: Generate API browser docs
+      shell: pwsh
       run: |
         cd src/api-browser-generation
         ./build-metadata.ps1
