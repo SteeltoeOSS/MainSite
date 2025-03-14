@@ -1,0 +1,140 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": [
+            "**/*.csproj"
+          ],
+          "exclude": [ "**/bin/**", "**/obj/**" ],
+          "src": "sources/v2/src/Common/src"
+        }
+      ],
+      "dest": "yaml/v2/common",
+      "allowCompilationErrors": true,
+      "filter": "api-filter.yml",
+      "properties": {
+        "ProduceReferenceAssembly": "true"
+      }
+    },
+    {
+      "src": [
+        {
+          "files": [
+            "**/*.csproj"
+          ],
+          "exclude": [ "**/bin/**", "**/obj/**" ],
+          "src": "sources/v2/src/CircuitBreaker/src"
+        }
+      ],
+      "dest": "yaml/v2/circuitbreaker",
+      "allowCompilationErrors": true,
+      "filter": "api-filter.yml",
+      "properties": {
+        "ProduceReferenceAssembly": "true"
+      }
+    },
+    {
+      "src": [
+        {
+          "files": [
+            "**/*.csproj"
+          ],
+          "exclude": [ "**/bin/**", "**/obj/**" ],
+          "src": "sources/v2/src/Configuration/src"
+        }
+      ],
+      "dest": "yaml/v2/configuration",
+      "allowCompilationErrors": true,
+      "filter": "api-filter.yml",
+      "properties": {
+        "ProduceReferenceAssembly": "true"
+      }
+    },
+    {
+      "src": [
+        {
+          "files": [
+            "**/*.csproj"
+          ],
+          "exclude": [ "**/bin/**", "**/obj/**" ],
+          "src": "sources/v2/src/Connectors/src"
+        }
+      ],
+      "dest": "yaml/v2/connectors",
+      "allowCompilationErrors": true,
+      "filter": "api-filter.yml",
+      "properties": {
+        "ProduceReferenceAssembly": "true"
+      }
+    },
+    {
+      "src": [
+        {
+          "files": [
+            "**/*.csproj"
+          ],
+          "exclude": [ "**/bin/**", "**/obj/**" ],
+          "src": "sources/v2/src/Discovery/src"
+        }
+      ],
+      "dest": "yaml/v2/discovery",
+      "allowCompilationErrors": true,
+      "filter": "api-filter.yml",
+      "properties": {
+        "ProduceReferenceAssembly": "true"
+      }
+    },
+    {
+      "src": [
+        {
+          "files": [
+            "**/*.csproj"
+          ],
+          "exclude": [ "**/bin/**", "**/obj/**" ],
+          "src": "sources/v2/src/Logging/src"
+        }
+      ],
+      "dest": "yaml/v2/logging",
+      "allowCompilationErrors": true,
+      "filter": "api-filter.yml",
+      "properties": {
+        "ProduceReferenceAssembly": "true"
+      }
+    },
+    {
+      "src": [
+        {
+          "files": [
+            "**/*.csproj"
+          ],
+          "exclude": [ "**/bin/**", "**/obj/**" ],
+          "src": "sources/v2/src/Management/src"
+        }
+      ],
+      "dest": "yaml/v2/management",
+      "allowCompilationErrors": true,
+      "filter": "api-filter.yml",
+      "properties": {
+        "ProduceReferenceAssembly": "true"
+      }
+    },
+    {
+      "src": [
+        {
+          "files": [
+            "**/*.csproj"
+          ],
+          "exclude": [ "**/bin/**", "**/obj/**" ],
+          "src": "sources/v2/src/Security/src"
+        }
+      ],
+      "dest": "yaml/v2/security",
+      "allowCompilationErrors": true,
+      "filter": "api-filter.yml",
+      "properties": {
+        "ProduceReferenceAssembly": "true"
+      }
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "files": [
+            "src/**/*.csproj"
+          ],
+          "exclude": [
+            "**/bin/**",
+            "**/obj/**",
+            "**/test/**"
+          ],
+          "src": "sources/v2"
+        }
+      ],
+      "dest": "yaml/v2/all",
+      "allowCompilationErrors": true,
+      "filter": "api-filter.yml",
+      "properties": {
+        "ProduceReferenceAssembly": "true"
+      }
+    },
+    {
+      "src": [
+        {
+          "files": [
+            "src/**/*.csproj"
+          ],
+          "exclude": [
+            "**/bin/**",
+            "**/obj/**",
+            "**/test/**"
+          ],
+          "src": "sources/v3"
+        }
+      ],
+      "dest": "yaml/v3/all",
+      "allowCompilationErrors": true,
+      "filter": "api-filter.yml",
+      "properties": {
+        "ProduceReferenceAssembly": "true"
+      }
+    },
+    {
+      "src": [
+        {
+          "files": [
+            "src/**/*.csproj"
+          ],
+          "exclude": [
+            "**/bin/**",
+            "**/obj/**",
+            "**/test/**"
+          ],
+          "src": "sources/v4"
+        }
+      ],
+      "dest": "yaml/v4/all",
+      "filter": "api-filter.yml",
+      "properties": {
+        "ProduceReferenceAssembly": "true"
+      }
+    }
+  ]
+}

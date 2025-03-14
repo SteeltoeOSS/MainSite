@@ -1,0 +1,29 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dotnet/docfx/main/schemas/docfx.schema.json",
+  "build": {
+    "content": [
+      {
+        "files": "all/*.yml",
+        "src": "docfx-content/api-browser/v3/",
+        "dest": "api/browser/v3/"
+      }
+    ],
+    "template": [
+      "default",
+      "modern",
+      "docfx-content/steeltoe-template"
+    ],
+    "xref": [
+      "wwwroot/xrefmap.yml"
+    ],
+    "output": "wwwroot",
+    "globalMetadataFiles": [
+      "metadata.json"
+    ],
+    "fileMetadataFiles": [],
+    "postProcessors": [
+      "ExtractSearchIndex"
+    ],
+    "disableGitFeatures": false
+  }
+}

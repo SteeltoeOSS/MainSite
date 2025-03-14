@@ -35,10 +35,6 @@
         "dest": "guides/"
       }
     ],
-    //"template": [
-    //  "default",
-    //  "template/steeltoe"
-    //],
     "template": [
       "default",
       "modern",
@@ -47,11 +43,14 @@
     "xref": [
       "wwwroot/xrefmap.yml"
     ],
-    "dest": "wwwroot",
-    "globalMetadataFiles": [ "metadata.json" ],
+    "output": "wwwroot",
+    "globalMetadataFiles": [
+      "metadata.json"
+    ],
     "fileMetadataFiles": [],
-    "postProcessors": ["ExtractSearchIndex"],
-    //"markdownEngineName": "markdig",
+    "postProcessors": [
+      "ExtractSearchIndex"
+    ],
     "disableGitFeatures": false
   }
 }

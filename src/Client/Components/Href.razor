@@ -1,5 +1,5 @@
-
-<NavLink class="@(Class + (AsButton ? " btn btn-secondary" : ""))"
+<NavLink
+    class="@(Class + (AsButton ? " btn btn-default p-3 border-dark" : ""))"
          target="@(NewWindow ? "_blank" : "")" role="@(AsButton ? "button" : "")" @attributes="AdditionalAttributes">@ChildContent</NavLink>
 
 @code

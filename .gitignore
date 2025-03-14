@@ -384,3 +384,8 @@ src/Client/wwwroot/guides/
 src/Client/wwwroot/articles/
 src/Client/wwwroot/xrefmap.yml
 src/Client/wwwroot/index.json
+src/Client/docfx-content/api-browser/**/.manifest
+src/Client/docfx-content/api-browser/**/*.yml
+
+src/api-browser-generation/sources/
+src/api-browser-generation/yaml/
