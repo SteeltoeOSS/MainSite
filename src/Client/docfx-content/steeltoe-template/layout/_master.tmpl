@@ -17,7 +17,7 @@
       {{#description}}<meta name="description" content="{{description}}">{{/description}}
       <link rel="icon" href="{{_rel}}{{{_appFaviconPath}}}{{^_appFaviconPath}}favicon.ico{{/_appFaviconPath}}">
       <link rel="stylesheet" href="{{_rel}}public/docfx.min.css">
-      <link rel="stylesheet" href="{{_rel}}public/main.css">
+      <link rel="stylesheet" href="/css/docfx-custom.css">
       <link rel="stylesheet" href="/css/fonts.css">
       <meta name="docfx:navrel" content="{{_navRel}}">
       <meta name="docfx:tocrel" content="{{_tocRel}}">
@@ -235,7 +235,9 @@
         </div>
 
         <article data-uid="{{uid}}">
+          {{#_showBackToBlogs}}<div class="row col hidewhenembedded"><a href="/articles/index.html">&lt;&lt; Back to blogs</a></div>{{/_showBackToBlogs}}
           {{!body}}
+          {{#_showBackToBlogs}}<div class="row col pt-2 hidewhenembedded"><a href="/articles/index.html">&lt;&lt; Back to blogs</a></div>{{/_showBackToBlogs}}
         </article>
 
         {{^_disableContribution}}

@@ -1,7 +1,6 @@
 @page "/app-configuration/get-started/{Provider}"
 
 @inject NavigationManager Navigation
-@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 
 @code
 {
@@ -9,7 +8,7 @@
 
     protected override void OnParametersSet()
     {
-        Navigation.NavigateTo($"{DocsSiteOptions.Value.BaseAddress}/guides/application-configuration/{TranslateProviderName(Provider)}.html");
+        Navigation.NavigateTo($"/guides/application-configuration/{TranslateProviderName(Provider)}.html");
     }
 
     private static string TranslateProviderName(string provider)

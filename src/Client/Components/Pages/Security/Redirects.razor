@@ -3,7 +3,6 @@
 @page "/security-providers/get-started/sso/openid/{Provider}"
 
 @inject NavigationManager Navigation
-@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 
 @code
 {
@@ -11,7 +10,7 @@
 
     protected override void OnParametersSet()
     {
-        Navigation.NavigateTo($"{DocsSiteOptions.Value.BaseAddress}/guides/security/{TranslateProviderName(Provider)}.html");
+        Navigation.NavigateTo($"/guides/security/{TranslateProviderName(Provider)}.html");
     }
 
     private static string TranslateProviderName(string provider)

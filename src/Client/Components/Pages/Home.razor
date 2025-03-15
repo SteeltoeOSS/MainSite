@@ -2,7 +2,6 @@
 @page "/index"
 
 @inject IOptions<CalendarEventOptions> CalendarEventOptions
-@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 @inject NavigationManager Navigation
 
 <PageTitle>Steeltoe | Home</PageTitle>
@@ -28,7 +27,7 @@
         <div class="row g-0 mt-5">
             <div class="col text-center">
                 <Href class="text-white border-white mr-4" href="/why-steeltoe" AsButton="true">WHY STEELTOE</Href>
-                <Href class="text-white border-white" href="@(DocsSiteOptions.Value.GuidesHome)" AsButton="true">GET STARTED</Href>
+                <Href class="text-white border-white" href="/guides" AsButton="true">GET STARTED</Href>
             </div>
         </div>
     </div>

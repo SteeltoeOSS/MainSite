@@ -1,7 +1,6 @@
 @page "/service-discovery/{Provider}"
 
 @inject NavigationManager Navigation
-@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 
 @code
 {
@@ -9,6 +8,6 @@
 
     protected override void OnParametersSet()
     {
-        Navigation.NavigateTo($"{DocsSiteOptions.Value.BaseAddress}/guides/service-discovery/{Provider}.html");
+        Navigation.NavigateTo($"/guides/service-discovery/{Provider}.html");
     }
 }

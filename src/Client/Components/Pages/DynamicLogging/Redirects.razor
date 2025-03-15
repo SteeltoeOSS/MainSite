@@ -3,12 +3,11 @@
 @page "/steeltoe-logging"
 
 @inject NavigationManager Navigation
-@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 
 @code
 {
     protected override void OnParametersSet()
     {
-        Navigation.NavigateTo(DocsSiteOptions.Value.DynamicLoggingHome);
+        Navigation.NavigateTo("/api/v4/logging");
     }
 }

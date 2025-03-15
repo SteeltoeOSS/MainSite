@@ -2,7 +2,6 @@
 @page "/cloud-management/get-started/endpoints/{Provider}"
 
 @inject NavigationManager Navigation
-@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 
 @code
 {
@@ -10,7 +9,7 @@
 
     protected override void OnParametersSet()
     {
-        Navigation.NavigateTo($"{DocsSiteOptions.Value.BaseAddress}/guides/cloud-management/{TranslateProviderName(Provider)}.html");
+        Navigation.NavigateTo($"/guides/cloud-management/{TranslateProviderName(Provider)}.html");
     }
 
     private static string TranslateProviderName(string provider)

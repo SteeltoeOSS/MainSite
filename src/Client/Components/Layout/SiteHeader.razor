@@ -1,5 +1,3 @@
-@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
-
 <header class="sticky-top" style="box-shadow: 0 0 20px -4px #eeeeee;">
     <nav class="navbar navbar-expand-xl container py-xl-2">
         <Href Class="navbar-brand" href="/">
@@ -87,10 +85,10 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="learn">
                         <Href class="dropdown-item" href="/initializr">Steeltoe Initializr</Href>
-                        <Href class="dropdown-item" href="@(DocsSiteOptions.Value.GuidesHome)">Guides</Href>
-                        <Href class="dropdown-item" href="@(DocsSiteOptions.Value.DocsHome)">Documentation</Href>
-                        <Href class="dropdown-item" href="@(DocsSiteOptions.Value.ApiBrowserHome)">API Browser</Href>
-                        <Href class="dropdown-item" href="@(DocsSiteOptions.Value.BlogHome)">Blog</Href>
+                        <Href class="dropdown-item" href="/guides">Guides</Href>
+                        <Href class="dropdown-item" href="/api">Documentation</Href>
+                        <Href class="dropdown-item" href="/api/browser">API Browser</Href>
+                        <Href class="dropdown-item" href="/articles">Blog</Href>
                     </div>
                 </li>
                 <li class="nav-item dropdown mx-xl-2">
@@ -103,11 +101,11 @@
                         <Href class="dropdown-item" href="/docs/logging">Steeltoe Dynamic Logging</Href>
                         <Href class="dropdown-item" href="/cloud-management">Steeltoe Management</Href>
                         <Href class="dropdown-item" href="/messaging">Steeltoe Messaging</Href>
-                        <Href class="dropdown-item" href="@(DocsSiteOptions.Value.FileShareHome)">Steeltoe Network File Sharing</Href>
+                        <Href class="dropdown-item" href="/api/v4/fileshares">Steeltoe Network File Sharing</Href>
                         <Href class="dropdown-item" href="/security-providers">Steeltoe Security</Href>
                         <Href class="dropdown-item" href="/service-connectors">Steeltoe Service Connectors</Href>
                         <Href class="dropdown-item" href="/service-discovery">Steeltoe Service Discovery</Href>
-                        <Href class="dropdown-item" href="@(DocsSiteOptions.Value.DocsStreamHome)">Steeltoe Stream</Href>
+                        <Href class="dropdown-item" href="/api/v3/stream">Steeltoe Stream</Href>
                     </div>
                 </li>
                 @*<li class="nav-item mx-xl-2">

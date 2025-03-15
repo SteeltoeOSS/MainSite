@@ -19,7 +19,6 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.Configure<CalendarEventOptions>(builder.Configuration.GetSection("CalendarEvents"));
-builder.Services.Configure<DocsSiteOptions>(builder.Configuration.GetSection("DocsSite"));
 
 var app = builder.Build();
 

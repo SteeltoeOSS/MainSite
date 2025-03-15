@@ -1,4 +1,3 @@
-@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 
 <footer>
     <div class="width-all bg-midnight-blue">
@@ -40,10 +39,10 @@
                 <div class="col" id="footer-learn-col">
                     <div class="pb-2 font-weight-bold">Learn</div>
                     <div><Href Class="link-light" href="/initializr" NewWindow="true">Steeltoe Initializr</Href></div>
-                    <div><Href Class="link-light" href="@(DocsSiteOptions.Value.GuidesHome)">Guides</Href></div>
-                    <div><Href Class="link-light" href="@(DocsSiteOptions.Value.DocsHome)">Documentation</Href></div>
-                    <div><Href Class="link-light" href="@(DocsSiteOptions.Value.ApiBrowserHome)">API Browser</Href></div>
-                    <div><Href Class="link-light" href="@(DocsSiteOptions.Value.BlogHome)">Blog</Href></div>
+                    <div><Href Class="link-light" href="/guides">Guides</Href></div>
+                    <div><Href Class="link-light" href="/api">Documentation</Href></div>
+                    <div><Href Class="link-light" href="/api/browser">API Browser</Href></div>
+                    <div><Href Class="link-light" href="/articles">Blog</Href></div>
                 </div>
                 <div class="col" id="footer-projects-col">
                     <div class="pb-2 font-weight-bold">Projects</div>
@@ -52,11 +51,11 @@
                     <div><Href Class="link-light" href="/logging">Dynamic Logging</Href></div>
                     <div><Href Class="link-light" href="/cloud-management">Management</Href></div>
                     <div><Href Class="link-light" href="/messaging">Messaging</Href></div>
-                    <div><Href Class="link-light" href="@(DocsSiteOptions.Value.FileShareHome)">Network File Sharing</Href></div>
+                    <div><Href Class="link-light" href="/api/v4/fileshares">Network File Sharing</Href></div>
                     <div><Href Class="link-light" href="/security-providers">Security</Href></div>
                     <div><Href Class="link-light" href="/service-connectors">Service Connectors</Href></div>
                     <div><Href Class="link-light" href="/service-discovery">Service Discovery</Href></div>
-                    <div><Href Class="link-light" href="@(DocsSiteOptions.Value.DocsStreamHome)">Stream</Href></div>
+                    <div><Href Class="link-light" href="/api/v3/stream">Stream</Href></div>
                 </div>
                 <div class="col" id="footer-others-col">
                     @*<div class="pb-2 font-weight-bold"><Href href="/training">Training</Href></div>*@

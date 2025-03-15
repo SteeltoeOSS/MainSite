@@ -26,3 +26,10 @@
     src: url("/fonts/Metropolis-Bold.woff2") format("woff2"), url("/fonts/Metropolis-Bold.woff") format("woff");
 }
 
+html, body {
+    font-family: 'Metropolis', sans-serif;
+    font-size: 100%;
+    font-style: normal;
+    font-weight: normal;
+    scroll-behavior: smooth;
+}

@@ -1,5 +1,4 @@
 @inject NavigationManager NavigationManager
-@inject IOptionsSnapshot<DocsSiteOptions> DocsSiteOptions
 
 @page "/blog"
 @page "/blogs"
@@ -15,8 +14,8 @@
     protected override void OnParametersSet()
     {
         var uri = Area != null
-            ? $"{DocsSiteOptions.Value.BaseAddress}/articles/{Area}/{ArticleName}.html"
-            : $"{DocsSiteOptions.Value.BaseAddress}/articles/{ArticleName}.html";
+            ? $"/articles/{Area}/{ArticleName}.html"
+            : $"/articles/{ArticleName}.html";
 
         NavigationManager.NavigateTo(uri);
     }
