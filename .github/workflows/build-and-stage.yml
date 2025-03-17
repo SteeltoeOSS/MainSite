@@ -36,11 +36,7 @@ jobs:
 
     - name: Generate API browser docs
       shell: pwsh
-      run: |
-        cd src/api-browser-generation
-        ./build-metadata.ps1
-        cd ../Client
-        ./process-api-browser-files.ps1
+      run: src/api-browser-generation/build-metadata.ps1
 
     - name: dotnet build
       run: dotnet build src/Client --configuration Release
