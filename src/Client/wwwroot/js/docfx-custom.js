@@ -11,17 +11,14 @@ function isGuide() {
 if (window.location.href.indexOf("v4") > -1) {
     $(".v4").prop("checked", true);
     $(".v4").parent().addClass("active");
-    $("#api-namespace-v4").show();
 }
 else if (window.location.href.indexOf("v3") > -1) {
     $(".v3").prop("checked", true);
     $(".v3").parent().addClass("active");
-    $("#api-namespace-v3").show();
 }
 else if (window.location.href.indexOf("v2") > -1) {
     $(".v2").prop("checked", true);
     $(".v2").parent().addClass("active");
-    $("#api-namespace-v2").show();
 }
 else if (window.location.href.indexOf("/articles") > -1) {
     $("#docsNavLink").removeClass("active");

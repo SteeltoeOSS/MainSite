@@ -16,6 +16,24 @@
         "files": "**.{md|yml}",
         "src": "docfx-content/guides/",
         "dest": "guides/"
+      },
+      {
+        "files": "all/*.{md|yml}",
+        "src": "docfx-content/api-browser/v4/",
+        "dest": "api/browser/v4/",
+        "group": "v4"
+      },
+      {
+        "files": "all/*.{md|yml}",
+        "src": "docfx-content/api-browser/v3/",
+        "dest": "api/browser/v3/",
+        "group": "v3"
+      },
+      {
+        "files": "all/*.{md|yml}",
+        "src": "docfx-content/api-browser/v2/",
+        "dest": "api/browser/v2/",
+        "group": "v2"
       }
     ],
     "resource": [

@@ -37,18 +37,7 @@ Get-Sources "sources/v2" $v2Sources
 Get-Sources "sources/v3" $v3Sources
 Get-Sources "sources/v4" $v4Sources
 
-# # Generate metadata
-Write-Output "building v2 metadata"
-docfx metadata api-v2.json
-
-Write-Output "building v3 metadata"
-docfx metadata api-v3.json
-
-Write-Output "building v4 metadata"
-docfx metadata api-v4.json
-
-# TODO: discuss... do we actually need/want this? it duplicates _everything_
-Write-Output "building *all* metadata"
+Write-Output "building all metadata"
 docfx metadata api-all.json
 
 # Copy yaml files to website

@@ -17,6 +17,13 @@
     width: 100%;
 }
 
+/* this **might** fix a bug where the version selector disappears when TOC contents are long, like at /api/browser/v3/all/Steeltoe.CircuitBreaker.Hystrix.html */
+@media (min-width: 768px) {
+    .offcanvas-body {
+        flex-direction: column;
+    }
+}
+
 /************ BLOG ************/
 .blog-entry {
     padding: 1%;
