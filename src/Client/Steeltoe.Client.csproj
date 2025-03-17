@@ -6,7 +6,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Content Include="docfx-content\**" CopyToPublishDirectory="PreserveNewest" />
+    </ItemGroup>
+
+    <ItemGroup>
       <PackageReference Include="Docfx.App" Version="2.78.3" />
     </ItemGroup>
-    
 </Project>
