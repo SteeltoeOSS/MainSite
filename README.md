@@ -1,3 +1,8 @@
+
+# This site has moved into the [Documentation repository](https://github.com/SteeltoeOSS/Documentation)
+
+---
+
 # Steeltoe Main Site
 
 	The site was built using [Blazor](https://docs.microsoft.com/aspnet/core/blazor/) in Visual Studio. 
